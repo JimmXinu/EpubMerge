@@ -20,6 +20,6 @@ if __name__=="__main__":
     files=['images',]
     files.extend(glob('*.py'))
     files.extend(glob('plugin-import-name-*.txt'))
-    createZipFile(filename,"a",
+    createZipFile(filename,"w",
                   files,exclude=exclude)
     
