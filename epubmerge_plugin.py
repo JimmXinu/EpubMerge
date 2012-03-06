@@ -28,7 +28,7 @@ from calibre.gui2.actions import InterfaceAction
 
 from calibre_plugins.epubmerge.common_utils import (set_plugin_icon_resources, get_icon)
 
-from calibre_plugins.epubmerge.config import (prefs)
+from calibre_plugins.epubmerge.config import (prefs, permitted_values)
 
 from calibre_plugins.epubmerge.epubmerge import doMerge
 
@@ -180,20 +180,138 @@ class EpubMergePlugin(InterfaceAction):
             mi.series = ''
 
             mi.comments = "Anthology containing:\n\n" + \
-                '\n'.join(map(lambda x : "%s by %s" %
-                              (x['title'],' & '.join(x['authors'])), book_list))
+                '\n'.join(map(lambda x : "%s by %s" % \
+                                  (x['title'],' & '.join(x['authors'])), book_list))
+            
 
             # print("======================= mi.languages:\n%s\n========================="%mi.languages)
 
             book_id = db.create_book_entry(mi,
                                            add_duplicates=True)
 
+            # ======================= custom columns ===================
+
             print("3:%s"%(time.time()-self.t))
             self.t = time.time()
-            self.gui.library_view.model().books_added(1)
 
-            self.gui.library_view.select_rows([book_id])
+            # have to get custom from db for each book.
+            idslist = map(lambda x : x['calibre_id'], book_list)
+            
+            custom_columns = self.gui.library_view.model().custom_columns
+            for col, action in prefs['custom_cols'].iteritems():
+                print("col: %s action: %s"%(col,action))
+                
+                if col not in custom_columns:
+                    print("%s not an existing column, skipping."%col)
+                    continue
+                
+                coldef = custom_columns[col]
+                print("coldef:%s"%coldef)
+                
+                if action not in permitted_values[coldef['datatype']]:
+                    print("%s not a valid column type for %s, skipping."%(col,action))
+                    continue
+                
+                label = coldef['label']
+
+                found = False
+                value = None
+                if action == 'first':
+                    value = db.get_custom(idslist[0], label=label, index_is_id=True)
+
+                if action == 'last':
+                    value = db.get_custom(idslist[-1], label=label, index_is_id=True)
+
+                if action == 'add':
+                    value = 0.0
+                    for bid in idslist:
+                        try:
+                            value += db.get_custom(bid, label=label, index_is_id=True)
+                            found = True
+                        except:
+                            # if not set, it's None and fails.
+                            pass
+                
+                if action == 'and':
+                    value = True
+                    for bid in idslist:
+                        try:
+                            value = value and db.get_custom(bid, label=label, index_is_id=True)
+                            found = True
+                        except:
+                            # if not set, it's None and fails.
+                            pass
+                
+                if action == 'or':
+                    value = False
+                    for bid in idslist:
+                        try:
+                            value = value or db.get_custom(bid, label=label, index_is_id=True)
+                            found = True
+                        except:
+                            # if not set, it's None and fails.
+                            pass
+                
+                if action == 'newest':
+                    value = None
+                    for bid in idslist:
+                        try:
+                            ivalue = db.get_custom(bid, label=label, index_is_id=True)
+                            if not value or  ivalue > value:
+                                value = ivalue
+                                found = True
+                        except:
+                            # if not set, it's None and fails.
+                            pass
+                    
+                if action == 'oldest':
+                    value = None
+                    for bid in idslist:
+                        try:
+                            ivalue = db.get_custom(bid, label=label, index_is_id=True)
+                            if not value or  ivalue < value:
+                                value = ivalue
+                                found = True
+                        except:
+                            # if not set, it's None and fails.
+                            pass
+                    
+                if action == 'union':
+                    if not coldef['is_multiple']:
+                        action = 'concat'
+                    else:
+                        value = set()
+                        for bid in idslist:
+                            try:
+                                value = value.union(db.get_custom(bid, label=label, index_is_id=True))
+                                found = True
+                            except:
+                                # if not set, it's None and fails.
+                                pass
+                        
+                if action == 'concat':
+                    value = ""
+                    for bid in idslist:
+                        try:
+                            value = value + ' ' + db.get_custom(bid, label=label, index_is_id=True)
+                            found = True
+                        except:
+                            # if not set, it's None and fails.
+                            pass
+                    value = value.strip()
+                    
+                if found and value != None:
+                    db.set_custom(book_id,value,label=label,commit=False)
+                
+            db.commit()
+            
             print("4:%s"%(time.time()-self.t))
+            self.t = time.time()
+            
+            self.gui.library_view.model().books_added(1)
+            self.gui.library_view.select_rows([book_id])
+            
+            print("5:%s"%(time.time()-self.t))
             self.t = time.time()
             
             confirm(u'''
