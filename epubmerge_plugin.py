@@ -216,11 +216,19 @@ class EpubMergePlugin(InterfaceAction):
 
                 found = False
                 value = None
+                idx = None
                 if action == 'first':
-                    value = db.get_custom(idslist[0], label=label, index_is_id=True)
+                    idx = 0
 
                 if action == 'last':
-                    value = db.get_custom(idslist[-1], label=label, index_is_id=True)
+                    idx = -1
+
+                if action in ['first','last']:
+                    value = db.get_custom(idslist[idx], label=label, index_is_id=True)
+                    if coldef['datatype'] == 'series' and value != None:
+                        # get the number-in-series, too.
+                        value = "%s [%s]"%(value, db.get_custom_extra(idslist[idx], label=label, index_is_id=True))
+                    found = True
 
                 if action == 'add':
                     value = 0.0
