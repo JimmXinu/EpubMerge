@@ -199,14 +199,14 @@ class EpubMergePlugin(InterfaceAction):
             
             custom_columns = self.gui.library_view.model().custom_columns
             for col, action in prefs['custom_cols'].iteritems():
-                print("col: %s action: %s"%(col,action))
+                #print("col: %s action: %s"%(col,action))
                 
                 if col not in custom_columns:
                     print("%s not an existing column, skipping."%col)
                     continue
                 
                 coldef = custom_columns[col]
-                print("coldef:%s"%coldef)
+                #print("coldef:%s"%coldef)
                 
                 if action not in permitted_values[coldef['datatype']]:
                     print("%s not a valid column type for %s, skipping."%(col,action))
