@@ -196,13 +196,18 @@ def doMerge(outputio,
                 break;
 
         ## Save indiv book title
-        booktitles.append(metadom.getElementsByTagName("dc:title")[0].firstChild.data)
+        try:
+            booktitles.append(metadom.getElementsByTagName("dc:title")[0].firstChild.data)
+        except:
+            booktitles.append("(Title Missing)")
 
         ## Save authors.
         authors=[]
         for creator in metadom.getElementsByTagName("dc:creator"):
             if( creator.getAttribute("opf:role") == "aut" or not creator.hasAttribute("opf:role") ):
                 authors.append(creator.firstChild.data)
+        if len(authors) == 0:
+            authors.append("(Author Missing)")
         allauthors.append(authors)
 
         for item in metadom.getElementsByTagName("item"):
