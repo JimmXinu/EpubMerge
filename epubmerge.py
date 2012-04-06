@@ -204,8 +204,11 @@ def doMerge(outputio,
         ## Save authors.
         authors=[]
         for creator in metadom.getElementsByTagName("dc:creator"):
-            if( creator.getAttribute("opf:role") == "aut" or not creator.hasAttribute("opf:role") ):
-                authors.append(creator.firstChild.data)
+            try:
+                if( creator.getAttribute("opf:role") == "aut" or not creator.hasAttribute("opf:role") and creator.firstChild != None):
+                    authors.append(creator.firstChild.data)
+            except:
+                pass
         if len(authors) == 0:
             authors.append("(Author Missing)")
         allauthors.append(authors)
