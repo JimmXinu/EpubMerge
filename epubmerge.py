@@ -8,6 +8,7 @@ __docformat__ = 'restructuredtext en'
 import sys
 import os
 import re
+from urllib import unquote
 from optparse import OptionParser      
 from functools import partial
 
@@ -230,14 +231,15 @@ def doMerge(outputio,
                 navmaps.append(tocdom.getElementsByTagName("navMap")[0])
             else:
                 itemid=bookid+item.getAttribute("id")
-                href=bookdir+relpath+item.getAttribute("href")
+                itemhref = unquote(item.getAttribute("href")) # remove %20, etc.
+                href=bookdir+relpath+itemhref
                 href=href.encode('utf8')
                 #print("item id: %s -> %s:"%(itemid,href))
                 itemhrefs[itemid] = href
                 if href not in filelist:
                     try:
                         outputepub.writestr(href,
-                                            epub.read(relpath+item.getAttribute("href")))
+                                            epub.read(relpath+itemhref))
                         if re.match(r'.*/(file|chapter)\d+\.x?html',href):
                             filecount+=1
                         items.append((itemid,href,item.getAttribute("media-type")))
