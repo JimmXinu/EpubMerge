@@ -12,8 +12,6 @@ from urllib import unquote
 from optparse import OptionParser      
 from functools import partial
 
-import zlib
-import zipfile
 from zipfile import ZipFile, ZIP_STORED, ZIP_DEFLATED
 from time import time
 
@@ -83,7 +81,8 @@ def doMerge(outputio,
             languages=['en'],
             titlenavpoints=True,
             flattentoc=False,
-            printtimes=False):
+            printtimes=False,
+            coverjpgdata=None):
     '''
     outputio = output file name or StringIO.
     files = list of input file names or StringIOs.
