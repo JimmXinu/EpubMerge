@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-# vim:fileencoding=UTF-8:ts=4:sw=4:sta:et:sts=4:ai
-from __future__ import (unicode_literals, division, absolute_import,
-                        print_function)
+# -*- coding: utf-8 -*-
 
 __license__   = 'GPL v3'
 __copyright__ = '2012, Jim Miller'
@@ -10,7 +8,9 @@ __docformat__ = 'restructuredtext en'
 import sys, re, os, traceback, copy
 from urllib import unquote
 from posixpath import normpath
+
 from zipfile import ZipFile, ZIP_STORED, ZIP_DEFLATED
+    
 from xml.dom.minidom import parse, parseString, getDOMImplementation, Element
 from time import time
 
@@ -321,8 +321,8 @@ class SplitEpub:
 
         if coverjpgpath:
             # <meta name="cover" content="cover.jpg"/>
-            metadata.appendChild(newTag(contentdom,"meta",{"content":"coverimageid",
-                                                           "name":"cover"}))
+            metadata.appendChild(newTag(contentdom,"meta",{"name":"cover",
+                                                           "content":"coverimageid"}))
             # cover stuff for later:
             # at end of <package>:
             # <guide>
@@ -383,7 +383,7 @@ class SplitEpub:
                                                'href':linked,
                                                'media-type':type}))
 
-        contentxml = contentdom.toxml(encoding='utf-8')        
+        contentxml = contentdom.toxml('utf-8')        
         # tweak for brain damaged Nook STR.  Nook insists on name before content.
         contentxml = contentxml.replace('<meta content="coverimageid" name="cover"/>',
                                         '<meta name="cover" content="coverimageid"/>')
@@ -455,9 +455,11 @@ div { margin: 0pt; padding: 0pt; }
 </div></body></html>
 ''')
             
-        outputepub.close()
-        
-        
+	# declares all the files created by Windows.  otherwise, when
+        # it runs in appengine, windows unzips the files as 000 perms.
+        for zf in outputepub.filelist:
+            zf.create_system = 0
+        outputepub.close()        
     
 class FileCache:
 

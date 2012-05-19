@@ -176,7 +176,8 @@ class EpubSplitPlugin(InterfaceAction):
 
             # ======================= cover ===================
 
-            db.set_cover(book_id, db.cover(source_id,index_is_id=True))
+            if misource.has_cover:
+                db.set_cover(book_id, db.cover(source_id,index_is_id=True))
             
             # ======================= custom columns ===================
 
@@ -346,7 +347,7 @@ If you download or add a cover image, it will be included in the generated EPUB.
             outputepub = PersistentTemporaryFile(suffix='.epub')
 
             coverjpgpath = None
-            if misource.has_cover:
+            if mi.has_cover:
                 # grab the path to the real image.
                 coverjpgpath = os.path.join(db.library_path, db.path(book_id, index_is_id=True), 'cover.jpg')
                 
