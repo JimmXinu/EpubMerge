@@ -321,7 +321,7 @@ class SplitEpub:
 
         if coverjpgpath:
             # <meta name="cover" content="cover.jpg"/>
-            metadata.appendChild(newTag(contentdom,"meta",{"content":"improbablyidforcoverimage",
+            metadata.appendChild(newTag(contentdom,"meta",{"content":"coverimageid",
                                                            "name":"cover"}))
             # cover stuff for later:
             # at end of <package>:
@@ -335,7 +335,7 @@ class SplitEpub:
             package.appendChild(guide)
 
             manifest.appendChild(newTag(contentdom,"item",
-                                        attrs={'id':"improbablyidforcoverimage",
+                                        attrs={'id':"coverimageid",
                                                'href':"cover.jpg",
                                                'media-type':"image/jpeg"}))            
             
@@ -355,6 +355,10 @@ class SplitEpub:
             #filename = self.filecache.addHtml(href,filedata)
             #print("writing :%s"%filename)
             # add to manifest and spine
+            
+            if coverjpgpath and filename == "cover.xhtml":
+                continue # don't dup cover.
+                
             outputepub.writestr(filename,filedata.encode('utf-8'))
             id = "a%d"%contentcount
             contentcount += 1
@@ -368,6 +372,9 @@ class SplitEpub:
 
         for (linked,type) in self.filecache.linkedfiles:
             # add to manifest 
+            if coverjpgpath and linked == "cover.jpg":
+                continue # don't dup cover.
+                
             outputepub.writestr(linked,self.get_file(linked))
             id = "a%d"%contentcount
             contentcount += 1
@@ -378,8 +385,8 @@ class SplitEpub:
 
         contentxml = contentdom.toxml(encoding='utf-8')        
         # tweak for brain damaged Nook STR.  Nook insists on name before content.
-        contentxml = contentxml.replace('<meta content="improbablyidforcoverimage" name="cover"/>',
-                                        '<meta name="cover" content="improbablyidforcoverimage"/>')
+        contentxml = contentxml.replace('<meta content="coverimageid" name="cover"/>',
+                                        '<meta name="cover" content="coverimageid"/>')
         outputepub.writestr("content.opf",contentxml)
 
         ## create toc.ncx file
