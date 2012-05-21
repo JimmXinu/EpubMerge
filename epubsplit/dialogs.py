@@ -228,8 +228,11 @@ class LinesTableWidget(QTableWidget):
         href_cell = ReadOnlyTableWidgetItem(href)
         href_cell.setData(Qt.UserRole, QVariant(line['num']))
         self.setItem(row, 0, href_cell)
-      
-        toc_cell = ReadOnlyTableWidgetItem(", ".join(line['toc']))
+
+        toc_str = ", ".join(line['toc'])
+        if 'guide' in line:
+            toc_str = toc_str+" {Guide(%s):%s}"%line['guide']
+        toc_cell = ReadOnlyTableWidgetItem(toc_str)
         toc_cell.setData(Qt.UserRole, QVariant(row))
         self.setItem(row, 1, toc_cell)
       

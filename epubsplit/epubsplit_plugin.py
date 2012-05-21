@@ -15,7 +15,7 @@ from datetime import datetime
 
 from PyQt4.Qt import (QApplication, QMenu, QToolButton)
 
-from calibre.ptempfile import PersistentTemporaryFile, PersistentTemporaryDirectory, remove_dir
+from calibre.ptempfile import PersistentTemporaryFile
 from calibre.ebooks.metadata import MetaInformation, authors_to_string
 from calibre.ebooks.metadata.meta import get_metadata
 from calibre.gui2 import error_dialog, warning_dialog, question_dialog, info_dialog
@@ -377,7 +377,7 @@ If you download or add a cover image, it will be included in the generated EPUB.
             db.add_format_with_hooks(book_id,
                                      'EPUB',
                                      outputepub, index_is_id=True)
-            
+
             print("7:%s"%(time.time()-self.t))
             self.t = time.time()
             

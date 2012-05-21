@@ -24,6 +24,7 @@ class SplitEpub:
         self.content_dom = None
         self.content_relpath = None
         self.manifest_items = None
+        self.guide_items = None
         self.toc_dom = None
         self.toc_map = None
         self.split_lines = None
@@ -64,6 +65,18 @@ class SplitEpub:
                     self.toc_dom = parseString(self.epub.read(fullhref))
         
         return self.manifest_items
+
+    def get_guide_items(self):
+        if not self.guide_items:
+            self.guide_items = {}
+
+            for item in self.get_content_dom().getElementsByTagName("reference"):
+                fullhref=unquote(self.get_content_relpath()+item.getAttribute("href"))
+                self.guide_items[fullhref]=(item.getAttribute("type"),item.getAttribute("title"))
+                #print("---- reference href:%s value:%s"%(fullhref,self.guide_items[fullhref],))
+                #self.guide_items[item.getAttribute("type")]=(fullhref,item.getAttribute("media-type"))
+                    
+        return self.guide_items
 
     def get_toc_dom(self):
         if not self.toc_dom:
@@ -106,6 +119,8 @@ class SplitEpub:
             current['href']=href
             current['anchor']=None
             current['toc'] = []
+            if href in self.get_guide_items():
+                current['guide'] = self.get_guide_items()[href]
             current['id'] = idref
             current['type'] = type
             current['num'] = count
