@@ -44,6 +44,8 @@ def main(argv):
     optparser.add_option("-f", "--flatten-toc",
                       action="store_true", dest="flattentoc",
                       help="Flatten TOC down to one level only.",)
+    optparser.add_option("-c", "--cover", dest="coveropt", default=None,
+                      help="Path to a jpg to use as cover image.", metavar="COVER")
     
     (options, args) = optparser.parse_args()
 
@@ -65,7 +67,8 @@ def main(argv):
             options.tagopts,
             options.languageopts,
             options.titlenavpoints,
-            options.flattentoc
+            options.flattentoc,
+            coverjpgpath=options.coveropt
             )
 
 def cond_print(flag,arg):
@@ -82,7 +85,7 @@ def doMerge(outputio,
             titlenavpoints=True,
             flattentoc=False,
             printtimes=False,
-            coverjpgdata=None):
+            coverjpgpath=None):
     '''
     outputio = output file name or StringIO.
     files = list of input file names or StringIOs.
@@ -93,6 +96,7 @@ def doMerge(outputio,
     languages = dc:language tags to include
     titlenavpoints if true, put in a new TOC entry for each epub, nesting each epub's chapters under it
     flattentoc if true, flatten TOC down to one level only.
+    coverjpgpath, Path to a jpg to use as cover image.
     '''
 
     printt = partial(cond_print,printtimes)
@@ -308,6 +312,36 @@ def doMerge(outputio,
     
     manifest = contentdom.createElement("manifest")
     package.appendChild(manifest)
+
+    spine = newTag(contentdom,"spine",attrs={"toc":"ncx"})
+    package.appendChild(spine)
+    
+    if coverjpgpath:
+        # <meta name="cover" content="cover.jpg"/>
+        metadata.appendChild(newTag(contentdom,"meta",{"name":"cover",
+                                                       "content":"coverimageid"}))
+        guide = newTag(contentdom,"guide")
+        guide.appendChild(newTag(contentdom,"reference",attrs={"type":"cover",
+                                                   "title":"Cover",
+                                                   "href":"cover.xhtml"}))
+        package.appendChild(guide)
+
+        manifest.appendChild(newTag(contentdom,"item",
+                                    attrs={'id':"coverimageid",
+                                           'href':"cover.jpg",
+                                           'media-type':"image/jpeg"}))            
+        
+        # Note that the id of the cover xhmtl *must* be 'cover'
+        # for it to work on Nook.
+        manifest.appendChild(newTag(contentdom,"item",
+                                    attrs={'id':"cover",
+                                           'href':"cover.xhtml",
+                                           'media-type':"application/xhtml+xml"}))
+        
+        spine.appendChild(newTag(contentdom,"itemref",
+                                 attrs={"idref":"cover",
+                                        "linear":"yes"}))    
+            
     for item in items:
         (id,href,type)=item
         manifest.appendChild(newTag(contentdom,"item",
@@ -315,8 +349,6 @@ def doMerge(outputio,
                                               'href':href,
                                               'media-type':type}))
         
-    spine = newTag(contentdom,"spine",attrs={"toc":"ncx"})
-    package.appendChild(spine)
     for itemref in itemrefs:
         spine.appendChild(newTag(contentdom,"itemref",
                                     attrs={"idref":itemref,
@@ -459,12 +491,30 @@ def doMerge(outputio,
 
     ## content.opf written now due to description being filled in
     ## during TOC generation to save loops.
-    outputepub.writestr("content.opf",contentdom.toxml('utf-8'))
+    contentxml = contentdom.toxml('utf-8')        
+    # tweak for brain damaged Nook STR.  Nook insists on name before content.
+    contentxml = contentxml.replace('<meta content="coverimageid" name="cover"/>',
+                                    '<meta name="cover" content="coverimageid"/>')
+    outputepub.writestr("content.opf",contentxml)
     outputepub.writestr("toc.ncx",tocncxdom.toxml('utf-8'))
 
     printt("wrote opf/ncx files:%s"%(time()-t))
     t = time()
     
+    if coverjpgpath:
+        # write, not write string.  Pulling from file.
+        outputepub.write(coverjpgpath,"cover.jpg")
+        
+        outputepub.writestr("cover.xhtml",'''
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><title>Cover</title><style type="text/css" title="override_css">
+@page {padding: 0pt; margin:0pt}
+body { text-align: center; padding:0pt; margin: 0pt; }
+div { margin: 0pt; padding: 0pt; }
+</style></head><body><div>
+<img src="cover.jpg" alt="cover"/>
+</div></body></html>
+''')
+        
     # declares all the files created by Windows.  otherwise, when
     # it runs in appengine, windows unzips the files as 000 perms.
     for zf in outputepub.filelist:

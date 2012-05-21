@@ -189,6 +189,11 @@ class EpubMergePlugin(InterfaceAction):
             book_id = db.create_book_entry(mi,
                                            add_duplicates=True)
 
+            # set default cover to same as first book
+            coverdata = db.cover(book_list[0]['calibre_id'],index_is_id=True)
+            if coverdata:
+                db.set_cover(book_id, coverdata)
+            
             # ======================= custom columns ===================
 
             print("3:%s"%(time.time()-self.t))
@@ -353,6 +358,11 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
             mergedepub = PersistentTemporaryFile(suffix='.epub')
             epubstomerge = map(lambda x : x['epub'] , book_list)
             
+            coverjpgpath = None
+            if mi.has_cover:
+                # grab the path to the real image.
+                coverjpgpath = os.path.join(db.library_path, db.path(book_id, index_is_id=True), 'cover.jpg')
+                
             doMerge( mergedepub,
                      epubstomerge,
                      authoropts=mi.authors,
@@ -362,7 +372,8 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
                      languages=mi.languages,
                      titlenavpoints=prefs['titlenavpoints'],
                      flattentoc=prefs['flattentoc'],
-                     printtimes=True
+                     printtimes=True,
+                     coverjpgpath=coverjpgpath
                      )
             
             print("6:%s"%(time.time()-self.t))
