@@ -128,7 +128,8 @@ class EpubSplitPlugin(InterfaceAction):
             if d.result() != d.Accepted:
                 return
 
-            linenums = d.get_selected_linenums()
+            linenums,changedtocs = d.get_selected_linenums_tocs()
+            print("updated tocs:%s"%changedtocs)
             
             print("2:%s"%(time.time()-self.t))
             self.t = time.time()
@@ -138,29 +139,8 @@ class EpubSplitPlugin(InterfaceAction):
             deftitle = "%s Split" % misource.title
             mi = MetaInformation(deftitle,misource.authors)
 
-            # print("======================= mi.title:\n%s\n========================="%mi.title)
-
-            # mi.authors = list()
-            # authorslists = map(lambda x : x['authors'], book_list)
-            # for l in authorslists:
-            #     for a in l:
-            #         if a not in mi.authors:
-            #             mi.authors.append(a)
-            #mi.authors = [item for sublist in authorslists for item in sublist]
-
-            # print("======================= mi.authors:\n%s\n========================="%mi.authors)
-            
-            #mi.author_sort = ' & '.join(map(lambda x : x['author_sort'], book_list))
-
-            # print("======================= mi.author_sort:\n%s\n========================="%mi.author_sort)
-            
-            #tagslists = map(lambda x : x['tags'], book_list)
             mi.tags = misource.tags # [item for sublist in tagslists for item in sublist]
 
-            # print("======================= m.tagsi:\n%s\n========================="%mi.tags)
-            
-            # languageslists = map(lambda x : x['languages'], book_list)
-            # mi.languages = [item for sublist in languageslists for item in sublist]
             mi.languages = misource.languages
 
             mi.series = misource.series
@@ -168,139 +148,15 @@ class EpubSplitPlugin(InterfaceAction):
             if misource.comments:
                 mi.comments = "Split from:\n\n" + misource.comments
             
-
-            # print("======================= mi.languages:\n%s\n========================="%mi.languages)
-
             book_id = db.create_book_entry(mi,
                                            add_duplicates=True)
 
-            # ======================= cover ===================
-
             if misource.has_cover:
                 db.set_cover(book_id, db.cover(source_id,index_is_id=True))
-            
-            # ======================= custom columns ===================
 
             print("3:%s"%(time.time()-self.t))
             self.t = time.time()
 
-            # # have to get custom from db for each book.
-            # idslist = map(lambda x : x['calibre_id'], book_list)
-            
-            # custom_columns = self.gui.library_view.model().custom_columns
-            # for col, action in prefs['custom_cols'].iteritems():
-            #     #print("col: %s action: %s"%(col,action))
-                
-            #     if col not in custom_columns:
-            #         print("%s not an existing column, skipping."%col)
-            #         continue
-                
-            #     coldef = custom_columns[col]
-            #     #print("coldef:%s"%coldef)
-                
-            #     if action not in permitted_values[coldef['datatype']]:
-            #         print("%s not a valid column type for %s, skipping."%(col,action))
-            #         continue
-                
-            #     label = coldef['label']
-
-            #     found = False
-            #     value = None
-            #     idx = None
-            #     if action == 'first':
-            #         idx = 0
-
-            #     if action == 'last':
-            #         idx = -1
-
-            #     if action in ['first','last']:
-            #         value = db.get_custom(idslist[idx], label=label, index_is_id=True)
-            #         if coldef['datatype'] == 'series' and value != None:
-            #             # get the number-in-series, too.
-            #             value = "%s [%s]"%(value, db.get_custom_extra(idslist[idx], label=label, index_is_id=True))
-            #         found = True
-
-            #     if action == 'add':
-            #         value = 0.0
-            #         for bid in idslist:
-            #             try:
-            #                 value += db.get_custom(bid, label=label, index_is_id=True)
-            #                 found = True
-            #             except:
-            #                 # if not set, it's None and fails.
-            #                 pass
-                
-            #     if action == 'and':
-            #         value = True
-            #         for bid in idslist:
-            #             try:
-            #                 value = value and db.get_custom(bid, label=label, index_is_id=True)
-            #                 found = True
-            #             except:
-            #                 # if not set, it's None and fails.
-            #                 pass
-                
-            #     if action == 'or':
-            #         value = False
-            #         for bid in idslist:
-            #             try:
-            #                 value = value or db.get_custom(bid, label=label, index_is_id=True)
-            #                 found = True
-            #             except:
-            #                 # if not set, it's None and fails.
-            #                 pass
-                
-            #     if action == 'newest':
-            #         value = None
-            #         for bid in idslist:
-            #             try:
-            #                 ivalue = db.get_custom(bid, label=label, index_is_id=True)
-            #                 if not value or  ivalue > value:
-            #                     value = ivalue
-            #                     found = True
-            #             except:
-            #                 # if not set, it's None and fails.
-            #                 pass
-                    
-            #     if action == 'oldest':
-            #         value = None
-            #         for bid in idslist:
-            #             try:
-            #                 ivalue = db.get_custom(bid, label=label, index_is_id=True)
-            #                 if not value or  ivalue < value:
-            #                     value = ivalue
-            #                     found = True
-            #             except:
-            #                 # if not set, it's None and fails.
-            #                 pass
-                    
-            #     if action == 'union':
-            #         if not coldef['is_multiple']:
-            #             action = 'concat'
-            #         else:
-            #             value = set()
-            #             for bid in idslist:
-            #                 try:
-            #                     value = value.union(db.get_custom(bid, label=label, index_is_id=True))
-            #                     found = True
-            #                 except:
-            #                     # if not set, it's None and fails.
-            #                     pass
-                        
-            #     if action == 'concat':
-            #         value = ""
-            #         for bid in idslist:
-            #             try:
-            #                 value = value + ' ' + db.get_custom(bid, label=label, index_is_id=True)
-            #                 found = True
-            #             except:
-            #                 # if not set, it's None and fails.
-            #                 pass
-            #         value = value.strip()
-                    
-            #     if found and value != None:
-            #         db.set_custom(book_id,value,label=label,commit=False)
-                
             db.commit()
             
             print("4:%s"%(time.time()-self.t))
@@ -330,16 +186,6 @@ If you download or add a cover image, it will be included in the generated EPUB.
             self.t = time.time()
             self.gui.tags_view.recount()
 
-#             totalsize = sum(map(lambda x : x['epub_size'], book_list))
-
-#             print("merging %s EPUBs totaling %s"%(len(book_list),gethumanreadable(totalsize)))
-#             if len(book_list) > 100 or totalsize > 5*1024*1024:
-#                 confirm(u'''
-# You're merging %s EPUBs totaling %s.  Calibre will be locked until the split is finished.
-# '''%(len(book_list),gethumanreadable(totalsize)),
-#                         'epubsplit_edited_now_split_again',
-#                         self.gui)
-            
             self.gui.status_bar.show_message('Splitting off from EPUB...', 60000)
 
             mi = db.get_metadata(book_id,index_is_id=True)
@@ -353,24 +199,13 @@ If you download or add a cover image, it will be included in the generated EPUB.
                 
             splitepub.write_split_epub(outputepub,
                                        linenums,
+                                       changedtocs=changedtocs,
                                        authoropts=mi.authors,
                                        titleopt=mi.title,
                                        descopt=mi.comments,
                                        tags=mi.tags,
                                        languages=mi.languages,
                                        coverjpgpath=coverjpgpath)
-            
-            # doSplit( outputepub,
-            #          epubstosplit,
-            #          authoropts=mi.authors,
-            #          titleopt=mi.title,
-            #          descopt=mi.comments,
-            #          tags=mi.tags,
-            #          languages=mi.languages,
-            #          titlenavpoints=prefs['titlenavpoints'],
-            #          flattentoc=prefs['flattentoc'],
-            #          printtimes=True
-            #          )
             
             print("6:%s"%(time.time()-self.t))
             self.t = time.time()
@@ -386,50 +221,8 @@ If you download or add a cover image, it will be included in the generated EPUB.
             self.gui.tags_view.recount()
             current = self.gui.library_view.currentIndex()
             self.gui.library_view.model().current_changed(current, self.previous)
-            #self.gui.iactions['View'].view_book(False)
 
     def apply_settings(self):
-        # No need to do anything with perfs here, but we could.
+        # No need to do anything with prefs here, but we could.
         prefs
         
-    # def _convert_id_to_book(self, idval, good=True):
-    #     book = {}
-    #     book['good'] = good
-    #     book['calibre_id'] = idval
-    #     book['title'] = 'Unknown'
-    #     book['author'] = 'Unknown'
-    #     book['author_sort'] = 'Unknown'
-    #     book['comment'] = ''
-      
-    #     return book
-        
-#     def _populate_book_from_calibre_id(self, book, db=None):
-#         mi = db.get_metadata(book['calibre_id'], index_is_id=True)
-#         #book = {}
-#         book['good'] = True
-#         book['calibre_id'] = mi.id
-#         book['title'] = mi.title
-#         book['authors'] = mi.authors
-#         book['author_sort'] = mi.author_sort
-#         book['tags'] = mi.tags
-#         book['series'] = mi.series
-#         if book['series']:
-#             book['series_index'] = mi.series_index
-#         else:
-#             book['series_index'] = None
-#         book['languages'] = mi.languages
-#         book['comment'] = ''
-#         if db.has_format(mi.id,'EPUB',index_is_id=True):
-#             book['epub'] = StringIO(db.format(mi.id,'EPUB',index_is_id=True))
-#             book['epub_size'] = len(book['epub'].getvalue())
-#         else:
-#             book['good'] = False;
-#             book['comment'] = "%s by %s doesn't have an EPUB."%(mi.title,', '.join(mi.authors))
-
-# def gethumanreadable(size,precision=1):
-#     suffixes=['B','KB','MB','GB','TB']
-#     suffixIndex = 0
-#     while size > 1024:
-#         suffixIndex += 1 #increment the index of the suffix
-#         size = size/1024.0 #apply the division
-#     return "%.*f%s"%(precision,size,suffixes[suffixIndex])

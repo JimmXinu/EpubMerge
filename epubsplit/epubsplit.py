@@ -239,6 +239,7 @@ class SplitEpub:
     def write_split_epub(self,
                          outputio,
                          linenums,
+                         changedtocs={},
                          authoropts=[],
                          titleopt=None,
                          descopt=None,
@@ -432,6 +433,9 @@ class SplitEpub:
         count=1
         for line in self.split_lines:
             if 'include' in line:
+                # if changed, use only changed values.
+                if line['num'] in changedtocs:
+                    line['toc'] = changedtocs[line['num']]
                 # can have more than one toc entry.
                 for title in line['toc']:
                     newnav = newTag(tocncxdom,"navPoint",
