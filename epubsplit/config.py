@@ -28,14 +28,23 @@ all_prefs = JSONConfig('plugins/EpubSplit')
 
 # Set defaults used by all.  Library specific settings continue to
 # take from here.
-all_prefs.defaults['flattentoc'] = False
-all_prefs.defaults['titlenavpoints'] = True
-all_prefs.defaults['custom_cols'] = {}
+all_prefs.defaults['copytitle'] = True
+all_prefs.defaults['copyauthors'] = True
+all_prefs.defaults['copytags'] = True
+all_prefs.defaults['copylanguages'] = True
+all_prefs.defaults['copyseries'] = True
+all_prefs.defaults['copycomments'] = True
+all_prefs.defaults['copycover'] = True
 
 # The list of settings to copy from all_prefs or the previous library
 # when config is called for the first time on a library.
-copylist = ['flattentoc',
-            'titlenavpoints']
+copylist = ['copytitle',
+            'copyauthors',
+            'copytags',
+            'copylanguages',
+            'copyseries',
+            'copycomments',
+            'copycover']
 
 # fake out so I don't have to change the prefs calls anywhere.  The
 # Java programmer in me is offended by op-overloading, but it's very
@@ -94,60 +103,45 @@ class ConfigWidget(QWidget):
         self.l = QVBoxLayout()
         self.setLayout(self.l)
 
-        tab_widget = QTabWidget(self)
-        self.l.addWidget(tab_widget)
-
-        self.basic_tab = BasicTab(self, plugin_action)
-        tab_widget.addTab(self.basic_tab, 'Basic')
-
-        self.columns_tab = ColumnsTab(self, plugin_action)
-        tab_widget.addTab(self.columns_tab, 'Custom Columns')
-
-    def save_settings(self):
-        # basic
-        prefs['flattentoc'] = self.basic_tab.flattentoc.isChecked()
-        prefs['titlenavpoints'] = self.basic_tab.titlenavpoints.isChecked()
-        
-        # Custom Columns tab
-        colsmap = {}
-        for (col,combo) in self.columns_tab.custcol_dropdowns.iteritems():
-            val = unicode(combo.itemData(combo.currentIndex()).toString())
-            if val != 'none':
-                colsmap[col] = val
-                #print("colsmap[%s]:%s"%(col,colsmap[col]))
-        prefs['custom_cols'] = colsmap
-
-    def edit_shortcuts(self):
-        self.save_settings()
-        d = KeyboardConfigDialog(self.plugin_action.gui, self.plugin_action.action_spec[0])
-        if d.exec_() == d.Accepted:
-            self.plugin_action.gui.keyboard.finalize()
-
-class BasicTab(QWidget):
-
-    def __init__(self, parent_dialog, plugin_action):
-        self.parent_dialog = parent_dialog
-        self.plugin_action = plugin_action
-        QWidget.__init__(self)
-        
-        self.l = QVBoxLayout()
-        self.setLayout(self.l)
-
-        label = QLabel('These settings control the basic features of the plugin.')
+        label = QLabel('When making a new Epub, the metadata from the source book will be copied or not as you choose below.')
         label.setWordWrap(True)
         self.l.addWidget(label)
-        self.l.addSpacing(5)
+        #self.l.addSpacing(5)
         
-        self.titlenavpoints = QCheckBox('Insert Table of Contents entry for each title?',self)
-        self.titlenavpoints.setToolTip('''If set, a new TOC entry will be made for each title and
-it's existing TOC nested underneath it.''')
-        self.titlenavpoints.setChecked(prefs['titlenavpoints'])
-        self.l.addWidget(self.titlenavpoints)
-
-        self.flattentoc = QCheckBox('Flatten Table of Contents?',self)
-        self.flattentoc.setToolTip('Remove nesting and make TOC all on one level.')
-        self.flattentoc.setChecked(prefs['flattentoc'])
-        self.l.addWidget(self.flattentoc)
+        self.copytitle = QCheckBox('Copy Title',self)
+        self.copytitle.setToolTip('Copy title from the source Epub to the Split Epub.  Adds "Split" to the title.')
+        self.copytitle.setChecked(prefs['copytitle'])
+        self.l.addWidget(self.copytitle)
+        
+        self.copyauthors = QCheckBox('Copy Authors',self)
+        self.copyauthors.setToolTip('Copy Authors from the source Epub to the Split Epub.')
+        self.copyauthors.setChecked(prefs['copyauthors'])
+        self.l.addWidget(self.copyauthors)
+        
+        self.copytags = QCheckBox('Copy Tags',self)
+        self.copytags.setToolTip('Copy Tags from the source Epub to the Split Epub.')
+        self.copytags.setChecked(prefs['copytags'])
+        self.l.addWidget(self.copytags)
+        
+        self.copylanguages = QCheckBox('Copy Languages',self)
+        self.copylanguages.setToolTip('Copy Languages from the source Epub to the Split Epub.')
+        self.copylanguages.setChecked(prefs['copylanguages'])
+        self.l.addWidget(self.copylanguages)
+        
+        self.copyseries = QCheckBox('Copy Series',self)
+        self.copyseries.setToolTip('Copy Series from the source Epub to the Split Epub.')
+        self.copyseries.setChecked(prefs['copyseries'])
+        self.l.addWidget(self.copyseries)
+        
+        self.copycomments = QCheckBox('Copy Comments',self)
+        self.copycomments.setToolTip('Copy Comments from the source Epub to the Split Epub.  Adds "Split from:" to the comments.')
+        self.copycomments.setChecked(prefs['copycomments'])
+        self.l.addWidget(self.copycomments)
+        
+        self.copycover = QCheckBox('Copy Cover',self)
+        self.copycover.setToolTip('Copy Cover from the source Epub to the Split Epub.')
+        self.copycover.setChecked(prefs['copycover'])
+        self.l.addWidget(self.copycover)
         
         self.l.addSpacing(15)        
 
@@ -159,7 +153,7 @@ it's existing TOC nested underneath it.''')
         keyboard_shortcuts_button = QPushButton('Keyboard shortcuts...', self)
         keyboard_shortcuts_button.setToolTip(_(
                     'Edit the keyboard shortcuts associated with this plugin'))
-        keyboard_shortcuts_button.clicked.connect(parent_dialog.edit_shortcuts)
+        keyboard_shortcuts_button.clicked.connect(self.edit_shortcuts)
         self.l.addWidget(keyboard_shortcuts_button)
 
         reset_confirmation_button = QPushButton(_('Reset disabled &confirmation dialogs'), self)
@@ -169,7 +163,22 @@ it's existing TOC nested underneath it.''')
         self.l.addWidget(reset_confirmation_button)
         
         self.l.insertStretch(-1)
-        
+
+    def save_settings(self):
+        prefs['copytitle'] = self.copytitle.isChecked()
+        prefs['copyauthors'] = self.copyauthors.isChecked()
+        prefs['copytags'] = self.copytags.isChecked()
+        prefs['copylanguages'] = self.copylanguages.isChecked()
+        prefs['copyseries'] = self.copyseries.isChecked()
+        prefs['copycomments'] = self.copycomments.isChecked()
+        prefs['copycover'] = self.copycover.isChecked()
+
+    def edit_shortcuts(self):
+        self.save_settings()
+        d = KeyboardConfigDialog(self.plugin_action.gui, self.plugin_action.action_spec[0])
+        if d.exec_() == d.Accepted:
+            self.plugin_action.gui.keyboard.finalize()
+
     def reset_dialogs(self):
         for key in dynamic.keys():
             if key.startswith('epubsplit_') and key.endswith('_again') \
@@ -180,76 +189,3 @@ it's existing TOC nested underneath it.''')
                     show=True,
                     show_copy_button=False)
 
-permitted_values = {
-    'int' : ['add', 'first', 'last'],
-    'float' : ['add', 'first', 'last'],
-    'bool' : ['and', 'or', 'first', 'last'],
-    'datetime' : ['newest', 'oldest', 'first', 'last'],
-    'enumeration' : ['first', 'last'],
-    'series' : ['first', 'last'],
-    'text' : ['union', 'concat', 'first', 'last'],
-    'comments' : ['concat', 'first', 'last']
-    }
-
-titleLabels = {
-    'first':'Take value from first source book',
-    'last':'Take value from last source book',
-    'add':'Add values from all source books',
-    'and':'True if true on all source books (and)',
-    'or':'True if true on any source books (or)',
-    'newest':'Take newest value from source books',
-    'oldest':'Take oldest value from source books',
-    'union':'Include values from all source books',
-    'concat':'Concatenate values from all source books',
-    }
-
-class ColumnsTab(QWidget):
-
-    def __init__(self, parent_dialog, plugin_action):
-        self.parent_dialog = parent_dialog
-        self.plugin_action = plugin_action
-        QWidget.__init__(self)
-        
-        self.l = QVBoxLayout()
-        self.setLayout(self.l)
-
-        label = QLabel("If you have custom columns defined, they will be listed below.  Choose how you would like these columns handled.")
-        label.setWordWrap(True)
-        self.l.addWidget(label)
-        self.l.addSpacing(5)
-        
-        self.custcol_dropdowns = {}
-
-        custom_columns = self.plugin_action.gui.library_view.model().custom_columns
-
-        grid = QGridLayout()
-        self.l.addLayout(grid)
-        row=0
-        for key, column in custom_columns.iteritems():
-            if column['datatype'] in permitted_values:
-                # print("\n============== %s ===========\n"%key)
-                # for (k,v) in column.iteritems():
-                #     print("column['%s'] => %s"%(k,v))
-                label = QLabel('%s(%s)'%(column['name'],key))
-                label.setToolTip("Set this %s column on new splitd books..."%column['datatype'])
-                grid.addWidget(label,row,0)
-
-                dropdown = QComboBox(self)
-                dropdown.addItem('',QVariant('none'))
-                for md in permitted_values[column['datatype']]:
-                    # tags-like column also 'text'
-                    if md == 'union' and not column['is_multiple']:
-                        continue
-                    if md == 'concat' and column['is_multiple']:
-                        continue
-                    dropdown.addItem(titleLabels[md],QVariant(md))
-                self.custcol_dropdowns[key] = dropdown
-                if key in prefs['custom_cols']:
-                    dropdown.setCurrentIndex(dropdown.findData(QVariant(prefs['custom_cols'][key])))
-                dropdown.setToolTip("How this column will be populated by default.")
-                grid.addWidget(dropdown,row,1)
-                row+=1
-        
-        self.l.insertStretch(-1)
-
-        #print("prefs['custom_cols'] %s"%prefs['custom_cols'])

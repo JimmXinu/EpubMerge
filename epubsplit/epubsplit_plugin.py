@@ -28,7 +28,7 @@ from calibre.gui2.actions import InterfaceAction
 
 from calibre_plugins.epubsplit.common_utils import (set_plugin_icon_resources, get_icon)
 
-from calibre_plugins.epubsplit.config import (prefs, permitted_values)
+from calibre_plugins.epubsplit.config import prefs
 
 from calibre_plugins.epubsplit.epubsplit import SplitEpub
 
@@ -136,22 +136,33 @@ class EpubSplitPlugin(InterfaceAction):
 
             print("linenums:%s"%linenums)
             
-            deftitle = "%s Split" % misource.title
-            mi = MetaInformation(deftitle,misource.authors)
+            deftitle = None
+            defauthors = None
+            
+            if prefs['copytitle']:
+                deftitle = "%s Split" % misource.title
+                
+            if prefs['copyauthors']:
+                defauthors = misource.authors
+                
+            mi = MetaInformation(deftitle,defauthors)
 
-            mi.tags = misource.tags # [item for sublist in tagslists for item in sublist]
+            if prefs['copytags']:
+                mi.tags = misource.tags # [item for sublist in tagslists for item in sublist]
 
-            mi.languages = misource.languages
+            if prefs['copylanguages']:
+                mi.languages = misource.languages
 
-            mi.series = misource.series
+            if prefs['copyseries']:
+                mi.series = misource.series
 
-            if misource.comments:
+            if prefs['copycomments'] and misource.comments:
                 mi.comments = "Split from:\n\n" + misource.comments
             
             book_id = db.create_book_entry(mi,
                                            add_duplicates=True)
 
-            if misource.has_cover:
+            if prefs['copycover'] and misource.has_cover:
                 db.set_cover(book_id, db.cover(source_id,index_is_id=True))
 
             print("3:%s"%(time.time()-self.t))
