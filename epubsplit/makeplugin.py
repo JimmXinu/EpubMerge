@@ -13,7 +13,7 @@ from makezip import createZipFile
 
 if __name__=="__main__":
     
-    filename="EpubMerge.zip"
+    filename="EpubSplit.zip"
     exclude=['*.pyc','*~','*.xcf','*[0-9].png']
     # from top dir. 'w' for overwrite
     #from calibre-plugin dir. 'a' for append
