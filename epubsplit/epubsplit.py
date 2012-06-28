@@ -390,8 +390,12 @@ class SplitEpub:
             # add to manifest 
             if coverjpgpath and linked == "cover.jpg":
                 continue # don't dup cover.
+
+            try:
+                outputepub.writestr(linked,self.get_file(linked))
+            except Exception, e:
+                print("Failed to copy linked file (%s)\nException: %s"%(linked,e))
                 
-            outputepub.writestr(linked,self.get_file(linked))
             id = "a%d"%contentcount
             contentcount += 1
             manifest.appendChild(newTag(contentdom,"item",
