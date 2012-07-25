@@ -119,16 +119,22 @@ class EpubSplitPlugin(InterfaceAction):
             print()
             
             d = SelectLinesDialog(self.gui,
-                                 'Select Sections to Split Off',
-                                 prefs,
-                                 self.qaction.icon(),
-                                 lines,
-                                 )
+                                  'Select Sections to Split Off',
+                                  prefs,
+                                  self.qaction.icon(),
+                                  lines,
+                                  partial(self._do_split, db, source_id, misource, splitepub)
+                                  )
             d.exec_()
+
+            return
+        
             if d.result() != d.Accepted:
                 return
-
-            linenums,changedtocs = d.get_selected_linenums_tocs()
+            
+    def _do_split(self, db, source_id, misource, splitepub, newspecs):
+    
+            linenums,changedtocs = newspecs
             print("updated tocs:%s"%changedtocs)
             
             print("2:%s"%(time.time()-self.t))

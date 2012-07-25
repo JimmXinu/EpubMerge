@@ -29,9 +29,11 @@ from calibre_plugins.epubsplit.common_utils \
         
 class SelectLinesDialog(SizePersistedDialog):
     def __init__(self, gui, header, prefs, icon, lines,
+                 do_split_fn,
                  save_size_name='epubsplit:update list dialog'):
         SizePersistedDialog.__init__(self, gui, save_size_name)
         self.gui = gui
+        self.do_split_fn = do_split_fn
       
         self.setWindowTitle(header)
         self.setWindowIcon(icon)
@@ -48,9 +50,12 @@ class SelectLinesDialog(SizePersistedDialog):
         lines_layout.addWidget(self.lines_table)
 
         options_layout = QHBoxLayout()
-
-        button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
-        button_box.accepted.connect(self.accept)
+        
+        button_box = QDialogButtonBox(self)
+        new_book = button_box.addButton("New Book", button_box.ActionRole)
+        new_book.clicked.connect(self.new_book)        
+        
+        new_book = button_box.addButton("Done", button_box.RejectRole)
         button_box.rejected.connect(self.reject)
         options_layout.addWidget(button_box)
       
@@ -60,6 +65,10 @@ class SelectLinesDialog(SizePersistedDialog):
         self.resize_dialog()
         self.lines_table.populate_table(lines)
 
+
+    def new_book(self):
+        self.do_split_fn(self.get_selected_linenums_tocs())
+        
     def get_selected_linenums_tocs(self):
         return self.lines_table.get_selected_linenums_tocs()
 
