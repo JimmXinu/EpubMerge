@@ -17,73 +17,88 @@ from calibre.utils.config import JSONConfig
 from calibre.gui2.ui import get_gui
 
 from calibre_plugins.epubmerge.common_utils \
-    import ( get_library_uuid, KeyboardConfigDialog )
+    import ( get_library_uuid, KeyboardConfigDialog, PrefsViewerDialog )
 
-# This is where all preferences for this plugin will be stored
+PREFS_NAMESPACE = 'EpubMergePlugin'
+PREFS_KEY_SETTINGS = 'settings'
+
+# Set defaults used by all.  Library specific settings continue to
+# take from here.
+default_prefs = {}
+default_prefs['flattentoc'] = False
+default_prefs['titlenavpoints'] = True
+default_prefs['custom_cols'] = {}
+
+def set_library_config(library_config):
+    get_gui().current_db.prefs.set_namespaced(PREFS_NAMESPACE,
+                                              PREFS_KEY_SETTINGS,
+                                              library_config)
+    
+def get_library_config():
+    db = get_gui().current_db
+    library_id = get_library_uuid(db)
+    library_config = None
+    # Check whether this is a configuration needing to be migrated
+    # from json into database.  If so: get it, set it, wipe it from json.
+    if library_id in old_prefs:
+        print("get prefs from old_prefs")
+        library_config = old_prefs[library_id]
+        set_library_config(library_config)
+        del old_prefs[library_id]
+
+    if library_config is None:
+        print("get prefs from db")
+        library_config = db.prefs.get_namespaced(PREFS_NAMESPACE, PREFS_KEY_SETTINGS,
+                                                 copy.deepcopy(default_prefs))
+    return library_config
+
+# This is where all preferences for this plugin *were* stored
 # Remember that this name (i.e. plugins/epubmerge) is also
 # in a global namespace, so make it as unique as possible.
 # You should always prefix your config file name with plugins/,
 # so as to ensure you dont accidentally clobber a calibre config file
-all_prefs = JSONConfig('plugins/EpubMerge')
-
-# Set defaults used by all.  Library specific settings continue to
-# take from here.
-all_prefs.defaults['flattentoc'] = False
-all_prefs.defaults['titlenavpoints'] = True
-all_prefs.defaults['custom_cols'] = {}
-
-# The list of settings to copy from all_prefs or the previous library
-# when config is called for the first time on a library.
-copylist = ['flattentoc',
-            'titlenavpoints']
+old_prefs = JSONConfig('plugins/EpubMerge')
 
 # fake out so I don't have to change the prefs calls anywhere.  The
 # Java programmer in me is offended by op-overloading, but it's very
 # tidy.
 class PrefsFacade():
-    def __init__(self,all_prefs):
-        self.all_prefs = all_prefs
-        self.lastlibid = None
-
-    def _get_copylist_prefs(self,frompref):
-        return filter( lambda x : x[0] in copylist, frompref.items() )
+    def __init__(self,default_prefs):
+        self.default_prefs = default_prefs
+        self.libraryid = None
+        self.current_prefs = None
         
     def _get_prefs(self):
         libraryid = get_library_uuid(get_gui().current_db)
-        if libraryid not in self.all_prefs:
-            if self.lastlibid == None:
-                self.all_prefs[libraryid] = dict(self._get_copylist_prefs(self.all_prefs))
-            else:
-                self.all_prefs[libraryid] = dict(self._get_copylist_prefs(self.all_prefs[self.lastlibid]))
-            self.lastlibid = libraryid
-            
-        return self.all_prefs[libraryid]
-
-    def _save_prefs(self,prefs):
-        libraryid = get_library_uuid(get_gui().current_db)
-        self.all_prefs[libraryid] = prefs
+        if self.current_prefs == None or self.libraryid != libraryid:
+            print("self.current_prefs == None(%s) or self.libraryid != libraryid(%s)"%(self.current_prefs == None,self.libraryid != libraryid))
+            self.libraryid = libraryid
+            self.current_prefs = get_library_config()
+        return self.current_prefs
         
     def __getitem__(self,k):            
         prefs = self._get_prefs()
         if k not in prefs:
-            # pulls from all_prefs.defaults automatically if not set
-            # in all_prefs
-            return self.all_prefs[k]
+            # pulls from default_prefs.defaults automatically if not set
+            # in default_prefs
+            return self.default_prefs[k]
         return prefs[k]
 
     def __setitem__(self,k,v):
         prefs = self._get_prefs()
         prefs[k]=v
-        self._save_prefs(prefs)
+        # self._save_prefs(prefs)
 
-    # to be avoided--can cause unexpected results as possibly ancient
-    # all_pref settings may be pulled.
     def __delitem__(self,k):
         prefs = self._get_prefs()
-        del prefs[k]
-        self._save_prefs(prefs)
+        if k in prefs:
+            del prefs[k]
 
-prefs = PrefsFacade(all_prefs)
+    def save_to_db(self):
+        set_library_config(self._get_prefs())
+        
+
+prefs = PrefsFacade(old_prefs)
     
 class ConfigWidget(QWidget):
 
@@ -168,7 +183,17 @@ it's existing TOC nested underneath it.''')
         reset_confirmation_button.clicked.connect(self.reset_dialogs)
         self.l.addWidget(reset_confirmation_button)
         
+        view_prefs_button = QPushButton('&View library preferences...', self)
+        view_prefs_button.setToolTip(_(
+                    'View data stored in the library database for this plugin'))
+        view_prefs_button.clicked.connect(self.view_prefs)
+        self.l.addWidget(view_prefs_button)
+        
         self.l.insertStretch(-1)
+        
+    def view_prefs(self):
+        d = PrefsViewerDialog(self.plugin_action.gui, PREFS_NAMESPACE)
+        d.exec_()
         
     def reset_dialogs(self):
         for key in dynamic.keys():

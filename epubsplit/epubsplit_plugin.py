@@ -89,9 +89,11 @@ class EpubSplitPlugin(InterfaceAction):
 
     def plugin_button(self):
         self.t = time.time()
-        if len(self.gui.library_view.get_selected_ids()) > 1:
-            d = error_dialog(self.gui, _('Multiple EPUBs'),
-                             _('More than 1 book selected.\nCannot Split Multiple EPUBs'))
+        if len(self.gui.library_view.get_selected_ids()) != 1:
+            d = error_dialog(self.gui,
+                             _('Select One Book'),
+                             _('Please select exactly one book to split.'),
+                             show_copy_button=False)
             d.exec_()
         else:
             self.previous = self.gui.library_view.currentIndex()

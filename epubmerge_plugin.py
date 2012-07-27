@@ -89,8 +89,10 @@ class EpubMergePlugin(InterfaceAction):
     def plugin_button(self):
         self.t = time.time()
         if len(self.gui.library_view.get_selected_ids()) < 2:
-            d = error_dialog(self.gui, _('Cannot Merge Epubs'),
-                             _('Less than 2 books selected.'))
+            d = error_dialog(self.gui,
+                             _('Cannot Merge Epubs'),
+                             _('Less than 2 books selected.'),
+                             show_copy_button=False)
             d.exec_()
         else:
             db=self.gui.current_db
