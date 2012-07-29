@@ -41,13 +41,13 @@ def get_library_config():
     # Check whether this is a configuration needing to be migrated
     # from json into database.  If so: get it, set it, wipe it from json.
     if library_id in old_prefs:
-        print("get prefs from old_prefs")
+        #print("get prefs from old_prefs")
         library_config = old_prefs[library_id]
         set_library_config(library_config)
         del old_prefs[library_id]
 
     if library_config is None:
-        print("get prefs from db")
+        #print("get prefs from db")
         library_config = db.prefs.get_namespaced(PREFS_NAMESPACE, PREFS_KEY_SETTINGS,
                                                  copy.deepcopy(default_prefs))
     return library_config
@@ -71,7 +71,7 @@ class PrefsFacade():
     def _get_prefs(self):
         libraryid = get_library_uuid(get_gui().current_db)
         if self.current_prefs == None or self.libraryid != libraryid:
-            print("self.current_prefs == None(%s) or self.libraryid != libraryid(%s)"%(self.current_prefs == None,self.libraryid != libraryid))
+            #print("self.current_prefs == None(%s) or self.libraryid != libraryid(%s)"%(self.current_prefs == None,self.libraryid != libraryid))
             self.libraryid = libraryid
             self.current_prefs = get_library_config()
         return self.current_prefs
@@ -79,9 +79,12 @@ class PrefsFacade():
     def __getitem__(self,k):            
         prefs = self._get_prefs()
         if k not in prefs:
-            # pulls from default_prefs.defaults automatically if not set
-            # in default_prefs
-            return self.default_prefs[k]
+            # some users have old JSON, but have never saved all the
+            # options.
+            if k in self.default_prefs:
+                return self.default_prefs[k]
+            else:
+                return default_prefs[k]
         return prefs[k]
 
     def __setitem__(self,k,v):
