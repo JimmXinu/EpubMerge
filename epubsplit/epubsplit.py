@@ -215,9 +215,10 @@ class SplitEpub:
 
         # print("self.oldnew:%s"%self.filecache.oldnew)
         # print("self.newold:%s"%self.filecache.newold)
-        print("\nanchors:%s\n"%self.filecache.anchors)
-        print("\nlinkedfiles:%s\n"%self.filecache.linkedfiles)
-        #print("relpath:%s"%get_path_part())
+        # print("\nanchors:%s\n"%self.filecache.anchors)
+        # print("\nlinkedfiles:%s\n"%self.filecache.linkedfiles)
+        # print("relpath:%s"%get_path_part())
+            
         # Spin through to replace internal URLs
         for fl in outfiles:
             print("file:%s"%fl[0])

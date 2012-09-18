@@ -181,8 +181,8 @@ def doMerge(outputio,
             
         metadom = parseString(epub.read(rootfilename))
         if booknum==1:
-            firstmetadom = metadom.getElementsByTagName("metadata")[0]
             try:
+                firstmetadom = metadom.getElementsByTagName("metadata")[0]
                 source=firstmetadom.getElementsByTagName("dc:source")[0].firstChild.data.encode("utf-8")
             except:
                 source=""
@@ -391,8 +391,13 @@ def doMerge(outputio,
             newnav = newTag(tocncxdom,"navPoint",{"id":"book%03d"%booknum})
             navlabel = newTag(tocncxdom,"navLabel")
             newnav.appendChild(navlabel)
-            # For purposes of TOC titling & desc, use first book author
-            navlabel.appendChild(newTag(tocncxdom,"text",text=booktitles[booknum]+" by "+allauthors[booknum][0]))
+            # For purposes of TOC titling & desc, use first book author.  Skip adding author if only one.
+            if len(usedauthors) > 1:
+                title = booktitles[booknum]+" by "+allauthors[booknum][0]
+            else:
+                title = booktitles[booknum]
+                
+            navlabel.appendChild(newTag(tocncxdom,"text",text=title))
             # Find the first 'spine' item's content for the title navpoint.
             # Many epubs have the first chapter as first navpoint, so we can't just
             # copy that anymore.
