@@ -10,7 +10,7 @@ __docformat__ = 'restructuredtext en'
 import traceback, copy
 
 from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
-                      QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QVariant)
+                      QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QVariant, QScrollArea)
 
 from calibre.gui2 import dynamic, info_dialog
 from calibre.utils.config import JSONConfig
@@ -99,7 +99,6 @@ class PrefsFacade():
 
     def save_to_db(self):
         set_library_config(self._get_prefs())
-        
 
 prefs = PrefsFacade(old_prefs)
     
@@ -118,7 +117,7 @@ class ConfigWidget(QWidget):
         self.basic_tab = BasicTab(self, plugin_action)
         tab_widget.addTab(self.basic_tab, 'Basic')
 
-        self.columns_tab = ColumnsTab(self, plugin_action)
+        self.columns_tab = CustomColumnsTab(self, plugin_action)
         tab_widget.addTab(self.columns_tab, 'Custom Columns')
 
     def save_settings(self):
@@ -231,7 +230,7 @@ titleLabels = {
     'concat':'Concatenate values from all source books',
     }
 
-class ColumnsTab(QWidget):
+class CustomColumnsTab(QWidget):
 
     def __init__(self, parent_dialog, plugin_action):
         self.parent_dialog = parent_dialog
@@ -246,12 +245,21 @@ class ColumnsTab(QWidget):
         self.l.addWidget(label)
         self.l.addSpacing(5)
         
+        scrollable = QScrollArea()
+        scrollcontent = QWidget()
+        scrollable.setWidget(scrollcontent)
+        scrollable.setWidgetResizable(True)
+        self.l.addWidget(scrollable)
+
+        self.sl = QVBoxLayout()
+        scrollcontent.setLayout(self.sl)
+        
         self.custcol_dropdowns = {}
 
         custom_columns = self.plugin_action.gui.library_view.model().custom_columns
 
         grid = QGridLayout()
-        self.l.addLayout(grid)
+        self.sl.addLayout(grid)
         row=0
         for key, column in custom_columns.iteritems():
             if column['datatype'] in permitted_values:
@@ -278,6 +286,6 @@ class ColumnsTab(QWidget):
                 grid.addWidget(dropdown,row,1)
                 row+=1
         
-        self.l.insertStretch(-1)
+        self.sl.insertStretch(-1)
 
         #print("prefs['custom_cols'] %s"%prefs['custom_cols'])
