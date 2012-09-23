@@ -17,6 +17,7 @@ from PyQt4.Qt import (QApplication, QMenu, QToolButton)
 
 from calibre.ptempfile import PersistentTemporaryFile
 from calibre.ebooks.metadata import MetaInformation, authors_to_string
+from calibre.ebooks.metadata.book.base import SafeFormat
 from calibre.ebooks.metadata.meta import get_metadata
 from calibre.gui2 import error_dialog, warning_dialog, question_dialog, info_dialog
 from calibre.gui2.dialogs.message_box import ViewLog
@@ -164,6 +165,21 @@ class EpubSplitPlugin(InterfaceAction):
             if prefs['copyseries']:
                 mi.series = misource.series
 
+            if prefs['copydate']:
+                mi.timestamp = misource.timestamp
+
+            if prefs['copyrating']:
+                mi.rating = misource.rating
+
+            if prefs['copypubdate']:
+                mi.pubdate = misource.pubdate
+
+            if prefs['copypublisher']:
+                mi.publisher = misource.publisher
+
+            if prefs['copyidentifiers']:
+                mi.set_identifiers(misource.get_identifiers())
+
             if prefs['copycomments'] and misource.comments:
                 mi.comments = "Split from:\n\n" + misource.comments
             
@@ -176,6 +192,31 @@ class EpubSplitPlugin(InterfaceAction):
             print("3:%s"%(time.time()-self.t))
             self.t = time.time()
 
+            custom_columns = self.gui.library_view.model().custom_columns
+            for col, action in prefs['custom_cols'].iteritems():
+                #print("col: %s action: %s"%(col,action))
+                
+                if col not in custom_columns:
+                    print("%s not an existing column, skipping."%col)
+                    continue
+                
+                coldef = custom_columns[col]
+                #print("coldef:%s"%coldef)
+                label = coldef['label']
+                value = db.get_custom(source_id, label=label, index_is_id=True)
+                if value:
+                    db.set_custom(book_id,value,label=label,commit=False)
+            
+            print("3.5:%s"%(time.time()-self.t))
+            self.t = time.time()
+
+            if prefs['sourcecol'] != '' and prefs['sourcecol'] in custom_columns \
+                    and prefs['sourcetemplate']:
+                val = SafeFormat().safe_format(prefs['sourcetemplate'], misource, 'EpubSplit Source Template Error', misource)
+                print("Attempting to set %s to %s"%(prefs['sourcecol'],val))
+                label = custom_columns[prefs['sourcecol']]['label']
+                db.set_custom(book_id, val, label=label, commit=False)
+                
             db.commit()
             
             print("4:%s"%(time.time()-self.t))

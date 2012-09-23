@@ -10,7 +10,7 @@ __docformat__ = 'restructuredtext en'
 import traceback, copy
 
 from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
-                      QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QVariant)
+                      QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QVariant, QScrollArea)
 
 from calibre.gui2 import dynamic, info_dialog
 from calibre.utils.config import JSONConfig
@@ -28,10 +28,22 @@ default_prefs = {}
 default_prefs['copytitle'] = True
 default_prefs['copyauthors'] = True
 default_prefs['copytags'] = True
+
+default_prefs['copyrating'] = True
+default_prefs['copydate'] = True
+default_prefs['copyidentifiers'] = False
+default_prefs['copypublisher'] = True
+default_prefs['copypubdate'] = True
+
 default_prefs['copylanguages'] = True
 default_prefs['copyseries'] = True
 default_prefs['copycomments'] = True
 default_prefs['copycover'] = True
+
+default_prefs['custom_cols'] = {}
+
+default_prefs['sourcecol'] = ''
+default_prefs['sourcetemplate'] = "{title} by {authors}"
 
 def set_library_config(library_config):
     get_gui().current_db.prefs.set_namespaced(PREFS_NAMESPACE,
@@ -115,45 +127,133 @@ class ConfigWidget(QWidget):
         self.l = QVBoxLayout()
         self.setLayout(self.l)
 
+        tab_widget = QTabWidget(self)
+        self.l.addWidget(tab_widget)
+
+        self.basic_tab = BasicTab(self, plugin_action)
+        tab_widget.addTab(self.basic_tab, 'Basic')
+
+        self.columns_tab = CustomColumnsTab(self, plugin_action)
+        tab_widget.addTab(self.columns_tab, 'Custom Columns')
+
+    def save_settings(self):
+        prefs['copytitle'] = self.basic_tab.copytitle.isChecked()
+        prefs['copyauthors'] = self.basic_tab.copyauthors.isChecked()
+        prefs['copytags'] = self.basic_tab.copytags.isChecked()
+        prefs['copylanguages'] = self.basic_tab.copylanguages.isChecked()
+        prefs['copyseries'] = self.basic_tab.copyseries.isChecked()
+        prefs['copycomments'] = self.basic_tab.copycomments.isChecked()
+        prefs['copycover'] = self.basic_tab.copycover.isChecked()
+        prefs['copydate'] = self.basic_tab.copydate.isChecked()
+        prefs['copyrating'] = self.basic_tab.copyrating.isChecked()
+        prefs['copypubdate'] = self.basic_tab.copypubdate.isChecked()
+        prefs['copyidentifiers'] = self.basic_tab.copyidentifiers.isChecked()
+        prefs['copypublisher'] = self.basic_tab.copypublisher.isChecked()
+
+        # Custom Columns tab
+        colsmap = {}
+        for (col,chkbx) in self.columns_tab.custcol_checkboxes.iteritems():
+            if chkbx.isChecked():
+                colsmap[col] = chkbx.isChecked()
+            #print("colsmap[%s]:%s"%(col,colsmap[col]))
+        prefs['custom_cols'] = colsmap
+
+        prefs['sourcecol'] = unicode(self.columns_tab.sourcecol.itemData(self.columns_tab.sourcecol.currentIndex()).toString())
+        prefs['sourcetemplate'] = unicode(self.columns_tab.sourcetemplate.text())
+        
+        prefs.save_to_db()
+        
+    def edit_shortcuts(self):
+        self.save_settings()
+        d = KeyboardConfigDialog(self.plugin_action.gui, self.plugin_action.action_spec[0])
+        if d.exec_() == d.Accepted:
+            self.plugin_action.gui.keyboard.finalize()
+
+class BasicTab(QWidget):
+
+    def __init__(self, parent_dialog, plugin_action):
+        QWidget.__init__(self)
+        self.parent_dialog = parent_dialog
+        self.plugin_action = plugin_action
+        
+        self.l = QVBoxLayout()
+        self.setLayout(self.l)
+
         label = QLabel('When making a new Epub, the metadata from the source book will be copied or not as you choose below.')
         label.setWordWrap(True)
         self.l.addWidget(label)
         #self.l.addSpacing(5)
         
+        scrollable = QScrollArea()
+        scrollcontent = QWidget()
+        scrollable.setWidget(scrollcontent)
+        scrollable.setWidgetResizable(True)
+        self.l.addWidget(scrollable)
+
+        self.sl = QVBoxLayout()
+        scrollcontent.setLayout(self.sl)
+        
         self.copytitle = QCheckBox('Copy Title',self)
-        self.copytitle.setToolTip('Copy title from the source Epub to the Split Epub.  Adds "Split" to the title.')
+        self.copytitle.setToolTip('Copy Title from the source Epub to the Split Epub.  Adds "Split" to the title.')
         self.copytitle.setChecked(prefs['copytitle'])
-        self.l.addWidget(self.copytitle)
+        self.sl.addWidget(self.copytitle)
         
         self.copyauthors = QCheckBox('Copy Authors',self)
         self.copyauthors.setToolTip('Copy Authors from the source Epub to the Split Epub.')
         self.copyauthors.setChecked(prefs['copyauthors'])
-        self.l.addWidget(self.copyauthors)
-        
-        self.copytags = QCheckBox('Copy Tags',self)
-        self.copytags.setToolTip('Copy Tags from the source Epub to the Split Epub.')
-        self.copytags.setChecked(prefs['copytags'])
-        self.l.addWidget(self.copytags)
-        
-        self.copylanguages = QCheckBox('Copy Languages',self)
-        self.copylanguages.setToolTip('Copy Languages from the source Epub to the Split Epub.')
-        self.copylanguages.setChecked(prefs['copylanguages'])
-        self.l.addWidget(self.copylanguages)
+        self.sl.addWidget(self.copyauthors)
         
         self.copyseries = QCheckBox('Copy Series',self)
         self.copyseries.setToolTip('Copy Series from the source Epub to the Split Epub.')
         self.copyseries.setChecked(prefs['copyseries'])
-        self.l.addWidget(self.copyseries)
-        
-        self.copycomments = QCheckBox('Copy Comments',self)
-        self.copycomments.setToolTip('Copy Comments from the source Epub to the Split Epub.  Adds "Split from:" to the comments.')
-        self.copycomments.setChecked(prefs['copycomments'])
-        self.l.addWidget(self.copycomments)
+        self.sl.addWidget(self.copyseries)
         
         self.copycover = QCheckBox('Copy Cover',self)
         self.copycover.setToolTip('Copy Cover from the source Epub to the Split Epub.')
         self.copycover.setChecked(prefs['copycover'])
-        self.l.addWidget(self.copycover)
+        self.sl.addWidget(self.copycover)
+        
+        self.copyrating = QCheckBox('Copy Rating',self)
+        self.copyrating.setToolTip('Copy Rating from the source Epub to the Split Epub.')
+        self.copyrating.setChecked(prefs['copyrating'])
+        self.sl.addWidget(self.copyrating)
+        
+        self.copytags = QCheckBox('Copy Tags',self)
+        self.copytags.setToolTip('Copy Tags from the source Epub to the Split Epub.')
+        self.copytags.setChecked(prefs['copytags'])
+        self.sl.addWidget(self.copytags)
+        
+        self.copyidentifiers = QCheckBox('Copy Identifiers',self)
+        self.copyidentifiers.setToolTip('Copy Identifiers from the source Epub to the Split Epub.')
+        self.copyidentifiers.setChecked(prefs['copyidentifiers'])
+        self.sl.addWidget(self.copyidentifiers)
+        
+        self.copydate = QCheckBox('Copy Date',self)
+        self.copydate.setToolTip('Copy Date from the source Epub to the Split Epub.')
+        self.copydate.setChecked(prefs['copydate'])
+        self.sl.addWidget(self.copydate)
+        
+        self.copypubdate = QCheckBox('Copy Published Date',self)
+        self.copypubdate.setToolTip('Copy Published Date from the source Epub to the Split Epub.')
+        self.copypubdate.setChecked(prefs['copypubdate'])
+        self.sl.addWidget(self.copypubdate)
+        
+        self.copypublisher = QCheckBox('Copy Publisher',self)
+        self.copypublisher.setToolTip('Copy Publisher from the source Epub to the Split Epub.')
+        self.copypublisher.setChecked(prefs['copypublisher'])
+        self.sl.addWidget(self.copypublisher)
+        
+        self.copylanguages = QCheckBox('Copy Languages',self)
+        self.copylanguages.setToolTip('Copy Languages from the source Epub to the Split Epub.')
+        self.copylanguages.setChecked(prefs['copylanguages'])
+        self.sl.addWidget(self.copylanguages)
+        
+        self.copycomments = QCheckBox('Copy Comments',self)
+        self.copycomments.setToolTip('Copy Comments from the source Epub to the Split Epub.  Adds "Split from:" to the comments.')
+        self.copycomments.setChecked(prefs['copycomments'])
+        self.sl.addWidget(self.copycomments)
+        
+        self.sl.insertStretch(-1)
         
         self.l.addSpacing(15)        
 
@@ -165,7 +265,7 @@ class ConfigWidget(QWidget):
         keyboard_shortcuts_button = QPushButton('Keyboard shortcuts...', self)
         keyboard_shortcuts_button.setToolTip(_(
                     'Edit the keyboard shortcuts associated with this plugin'))
-        keyboard_shortcuts_button.clicked.connect(self.edit_shortcuts)
+        keyboard_shortcuts_button.clicked.connect(parent_dialog.edit_shortcuts)
         self.l.addWidget(keyboard_shortcuts_button)
 
         reset_confirmation_button = QPushButton(_('Reset disabled &confirmation dialogs'), self)
@@ -180,29 +280,10 @@ class ConfigWidget(QWidget):
         view_prefs_button.clicked.connect(self.view_prefs)
         self.l.addWidget(view_prefs_button)
         
-        self.l.insertStretch(-1)
-        
     def view_prefs(self):
         d = PrefsViewerDialog(self.plugin_action.gui, PREFS_NAMESPACE)
         d.exec_()
         
-    def save_settings(self):
-        prefs['copytitle'] = self.copytitle.isChecked()
-        prefs['copyauthors'] = self.copyauthors.isChecked()
-        prefs['copytags'] = self.copytags.isChecked()
-        prefs['copylanguages'] = self.copylanguages.isChecked()
-        prefs['copyseries'] = self.copyseries.isChecked()
-        prefs['copycomments'] = self.copycomments.isChecked()
-        prefs['copycover'] = self.copycover.isChecked()
-
-        prefs.save_to_db()
-        
-    def edit_shortcuts(self):
-        self.save_settings()
-        d = KeyboardConfigDialog(self.plugin_action.gui, self.plugin_action.action_spec[0])
-        if d.exec_() == d.Accepted:
-            self.plugin_action.gui.keyboard.finalize()
-
     def reset_dialogs(self):
         for key in dynamic.keys():
             if key.startswith('epubsplit_') and key.endswith('_again') \
@@ -213,3 +294,67 @@ class ConfigWidget(QWidget):
                     show=True,
                     show_copy_button=False)
 
+class CustomColumnsTab(QWidget):
+
+    def __init__(self, parent_dialog, plugin_action):
+        self.parent_dialog = parent_dialog
+        self.plugin_action = plugin_action
+        QWidget.__init__(self)
+        
+        self.l = QVBoxLayout()
+        self.setLayout(self.l)
+
+        label = QLabel("If you have custom columns defined, they will be listed below.  Choose if you would like these columns copied to new split books.")
+        label.setWordWrap(True)
+        self.l.addWidget(label)
+        self.l.addSpacing(5)
+        
+        scrollable = QScrollArea()
+        scrollcontent = QWidget()
+        scrollable.setWidget(scrollcontent)
+        scrollable.setWidgetResizable(True)
+        self.l.addWidget(scrollable)
+
+        self.sl = QVBoxLayout()
+        scrollcontent.setLayout(self.sl)
+        
+        self.custcol_checkboxes = {}
+
+        custom_columns = self.plugin_action.gui.library_view.model().custom_columns
+        for key, column in custom_columns.iteritems():
+            # print("\n============== %s ===========\n"%key)
+            # for (k,v) in column.iteritems():
+            #     print("column['%s'] => %s"%(k,v))
+            checkbox = QCheckBox('%s(%s)'%(column['name'],key))
+            checkbox.setToolTip("Copy this %s column to new split books..."%column['datatype'])
+            checkbox.setChecked(key in prefs['custom_cols'] and prefs['custom_cols'][key])
+            self.custcol_checkboxes[key] = checkbox
+            self.sl.addWidget(checkbox)
+            
+        self.sl.insertStretch(-1)
+
+        self.l.addSpacing(5)
+        label = QLabel("Source column:")
+        label.setToolTip("If set, the column below will be populated with the template below to record the source of the split file.")
+        label.setWordWrap(True)
+        self.l.addWidget(label)
+        
+        horz = QHBoxLayout()
+        self.sourcecol = QComboBox(self)
+        self.sourcecol.setToolTip("Choose a column to populate with template on split.")
+        self.sourcecol.addItem('',QVariant('none'))
+        for key, column in custom_columns.iteritems():
+            if column['datatype'] in ('text','comments'):
+                self.sourcecol.addItem(column['name'],QVariant(key))
+        self.sourcecol.setCurrentIndex(self.sourcecol.findData(QVariant(prefs['sourcecol'])))
+        horz.addWidget(self.sourcecol)
+        
+        self.sourcetemplate = QLineEdit(self)
+        self.sourcetemplate.setToolTip("Template from source book. Example: {title} by {authors}")
+        # if 'sourcetemplate' in prefs:
+        self.sourcetemplate.setText(prefs['sourcetemplate'])
+        # else:
+        #      self.sourcetemplate.setText("{title} by {authors}")
+        horz.addWidget(self.sourcetemplate)
+        
+        self.l.addLayout(horz)
