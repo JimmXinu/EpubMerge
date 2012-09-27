@@ -111,7 +111,7 @@ class SplitEpub:
         self.split_lines = [] # list of dicts with href, anchor and toc
         # spin on spine files.
         count=0
-        for itemref in self. get_content_dom().getElementsByTagName("itemref"):
+        for itemref in self.get_content_dom().getElementsByTagName("itemref"):
             idref = itemref.getAttribute("idref")
             (href,type) = self.get_manifest_items()[idref]
             current = {}
@@ -124,6 +124,9 @@ class SplitEpub:
             current['id'] = idref
             current['type'] = type
             current['num'] = count
+            t=self.epub.read(href).decode('utf-8')
+            if len(t) > 1500 : t = t[:1500] + "..."
+            current['sample']=t
             count += 1
             #print("spine:%s->%s"%(idref,href))
             
@@ -149,6 +152,10 @@ class SplitEpub:
                         current['id'] = idref
                         current['type'] = type
                         current['num'] = count
+                        # anchor, need to split first, then reduce to 1500.
+                        t=splitHtml(self.epub.read(href).decode('utf-8'),anchor,before=False)
+                        if len(t) > 1500 : t = t[:1500] + "..."
+                        current['sample']=t
                         count += 1
                     # There can be more than one toc to the same split line.
                     # This won't find multiple toc to the same anchor yet.

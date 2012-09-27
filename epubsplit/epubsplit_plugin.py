@@ -117,9 +117,9 @@ class EpubSplitPlugin(InterfaceAction):
 
             lines = splitepub.get_split_lines()
 
-            for line in lines:
-                print("line(%d):%s"%(line['num'],line))
-            print()
+            # for line in lines:
+            #     print("line(%d):%s"%(line['num'],line))
+            # print()
             
             d = SelectLinesDialog(self.gui,
                                   'Select Sections to Split Off',

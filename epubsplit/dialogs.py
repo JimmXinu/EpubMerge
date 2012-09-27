@@ -110,6 +110,7 @@ class LinesTableWidget(QTableWidget):
             href = "%s#%s"%(href,line['anchor'])
             
         href_cell = ReadOnlyTableWidgetItem(href)
+        href_cell.setToolTip(line['sample'])
         href_cell.setData(Qt.UserRole, QVariant(line['num']))
         self.setItem(row, 0, href_cell)
 
