@@ -90,14 +90,21 @@ class SplitEpub:
             self.toc_map = {}
             # update all navpoint ids with bookid for uniqueness.
             for navpoint in self.get_toc_dom().getElementsByTagName("navPoint"):
-                # The first of these in each navPoint should be the appropriate one.
-                # (may be others due to nesting.
-                text = navpoint.getElementsByTagName("text")[0].firstChild.data.encode("utf-8")
                 src = unquote(self.get_content_relpath()+navpoint.getElementsByTagName("content")[0].getAttribute("src"))
                 if '#' in src:
                     (href,anchor)=src.split("#")
                 else:
                     (href,anchor)=(src,None)
+                    
+                # The first of these in each navPoint should be the appropriate one.
+                # (may be others due to nesting.
+                textnode = navpoint.getElementsByTagName("text")[0].firstChild
+                if textnode:
+                    text = textnode.data.encode("utf-8")
+                else:
+                    print("No chapter title found in TOC for (%s)"%src)
+                    text = ""
+                    
                 if href not in self.toc_map:
                     self.toc_map[href] = []
                 self.toc_map[href].append((text,anchor))
