@@ -134,6 +134,8 @@ class ConfigWidget(QWidget):
                 #print("colsmap[%s]:%s"%(col,colsmap[col]))
         prefs['custom_cols'] = colsmap
 
+        prefs.save_to_db()
+        
     def edit_shortcuts(self):
         self.save_settings()
         d = KeyboardConfigDialog(self.plugin_action.gui, self.plugin_action.action_spec[0])
