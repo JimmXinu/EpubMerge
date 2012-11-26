@@ -438,6 +438,25 @@ def doMerge(outputio,
                 break
             
         if( contentsrc not in contentsrcs ):
+            
+            parent = navpoint.parentNode
+            try:
+                # if the epub was ever edited with Sigil, it changed
+                # the id, but the file name is the same.
+                if navpoint.is_ffdl_epub and \
+                        ( navpoint.getAttribute("id").endswith('log_page') \
+                              or contentsrc.endswith("log_page.xhtml") ):
+                    sibs = filter( lambda x : isinstance(x,Element) and x.tagName=="navPoint",
+                                   parent.childNodes )
+                    # if only logpage and one chapter, remove them from TOC and just show story.
+                    if len(sibs) == 2:
+                        parent.removeChild(navpoint)
+                        # print("Removing %s:"% sibs[0].getAttribute("playOrder"))
+                        parent.removeChild(sibs[1])
+                        removednodes.append(sibs[1])
+            except:
+                pass                
+            
             # New src, new number.
             contentsrcs[contentsrc] = navpoint.getAttribute("id")
             playorder += 1
