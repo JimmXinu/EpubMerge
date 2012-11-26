@@ -56,6 +56,12 @@ class EpubMergePlugin(InterfaceAction):
     # make button menu drop down only
     #popup_type = QToolButton.InstantPopup
 
+    # disable when not in library. (main,carda,cardb)
+    def location_selected(self, loc):
+        enabled = loc == 'library'
+        self.qaction.setEnabled(enabled)
+        self.menuless_qaction.setEnabled(enabled)
+
     def genesis(self):
 
         # This method is called once per plugin, do initial setup here
@@ -88,6 +94,7 @@ class EpubMergePlugin(InterfaceAction):
 
     def plugin_button(self):
         self.t = time.time()
+        
         if len(self.gui.library_view.get_selected_ids()) < 2:
             d = error_dialog(self.gui,
                              _('Cannot Merge Epubs'),
