@@ -14,7 +14,7 @@ from zipfile import ZipFile, ZIP_STORED, ZIP_DEFLATED
 from xml.dom.minidom import parse, parseString, getDOMImplementation, Element
 from time import time
 
-import BeautifulSoup as bs
+from calibre.ebooks import BeautifulSoup as bs
 #import html5lib
 
 class SplitEpub:
