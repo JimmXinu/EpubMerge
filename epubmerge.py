@@ -171,7 +171,7 @@ def doMerge(outputio,
         ## Find the .opf file.
         container = epub.read("META-INF/container.xml")
         containerdom = parseString(container)
-        rootfilenodelist = containerdom.getElementsByTagName("rootfile")
+        rootfilenodelist = containerdom.getElementsByTagNameNS("*","rootfile")
         rootfilename = rootfilenodelist[0].getAttribute("full-path")
 
         ## Save the path to the .opf file--hrefs inside it are relative to it.
@@ -180,9 +180,10 @@ def doMerge(outputio,
             relpath=relpath+"/"
             
         metadom = parseString(epub.read(rootfilename))
+        #print("metadom:%s"%epub.read(rootfilename))
         if booknum==1:
             try:
-                firstmetadom = metadom.getElementsByTagName("metadata")[0]
+                firstmetadom = metadom.getElementsByTagNameNS("*","metadata")[0]
                 source=firstmetadom.getElementsByTagName("dc:source")[0].firstChild.data.encode("utf-8")
             except:
                 source=""
@@ -217,21 +218,21 @@ def doMerge(outputio,
             authors.append("(Author Missing)")
         allauthors.append(authors)
 
-        for item in metadom.getElementsByTagName("item"):
+        for item in metadom.getElementsByTagNameNS("*","item"):
             if( item.getAttribute("media-type") == "application/x-dtbncx+xml" ):
                 # TOC file is only one with this type--as far as I know.
                 # grab the whole navmap, deal with it later.
                 tocdom = parseString(epub.read(relpath+item.getAttribute("href")))
 
                 # update all navpoint ids with bookid for uniqueness.
-                for navpoint in tocdom.getElementsByTagName("navPoint"):
+                for navpoint in tocdom.getElementsByTagNameNS("*","navPoint"):
                     navpoint.setAttribute("id",bookid+navpoint.getAttribute("id"))
 
                 # update all content paths with bookdir for uniqueness.
-                for content in tocdom.getElementsByTagName("content"):
+                for content in tocdom.getElementsByTagNameNS("*","content"):
                     content.setAttribute("src",bookdir+relpath+content.getAttribute("src"))
 
-                navmaps.append(tocdom.getElementsByTagName("navMap")[0])
+                navmaps.append(tocdom.getElementsByTagNameNS("*","navMap")[0])
             else:
                 itemid=bookid+item.getAttribute("id")
                 itemhref = unquote(item.getAttribute("href")) # remove %20, etc.
@@ -250,7 +251,11 @@ def doMerge(outputio,
                     except KeyError, ke:
                         pass # Skip missing files.
 
-        itemreflist = metadom.getElementsByTagName("itemref")
+        itemreflist = metadom.getElementsByTagNameNS("*","itemref")
+        # print("itemreflist:%s"%itemreflist)
+        # print("itemhrefs:%s"%itemhrefs)
+        # print("bookid:%s"%bookid)
+        # print("itemreflist[0].getAttribute(idref):%s"%itemreflist[0].getAttribute("idref"))
         firstitemhrefs.append(itemhrefs[bookid+itemreflist[0].getAttribute("idref")])
         for itemref in itemreflist:
             itemrefs.append(bookid+itemref.getAttribute("idref"))
@@ -385,7 +390,7 @@ def doMerge(outputio,
     
     for navmap in navmaps:
         navpoints = filter( lambda x : isinstance(x,Element) and x.tagName=="navPoint",
-                            navmap.childNodes) #getElementsByTagName("navPoint")
+                            navmap.childNodes) #getElementsByTagNameNS("*","navPoint")
         newnav = None
         if titlenavpoints:
             newnav = newTag(tocncxdom,"navPoint",{"id":"book%03d"%booknum})
@@ -426,7 +431,7 @@ def doMerge(outputio,
     removednodes = []
     ## Force strict ordering of playOrder, stripping out some.
     playorder=0
-    for navpoint in tocncxdom.getElementsByTagName("navPoint"):
+    for navpoint in tocncxdom.getElementsByTagNameNS("*","navPoint"):
         if navpoint in removednodes:
             continue
         # need content[src] to compare for dups.  epub wants dup srcs to have same playOrder.
@@ -503,7 +508,7 @@ def doMerge(outputio,
         # already have play order and pesky dup/single chapters
         # removed, just need to flatten.
         flattocnavMap = tocncxdom.createElement("navMap")
-        for n in tocnavMap.getElementsByTagName("navPoint"):
+        for n in tocnavMap.getElementsByTagNameNS("*","navPoint"):
             flattocnavMap.appendChild(n)
             
         ncx.replaceChild(flattocnavMap,tocnavMap)
