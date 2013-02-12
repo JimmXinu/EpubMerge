@@ -55,7 +55,7 @@ class SelectLinesDialog(SizePersistedDialog):
         new_book = button_box.addButton("New Book", button_box.ActionRole)
         new_book.clicked.connect(self.new_book)        
         
-        new_book = button_box.addButton("Done", button_box.RejectRole)
+        button_box.addButton("Done", button_box.RejectRole)
         button_box.rejected.connect(self.reject)
         options_layout.addWidget(button_box)
       
@@ -64,7 +64,6 @@ class SelectLinesDialog(SizePersistedDialog):
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
         self.lines_table.populate_table(lines)
-
 
     def new_book(self):
         self.do_split_fn(self.get_selected_linenums_tocs())
