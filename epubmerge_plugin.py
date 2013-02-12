@@ -17,26 +17,27 @@ from PyQt4.Qt import (QApplication, QMenu, QToolButton)
 
 from calibre.ptempfile import PersistentTemporaryFile, PersistentTemporaryDirectory, remove_dir
 from calibre.ebooks.metadata import MetaInformation, authors_to_string
-from calibre.ebooks.metadata.meta import get_metadata
+from calibre.ebooks.metadata.meta import set_metadata, metadata_from_formats
 from calibre.gui2 import error_dialog, warning_dialog, question_dialog, info_dialog
 from calibre.gui2.dialogs.message_box import ViewLog
 from calibre.gui2.dialogs.confirm_delete import confirm
 from calibre.utils.date import local_tz
+from calibre.constants import config_dir as calibre_config_dir
 
 # The class that all interface action plugins must inherit from
 from calibre.gui2.actions import InterfaceAction
 
-from calibre_plugins.epubmerge.common_utils import (set_plugin_icon_resources, get_icon)
+from calibre_plugins.epubmerge.common_utils import (set_plugin_icon_resources, get_icon, create_menu_action_unique )
 
 from calibre_plugins.epubmerge.config import (prefs, permitted_values)
 
-from calibre_plugins.epubmerge.epubmerge import doMerge
+from calibre_plugins.epubmerge.epubmerge import doMerge, doUnMerge
 
 from calibre_plugins.epubmerge.dialogs import (
-    LoopProgressDialog, OrderEPUBsDialog
+    LoopProgressDialog, OrderEPUBsDialog, AddOverDiscardDialog
     )
 
-PLUGIN_ICONS = ['images/icon.png']
+PLUGIN_ICONS = ['images/icon.png','images/unmerge.png']
 
 class EpubMergePlugin(InterfaceAction):
 
@@ -92,6 +93,162 @@ class EpubMergePlugin(InterfaceAction):
         # Call function when plugin triggered.
         self.qaction.triggered.connect(self.plugin_button)
 
+        # Assign our menu to this action
+        self.menu = QMenu(self.gui)
+        self.old_actions_unique_map = {}
+        # menu_actions is just to keep a live reference to the menu
+        # items to prevent GC removing it.
+        self.menu_actions = []
+        self.qaction.setMenu(self.menu)
+        self.menus_lock = threading.RLock()
+        self.menu.aboutToShow.connect(self.about_to_show_menu)
+        
+    def initialization_complete(self):
+        # otherwise configured hot keys won't work until the menu's
+        # been displayed once.
+        self.rebuild_menus()
+
+    def about_to_show_menu(self):
+        self.rebuild_menus()
+
+    def library_changed(self, db):
+        # We need to reset our menus after switching libraries
+        self.rebuild_menus()
+        
+    def rebuild_menus(self):
+        with self.menus_lock:
+            self.qaction.setMenu(self.menu)
+            do_user_config = self.interface_action_base_plugin.do_user_config
+            self.menu.clear()
+            self.actions_unique_map = {}
+            self.menu_actions = []
+            
+            self.merge_action = self.create_menu_item_ex(self.menu, '&Merge Epubs', image='images/icon.png',
+                                                         triggered=self.plugin_button )
+
+            self.unmerge_action = self.create_menu_item_ex(self.menu, '&UnMerge Epub', image='images/unmerge.png',
+                                                           triggered=self.unmerge )
+
+
+            # print("platform.system():%s"%platform.system())
+            # print("platform.mac_ver()[0]:%s"%platform.mac_ver()[0])
+            if not self.check_macmenuhack(): # not platform.mac_ver()[0]: # Some macs crash on these menu items for unknown reasons.
+                self.menu.addSeparator()
+                self.config_action = self.create_menu_item_ex(self.menu, '&Configure Plugin',
+                                                              image= 'config.png',
+                                                              unique_name='Configure EpubMerge',
+                                                              shortcut_name='Configure EpubMerge',
+                                                              triggered=partial(do_user_config,parent=self.gui))
+            
+            
+            # Before we finalize, make sure we delete any actions for menus that are no longer displayed
+            for menu_id, unique_name in self.old_actions_unique_map.iteritems():
+                if menu_id not in self.actions_unique_map:
+                    self.gui.keyboard.unregister_shortcut(unique_name)
+            self.old_actions_unique_map = self.actions_unique_map
+            self.gui.keyboard.finalize()
+
+    def create_menu_item_ex(self, parent_menu, menu_text, image=None, tooltip=None,
+                           shortcut=None, triggered=None, is_checked=None, shortcut_name=None,
+                           unique_name=None):
+        #print("create_menu_item_ex before %s"%menu_text)
+        ac = create_menu_action_unique(self, parent_menu, menu_text, image, tooltip,
+                                       shortcut, triggered, is_checked, shortcut_name, unique_name)
+        self.actions_unique_map[ac.calibre_shortcut_unique_name] = ac.calibre_shortcut_unique_name
+        self.menu_actions.append(ac)
+        #print("create_menu_item_ex after %s"%menu_text)
+        return ac
+
+    ## Kludgey, yes, but with the real configuration inside the
+    ## library now, how else would a user be able to change this
+    ## setting if it's crashing calibre?
+    def check_macmenuhack(self):
+        try:
+            return self.macmenuhack
+        except:
+            file_path = os.path.join(calibre_config_dir,
+                                     *("plugins/fanfictiondownloader_macmenuhack.txt".split('/')))
+            file_path = os.path.abspath(file_path)
+            print("macmenuhack file_path:%s"%file_path)
+            self.macmenuhack = os.access(file_path, os.F_OK)
+            return self.macmenuhack
+
+    def unmerge(self):
+        if len(self.gui.library_view.get_selected_ids()) != 1:
+            d = error_dialog(self.gui,
+                             _('Select One Book'),
+                             _('Please select exactly one book to UnMerge.'),
+                             show_copy_button=False)
+            d.exec_()
+        else:
+            db=self.gui.current_db
+            book_id=self.gui.library_view.get_selected_ids()[0]
+            if db.has_format(book_id,'EPUB',index_is_id=True):
+                epub = StringIO(db.format(book_id,'EPUB',index_is_id=True))
+            else:
+                d = error_dialog(self.gui,
+                                 _('Cannot UnMerge Non-Epubs'),
+                                 _('To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge Metadata enabled.'),
+                                 show_copy_button=False)
+                d.exec_()
+                remove_dir(tdir)
+                return
+                
+            tdir = PersistentTemporaryDirectory(prefix='epubmerge_')
+            print("tdir:%s"%tdir)
+            outfilenames = doUnMerge(epub,tdir)
+            if not outfilenames:
+                d = error_dialog(self.gui,
+                                 _('No UnMerge data found'),
+                                 _('To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge Metadata enabled.'),
+                                 show_copy_button=False)
+                d.exec_()
+                return
+
+            #db.import_book_directory_multiple(tdir) XXX
+            #self.gui.library_view.model().books_added(len(outfilenames))
+            added_list=[]
+            updated_list=[]
+            for formats in db.find_books_in_directory(tdir, False):
+                #print("formats:%s"%formats)
+                mi = metadata_from_formats(formats)
+                #print("mi:%s"%mi)
+
+                state = 'add'
+                identicalbooks = db.find_identical_books(mi)
+                if identicalbooks:
+                    if len(identicalbooks) == 1:
+                        text = "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, Overwrite the Epub in the existing book, or Discard this Epub."%(mi.title,", ".join(mi.authors))
+                        over=True
+                    else:
+                        text = "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, or Discard this Epub."%(mi.title,", ".join(mi.authors))
+                        over=False
+                    d = AddOverDiscardDialog(self.gui,self.qaction.icon(),text,over=over)
+                    d.exec_()
+                    state=d.state
+                    
+                if not state or state == 'discard':
+                    continue
+                elif state == 'add':
+                    book_id = db.create_book_entry(mi,
+                                                   add_duplicates=True)
+                    added_list.append(book_id)
+                else:
+                    book_id = identicalbooks.pop()
+                        
+                db.add_format_with_hooks(book_id,
+                                         'EPUB',
+                                         formats[0], index_is_id=True)
+                updated_list.append(book_id)
+
+            if len(added_list):
+                self.gui.library_view.model().books_added(len(added_list))
+
+            if len(updated_list):
+                self.gui.library_view.model().refresh_ids(updated_list)
+            
+            remove_dir(tdir)
+
     def plugin_button(self):
         self.t = time.time()
         
@@ -107,10 +264,6 @@ class EpubMergePlugin(InterfaceAction):
             print("1:%s"%(time.time()-self.t))
             self.t = time.time()
             
-            # epubstomerge = []
-            # for book_id in self.gui.library_view.get_selected_ids():
-            #     epubstomerge.append(StringIO(db.format(book_id,'EPUB',index_is_id=True)))
-
             book_list = map( partial(self._convert_id_to_book, good=False), self.gui.library_view.get_selected_ids() )
             # book_ids = self.gui.library_view.get_selected_ids()
 
@@ -149,7 +302,6 @@ class EpubMergePlugin(InterfaceAction):
             print("2:%s"%(time.time()-self.t))
             self.t = time.time()
 
-            #mi = get_metadata(mergedepub,'EPUB')
             deftitle = "%s Anthology" % book_list[0]['title']
             mi = MetaInformation(deftitle,["Temp Author"])
 
@@ -382,7 +534,8 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
                      titlenavpoints=prefs['titlenavpoints'],
                      flattentoc=prefs['flattentoc'],
                      printtimes=True,
-                     coverjpgpath=coverjpgpath
+                     coverjpgpath=coverjpgpath,
+                     keepmetadatafiles=prefs['keepmeta']
                      )
             
             print("6:%s"%(time.time()-self.t))
@@ -434,6 +587,8 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
         book['comment'] = ''
         if db.has_format(mi.id,'EPUB',index_is_id=True):
             book['epub'] = StringIO(db.format(mi.id,'EPUB',index_is_id=True))
+            if prefs['keepmeta']:
+                set_metadata(book['epub'], mi, stream_type='epub')
             book['epub_size'] = len(book['epub'].getvalue())
         else:
             book['good'] = False;

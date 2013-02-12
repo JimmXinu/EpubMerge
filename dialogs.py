@@ -26,7 +26,7 @@ from calibre.gui2 import dynamic
 from calibre_plugins.epubmerge.common_utils \
     import (ReadOnlyTableWidgetItem, SizePersistedDialog,
             ImageTitleLayout, get_icon)
-        
+
 class LoopProgressDialog(QProgressDialog):
     '''
     ProgressDialog displayed while fetching metadata for each story.
@@ -50,7 +50,7 @@ class LoopProgressDialog(QProgressDialog):
         self.finish_function = finish_function
         self.status_prefix = status_prefix
         self.i = 0
-        
+
         ## self.do_loop does QTimer.singleShot on self.do_loop also.
         ## A weird way to do a loop, but that was the example I had.
         QTimer.singleShot(0, self.do_loop)
@@ -68,16 +68,16 @@ class LoopProgressDialog(QProgressDialog):
         book = self.book_list[self.i]
         try:
             self.foreach_function(book)
-            
+
         except Exception as e:
             book['good']=False
             book['comment']=unicode(e)
             print("Exception: %s:%s"%(book,unicode(e)))
             traceback.print_exc()
-            
+
         self.updateStatus()
         self.i += 1
-            
+
         if self.i >= len(self.book_list) or self.wasCanceled():
             return self.do_when_finished()
         else:
@@ -87,10 +87,10 @@ class LoopProgressDialog(QProgressDialog):
         # Queues a job to process these books in the background.
         self.setLabelText("Starting Merge...")
         self.setValue(self.i+1)
-        
+
         self.finish_function(self.book_list)
-        self.gui = None        
-        self.hide()        
+        self.gui = None
+        self.hide()
 
 class AuthorTableWidgetItem(ReadOnlyTableWidgetItem):
     def __init__(self, text, sort_key):
@@ -123,10 +123,10 @@ class OrderEPUBsDialog(SizePersistedDialog):
                  save_size_name='epubmerge:update list dialog'):
         SizePersistedDialog.__init__(self, gui, save_size_name)
         self.gui = gui
-      
+
         self.setWindowTitle(header)
         self.setWindowIcon(icon)
-      
+
         layout = QVBoxLayout(self)
         self.setLayout(layout)
         title_layout = ImageTitleLayout(self, 'images/icon.png',
@@ -166,9 +166,9 @@ class OrderEPUBsDialog(SizePersistedDialog):
         button_box.accepted.connect(self.accept)
         button_box.rejected.connect(self.reject)
         options_layout.addWidget(button_box)
-      
+
         layout.addLayout(options_layout)
-      
+
         # Cause our dialog size to be restored from prefs or created on first usage
         self.resize_dialog()
         self.books_table.populate_table(books)
@@ -187,7 +187,7 @@ class StoryListTableWidget(QTableWidget):
 
     def on_headersection_clicked(self):
         self.setSortingEnabled(True)
-        
+
     def populate_table(self, books):
         self.clear()
         self.setAlternatingRowColors(True)
@@ -203,7 +203,7 @@ class StoryListTableWidget(QTableWidget):
         self.connect(self.horizontalHeader(),
                      SIGNAL('sectionClicked(int)'),
                      self.on_headersection_clicked)
-        
+
         self.books={}
         for row, book in enumerate(books):
             self.populate_table_row(row, book)
@@ -224,13 +224,13 @@ class StoryListTableWidget(QTableWidget):
         title_cell = ReadOnlyTableWidgetItem(book['title'])
         title_cell.setData(Qt.UserRole, QVariant(row))
         self.setItem(row, 0, title_cell)
-      
+
         self.setItem(row, 1, AuthorTableWidgetItem(' & '.join(book['authors']),
                                                    book['author_sort']))
-      
+
         series_cell = SeriesTableWidgetItem(book['series'],book['series_index'])
         self.setItem(row, 2, series_cell)
-      
+
     def get_books(self):
         books = []
         for row in range(self.rowCount()):
@@ -311,3 +311,43 @@ class StoryListTableWidget(QTableWidget):
             self.setItem(dest_row, col, self.takeItem(src_row, col))
         self.removeRow(src_row)
         self.blockSignals(False)
+
+class AddOverDiscardDialog(QDialog):
+
+    def __init__(self, parent, icon, text, over=True):
+        QDialog.__init__(self, parent)
+        self.state=None
+
+        layout = QVBoxLayout(self)
+        self.setLayout(layout)
+        self.setWindowTitle('UnMerge Epub')
+
+        label = QLabel(text)
+        label.setOpenExternalLinks(True)
+        label.setWordWrap(True)
+        layout.addWidget(label)
+
+        button_box = QDialogButtonBox(self)
+        button = button_box.addButton("Add", button_box.AcceptRole)
+        button.clicked.connect(self.add)
+
+        if over:
+            button = button_box.addButton("Overwrite", button_box.AcceptRole)
+            button.clicked.connect(self.over)
+
+        button = button_box.addButton("Discard", button_box.AcceptRole)
+        button.clicked.connect(self.discard)
+        button_box.accepted.connect(self.accept)
+
+        layout.addWidget(button_box)
+
+
+    def add(self):
+        self.state="add"
+
+    def over(self):
+        self.state="over"
+
+    def discard(self):
+        self.state="discard"
+
