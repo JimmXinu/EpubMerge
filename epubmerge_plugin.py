@@ -126,8 +126,9 @@ class EpubMergePlugin(InterfaceAction):
             self.merge_action = self.create_menu_item_ex(self.menu, '&Merge Epubs', image='images/icon.png',
                                                          triggered=self.plugin_button )
 
-            self.unmerge_action = self.create_menu_item_ex(self.menu, '&UnMerge Epub', image='images/unmerge.png',
-                                                           triggered=self.unmerge )
+            if prefs['showunmerge']:
+                self.unmerge_action = self.create_menu_item_ex(self.menu, '&UnMerge Epub', image='images/unmerge.png',
+                                                               triggered=self.unmerge )
 
 
             # print("platform.system():%s"%platform.system())
@@ -173,6 +174,14 @@ class EpubMergePlugin(InterfaceAction):
             self.macmenuhack = os.access(file_path, os.F_OK)
             return self.macmenuhack
 
+    def do_unmerge(self, *args, **kwargs):
+        '''Also called by FFDL plugin.'''
+        return doUnMerge(*args, **kwargs)
+        
+    def do_merge(self, *args, **kwargs):
+        '''Also called by FFDL plugin.'''
+        return doMerge(*args, **kwargs)
+            
     def unmerge(self):
         if len(self.gui.library_view.get_selected_ids()) != 1:
             d = error_dialog(self.gui,
@@ -196,7 +205,7 @@ class EpubMergePlugin(InterfaceAction):
                 
             tdir = PersistentTemporaryDirectory(prefix='epubmerge_')
             print("tdir:%s"%tdir)
-            outfilenames = doUnMerge(epub,tdir)
+            outfilenames = self.do_unmerge(epub,tdir)
             if not outfilenames:
                 d = error_dialog(self.gui,
                                  _('No UnMerge data found'),
@@ -524,20 +533,19 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
                 # grab the path to the real image.
                 coverjpgpath = os.path.join(db.library_path, db.path(book_id, index_is_id=True), 'cover.jpg')
                 
-            doMerge( mergedepub,
-                     epubstomerge,
-                     authoropts=mi.authors,
-                     titleopt=mi.title,
-                     descopt=mi.comments,
-                     tags=mi.tags,
-                     languages=mi.languages,
-                     titlenavpoints=prefs['titlenavpoints'],
-                     flattentoc=prefs['flattentoc'],
-                     printtimes=True,
-                     coverjpgpath=coverjpgpath,
-                     keepmetadatafiles=prefs['keepmeta']
-                     )
-            
+            self.do_merge( mergedepub,
+                           epubstomerge,
+                           authoropts=mi.authors,
+                           titleopt=mi.title,
+                           descopt=mi.comments,
+                           tags=mi.tags,
+                           languages=mi.languages,
+                           titlenavpoints=prefs['titlenavpoints'],
+                           flattentoc=prefs['flattentoc'],
+                           printtimes=True,
+                           coverjpgpath=coverjpgpath,
+                           keepmetadatafiles=prefs['keepmeta'] )
+                 
             print("6:%s"%(time.time()-self.t))
             self.t = time.time()
             db.add_format_with_hooks(book_id,

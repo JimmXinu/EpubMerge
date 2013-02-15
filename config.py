@@ -27,7 +27,8 @@ PREFS_KEY_SETTINGS = 'settings'
 default_prefs = {}
 default_prefs['flattentoc'] = False
 default_prefs['titlenavpoints'] = True
-default_prefs['keepmeta'] = False
+default_prefs['keepmeta'] = True
+default_prefs['showunmerge'] = True
 default_prefs['custom_cols'] = {}
 
 def set_library_config(library_config):
@@ -126,6 +127,7 @@ class ConfigWidget(QWidget):
         prefs['flattentoc'] = self.basic_tab.flattentoc.isChecked()
         prefs['titlenavpoints'] = self.basic_tab.titlenavpoints.isChecked()
         prefs['keepmeta'] = self.basic_tab.keepmeta.isChecked()
+        prefs['showunmerge'] = self.basic_tab.showunmerge.isChecked()
         
         # Custom Columns tab
         colsmap = {}
@@ -176,6 +178,12 @@ be included, allowing for UnMerge.  This includes your calibre custom
 columns.  Leave off if you plan to distribute the epub to others.''')
         self.keepmeta.setChecked(prefs['keepmeta'])
         self.l.addWidget(self.keepmeta)
+
+        self.showunmerge = QCheckBox('Show UnMerge Option?',self)
+        self.showunmerge.setToolTip('''If set, the UnMerge Epub option will be shown.
+Only Epubs merged with 'Keep UnMerge Metadata' can be UnMerged.''')
+        self.showunmerge.setChecked(prefs['showunmerge'])
+        self.l.addWidget(self.showunmerge)
 
         self.l.addSpacing(15)        
 
