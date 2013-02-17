@@ -47,6 +47,17 @@ def main(argv):
                       help="Flatten TOC down to one level only.",)
     optparser.add_option("-c", "--cover", dest="coveropt", default=None,
                       help="Path to a jpg to use as cover image.", metavar="COVER")
+    optparser.add_option("-k", "--keep-meta",
+                      action="store_true", dest="keepmeta",
+                      help="Keep original metadata files in merged epub.  Use for UnMerging.",)
+    optparser.add_option("-s", "--source", dest="sourceopt", default=None,
+                      help="Include URL as dc:source and dc:identifier(opf:scheme=URL).", metavar="URL")
+    
+    optparser.add_option("-u", "--unmerge",
+                      action="store_true", dest="unmerge",
+                      help="UnMerge an existing epub that was created by merging with --keep-meta.",)
+    optparser.add_option("-D", "--outputdir", dest="outputdir", default=".",
+                      help="Set output directory for unmerge, Default: (current dir)", metavar="OUTPUTDIR")
     
     (options, args) = optparser.parse_args()
 
@@ -59,18 +70,23 @@ def main(argv):
     if not args:
         optparser.print_help()
         return
-        
-    doMerge(options.outputopt,
-            args,
-            options.authoropts,
-            options.titleopt,
-            options.descopt,
-            options.tagopts,
-            options.languageopts,
-            options.titlenavpoints,
-            options.flattentoc,
-            coverjpgpath=options.coveropt
-            )
+
+    if options.unmerge:
+        doUnMerge(args[0],options.outputdir)
+    else:
+        doMerge(options.outputopt,
+                args,
+                options.authoropts,
+                options.titleopt,
+                options.descopt,
+                options.tagopts,
+                options.languageopts,
+                options.titlenavpoints,
+                options.flattentoc,
+                coverjpgpath=options.coveropt,
+                keepmetadatafiles=options.keepmeta,
+                source=options.sourceopt
+                )
 
 def cond_print(flag,arg):
     if flag:
@@ -87,7 +103,8 @@ def doMerge(outputio,
             flattentoc=False,
             printtimes=False,
             coverjpgpath=None,
-            keepmetadatafiles=False):
+            keepmetadatafiles=False,
+            source=None):
     '''
     outputio = output file name or StringIO.
     files = list of input file names or StringIOs.
@@ -110,7 +127,6 @@ def doMerge(outputio,
     ## compression type anyway.
 
     filecount=0
-    source=None
     t = time()
     
     ## Write mimetype file, must be first and uncompressed.
@@ -181,7 +197,7 @@ def doMerge(outputio,
             
         metadom = parseString(epub.read(rootfilename))
         #print("metadom:%s"%epub.read(rootfilename))
-        if booknum==1:
+        if booknum==1 and not source:
             try:
                 firstmetadom = metadom.getElementsByTagNameNS("*","metadata")[0]
                 source=firstmetadom.getElementsByTagName("dc:source")[0].firstChild.data.encode("utf-8")
@@ -325,6 +341,13 @@ def doMerge(outputio,
         description = newTag(contentdom,"dc:description",text=descopt)
     metadata.appendChild(description)
     
+    if source:
+        metadata.appendChild(newTag(contentdom,"dc:identifier",
+                                    attrs={"opf:scheme":"URL"},
+                                    text=source))
+        metadata.appendChild(newTag(contentdom,"dc:source",
+                                    text=source))
+        
     for tag in tags:
         metadata.appendChild(newTag(contentdom,"dc:subject",text=tag))
     
