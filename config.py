@@ -180,7 +180,7 @@ columns.  Leave off if you plan to distribute the epub to others.''')
         self.l.addWidget(self.keepmeta)
 
         self.showunmerge = QCheckBox('Show UnMerge Option?',self)
-        self.showunmerge.setToolTip('''If set, the UnMerge Epub option will be shown.
+        self.showunmerge.setToolTip('''If set, the UnMerge Epub option will be shown on the EpubMerge menu.
 Only Epubs merged with 'Keep UnMerge Metadata' can be UnMerged.''')
         self.showunmerge.setChecked(prefs['showunmerge'])
         self.l.addWidget(self.showunmerge)

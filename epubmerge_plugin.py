@@ -94,7 +94,7 @@ class EpubMergePlugin(InterfaceAction):
         self.qaction.triggered.connect(self.plugin_button)
 
         # Assign our menu to this action
-        self.menu = QMenu(self.gui)
+        self.menu = QMenu()
         self.old_actions_unique_map = {}
         # menu_actions is just to keep a live reference to the menu
         # items to prevent GC removing it.
@@ -117,7 +117,6 @@ class EpubMergePlugin(InterfaceAction):
         
     def rebuild_menus(self):
         with self.menus_lock:
-            self.qaction.setMenu(self.menu)
             do_user_config = self.interface_action_base_plugin.do_user_config
             self.menu.clear()
             self.actions_unique_map = {}
