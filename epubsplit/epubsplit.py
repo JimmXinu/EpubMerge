@@ -14,7 +14,10 @@ from zipfile import ZipFile, ZIP_STORED, ZIP_DEFLATED
 from xml.dom.minidom import parse, parseString, getDOMImplementation, Element
 from time import time
 
-from calibre.ebooks import BeautifulSoup as bs
+try:
+    from calibre.ebooks import BeautifulSoup as bs
+except:
+    import BeautifulSoup as bs
 #import html5lib
 
 class SplitEpub:
@@ -28,6 +31,8 @@ class SplitEpub:
         self.toc_dom = None
         self.toc_map = None
         self.split_lines = None
+        self.origauthors = []
+        self.origtitle = None
 
     def get_file(self,href):
         return self.epub.read(href)
@@ -115,10 +120,29 @@ class SplitEpub:
     # 'split lines' are all the points that the epub can be split on.
     # Offer a split at each spine file and each ToC point.
     def get_split_lines(self):
+
+        metadom = self.get_content_dom()
+        ## Save indiv book title
+        try:
+            self.origtitle = metadom.getElementsByTagName("dc:title")[0].firstChild.data
+        except:
+            self.origtitle = "(Title Missing)"
+
+        ## Save authors.
+        for creator in metadom.getElementsByTagName("dc:creator"):
+            try:
+                if( creator.getAttribute("opf:role") == "aut" or not creator.hasAttribute("opf:role") and creator.firstChild != None):
+                    if creator.firstChild.data not in self.origauthors:
+                        self.origauthors.append(creator.firstChild.data)
+            except:
+                pass
+        if len(self.origauthors) == 0:
+            self.origauthors.append("(Authors Missing)")        
+        
         self.split_lines = [] # list of dicts with href, anchor and toc
         # spin on spine files.
         count=0
-        for itemref in self.get_content_dom().getElementsByTagName("itemref"):
+        for itemref in metadom.getElementsByTagName("itemref"):
             idref = itemref.getAttribute("idref")
             (href,type) = self.get_manifest_items()[idref]
             current = {}
@@ -303,34 +327,34 @@ class SplitEpub:
                                "xmlns:opf":"http://www.idpf.org/2007/opf"})
         metadata.appendChild(newTag(contentdom,"dc:identifier",text=uniqueid,attrs={"id":"epubsplit-id"}))
         if( titleopt is None ):
-            titleopt = "Testing title"
+            titleopt = self.origtitle+" Split"
         metadata.appendChild(newTag(contentdom,"dc:title",text=titleopt))
         
-        # If cmdline authors, use those instead of those collected from the epubs
-        # (allauthors kept for TOC & description gen below.
-        if( len(authoropts) > 0  ):
-            useauthors=[authoropts]
+        if( authoropts and len(authoropts) > 0  ):
+            useauthors=authoropts
         else:
-            useauthors=[['testing author']]
+            useauthors=self.origauthors
 
         usedauthors=dict()
-        for authorlist in useauthors:
-            for author in authorlist:
-                if( not usedauthors.has_key(author) ):
-                    usedauthors[author]=author
-                    metadata.appendChild(newTag(contentdom,"dc:creator",
-                                                attrs={"opf:role":"aut"},
-                                                text=author))
+        for author in useauthors:
+            if( not usedauthors.has_key(author) ):
+                usedauthors[author]=author
+                metadata.appendChild(newTag(contentdom,"dc:creator",
+                                            attrs={"opf:role":"aut"},
+                                            text=author))
         
         metadata.appendChild(newTag(contentdom,"dc:contributor",text="epubsplit",attrs={"opf:role":"bkp"}))
         metadata.appendChild(newTag(contentdom,"dc:rights",text="Copyrights as per source stories"))
-        
-        for l in languages:
-            metadata.appendChild(newTag(contentdom,"dc:language",text=l))
+
+        if languages:
+            for l in languages:
+                metadata.appendChild(newTag(contentdom,"dc:language",text=l))
+        else:
+            metadata.appendChild(newTag(contentdom,"dc:language",text="en"))
         
         if not descopt:
             # created now, but not filled in until TOC generation to save loops.
-            description = newTag(contentdom,"dc:description",text="Anthology containing:\n")
+            description = newTag(contentdom,"dc:description",text="Split from %s by %s."%(self.origtitle,", ".join(self.origauthors)))
         else:
             description = newTag(contentdom,"dc:description",text=descopt)
         metadata.appendChild(description)
@@ -620,3 +644,69 @@ def newTag(dom,name,attrs=None,text=None):
         tag.appendChild(dom.createTextNode(text))
     return tag
     
+def main(argv):
+
+    from optparse import OptionParser
+    
+    # read in args, anything starting with -- will be treated as --<varible>=<value>
+    usage = "usage: %prog [options] <input epub> [<input epub>...]"
+    optparser = OptionParser(usage)
+    optparser.add_option("-o", "--output", dest="outputopt", default="split.epub",
+                      help="Set OUTPUT file, Default: split.epub", metavar="OUTPUT")
+    optparser.add_option("-t", "--title", dest="titleopt", default=None,
+                      help="Use TITLE as the metadata title.  Default: '<original epub title> Split'", metavar="TITLE")
+    optparser.add_option("-d", "--description", dest="descopt", default=None,
+                      help="Use DESC as the metadata description.  Default: 'Split from <epub title> by <author>'.", metavar="DESC")
+    optparser.add_option("-a", "--author",
+                      action="append", dest="authoropts", default=[],
+                      help="Use AUTHOR as a metadata author, multiple authors may be given, Default: <All authors from original epub>", metavar="AUTHOR")
+    optparser.add_option("-g", "--tag",
+                      action="append", dest="tagopts", default=[],
+                      help="Include TAG as dc:subject tag, multiple tags may be given, Default: None", metavar="TAG")
+    optparser.add_option("-l", "--language",
+                      action="append", dest="languageopts", default=[],
+                      help="Include LANG as dc:language tag, multiple languages may be given, Default: en", metavar="LANG")
+    optparser.add_option("-c", "--cover", dest="coveropt", default=None,
+                      help="Path to a jpg to use as cover image.", metavar="COVER")
+    
+    (options, args) = optparser.parse_args()
+
+    ## Add .epub if not already there.
+    if not options.outputopt.lower().endswith(".epub"):
+        options.outputopt=options.outputopt+".epub"
+
+    if not options.languageopts:
+        options.languageopts = ['en']
+
+    print("output file: "+options.outputopt)
+
+    if not args:
+        optparser.print_help()
+        return        
+
+    epubO = SplitEpub(args[0])
+
+    lines = epubO.get_split_lines()
+
+    if len(args) == 1:
+        count = 0
+        for line in lines:
+            print("line(%d):%s"%(count,line))
+            count += 1
+        print()
+        
+    if len(args) > 1:
+
+        epubO.write_split_epub(options.outputopt,
+                               args[1:],
+                               options.authoropts,
+                               options.titleopt,
+                               options.descopt,
+                               options.tagopts,
+                               options.languageopts,
+                               options.coveropt)
+
+        return
+    
+if __name__ == "__main__":
+    main(sys.argv[1:])
