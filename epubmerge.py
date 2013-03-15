@@ -20,10 +20,16 @@ from exceptions import KeyError
 
 from xml.dom.minidom import parse, parseString, getDOMImplementation, Element
         
-def main(argv):
+def main(argv,usage=None):
+
+    if not usage:
     # read in args, anything starting with -- will be treated as --<varible>=<value>
-    usage = "usage: %prog [options] <input epub> [<input epub>...]"
-    optparser = OptionParser(usage)
+        usage = "usage: python %prog"
+    optparser = OptionParser(usage+''' [options] <input epub> [<input epub>...]
+
+Given list of epubs will be merged together into one new epub.
+''')
+    
     optparser.add_option("-o", "--output", dest="outputopt", default="merge.epub",
                       help="Set OUTPUT file, Default: merge.epub", metavar="OUTPUT")
     optparser.add_option("-t", "--title", dest="titleopt", default=None,

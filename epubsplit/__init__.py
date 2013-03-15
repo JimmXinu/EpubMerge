@@ -82,4 +82,4 @@ class EpubSplitBase(InterfaceActionBase):
             ac.apply_settings()
 
     def cli_main(self,argv):
-        epubsplit_main(argv[1:])
+        epubsplit_main(argv[1:],usage='%prog --run-plugin '+self.name+' --')

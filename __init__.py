@@ -82,4 +82,4 @@ class EpubMergeBase(InterfaceActionBase):
             ac.apply_settings()
 
     def cli_main(self,argv):
-        epubmerge_main(argv[1:])
+        epubmerge_main(argv[1:],usage='%prog --run-plugin '+self.name+' --')

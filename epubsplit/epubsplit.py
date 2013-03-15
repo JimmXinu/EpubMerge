@@ -644,32 +644,39 @@ def newTag(dom,name,attrs=None,text=None):
         tag.appendChild(dom.createTextNode(text))
     return tag
     
-def main(argv):
+def main(argv,usage=None):
 
     from optparse import OptionParser
-    
-    # read in args, anything starting with -- will be treated as --<varible>=<value>
-    usage = "usage: %prog [options] <input epub> [line numbers...]"
-    optparser = OptionParser(usage)
-    optparser.add_option("-o", "--output", dest="outputopt", default="split.epub",
+
+    if not usage:
+        # read in args, anything starting with -- will be treated as --<varible>=<value>
+        usage = 'usage: python %prog'
+        
+    parser = OptionParser(usage+''' [options] <input epub> [line numbers...]
+
+Giving an epub without line numbers will return a list of line numbers: the
+possible split points in the input file. Calling with line numbers will
+generate an epub with each of the "lines" given included.''')
+        
+    parser.add_option("-o", "--output", dest="outputopt", default="split.epub",
                       help="Set OUTPUT file, Default: split.epub", metavar="OUTPUT")
-    optparser.add_option("-t", "--title", dest="titleopt", default=None,
+    parser.add_option("-t", "--title", dest="titleopt", default=None,
                       help="Use TITLE as the metadata title.  Default: '<original epub title> Split'", metavar="TITLE")
-    optparser.add_option("-d", "--description", dest="descopt", default=None,
+    parser.add_option("-d", "--description", dest="descopt", default=None,
                       help="Use DESC as the metadata description.  Default: 'Split from <epub title> by <author>'.", metavar="DESC")
-    optparser.add_option("-a", "--author",
+    parser.add_option("-a", "--author",
                       action="append", dest="authoropts", default=[],
                       help="Use AUTHOR as a metadata author, multiple authors may be given, Default: <All authors from original epub>", metavar="AUTHOR")
-    optparser.add_option("-g", "--tag",
+    parser.add_option("-g", "--tag",
                       action="append", dest="tagopts", default=[],
                       help="Include TAG as dc:subject tag, multiple tags may be given, Default: None", metavar="TAG")
-    optparser.add_option("-l", "--language",
+    parser.add_option("-l", "--language",
                       action="append", dest="languageopts", default=[],
                       help="Include LANG as dc:language tag, multiple languages may be given, Default: en", metavar="LANG")
-    optparser.add_option("-c", "--cover", dest="coveropt", default=None,
+    parser.add_option("-c", "--cover", dest="coveropt", default=None,
                       help="Path to a jpg to use as cover image.", metavar="COVER")
     
-    (options, args) = optparser.parse_args(argv)
+    (options, args) = parser.parse_args(argv)
 
     ## Add .epub if not already there.
     if not options.outputopt.lower().endswith(".epub"):
@@ -681,7 +688,7 @@ def main(argv):
     print("output file: "+options.outputopt)
 
     if not args:
-        optparser.print_help()
+        parser.print_help()
         return        
 
     epubO = SplitEpub(args[0])
@@ -690,21 +697,24 @@ def main(argv):
 
     if len(args) == 1:
         count = 0
+        showlist=['toc','guide','anchor','id','href']
         for line in lines:
-            print("Line Number: %d\n\tAnchor:%s\n\tTOC:%s\n\tGuide:%s\n\tId:%s\n"%(count,line['anchor'],line['toc'],line['guide'],line['id']))
+            print("\nLine Number: %d"%count)
+            for s in showlist:
+                if s in line and line[s]:
+                    print("\t%s: %s"%(s,line[s]))
             count += 1
-        print()
         
     if len(args) > 1:
 
         epubO.write_split_epub(options.outputopt,
                                args[1:],
-                               options.authoropts,
-                               options.titleopt,
-                               options.descopt,
-                               options.tagopts,
-                               options.languageopts,
-                               options.coveropt)
+                               authoropts=options.authoropts,
+                               titleopt=options.titleopt,
+                               descopt=options.descopt,
+                               tags=options.tagopts,
+                               languages=options.languageopts,
+                               coverjpgpath=options.coveropt)
 
         return
     
