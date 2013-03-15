@@ -11,6 +11,8 @@ __docformat__ = 'restructuredtext en'
 # The class that all Interface Action plugin wrappers must inherit from
 from calibre.customize import InterfaceActionBase
 
+from calibre_plugins.epubsplit.epubsplit import main as epubsplit_main
+
 ## Apparently the name for this class doesn't matter.
 class EpubSplitBase(InterfaceActionBase):
     '''
@@ -26,7 +28,7 @@ class EpubSplitBase(InterfaceActionBase):
     description         = 'UI plugin to split off parts of an epub into a new book.'
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'Jim Miller'
-    version             = (1, 2, 6)
+    version             = (1, 2, 7)
     minimum_calibre_version = (0, 8, 57)
 
     #: This field defines the GUI plugin class that contains all the code
@@ -79,3 +81,5 @@ class EpubSplitBase(InterfaceActionBase):
         if ac is not None:
             ac.apply_settings()
 
+    def cli_main(self,argv):
+        epubsplit_main(argv[1:])

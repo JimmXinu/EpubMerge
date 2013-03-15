@@ -649,7 +649,7 @@ def main(argv):
     from optparse import OptionParser
     
     # read in args, anything starting with -- will be treated as --<varible>=<value>
-    usage = "usage: %prog [options] <input epub> [<input epub>...]"
+    usage = "usage: %prog [options] <input epub> [line numbers...]"
     optparser = OptionParser(usage)
     optparser.add_option("-o", "--output", dest="outputopt", default="split.epub",
                       help="Set OUTPUT file, Default: split.epub", metavar="OUTPUT")
@@ -669,7 +669,7 @@ def main(argv):
     optparser.add_option("-c", "--cover", dest="coveropt", default=None,
                       help="Path to a jpg to use as cover image.", metavar="COVER")
     
-    (options, args) = optparser.parse_args()
+    (options, args) = optparser.parse_args(argv)
 
     ## Add .epub if not already there.
     if not options.outputopt.lower().endswith(".epub"):
@@ -691,7 +691,7 @@ def main(argv):
     if len(args) == 1:
         count = 0
         for line in lines:
-            print("line(%d):%s"%(count,line))
+            print("Line Number: %d\n\tAnchor:%s\n\tTOC:%s\n\tGuide:%s\n\tId:%s\n"%(count,line['anchor'],line['toc'],line['guide'],line['id']))
             count += 1
         print()
         

@@ -59,7 +59,7 @@ def main(argv):
     optparser.add_option("-D", "--outputdir", dest="outputdir", default=".",
                       help="Set output directory for unmerge, Default: (current dir)", metavar="OUTPUTDIR")
     
-    (options, args) = optparser.parse_args()
+    (options, args) = optparser.parse_args(argv)
 
     ## Add .epub if not already there.
     if not options.outputopt.lower().endswith(".epub"):
