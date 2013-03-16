@@ -11,8 +11,6 @@ __docformat__ = 'restructuredtext en'
 # The class that all Interface Action plugin wrappers must inherit from
 from calibre.customize import InterfaceActionBase
 
-from calibre_plugins.epubmerge.epubmerge import main as epubmerge_main
-
 ## Apparently the name for this class doesn't matter.
 class EpubMergeBase(InterfaceActionBase):
     '''
@@ -28,7 +26,7 @@ class EpubMergeBase(InterfaceActionBase):
     description         = 'UI plugin to concatenate multiple epubs into one.'
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'Jim Miller'
-    version             = (1, 3, 2)
+    version             = (1, 3, 3)
     minimum_calibre_version = (0, 8, 57)
 
     #: This field defines the GUI plugin class that contains all the code
@@ -82,4 +80,5 @@ class EpubMergeBase(InterfaceActionBase):
             ac.apply_settings()
 
     def cli_main(self,argv):
+        from calibre_plugins.epubmerge.epubmerge import main as epubmerge_main
         epubmerge_main(argv[1:],usage='%prog --run-plugin '+self.name+' --')
