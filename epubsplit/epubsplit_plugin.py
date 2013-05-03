@@ -17,7 +17,7 @@ from PyQt4.Qt import (QApplication, QMenu, QToolButton)
 
 from calibre.ptempfile import PersistentTemporaryFile
 from calibre.ebooks.metadata import MetaInformation, authors_to_string
-from calibre.ebooks.metadata.book.base import SafeFormat
+from calibre.ebooks.metadata.book.formatter import SafeFormat
 from calibre.ebooks.metadata.meta import get_metadata
 from calibre.gui2 import error_dialog, warning_dialog, question_dialog, info_dialog
 from calibre.gui2.dialogs.message_box import ViewLog
