@@ -249,7 +249,11 @@ def doMerge(outputio,
                                 epub.read(itemhref))
             items.append((itemid,href,"origrootfile/xml"))
             
-        for item in metadom.getElementsByTagNameNS("*","item"):
+        # spin through the manifest--only place there are item tags.
+        # Correction--only place there *should* be item tags.  But
+        # somebody found one that did.
+        manifesttag=metadom.getElementsByTagNameNS("*","manifest")[0]
+        for item in manifesttag.getElementsByTagNameNS("*","item"):
             itemid=bookid+item.getAttribute("id")
             itemhref = unquote(item.getAttribute("href")) # remove %20, etc.
             href=bookdir+relpath+itemhref
@@ -616,7 +620,10 @@ def doUnMerge(inputio,outdir=None):
     #print("relpath:%s"%relpath)
             
     # spin through the manifest--only place there are item tags.
-    for item in contentdom.getElementsByTagName("item"):
+    # Correction--only place there *should* be item tags.  But
+    # somebody found one that did.
+    manifesttag=contentdom.getElementsByTagNameNS("*","manifest")[0]
+    for item in manifesttag.getElementsByTagNameNS("*","item"):
         # look for our fake media-type for original rootfiles.
         if( item.getAttribute("media-type") == "origrootfile/xml" ):
             # found one, assume the dir containing it is a complete
