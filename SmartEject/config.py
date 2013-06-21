@@ -27,6 +27,9 @@ default_prefs = {}
 default_prefs['checkdups'] = True
 default_prefs['checknotinlibrary'] = True
 default_prefs['checknotondevice'] = True
+default_prefs['checkdups_search'] = 'ondevice:"("'
+default_prefs['checknotinlibrary_search'] = 'inlibrary:False'
+default_prefs['checknotondevice_search'] = 'not ondevice:"~[a-z]"'
 
 def set_library_config(library_config):
     get_gui().current_db.prefs.set_namespaced(PREFS_NAMESPACE,
@@ -92,13 +95,17 @@ class ConfigWidget(QWidget):
         self.basic_tab = BasicTab(self, plugin_action)
         tab_widget.addTab(self.basic_tab, 'Basic')
 
-        # self.columns_tab = CustomColumnsTab(self, plugin_action)
-        # tab_widget.addTab(self.columns_tab, 'Custom Columns')
+        self.searches_tab = SearchesTab(self, plugin_action)
+        tab_widget.addTab(self.searches_tab, 'Searches')
 
     def save_settings(self):
         prefs['checkdups'] = self.basic_tab.checkdups.isChecked()
         prefs['checknotinlibrary'] = self.basic_tab.checknotinlibrary.isChecked()
         prefs['checknotondevice'] = self.basic_tab.checknotondevice.isChecked()
+
+        prefs['checkdups_search'] = unicode(self.searches_tab.checkdups_search.text())
+        prefs['checknotinlibrary_search'] = unicode(self.searches_tab.checknotinlibrary_search.text())
+        prefs['checknotondevice_search'] = unicode(self.searches_tab.checknotondevice_search.text())
 
         prefs.save_to_db()
         
@@ -182,3 +189,62 @@ class BasicTab(QWidget):
                     show=True,
                     show_copy_button=False)
 
+class SearchesTab(QWidget):
+
+    def __init__(self, parent_dialog, plugin_action):
+        QWidget.__init__(self)
+        self.parent_dialog = parent_dialog
+        self.plugin_action = plugin_action
+        
+        self.l = QVBoxLayout()
+        self.setLayout(self.l)
+
+        label = QLabel('Searches to use for:')
+        label.setWordWrap(True)
+        self.l.addWidget(label)
+        #self.l.addSpacing(5)
+        
+        scrollable = QScrollArea()
+        scrollcontent = QWidget()
+        scrollable.setWidget(scrollcontent)
+        scrollable.setWidgetResizable(True)
+        self.l.addWidget(scrollable)
+
+        self.sl = QVBoxLayout()
+        scrollcontent.setLayout(self.sl)
+
+        
+        self.sl.addWidget(QLabel("Search for Duplicated Books:"))
+        self.checkdups_search = QLineEdit(self)
+        self.sl.addWidget(self.checkdups_search)
+        self.checkdups_search.setText(prefs['checkdups_search'])
+        self.checkdups_search.setToolTip('Default is %s'%default_prefs['checkdups_search'])
+        self.sl.addSpacing(5)
+        
+        self.sl.addWidget(QLabel("Deleted Books (not in Library):"))
+        self.checknotinlibrary_search = QLineEdit(self)
+        self.sl.addWidget(self.checknotinlibrary_search)
+        self.checknotinlibrary_search.setText(prefs['checknotinlibrary_search'])
+        self.checknotinlibrary_search.setToolTip('Default is %s'%default_prefs['checknotinlibrary_search'])
+        self.sl.addSpacing(5)
+        
+        self.sl.addWidget(QLabel("Added Books (not on Device):"))
+        self.checknotondevice_search = QLineEdit(self)
+        self.sl.addWidget(self.checknotondevice_search)
+        self.checknotondevice_search.setText(prefs['checknotondevice_search'])
+        self.checknotondevice_search.setToolTip('Default is %s'%default_prefs['checknotondevice_search'])
+                        
+        self.sl.insertStretch(-1)
+        
+        self.l.addSpacing(15)        
+
+        restore_defaults_button = QPushButton('Restore Defaults', self)
+        restore_defaults_button.setToolTip('Revert all searches to the defaults.')
+        restore_defaults_button.clicked.connect(self.restore_defaults_button)
+        self.l.addWidget(restore_defaults_button)
+
+
+    def restore_defaults_button(self):
+        self.checkdups_search.setText(default_prefs['checkdups_search'])
+        self.checknotinlibrary_search.setText(default_prefs['checknotinlibrary_search'])
+        self.checknotondevice_search.setText(default_prefs['checknotondevice_search'])

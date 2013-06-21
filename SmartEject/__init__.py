@@ -26,7 +26,7 @@ class SmartEjectBase(InterfaceActionBase):
     description         = 'UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices.'
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'Jim Miller'
-    version             = (0, 1, 0)
+    version             = (1, 0, 0)
     minimum_calibre_version = (0, 8, 57)
 
     #: This field defines the GUI plugin class that contains all the code

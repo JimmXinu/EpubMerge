@@ -73,7 +73,7 @@ class SmartEjectPlugin(InterfaceAction):
     def plugin_button(self):
 
         t = time.time()
-        if prefs['checkdups'] and self.gui.library_view.model().db.search_getting_ids('ondevice:"("', None):
+        if prefs['checkdups'] and self.gui.library_view.model().db.search_getting_ids(prefs['checkdups_search'], None):
             print("dups find:%s"%(time.time()-t))
             t = time.time()
             
@@ -83,7 +83,7 @@ class SmartEjectPlugin(InterfaceAction):
                 self.gui.location_manager._location_selected('library')
                 print("select library:%s"%(time.time()-t))
                 t = time.time()
-                self.gui.search.setEditText('ondevice:"("')
+                self.gui.search.setEditText(prefs['checkdups_search'])
                 print("setEditText:%s"%(time.time()-t))
                 t = time.time()
                 self.gui.search.do_search()
@@ -110,7 +110,7 @@ class SmartEjectPlugin(InterfaceAction):
             return
         
         t = time.time()
-        if prefs['checknotondevice'] and self.gui.library_view.model().db.search_getting_ids('not ondevice:"~[a-z]"', None):
+        if prefs['checknotondevice'] and self.gui.library_view.model().db.search_getting_ids(prefs['checknotondevice_search'], None):
             print("checknotondevice find:%s"%(time.time()-t))
             t = time.time()
             
@@ -122,7 +122,7 @@ class SmartEjectPlugin(InterfaceAction):
                 self.gui.location_manager._location_selected('library')
                 print("select library:%s"%(time.time()-t))
                 t = time.time()
-                self.gui.search.setEditText('not ondevice:"~[a-z]"')
+                self.gui.search.setEditText(prefs['checknotondevice_search'])
                 print("setEditText:%s"%(time.time()-t))
                 t = time.time()
                 self.gui.search.do_search()
@@ -149,9 +149,9 @@ class SmartEjectPlugin(InterfaceAction):
         self.gui.location_manager._eject_requested()
         print("_eject_requested:%s"%(time.time()-t))
 
-        # if 'ondevice:"("' or 'inlibrary:false'
+        # if one of the configured searchs, clear it.
         print("self.gui.search.current_text :(%s)"%self.gui.search.current_text )
-        if self.gui.search.current_text in ('ondevice:"("','inlibrary:False','not ondevice:"~[a-z]"'): 
+        if self.gui.search.current_text in (prefs['checkdups_search'],prefs['checknotinlibrary_search'],prefs['checknotondevice_search']): 
             t = time.time()
             self.gui.search.clear()
             print("search.clear:%s"%(time.time()-t))
@@ -169,7 +169,7 @@ class SmartEjectPlugin(InterfaceAction):
             if question_dialog(self.gui, "Books on Device not in Library", "There are books on the device in %s that are not in the Library.<p>Display books not in Library?"%loc, show_copy_button=False):
 #            print("not in Library warning:%s"%warning_dialog(self.gui, "Books on Device not in Library", "There are books on the device not in Library.", show=True, show_copy_button=False))
                 t = time.time()
-                self.gui.search.setEditText('inlibrary:False')
+                self.gui.search.setEditText(prefs['checknotinlibrary_search'])
                 print("checkdevice setEditText:%s"%(time.time()-t))
                 t = time.time()
                 self.gui.search.do_search()
