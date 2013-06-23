@@ -161,7 +161,7 @@ class SmartEjectPlugin(InterfaceAction):
         #print("\nmodel.last_search:%s"%model.last_search)
         #print("model.count():%s"%model.count())
         t = time.time()
-        model.search('inlibrary:false')
+        model.search(prefs['checknotinlibrary_search'])
         print("checkdevice model.search:%s"%(time.time()-t))
         t = time.time()
         #print("model.count():%s"%model.count())
