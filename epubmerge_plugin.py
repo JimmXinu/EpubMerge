@@ -340,8 +340,10 @@ class EpubMergePlugin(InterfaceAction):
             
             tagslists = map(lambda x : x['tags'], book_list)
             mi.tags = [item for sublist in tagslists for item in sublist]
+            mi.tags.extend(prefs['mergetags'].split(','))
 
-            # print("======================= m.tagsi:\n%s\n========================="%mi.tags)
+            # print("======================= mergetags:\n%s\n========================="%prefs['mergetags'])
+            # print("======================= m.tags:\n%s\n========================="%mi.tags)
             
             languageslists = map(lambda x : x['languages'], book_list)
             mi.languages = [item for sublist in languageslists for item in sublist]
@@ -404,15 +406,26 @@ class EpubMergePlugin(InterfaceAction):
                         value = "%s [%s]"%(value, db.get_custom_extra(idslist[idx], label=label, index_is_id=True))
                     found = True
 
-                if action == 'add':
+                if action in ('add','average','averageall'):
                     value = 0.0
+                    count = 0
                     for bid in idslist:
                         try:
                             value += db.get_custom(bid, label=label, index_is_id=True)
                             found = True
+                            # only count ones with values unless averageall
+                            count += 1
                         except:
                             # if not set, it's None and fails.
-                            pass
+                            # only count ones with values unless averageall
+                            if action == 'averageall':
+                                count += 1
+                                
+                    if found and action in ('average','averageall'):
+                        value = value / count
+                        
+                    if coldef['datatype'] == 'int':
+                        value += 0.5 # so int rounds instead of truncs.
                 
                 if action == 'and':
                     value = True
@@ -546,6 +559,7 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
                            keepmetadatafiles=prefs['keepmeta'] )
                  
             print("6:%s"%(time.time()-self.t))
+            print("Merge finished, output in:\n%s"%mergedepub.name)
             self.t = time.time()
             db.add_format_with_hooks(book_id,
                                      'EPUB',

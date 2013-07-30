@@ -29,6 +29,7 @@ default_prefs['flattentoc'] = False
 default_prefs['titlenavpoints'] = True
 default_prefs['keepmeta'] = True
 default_prefs['showunmerge'] = True
+default_prefs['mergetags'] = ''
 default_prefs['custom_cols'] = {}
 
 def set_library_config(library_config):
@@ -128,6 +129,7 @@ class ConfigWidget(QWidget):
         prefs['titlenavpoints'] = self.basic_tab.titlenavpoints.isChecked()
         prefs['keepmeta'] = self.basic_tab.keepmeta.isChecked()
         prefs['showunmerge'] = self.basic_tab.showunmerge.isChecked()
+        prefs['mergetags'] = unicode(self.basic_tab.mergetags.text())
         
         # Custom Columns tab
         colsmap = {}
@@ -185,6 +187,15 @@ Only Epubs merged with 'Keep UnMerge Metadata' can be UnMerged.''')
         self.showunmerge.setChecked(prefs['showunmerge'])
         self.l.addWidget(self.showunmerge)
 
+        horz = QHBoxLayout()
+        horz.addWidget(QLabel("Add tags to merged books:"))
+        
+        self.mergetags = QLineEdit(self)
+        self.mergetags.setText(prefs['mergetags'])
+        self.mergetags.setToolTip('''Tags you enter here will be added to all new merged books''')
+        horz.addWidget(self.mergetags)
+        self.l.addLayout(horz)
+
         self.l.addSpacing(15)        
 
         label = QLabel("These controls aren't plugin settings as such, but convenience buttons for setting Keyboard shortcuts and getting all the EpubMerge confirmation dialogs back again.")
@@ -227,8 +238,8 @@ Only Epubs merged with 'Keep UnMerge Metadata' can be UnMerged.''')
                     show_copy_button=False)
 
 permitted_values = {
-    'int' : ['add', 'first', 'last'],
-    'float' : ['add', 'first', 'last'],
+    'int' : ['add', 'averageall', 'average', 'first', 'last'],
+    'float' : ['add', 'averageall', 'average', 'first', 'last'],
     'bool' : ['and', 'or', 'first', 'last'],
     'datetime' : ['newest', 'oldest', 'first', 'last'],
     'enumeration' : ['first', 'last'],
@@ -241,6 +252,8 @@ titleLabels = {
     'first':'Take value from first source book',
     'last':'Take value from last source book',
     'add':'Add values from all source books',
+    'averageall':'Average value from ALL source books',
+    'average':'Average value from source books with values',
     'and':'True if true on all source books (and)',
     'or':'True if true on any source books (or)',
     'newest':'Take newest value from source books',
