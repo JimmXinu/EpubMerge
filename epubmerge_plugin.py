@@ -310,7 +310,7 @@ class EpubMergePlugin(InterfaceAction):
             print("2:%s"%(time.time()-self.t))
             self.t = time.time()
 
-            deftitle = "%s Anthology" % book_list[0]['title']
+            deftitle = "%s %s" % (book_list[0]['title'],prefs['mergeword'])
             mi = MetaInformation(deftitle,["Temp Author"])
 
             # if all same series, use series for name.  But only if all.
@@ -350,7 +350,7 @@ class EpubMergePlugin(InterfaceAction):
 
             mi.series = ''
 
-            mi.comments = "Anthology containing:\n\n" + \
+            mi.comments = "%s containing:\n\n" % prefs['mergeword'] + \
                 '\n'.join(map(lambda x : "%s by %s" % \
                                   (x['title'],' & '.join(x['authors'])), book_list))
             
