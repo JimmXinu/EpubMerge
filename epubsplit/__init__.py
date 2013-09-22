@@ -26,7 +26,7 @@ class EpubSplitBase(InterfaceActionBase):
     description         = 'UI plugin to split off parts of an epub into a new book.'
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'Jim Miller'
-    version             = (1, 2, 9)
+    version             = (1, 3, 0)
     minimum_calibre_version = (0, 9, 29)
 
     #: This field defines the GUI plugin class that contains all the code

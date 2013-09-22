@@ -566,7 +566,7 @@ class SplitEpub:
                 if textnode:
                     text = textnode.data.encode("utf-8")
                 else:
-                    print("No chapter title found in TOC for (%s)"%src)
+                    #print("No chapter title found in TOC for (%s)"%src)
                     text = ""
                     
                 if href not in self.toc_map:
@@ -718,16 +718,16 @@ class SplitEpub:
             
         # Spin through to replace internal URLs
         for fl in outfiles:
-            print("file:%s"%fl[0])
+            #print("file:%s"%fl[0])
             soup = bs.BeautifulSoup(fl[3])
             changed = False
             for a in soup.findAll('a'):
                 if a.has_key('href'):
                     path = normpath(unquote("%s%s"%(get_path_part(fl[0]),a['href'])))
-                    print("full a['href']:%s"%path)
+                    #print("full a['href']:%s"%path)
                     if path in self.filecache.anchors and self.filecache.anchors[path] != path:
                         a['href'] = self.filecache.anchors[path][len(get_path_part(fl[0])):]
-                        print("replacement path:%s"%a['href'])
+                        #print("replacement path:%s"%a['href'])
                         changed = True
             if changed:
                 fl[3] = soup.__str__('utf-8').decode('utf-8')
@@ -1013,7 +1013,7 @@ class FileCache:
             
         self.oldnew[href].append(newfile)
         self.newold[newfile]=href
-        print("newfile:%s"%newfile)
+        #print("newfile:%s"%newfile)
 
         soup = bs.BeautifulSoup(filedata) #.encode('utf-8')
         #print("soup head:%s"%soup.find('head'))
@@ -1054,7 +1054,7 @@ def splitHtml(data,tagid,before=False):
 
     splitpoint = soup.find(id=tagid)
 
-    print("splitpoint:%s"%splitpoint)
+    #print("splitpoint:%s"%splitpoint)
 
     if splitpoint == None:
         return data

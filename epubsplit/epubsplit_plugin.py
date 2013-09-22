@@ -107,7 +107,7 @@ class EpubSplitPlugin(InterfaceAction):
             self.previous = self.gui.library_view.currentIndex()
             db=self.gui.current_db
 
-            print("1:%s"%(time.time()-self.t))
+            #print("1:%s"%(time.time()-self.t))
             self.t = time.time()
 
             source_id = self.gui.library_view.get_selected_ids()[0]
@@ -145,12 +145,12 @@ class EpubSplitPlugin(InterfaceAction):
     def _do_split(self, db, source_id, misource, splitepub, newspecs):
     
             linenums,changedtocs = newspecs
-            print("updated tocs:%s"%changedtocs)
+            #print("updated tocs:%s"%changedtocs)
             
-            print("2:%s"%(time.time()-self.t))
+            #print("2:%s"%(time.time()-self.t))
             self.t = time.time()
 
-            print("linenums:%s"%linenums)
+            #print("linenums:%s"%linenums)
             
             deftitle = None
             defauthors = None
@@ -196,7 +196,7 @@ class EpubSplitPlugin(InterfaceAction):
             if prefs['copycover'] and misource.has_cover:
                 db.set_cover(book_id, db.cover(source_id,index_is_id=True))
 
-            print("3:%s"%(time.time()-self.t))
+            #print("3:%s"%(time.time()-self.t))
             self.t = time.time()
 
             custom_columns = self.gui.library_view.model().custom_columns
@@ -204,7 +204,7 @@ class EpubSplitPlugin(InterfaceAction):
                 #print("col: %s action: %s"%(col,action))
                 
                 if col not in custom_columns:
-                    print("%s not an existing column, skipping."%col)
+                    #print("%s not an existing column, skipping."%col)
                     continue
                 
                 coldef = custom_columns[col]
@@ -214,25 +214,25 @@ class EpubSplitPlugin(InterfaceAction):
                 if value:
                     db.set_custom(book_id,value,label=label,commit=False)
             
-            print("3.5:%s"%(time.time()-self.t))
+            #print("3.5:%s"%(time.time()-self.t))
             self.t = time.time()
 
             if prefs['sourcecol'] != '' and prefs['sourcecol'] in custom_columns \
                     and prefs['sourcetemplate']:
                 val = SafeFormat().safe_format(prefs['sourcetemplate'], misource, 'EpubSplit Source Template Error', misource)
-                print("Attempting to set %s to %s"%(prefs['sourcecol'],val))
+                #print("Attempting to set %s to %s"%(prefs['sourcecol'],val))
                 label = custom_columns[prefs['sourcecol']]['label']
                 db.set_custom(book_id, val, label=label, commit=False)
                 
             db.commit()
             
-            print("4:%s"%(time.time()-self.t))
+            #print("4:%s"%(time.time()-self.t))
             self.t = time.time()
             
             self.gui.library_view.model().books_added(1)
             self.gui.library_view.select_rows([book_id])
             
-            print("5:%s"%(time.time()-self.t))
+            #print("5:%s"%(time.time()-self.t))
             self.t = time.time()
             
             confirm(u'''
@@ -249,7 +249,7 @@ If you download or add a cover image, it will be included in the generated EPUB.
             
             self.gui.iactions['Edit Metadata'].edit_metadata(False)
 
-            print("5:%s"%(time.time()-self.t))
+            #print("5:%s"%(time.time()-self.t))
             self.t = time.time()
             self.gui.tags_view.recount()
 
@@ -274,13 +274,13 @@ If you download or add a cover image, it will be included in the generated EPUB.
                                        languages=mi.languages,
                                        coverjpgpath=coverjpgpath)
             
-            print("6:%s"%(time.time()-self.t))
+            #print("6:%s"%(time.time()-self.t))
             self.t = time.time()
             db.add_format_with_hooks(book_id,
                                      'EPUB',
                                      outputepub, index_is_id=True)
 
-            print("7:%s"%(time.time()-self.t))
+            #print("7:%s"%(time.time()-self.t))
             self.t = time.time()
             
             self.gui.status_bar.show_message('Finished splitting off EPUB.', 3000)
