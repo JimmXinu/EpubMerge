@@ -7,8 +7,6 @@ __license__   = 'GPL v3'
 __copyright__ = '2012, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
-import time
-
 from calibre.gui2 import question_dialog
 
 # The class that all interface action plugins must inherit from
@@ -72,113 +70,59 @@ class SmartEjectPlugin(InterfaceAction):
 
     def plugin_button(self):
 
-        t = time.time()
         if prefs['checkdups'] and self.gui.library_view.model().db.search_getting_ids(prefs['checkdups_search'], None):
-            print("dups find:%s"%(time.time()-t))
-            t = time.time()
             
             if question_dialog(self.gui, "Duplicates on Device", "There are duplicate ebooks on the device.<p>Display duplicates?", show_copy_button=False):
 #            print("Duplicates on Device warning:%s"%warning_dialog(self.gui, "Duplicates on Device", "There are duplicate ebooks on the device.", show=True, show_copy_button=False))
-                t = time.time()
                 self.gui.location_manager._location_selected('library')
-                print("select library:%s"%(time.time()-t))
-                t = time.time()
                 self.gui.search.setEditText(prefs['checkdups_search'])
-                print("setEditText:%s"%(time.time()-t))
-                t = time.time()
                 self.gui.search.do_search()
-                print("do_search:%s"%(time.time()-t))
-                t = time.time()
                 return
 
         if prefs['checknotinlibrary'] and self.checkdevice(self.gui.memory_view.model(),"Main"):
-            t = time.time()
             self.gui.location_manager._location_selected('main')
-            print("_location_selected('main'):%s"%(time.time()-t))
             return
         
         if prefs['checknotinlibrary'] and self.checkdevice(self.gui.card_a_view.model(),"Card A"):
-            t = time.time()
             self.gui.location_manager._location_selected('carda')
-            print("_location_selected('carda'):%s"%(time.time()-t))
             return
         
         if prefs['checknotinlibrary'] and self.checkdevice(self.gui.card_b_view.model(),"Card B"):
-            t = time.time()
             self.gui.location_manager._location_selected('cardb')
-            print("_location_selected('cardb'):%s"%(time.time()-t))
             return
         
-        t = time.time()
         if prefs['checknotondevice'] and self.gui.library_view.model().db.search_getting_ids(prefs['checknotondevice_search'], None):
-            print("checknotondevice find:%s"%(time.time()-t))
-            t = time.time()
-            
             if question_dialog(self.gui,
                                "Books in Library not on Device",
                                "There are books in the Library that are not on the Device.<p>Display books not on Device?",
                                show_copy_button=False):
-                t = time.time()
                 self.gui.location_manager._location_selected('library')
-                print("select library:%s"%(time.time()-t))
-                t = time.time()
                 self.gui.search.setEditText(prefs['checknotondevice_search'])
-                print("setEditText:%s"%(time.time()-t))
-                t = time.time()
                 self.gui.search.do_search()
-                print("do_search:%s"%(time.time()-t))
-                t = time.time()
                 return
             
-        # savesearch = self.gui.memory_view.model().last_search
-        # print("\nself.gui.memory_view.model().last_search:%s"%self.gui.memory_view.model().last_search)
-        # print("self.gui.memory_view.model().count():%s"%self.gui.memory_view.model().count())
-        # self.gui.memory_view.model().search('inlibrary:false')
-        # print("self.gui.memory_view.model().count():%s"%self.gui.memory_view.model().count())
-        # if self.gui.memory_view.model().count() > 0:
-        #     warning_dialog(self.gui, "Books on Device not in Library", "There are books on the device not in Library.", show=True)
-        #     return        
-        # self.gui.memory_view.model().search(savesearch)
-        # print("self.gui.memory_view.model().count():%s"%self.gui.memory_view.model().count())
-        
-        t = time.time()
         self.gui.location_manager._location_selected('library')
-        print("_location_selected('library'):%s"%(time.time()-t))
-        
-        t = time.time()
+
         self.gui.location_manager._eject_requested()
-        print("_eject_requested:%s"%(time.time()-t))
 
         # if one of the configured searchs, clear it.
-        print("self.gui.search.current_text :(%s)"%self.gui.search.current_text )
+        #print("self.gui.search.current_text :(%s)"%self.gui.search.current_text )
         if self.gui.search.current_text in (prefs['checkdups_search'],prefs['checknotinlibrary_search'],prefs['checknotondevice_search']): 
-            t = time.time()
             self.gui.search.clear()
-            print("search.clear:%s"%(time.time()-t))
 
     def checkdevice(self,model,loc):
         savesearch = model.last_search
         #print("\nmodel.last_search:%s"%model.last_search)
         #print("model.count():%s"%model.count())
-        t = time.time()
         model.search(prefs['checknotinlibrary_search'])
-        print("checkdevice model.search:%s"%(time.time()-t))
-        t = time.time()
         #print("model.count():%s"%model.count())
         if model.count() > 0:
             if question_dialog(self.gui, "Books on Device not in Library", "There are books on the device in %s that are not in the Library.<p>Display books not in Library?"%loc, show_copy_button=False):
-#            print("not in Library warning:%s"%warning_dialog(self.gui, "Books on Device not in Library", "There are books on the device not in Library.", show=True, show_copy_button=False))
-                t = time.time()
+#            #print("not in Library warning:%s"%warning_dialog(self.gui, "Books on Device not in Library", "There are books on the device not in Library.", show=True, show_copy_button=False))
                 self.gui.search.setEditText(prefs['checknotinlibrary_search'])
-                print("checkdevice setEditText:%s"%(time.time()-t))
-                t = time.time()
                 self.gui.search.do_search()
-                print("checkdevice do_search:%s"%(time.time()-t))
-                t = time.time()
                 return True
         model.search(savesearch)
-        print("checkdevice savesearch:%s"%(time.time()-t))
-        t = time.time()
         #print("model.count():%s"%model.count())
 
         return False
@@ -186,4 +130,3 @@ class SmartEjectPlugin(InterfaceAction):
     def apply_settings(self):
         # No need to do anything with prefs here, but we could.
         prefs
-        
