@@ -14,7 +14,7 @@ from makezip import createZipFile
 if __name__=="__main__":
     
     filename="EpubSplit.zip"
-    exclude=['*.pyc','*~','*.xcf','*[0-9].png','BeautifulSoup.py']
+    exclude=['*.pyc','*~','*.xcf','*[0-9].png','BeautifulSoup.py','makezip.py','makeplugin.py']
     # from top dir. 'w' for overwrite
     #from calibre-plugin dir. 'a' for append
     files=['images',]
