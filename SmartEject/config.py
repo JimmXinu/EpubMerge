@@ -15,6 +15,12 @@ from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineE
 from calibre.gui2 import dynamic, info_dialog
 from calibre.gui2.ui import get_gui
 
+# pulls in translation files for _() strings
+try:
+    load_translations()
+except:
+    pass # load_translations() added in calibre 1.9
+
 from calibre_plugins.smarteject.common_utils \
     import ( get_library_uuid, KeyboardConfigDialog, PrefsViewerDialog )
 
@@ -24,6 +30,7 @@ PREFS_KEY_SETTINGS = 'settings'
 # Set defaults used by all.  Library specific settings continue to
 # take from here.
 default_prefs = {}
+default_prefs['checkreadinglistsync'] = True
 default_prefs['checkdups'] = True
 default_prefs['checknotinlibrary'] = True
 default_prefs['checknotondevice'] = True
@@ -93,12 +100,13 @@ class ConfigWidget(QWidget):
         self.l.addWidget(tab_widget)
 
         self.basic_tab = BasicTab(self, plugin_action)
-        tab_widget.addTab(self.basic_tab, 'Basic')
+        tab_widget.addTab(self.basic_tab, _('Basic'))
 
         self.searches_tab = SearchesTab(self, plugin_action)
-        tab_widget.addTab(self.searches_tab, 'Searches')
+        tab_widget.addTab(self.searches_tab, _('Searches'))
 
     def save_settings(self):
+        prefs['checkreadinglistsync'] = self.basic_tab.checkreadinglistsync.isChecked()
         prefs['checkdups'] = self.basic_tab.checkdups.isChecked()
         prefs['checknotinlibrary'] = self.basic_tab.checknotinlibrary.isChecked()
         prefs['checknotondevice'] = self.basic_tab.checknotondevice.isChecked()
@@ -125,7 +133,7 @@ class BasicTab(QWidget):
         self.l = QVBoxLayout()
         self.setLayout(self.l)
 
-        label = QLabel('When Ejecting a Device, Check for:')
+        label = QLabel(_('When Ejecting a Device, Check for:'))
         label.setWordWrap(True)
         self.l.addWidget(label)
         #self.l.addSpacing(5)
@@ -139,18 +147,25 @@ class BasicTab(QWidget):
         self.sl = QVBoxLayout()
         scrollcontent.setLayout(self.sl)
         
-        self.checkdups = QCheckBox('Duplicated Books',self)
-        self.checkdups.setToolTip('Check for books that are on the device more than once.')
+        self.checkreadinglistsync = QCheckBox(_('Reading List books to Sync'),self)
+        self.checkreadinglistsync.setToolTip(_('Check Reading List plugin for books ready to Sync to the current device.'))
+        self.checkreadinglistsync.setChecked(prefs['checkreadinglistsync'])
+        self.sl.addWidget(self.checkreadinglistsync)
+        if 'Reading List' not in plugin_action.gui.iactions:
+            self.checkreadinglistsync.setEnabled(False)
+        
+        self.checkdups = QCheckBox(_('Duplicated Books'),self)
+        self.checkdups.setToolTip(_('Check for books that are on the device more than once.'))
         self.checkdups.setChecked(prefs['checkdups'])
         self.sl.addWidget(self.checkdups)
         
-        self.checknotinlibrary = QCheckBox('Deleted Books (not in Library)',self)
-        self.checknotinlibrary.setToolTip('Check for books on the device that are not in the current library.')
+        self.checknotinlibrary = QCheckBox(_('Deleted Books (not in Library)'),self)
+        self.checknotinlibrary.setToolTip(_('Check for books on the device that are not in the current library.'))
         self.checknotinlibrary.setChecked(prefs['checknotinlibrary'])
         self.sl.addWidget(self.checknotinlibrary)
         
-        self.checknotondevice = QCheckBox('Added Books (not on Device)',self)
-        self.checknotondevice.setToolTip('Check for books in the current library that are not on the device.')
+        self.checknotondevice = QCheckBox(_('Added Books (not on Device)'),self)
+        self.checknotondevice.setToolTip(_('Check for books in the current library that are not on the device.'))
         self.checknotondevice.setChecked(prefs['checknotondevice'])
         self.sl.addWidget(self.checknotondevice)
                 
@@ -158,20 +173,18 @@ class BasicTab(QWidget):
         
         self.l.addSpacing(15)        
 
-        label = QLabel("These controls aren't plugin settings as such, but convenience buttons for setting Keyboard shortcuts and getting all the SmartEject confirmation dialogs back again.")
+        label = QLabel(_("These controls aren't plugin settings as such, but convenience buttons for setting Keyboard shortcuts and viewing all plugins settings."))
         label.setWordWrap(True)
         self.l.addWidget(label)
         self.l.addSpacing(5)
         
-        keyboard_shortcuts_button = QPushButton('Keyboard shortcuts...', self)
-        keyboard_shortcuts_button.setToolTip(_(
-                    'Edit the keyboard shortcuts associated with this plugin'))
+        keyboard_shortcuts_button = QPushButton(_('Keyboard shortcuts...'), self)
+        keyboard_shortcuts_button.setToolTip(_('Edit the keyboard shortcuts associated with this plugin'))
         keyboard_shortcuts_button.clicked.connect(parent_dialog.edit_shortcuts)
         self.l.addWidget(keyboard_shortcuts_button)
                 
-        view_prefs_button = QPushButton('&View library preferences...', self)
-        view_prefs_button.setToolTip(_(
-                    'View data stored in the library database for this plugin'))
+        view_prefs_button = QPushButton(_('&View library preferences...'), self)
+        view_prefs_button.setToolTip(_('View data stored in the library database for this plugin'))
         view_prefs_button.clicked.connect(self.view_prefs)
         self.l.addWidget(view_prefs_button)
         
@@ -199,7 +212,7 @@ class SearchesTab(QWidget):
         self.l = QVBoxLayout()
         self.setLayout(self.l)
 
-        label = QLabel('Searches to use for:')
+        label = QLabel(_('Searches to use for:'))
         label.setWordWrap(True)
         self.l.addWidget(label)
         #self.l.addSpacing(5)
@@ -214,32 +227,32 @@ class SearchesTab(QWidget):
         scrollcontent.setLayout(self.sl)
 
         
-        self.sl.addWidget(QLabel("Search for Duplicated Books:"))
+        self.sl.addWidget(QLabel(_("Search for Duplicated Books:")))
         self.checkdups_search = QLineEdit(self)
         self.sl.addWidget(self.checkdups_search)
         self.checkdups_search.setText(prefs['checkdups_search'])
-        self.checkdups_search.setToolTip('Default is %s'%default_prefs['checkdups_search'])
+        self.checkdups_search.setToolTip(_('Default is %s')%default_prefs['checkdups_search'])
         self.sl.addSpacing(5)
         
-        self.sl.addWidget(QLabel("Deleted Books (not in Library):"))
+        self.sl.addWidget(QLabel(_("Deleted Books (not in Library):")))
         self.checknotinlibrary_search = QLineEdit(self)
         self.sl.addWidget(self.checknotinlibrary_search)
         self.checknotinlibrary_search.setText(prefs['checknotinlibrary_search'])
-        self.checknotinlibrary_search.setToolTip('Default is %s'%default_prefs['checknotinlibrary_search'])
+        self.checknotinlibrary_search.setToolTip(_('Default is %s')%default_prefs['checknotinlibrary_search'])
         self.sl.addSpacing(5)
         
         self.sl.addWidget(QLabel("Added Books (not on Device):"))
         self.checknotondevice_search = QLineEdit(self)
         self.sl.addWidget(self.checknotondevice_search)
         self.checknotondevice_search.setText(prefs['checknotondevice_search'])
-        self.checknotondevice_search.setToolTip('Default is %s'%default_prefs['checknotondevice_search'])
+        self.checknotondevice_search.setToolTip(_('Default is %s')%default_prefs['checknotondevice_search'])
                         
         self.sl.insertStretch(-1)
         
         self.l.addSpacing(15)        
 
-        restore_defaults_button = QPushButton('Restore Defaults', self)
-        restore_defaults_button.setToolTip('Revert all searches to the defaults.')
+        restore_defaults_button = QPushButton(_('Restore Defaults'), self)
+        restore_defaults_button.setToolTip(_('Revert all searches to the defaults.'))
         restore_defaults_button.clicked.connect(self.restore_defaults_button)
         self.l.addWidget(restore_defaults_button)
 

@@ -11,6 +11,12 @@ __docformat__ = 'restructuredtext en'
 # The class that all Interface Action plugin wrappers must inherit from
 from calibre.customize import InterfaceActionBase
 
+# pulls in translation files for _() strings
+try:
+    load_translations()
+except:
+    pass # load_translations() added in calibre 1.9
+
 ## Apparently the name for this class doesn't matter.
 class SmartEjectBase(InterfaceActionBase):
     '''
@@ -23,10 +29,10 @@ class SmartEjectBase(InterfaceActionBase):
     calibre utilities to run without needing to load the GUI libraries.
     '''
     name                = 'SmartEject'
-    description         = 'UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices.'
+    description         = _('UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices.')
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'Jim Miller'
-    version             = (1, 0, 1)
+    version             = (1, 0, 2)
     minimum_calibre_version = (0, 8, 57)
 
     #: This field defines the GUI plugin class that contains all the code

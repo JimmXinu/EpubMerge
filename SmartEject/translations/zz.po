@@ -1,0 +1,167 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SmartEject 1.0.2\n"
+"POT-Creation-Date: 2013-10-29 12:56+Central Daylight Time\n"
+"PO-Revision-Date: 2013-10-29 13:57-0600\n"
+"Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: ..\__init__.py:31 ..\smarteject_plugin.py:34 ..\smarteject_plugin.py:67
+msgid "SmartEject"
+msgstr "SmartEject(zz)"
+
+#: ..\__init__.py:32
+msgid ""
+"UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices."
+msgstr ""
+"UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices."
+"(zz)"
+
+#: ..\config.py:103
+msgid "Basic"
+msgstr "Basic(zz)"
+
+#: ..\config.py:106
+msgid "Searches"
+msgstr "Searches(zz)"
+
+#: ..\config.py:136
+msgid "When Ejecting a Device, Check for:"
+msgstr "When Ejecting a Device, Check for:(zz)"
+
+#: ..\config.py:150
+msgid "Reading List books to Sync"
+msgstr ""
+
+#: ..\config.py:151
+msgid ""
+"Check Reading List plugin for books ready to Sync to the current device."
+msgstr ""
+
+#: ..\config.py:157
+msgid "Duplicated Books"
+msgstr ""
+
+#: ..\config.py:158
+msgid "Check for books that are on the device more than once."
+msgstr ""
+
+#: ..\config.py:162
+msgid "Deleted Books (not in Library)"
+msgstr ""
+
+#: ..\config.py:163
+msgid "Check for books on the device that are not in the current library."
+msgstr ""
+
+#: ..\config.py:167
+msgid "Added Books (not on Device)"
+msgstr ""
+
+#: ..\config.py:168
+msgid "Check for books in the current library that are not on the device."
+msgstr ""
+
+#: ..\config.py:176
+msgid ""
+"These controls aren't plugin settings as such, but convenience buttons for "
+"setting Keyboard shortcuts and viewing all plugins settings."
+msgstr ""
+
+#: ..\config.py:181
+msgid "Keyboard shortcuts..."
+msgstr ""
+
+#: ..\config.py:182
+msgid "Edit the keyboard shortcuts associated with this plugin"
+msgstr ""
+
+#: ..\config.py:186
+msgid "&View library preferences..."
+msgstr ""
+
+#: ..\config.py:187
+msgid "View data stored in the library database for this plugin"
+msgstr ""
+
+#: ..\config.py:200
+msgid "Done"
+msgstr ""
+
+#: ..\config.py:201
+msgid "Confirmation dialogs have all been reset"
+msgstr ""
+
+#: ..\config.py:215
+msgid "Searches to use for:"
+msgstr ""
+
+#: ..\config.py:230
+msgid "Search for Duplicated Books:"
+msgstr ""
+
+#: ..\config.py:234 ..\config.py:241 ..\config.py:248
+msgid "Default is %s"
+msgstr ""
+
+#: ..\config.py:237
+msgid "Deleted Books (not in Library):"
+msgstr ""
+
+#: ..\config.py:254
+msgid "Restore Defaults"
+msgstr ""
+
+#: ..\config.py:255
+msgid "Revert all searches to the defaults."
+msgstr ""
+
+#: ..\smarteject_plugin.py:35
+msgid "Check for duplicated/deleted/added books before ejecting."
+msgstr "Check for duplicated/deleted/added books before ejecting.(zz)"
+
+#: ..\smarteject_plugin.py:86
+msgid "Sync Reading List?"
+msgstr ""
+
+#: ..\smarteject_plugin.py:86
+msgid ""
+"There are books that need syncing according to Reading List.<p>Sync Books?"
+msgstr ""
+
+#: ..\smarteject_plugin.py:93
+msgid "Duplicates on Device"
+msgstr ""
+
+#: ..\smarteject_plugin.py:93
+msgid "There are duplicate ebooks on the device.<p>Display duplicates?"
+msgstr ""
+
+#: ..\smarteject_plugin.py:114
+msgid "Books in Library not on Device"
+msgstr ""
+
+#: ..\smarteject_plugin.py:115
+msgid ""
+"There are books in the Library that are not on the Device.<p>Display books "
+"not on Device?"
+msgstr ""
+
+#: ..\smarteject_plugin.py:138
+msgid "Books on Device not in Library"
+msgstr ""
+
+#: ..\smarteject_plugin.py:138
+msgid ""
+"There are books on the device in %s that are not in the Library.<p>Display "
+"books not in Library?"
+msgstr ""
