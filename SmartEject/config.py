@@ -18,7 +18,7 @@ from calibre.gui2.ui import get_gui
 # pulls in translation files for _() strings
 try:
     load_translations()
-except:
+except NameError:
     pass # load_translations() added in calibre 1.9
 
 from calibre_plugins.smarteject.common_utils \
@@ -241,7 +241,7 @@ class SearchesTab(QWidget):
         self.checknotinlibrary_search.setToolTip(_('Default is %s')%default_prefs['checknotinlibrary_search'])
         self.sl.addSpacing(5)
         
-        self.sl.addWidget(QLabel("Added Books (not on Device):"))
+        self.sl.addWidget(QLabel(_("Added Books (not on Device):")))
         self.checknotondevice_search = QLineEdit(self)
         self.sl.addWidget(self.checknotondevice_search)
         self.checknotondevice_search.setText(prefs['checknotondevice_search'])

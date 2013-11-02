@@ -14,7 +14,7 @@ from calibre.customize import InterfaceActionBase
 # pulls in translation files for _() strings
 try:
     load_translations()
-except:
+except NameError:
     pass # load_translations() added in calibre 1.9
 
 ## Apparently the name for this class doesn't matter.

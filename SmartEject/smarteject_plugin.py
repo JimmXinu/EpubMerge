@@ -18,7 +18,7 @@ from calibre_plugins.smarteject.config import prefs
 # pulls in translation files for _() strings
 try:
     load_translations()
-except:
+except NameError:
     pass # load_translations() added in calibre 1.9
 
 # PLUGIN_ICONS = ['images/icon.png']
@@ -41,9 +41,9 @@ class SmartEjectPlugin(InterfaceAction):
 
     #: Set of locations to which this action must not be added.
     #: See :attr:`all_locations` for a list of possible locations
-    # dont_add_to = frozenset(['toolbar', 'context-menu', 'toolbar-child',
-    #                          'context-menu-device', 'menubar',
-    #                          'context-menu-cover-browser'])
+    dont_add_to = frozenset(['toolbar', 'context-menu', 'toolbar-child',
+                             'context-menu-device', 'menubar',
+                             'context-menu-cover-browser'])
 
     def genesis(self):
 
