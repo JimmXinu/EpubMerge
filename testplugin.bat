@@ -5,6 +5,6 @@ c:\Python27\python.exe makeplugin.py
 
 cp EpubMerge.zip "C:\Users\retief\AppData\Roaming\calibre\plugins\EpubMerge.zip"
 
-set CALIBRE_OVERRIDE_LANG=zz
+set CALIBRE_OVERRIDE_LANG=
 
 calibre-debug -g

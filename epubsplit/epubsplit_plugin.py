@@ -27,6 +27,12 @@ from calibre.utils.date import local_tz
 # The class that all interface action plugins must inherit from
 from calibre.gui2.actions import InterfaceAction
 
+# pulls in translation files for _() strings
+try:
+    load_translations()
+except NameError:
+    pass # load_translations() added in calibre 1.9
+
 from calibre_plugins.epubsplit.common_utils import (set_plugin_icon_resources, get_icon)
 
 from calibre_plugins.epubsplit.config import prefs
@@ -50,8 +56,8 @@ class EpubSplitPlugin(InterfaceAction):
     # keyboard shortcuts, so try to use an unusual/unused shortcut.
     # (text, icon_path, tooltip, keyboard shortcut)
     # icon_path isn't in the zip--icon loaded below.
-    action_spec = (name, None,
-                   'Split off part of an EPUB into a new book.', ())
+    action_spec = (_('EpubSplit'), None,
+                   _('Split off part of an EPUB into a new book.'), ())
     # None for keyboard shortcut doesn't allow shortcut.  () does, there just isn't one yet
 
     action_type = 'global'
@@ -129,7 +135,7 @@ class EpubSplitPlugin(InterfaceAction):
             # print()
             
             d = SelectLinesDialog(self.gui,
-                                  'Select Sections to Split Off',
+                                  _('Select Sections to Split Off'),
                                   prefs,
                                   self.qaction.icon(),
                                   lines,
@@ -156,7 +162,7 @@ class EpubSplitPlugin(InterfaceAction):
             defauthors = None
             
             if prefs['copytitle']:
-                deftitle = "%s Split" % misource.title
+                deftitle = _("%s Split") % misource.title
                 
             if prefs['copyauthors']:
                 defauthors = misource.authors
@@ -188,7 +194,7 @@ class EpubSplitPlugin(InterfaceAction):
                 mi.set_identifiers(misource.get_identifiers())
 
             if prefs['copycomments'] and misource.comments:
-                mi.comments = "Split from:\n\n" + misource.comments
+                mi.comments = _("Split from:")+"\n\n" + misource.comments
             
             book_id = db.create_book_entry(mi,
                                            add_duplicates=True)
@@ -235,15 +241,13 @@ class EpubSplitPlugin(InterfaceAction):
             #print("5:%s"%(time.time()-self.t))
             self.t = time.time()
             
-            confirm(u'''
-The book for the new Split EPUB has been created and default metadata filled in.
+            confirm('\n'+_('''The book for the new Split EPUB has been created and default metadata filled in.
 
 However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows.
 
 You can fill in the metadata yourself, or use download metadata for known books.
 
-If you download or add a cover image, it will be included in the generated EPUB.
-''',
+If you download or add a cover image, it will be included in the generated EPUB.''')+'\n',
                     'epubsplit_created_now_edit_again',
                     self.gui)
             
@@ -253,7 +257,7 @@ If you download or add a cover image, it will be included in the generated EPUB.
             self.t = time.time()
             self.gui.tags_view.recount()
 
-            self.gui.status_bar.show_message('Splitting off from EPUB...', 60000)
+            self.gui.status_bar.show_message(_('Splitting off from EPUB...'), 60000)
 
             mi = db.get_metadata(book_id,index_is_id=True)
             
@@ -283,7 +287,7 @@ If you download or add a cover image, it will be included in the generated EPUB.
             #print("7:%s"%(time.time()-self.t))
             self.t = time.time()
             
-            self.gui.status_bar.show_message('Finished splitting off EPUB.', 3000)
+            self.gui.status_bar.show_message(_('Finished splitting off EPUB.'), 3000)
             self.gui.library_view.model().refresh_ids([book_id])
             self.gui.tags_view.recount()
             current = self.gui.library_view.currentIndex()

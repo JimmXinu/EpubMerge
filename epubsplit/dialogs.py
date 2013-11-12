@@ -23,6 +23,12 @@ from calibre.ebooks.metadata import fmt_sidx
 from calibre import confirm_config_name
 from calibre.gui2 import dynamic
 
+# pulls in translation files for _() strings
+try:
+    load_translations()
+except NameError:
+    pass # load_translations() added in calibre 1.9
+
 from calibre_plugins.epubsplit.common_utils \
     import (ReadOnlyTableWidgetItem, SizePersistedDialog,
             ImageTitleLayout, get_icon)
@@ -52,10 +58,10 @@ class SelectLinesDialog(SizePersistedDialog):
         options_layout = QHBoxLayout()
         
         button_box = QDialogButtonBox(self)
-        new_book = button_box.addButton("New Book", button_box.ActionRole)
+        new_book = button_box.addButton(_("New Book"), button_box.ActionRole)
         new_book.clicked.connect(self.new_book)        
         
-        button_box.addButton("Done", button_box.RejectRole)
+        button_box.addButton(_("Done"), button_box.RejectRole)
         button_box.rejected.connect(self.reject)
         options_layout.addWidget(button_box)
       
@@ -81,7 +87,7 @@ class LinesTableWidget(QTableWidget):
         self.clear()
         self.setAlternatingRowColors(True)
         self.setRowCount(len(lines))
-        header_labels = ['HREF', 'Guide', 'Table of Contents'] #, 'extra'
+        header_labels = [_('HREF'), _('Guide'), _('Table of Contents')] #, 'extra'
         self.setColumnCount(len(header_labels))
         self.setHorizontalHeaderLabels(header_labels)
         self.horizontalHeader().setStretchLastSection(True)
@@ -118,15 +124,15 @@ class LinesTableWidget(QTableWidget):
         else:
             guide = ""
         guide_cell = ReadOnlyTableWidgetItem(guide)
-        guide_cell.setToolTip("Indicates 'special' pages: copyright, titlepage, etc.")
+        guide_cell.setToolTip(_("Indicates 'special' pages: copyright, titlepage, etc."))
         self.setItem(row, 1, guide_cell)
 
         toc_str = "|".join(line['toc'])
         toc_cell = QTableWidgetItem(toc_str)
         toc_cell.setData(Qt.UserRole, QVariant(toc_str))
-        toc_cell.setToolTip('''Click and copy hotkey to copy text.
+        toc_cell.setToolTip(_('''Click and copy hotkey to copy text.
 Double-click to edit ToC entry.
-Pipes(|) divide different ToC entries to the same place.''')
+Pipes(|) divide different ToC entries to the same place.'''))
         self.setItem(row, 2, toc_cell)
       
     def get_selected_linenums_tocs(self):

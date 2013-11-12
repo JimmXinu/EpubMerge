@@ -14,7 +14,7 @@ from makezip import createZipFile
 if __name__=="__main__":
     
     filename="SmartEject.zip"
-    exclude=['*.pyc','*~','*.xcf','makezip.py','makeplugin.py','*.po','*.pot','*.notes']
+    exclude=['*.pyc','*~','*.xcf','makezip.py','makeplugin.py','*.po','*.pot','*.notes','*default.mo']
     # from top dir. 'w' for overwrite
     #from calibre-plugin dir. 'a' for append
     files=['translations',]
