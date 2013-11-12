@@ -11,6 +11,12 @@ __docformat__ = 'restructuredtext en'
 # The class that all Interface Action plugin wrappers must inherit from
 from calibre.customize import InterfaceActionBase
 
+# pulls in translation files for _() strings
+try:
+    load_translations()
+except NameError:
+    pass # load_translations() added in calibre 1.9
+
 ## Apparently the name for this class doesn't matter.
 class EpubMergeBase(InterfaceActionBase):
     '''
@@ -23,7 +29,7 @@ class EpubMergeBase(InterfaceActionBase):
     calibre utilities to run without needing to load the GUI libraries.
     '''
     name                = 'EpubMerge'
-    description         = 'UI plugin to concatenate multiple epubs into one.'
+    description         = _('UI plugin to concatenate multiple epubs into one.')
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'Jim Miller'
     version             = (1, 3, 6)

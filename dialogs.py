@@ -23,6 +23,12 @@ from calibre.ebooks.metadata import fmt_sidx
 from calibre import confirm_config_name
 from calibre.gui2 import dynamic
 
+# pulls in translation files for _() strings
+try:
+    load_translations()
+except NameError:
+    pass # load_translations() added in calibre 1.9
+
 from calibre_plugins.epubmerge.common_utils \
     import (ReadOnlyTableWidgetItem, SizePersistedDialog,
             ImageTitleLayout, get_icon)
@@ -36,9 +42,9 @@ class LoopProgressDialog(QProgressDialog):
                  book_list,
                  foreach_function,
                  finish_function,
-                 init_label="Starting...",
-                 win_title="Working",
-                 status_prefix="Completed so far"):
+                 init_label=_("Starting..."),
+                 win_title=_("Working"),
+                 status_prefix=_("Completed so far")):
         QProgressDialog.__init__(self,
                                  init_label,
                                  QString(), 0, len(book_list), gui)
@@ -85,7 +91,7 @@ class LoopProgressDialog(QProgressDialog):
 
     def do_when_finished(self):
         # Queues a job to process these books in the background.
-        self.setLabelText("Starting Merge...")
+        self.setLabelText(_("Starting Merge..."))
         self.setValue(self.i+1)
 
         self.finish_function(self.book_list)
@@ -143,17 +149,17 @@ class OrderEPUBsDialog(SizePersistedDialog):
         spacerItem = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         button_layout.addItem(spacerItem)
         self.move_up_button = QtGui.QToolButton(self)
-        self.move_up_button.setToolTip('Move selected books up the list')
+        self.move_up_button.setToolTip(_('Move selected books up the list'))
         self.move_up_button.setIcon(QIcon(I('arrow-up.png')))
         self.move_up_button.clicked.connect(self.books_table.move_rows_up)
         button_layout.addWidget(self.move_up_button)
         self.remove_button = QtGui.QToolButton(self)
-        self.remove_button.setToolTip('Remove selected books from the list')
+        self.remove_button.setToolTip(_('Remove selected books from the list'))
         self.remove_button.setIcon(get_icon('list_remove.png'))
         self.remove_button.clicked.connect(self.remove_from_list)
         button_layout.addWidget(self.remove_button)
         self.move_down_button = QtGui.QToolButton(self)
-        self.move_down_button.setToolTip('Move selected books down the list')
+        self.move_down_button.setToolTip(_('Move selected books down the list'))
         self.move_down_button.setIcon(QIcon(I('arrow-down.png')))
         self.move_down_button.clicked.connect(self.books_table.move_rows_down)
         button_layout.addWidget(self.move_down_button)
@@ -192,7 +198,7 @@ class StoryListTableWidget(QTableWidget):
         self.clear()
         self.setAlternatingRowColors(True)
         self.setRowCount(len(books))
-        header_labels = ['Title', 'Author(s)', 'Series']
+        header_labels = [_('Title'), _('Author(s)'), _('Series')]
         self.setColumnCount(len(header_labels))
         self.setHorizontalHeaderLabels(header_labels)
         self.horizontalHeader().setStretchLastSection(True)
@@ -244,9 +250,9 @@ class StoryListTableWidget(QTableWidget):
         rows = self.selectionModel().selectedRows()
         if len(rows) == 0:
             return
-        message = '<p>Are you sure you want to remove this book from the list?'
+        message = '<p>'+_('Are you sure you want to remove this book from the list?')
         if len(rows) > 1:
-            message = '<p>Are you sure you want to remove the selected %d books from the list?'%len(rows)
+            message = '<p>'+_('Are you sure you want to remove the selected %d books from the list?')%len(rows)
         if not confirm(message,'epubmerge_delete_item_again', self):
             return
         first_sel_row = self.currentRow()
@@ -328,14 +334,14 @@ class AddOverDiscardDialog(QDialog):
         layout.addWidget(label)
 
         button_box = QDialogButtonBox(self)
-        button = button_box.addButton("Add", button_box.AcceptRole)
+        button = button_box.addButton(_("Add"), button_box.AcceptRole)
         button.clicked.connect(self.add)
 
         if over:
-            button = button_box.addButton("Overwrite", button_box.AcceptRole)
+            button = button_box.addButton(_("Overwrite"), button_box.AcceptRole)
             button.clicked.connect(self.over)
 
-        button = button_box.addButton("Discard", button_box.AcceptRole)
+        button = button_box.addButton(_("Discard"), button_box.AcceptRole)
         button.clicked.connect(self.discard)
         button_box.accepted.connect(self.accept)
 

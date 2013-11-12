@@ -27,6 +27,12 @@ from calibre.constants import config_dir as calibre_config_dir
 # The class that all interface action plugins must inherit from
 from calibre.gui2.actions import InterfaceAction
 
+# pulls in translation files for _() strings
+try:
+    load_translations()
+except NameError:
+    pass # load_translations() added in calibre 1.9
+
 from calibre_plugins.epubmerge.common_utils import (set_plugin_icon_resources, get_icon, create_menu_action_unique )
 
 from calibre_plugins.epubmerge.config import (prefs, permitted_values)
@@ -49,8 +55,8 @@ class EpubMergePlugin(InterfaceAction):
     # keyboard shortcuts, so try to use an unusual/unused shortcut.
     # (text, icon_path, tooltip, keyboard shortcut)
     # icon_path isn't in the zip--icon loaded below.
-    action_spec = (name, None,
-                   'Merge multiple EPUBs into one in a new book.', ())
+    action_spec = (_('EpubMerge'), None,
+                   _('Merge multiple EPUBs into one in a new book.'), ())
     # None for keyboard shortcut doesn't allow shortcut.  () does, there just isn't one yet
 
     action_type = 'global'
@@ -67,13 +73,13 @@ class EpubMergePlugin(InterfaceAction):
 
         # This method is called once per plugin, do initial setup here
 
+        base = self.interface_action_base_plugin
+        self.version = base.name+" v%d.%d.%d"%base.version
+
         # Read the plugin icons and store for potential sharing with the config widget
         icon_resources = self.load_resources(PLUGIN_ICONS)
         set_plugin_icon_resources(self.name, icon_resources)
         
-        base = self.interface_action_base_plugin
-        self.version = base.name+" v%d.%d.%d"%base.version
-
         # Set the icon for this interface action
         # The get_icons function is a builtin function defined for all your
         # plugin code. It loads icons from the plugin zip file. It returns
@@ -122,11 +128,11 @@ class EpubMergePlugin(InterfaceAction):
             self.actions_unique_map = {}
             self.menu_actions = []
             
-            self.merge_action = self.create_menu_item_ex(self.menu, '&Merge Epubs', image='images/icon.png',
+            self.merge_action = self.create_menu_item_ex(self.menu, _('&Merge Epubs'), image='images/icon.png',
                                                          triggered=self.plugin_button )
 
             if prefs['showunmerge']:
-                self.unmerge_action = self.create_menu_item_ex(self.menu, '&UnMerge Epub', image='images/unmerge.png',
+                self.unmerge_action = self.create_menu_item_ex(self.menu, _('&UnMerge Epub'), image='images/unmerge.png',
                                                                triggered=self.unmerge )
 
 
@@ -134,10 +140,10 @@ class EpubMergePlugin(InterfaceAction):
             # print("platform.mac_ver()[0]:%s"%platform.mac_ver()[0])
             if not self.check_macmenuhack(): # not platform.mac_ver()[0]: # Some macs crash on these menu items for unknown reasons.
                 self.menu.addSeparator()
-                self.config_action = self.create_menu_item_ex(self.menu, '&Configure Plugin',
+                self.config_action = self.create_menu_item_ex(self.menu, _('&Configure Plugin'),
                                                               image= 'config.png',
-                                                              unique_name='Configure EpubMerge',
-                                                              shortcut_name='Configure EpubMerge',
+                                                              unique_name=_('Configure EpubMerge'),
+                                                              shortcut_name=_('Configure EpubMerge'),
                                                               triggered=partial(do_user_config,parent=self.gui))
             
             
@@ -226,10 +232,10 @@ class EpubMergePlugin(InterfaceAction):
                 identicalbooks = db.find_identical_books(mi)
                 if identicalbooks:
                     if len(identicalbooks) == 1:
-                        text = "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, Overwrite the Epub in the existing book, or Discard this Epub."%(mi.title,", ".join(mi.authors))
+                        text = _("You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, Overwrite the Epub in the existing book, or Discard this Epub.")%(mi.title,", ".join(mi.authors))
                         over=True
                     else:
-                        text = "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, or Discard this Epub."%(mi.title,", ".join(mi.authors))
+                        text = ("You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, or Discard this Epub.")%(mi.title,", ".join(mi.authors))
                         over=False
                     d = AddOverDiscardDialog(self.gui,self.qaction.icon(),text,over=over)
                     d.exec_()
@@ -279,9 +285,9 @@ class EpubMergePlugin(InterfaceAction):
                                book_list,
                                partial(self._populate_book_from_calibre_id, db=self.gui.current_db),
                                self._start_merge,
-                               init_label="Collecting EPUBs for merger...",
-                               win_title="Get EPUBs for merg",
-                               status_prefix="EPUBs collected")
+                               init_label=_("Collecting EPUBs for merger..."),
+                               win_title=_("Get EPUBs for merge"),
+                               status_prefix=_("EPUBs collected"))
                 
     def _start_merge(self,book_list):
         db=self.gui.current_db
@@ -290,13 +296,13 @@ class EpubMergePlugin(InterfaceAction):
         bad_list = filter(lambda x : not x['good'], book_list)
         if len(bad_list) > 0:
             d = error_dialog(self.gui,
-                             'Cannot Merge Epubs',
-                             '%s books failed.'%len(bad_list),
+                             _('Cannot Merge Epubs'),
+                             _('%s books failed.')%len(bad_list),
                              det_msg='\n'.join(map(lambda x : x['comment'] , bad_list)))
             d.exec_()
         else:
             d = OrderEPUBsDialog(self.gui,
-                                 'Order EPUBs to Merge',
+                                 _('Order EPUBs to Merge'),
                                  prefs,
                                  self.qaction.icon(),
                                  book_list,
@@ -350,8 +356,8 @@ class EpubMergePlugin(InterfaceAction):
 
             mi.series = ''
 
-            mi.comments = "%s containing:\n\n" % prefs['mergeword'] + \
-                '\n'.join(map(lambda x : "%s by %s" % \
+            mi.comments = (_("%s containing:")+"\n\n") % prefs['mergeword'] + \
+                '\n'.join(map(lambda x : _("%s by %s") % \
                                   (x['title'],' & '.join(x['authors'])), book_list))
             
 
@@ -509,11 +515,9 @@ class EpubMergePlugin(InterfaceAction):
             print("5:%s"%(time.time()-self.t))
             self.t = time.time()
             
-            confirm(u'''
-The book for the new Merged EPUB has been created and default metadata filled in.
+            confirm('\n'+_('''The book for the new Merged EPUB has been created and default metadata filled in.
 
-However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows.
-''',
+However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows.'''),
                     'epubmerge_created_now_edit_again',
                     self.gui)
             
@@ -527,13 +531,11 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
 
             print("merging %s EPUBs totaling %s"%(len(book_list),gethumanreadable(totalsize)))
             if len(book_list) > 100 or totalsize > 5*1024*1024:
-                confirm(u'''
-You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is finished.
-'''%(len(book_list),gethumanreadable(totalsize)),
+                confirm('\n'+_('''You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is finished.''')%(len(book_list),gethumanreadable(totalsize)),
                         'epubmerge_edited_now_merge_again',
                         self.gui)
             
-            self.gui.status_bar.show_message('Merging %s EPUBs...'%len(book_list), 60000)
+            self.gui.status_bar.show_message(_('Merging %s EPUBs...')%len(book_list), 60000)
 
             mi = db.get_metadata(book_id,index_is_id=True)
             
@@ -559,7 +561,7 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
                            keepmetadatafiles=prefs['keepmeta'] )
                  
             print("6:%s"%(time.time()-self.t))
-            print("Merge finished, output in:\n%s"%mergedepub.name)
+            print(_("Merge finished, output in:\n%s")%mergedepub.name)
             self.t = time.time()
             db.add_format_with_hooks(book_id,
                                      'EPUB',
@@ -568,7 +570,7 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
             print("7:%s"%(time.time()-self.t))
             self.t = time.time()
             
-            self.gui.status_bar.show_message('Finished merging %s EPUBs.'%len(book_list), 3000)
+            self.gui.status_bar.show_message(_('Finished merging %s EPUBs.')%len(book_list), 3000)
             self.gui.library_view.model().refresh_ids([book_id])
             self.gui.tags_view.recount()
             current = self.gui.library_view.currentIndex()
@@ -583,9 +585,9 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
         book = {}
         book['good'] = good
         book['calibre_id'] = idval
-        book['title'] = 'Unknown'
-        book['author'] = 'Unknown'
-        book['author_sort'] = 'Unknown'
+        book['title'] = _('Unknown')
+        book['author'] = _('Unknown')
+        book['author_sort'] = _('Unknown')
         book['comment'] = ''
       
         return book
@@ -613,7 +615,7 @@ You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is 
             book['epub_size'] = len(book['epub'].getvalue())
         else:
             book['good'] = False;
-            book['comment'] = "%s by %s doesn't have an EPUB."%(mi.title,', '.join(mi.authors))
+            book['comment'] = _("%s by %s doesn't have an EPUB.")%(mi.title,', '.join(mi.authors))
 
 def gethumanreadable(size,precision=1):
     suffixes=['B','KB','MB','GB','TB']
