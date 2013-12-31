@@ -32,7 +32,7 @@ class EpubMergeBase(InterfaceActionBase):
     description         = _('UI plugin to concatenate multiple epubs into one.')
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'Jim Miller'
-    version             = (1, 3, 6)
+    version             = (1, 3, 7)
     minimum_calibre_version = (0, 8, 57)
 
     #: This field defines the GUI plugin class that contains all the code
