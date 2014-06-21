@@ -901,7 +901,7 @@ class SplitEpub:
                                                'href':linked,
                                                'media-type':type}))
 
-        contentxml = contentdom.toxml('utf-8')        
+        contentxml = contentdom.toprettyxml(indent='   ',encoding='utf-8')
         # tweak for brain damaged Nook STR.  Nook insists on name before content.
         contentxml = contentxml.replace('<meta content="coverimageid" name="cover"/>',
                                         '<meta name="cover" content="coverimageid"/>')
@@ -960,7 +960,7 @@ class SplitEpub:
                     newnav.appendChild(newTag(tocncxdom,"content",
                                               {"src":src}))
 
-        outputepub.writestr("toc.ncx",tocncxdom.toxml('utf-8'))
+        outputepub.writestr("toc.ncx",tocncxdom.toprettyxml(indent='   ',encoding='utf-8'))
         
         if coverjpgpath:
             # write, not write string.  Pulling from file.

@@ -568,12 +568,12 @@ def doMerge(outputio,
 
     ## content.opf written now due to description being filled in
     ## during TOC generation to save loops.
-    contentxml = contentdom.toxml('utf-8')        
+    contentxml = contentdom.toprettyxml(indent='   ',encoding='utf-8')        
     # tweak for brain damaged Nook STR.  Nook insists on name before content.
     contentxml = contentxml.replace('<meta content="coverimageid" name="cover"/>',
                                     '<meta name="cover" content="coverimageid"/>')
     outputepub.writestr("content.opf",contentxml)
-    outputepub.writestr("toc.ncx",tocncxdom.toxml('utf-8'))
+    outputepub.writestr("toc.ncx",tocncxdom.toprettyxml(indent='   ',encoding='utf-8'))
 
     printt("wrote opf/ncx files:%s"%(time()-t))
     t = time()
