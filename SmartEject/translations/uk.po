@@ -1,0 +1,189 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+#
+# Translators:
+# Yuri Chornoivan <yurchor@ukr.net>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: calibre-plugins\n"
+"POT-Creation-Date: 2013-11-15 14:56+Central Standard Time\n"
+"PO-Revision-Date: 2014-07-02 19:14-0600\n"
+"Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
+"Language-Team: Ukrainian (http://www.transifex.com/projects/p/calibre-"
+"plugins/language/uk/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"Language: uk\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: __init__.py:32
+msgid ""
+"UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices."
+msgstr ""
+"Додаток для синхронізації даних щодо дублікатів та списку книг під час "
+"вилучення пристроїв зберігання даних у системі."
+
+#: config.py:103
+msgid "Basic"
+msgstr "Основні"
+
+#: config.py:106
+msgid "Searches"
+msgstr "Пошуки"
+
+#: config.py:136
+msgid "When Ejecting a Device, Check for:"
+msgstr "Під час вилучення пристрою перевіряти:"
+
+#: config.py:150
+msgid "Reading List books to Sync"
+msgstr "Синхронізацію списку прочитаного"
+
+#: config.py:151
+msgid ""
+"Check Reading List plugin for books ready to Sync to the current device."
+msgstr ""
+"Перевіряти за допомогою додатка списку читання, чи є книги, позначку читання "
+"яких не синхронізовано з пристроєм."
+
+#: config.py:157
+msgid "Duplicated Books"
+msgstr "Дублікати книг"
+
+#: config.py:158
+msgid "Check for books that are on the device more than once."
+msgstr "Перевіряти, чи немає на пристрої дублікатів книг."
+
+#: config.py:162
+msgid "Deleted Books (not in Library)"
+msgstr "Вилучені книги, яких немає у бібліотеці"
+
+#: config.py:163
+msgid "Check for books on the device that are not in the current library."
+msgstr "Перевірити, чи є на пристрої книги, яких немає у поточній бібліотеці."
+
+#: config.py:167
+msgid "Added Books (not on Device)"
+msgstr "Додані книги, яких немає на пристрої"
+
+#: config.py:168
+msgid "Check for books in the current library that are not on the device."
+msgstr "Перевіряти, чи є у поточній бібліотеці книги, яких немає на пристрої."
+
+#: config.py:176
+msgid ""
+"These controls aren't plugin settings as such, but convenience buttons for "
+"setting Keyboard shortcuts and viewing all plugins settings."
+msgstr ""
+"Ці елементи керування не визначають параметрів додатка, а є лише зручними "
+"кнопками для визначення клавіатурних скорочень і перегляду усіх параметрів "
+"додатків."
+
+#: config.py:181
+msgid "Keyboard shortcuts..."
+msgstr "Клавіатурні скорочення…"
+
+#: config.py:182
+msgid "Edit the keyboard shortcuts associated with this plugin"
+msgstr "Редагувати клавіатурні скорочення, пов’язані із роботою цього додатка."
+
+#: config.py:186
+msgid "&View library preferences..."
+msgstr "П&ереглянути налаштування бібліотеки…"
+
+#: config.py:187
+msgid "View data stored in the library database for this plugin"
+msgstr "Переглянути дані, збережені у базі даних бібліотеки для цього додатка"
+
+#: config.py:200
+msgid "Done"
+msgstr "Виконано"
+
+#: config.py:201
+msgid "Confirmation dialogs have all been reset"
+msgstr "Показ діалогових вікон підтвердження відновлено"
+
+#: config.py:215
+msgid "Searches to use for:"
+msgstr "Критерії пошуку:"
+
+#: config.py:230
+msgid "Search for Duplicated Books:"
+msgstr "Пошук дублікатів книг:"
+
+#: config.py:234 config.py:241 config.py:248
+msgid "Default is %s"
+msgstr "Типовим є %s"
+
+#: config.py:237
+msgid "Deleted Books (not in Library):"
+msgstr "Вилучені книги, яких немає у бібліотеці:"
+
+#: config.py:244
+msgid "Added Books (not on Device):"
+msgstr "Додані книги, яких немає на пристрої:"
+
+#: config.py:254
+msgid "Restore Defaults"
+msgstr "Відновити типові параметри"
+
+#: config.py:255
+msgid "Revert all searches to the defaults."
+msgstr "Відновити типові параметри усіх пошуків."
+
+#: smarteject_plugin.py:34 smarteject_plugin.py:67
+msgid "SmartEject"
+msgstr "SmartEject"
+
+#: smarteject_plugin.py:35
+msgid "Check for duplicated/deleted/added books before ejecting."
+msgstr ""
+"Виконує перевірки наявності дублікатів, вилучених і доданих книг до "
+"вилучення пристрою у системі."
+
+#: smarteject_plugin.py:86
+msgid "Sync Reading List?"
+msgstr "Синхронізувати список прочитаного?"
+
+#: smarteject_plugin.py:86
+msgid ""
+"There are books that need syncing according to Reading List.<p>Sync Books?"
+msgstr ""
+"Виявлено книги, дані щодо відсотку прочитаного у яких не синхронізовано."
+"<p>Синхронізувати дані?"
+
+#: smarteject_plugin.py:93
+msgid "Duplicates on Device"
+msgstr "Дублікати на пристрої"
+
+#: smarteject_plugin.py:93
+msgid "There are duplicate ebooks on the device.<p>Display duplicates?"
+msgstr "На пристрої виявлено дублікати книг.<p>Показати список дублікатів?"
+
+#: smarteject_plugin.py:114
+msgid "Books in Library not on Device"
+msgstr "Книги у бібліотеці, яких немає на пристрої"
+
+#: smarteject_plugin.py:115
+msgid ""
+"There are books in the Library that are not on the Device.<p>Display books "
+"not on Device?"
+msgstr ""
+"У бібліотеці є книги, яких немає на пристрої.<p>Показати список книг, яких "
+"немає на пристрої?"
+
+#: smarteject_plugin.py:138
+msgid "Books on Device not in Library"
+msgstr "Книги на пристрої, яких немає у бібліотеці"
+
+#: smarteject_plugin.py:138
+msgid ""
+"There are books on the device in %s that are not in the Library.<p>Display "
+"books not in Library?"
+msgstr ""
+"На пристрої у %s є книги, яких немає у бібліотеці.<p>Показати список книг, "
+"яких немає у бібліотеці?"
