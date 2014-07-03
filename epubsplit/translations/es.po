@@ -2,11 +2,12 @@
 # Copyright (C) YEAR ORGANIZATION
 #
 # Translators:
+# Adolfo Jayme Barrientos <fitoschido@ubuntu.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2013-11-11 22:12+Central Standard Time\n"
-"PO-Revision-Date: 2014-06-20 20:22-0600\n"
+"PO-Revision-Date: 2014-07-02 19:24-0600\n"
 "Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/calibre-plugins/"
 "language/es/)\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: __init__.py:32
 msgid "UI plugin to split off parts of an epub into a new book."
-msgstr "Plugin de usuario para dividir por partes un epub en un nuevo libro."
+msgstr "Complemento para dividir partes de un archivo EPUB en un libro nuevo."
 
 #: config.py:140
 msgid "Basic"
@@ -221,7 +222,7 @@ msgstr "Plantilla del libro origen. Ejemplo: {title} por {authors}"
 
 #: dialogs.py:61
 msgid "New Book"
-msgstr "Nuevo libro"
+msgstr "Libro nuevo"
 
 #: dialogs.py:90
 msgid "Guide"
@@ -264,7 +265,7 @@ msgstr "Seleccione un libro"
 
 #: epubsplit_plugin.py:109
 msgid "Please select exactly one book to split."
-msgstr "Por favor, seleccione exactamente un libro para dividir."
+msgstr "Seleccione solo un libro que dividir."
 
 #: epubsplit_plugin.py:126
 msgid "No EPUB"
@@ -272,7 +273,7 @@ msgstr "No es EPUB"
 
 #: epubsplit_plugin.py:127
 msgid "This plugin only works on EPUB format ebooks."
-msgstr "Este plugin solo funciona con libros en formato EPUB."
+msgstr "Este complemento funciona solo con libros en el formato EPUB"
 
 #: epubsplit_plugin.py:138
 msgid "Select Sections to Split Off"
