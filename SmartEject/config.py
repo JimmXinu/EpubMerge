@@ -4,13 +4,17 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2012, Jim Miller'
+__copyright__ = '2014, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import traceback, copy
 
-from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
-                      QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QVariant, QScrollArea)
+try:
+    from PyQt5.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
+                          QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QScrollArea)
+except ImportError as e:
+    from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
+                          QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QScrollArea)
 
 from calibre.gui2 import dynamic, info_dialog
 from calibre.gui2.ui import get_gui
