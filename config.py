@@ -4,13 +4,17 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2012, Jim Miller'
+__copyright__ = '2014, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import traceback, copy
 
-from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
-                      QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QVariant, QScrollArea)
+try:
+    from PyQt5.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
+                          QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QScrollArea)
+except ImportError as e:    
+    from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
+                          QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QScrollArea)
 
 from calibre.gui2 import dynamic, info_dialog
 from calibre.utils.config import JSONConfig
@@ -321,17 +325,17 @@ class CustomColumnsTab(QWidget):
                 grid.addWidget(label,row,0)
 
                 dropdown = QComboBox(self)
-                dropdown.addItem('',QVariant('none'))
+                dropdown.addItem('','none')
                 for md in permitted_values[column['datatype']]:
                     # tags-like column also 'text'
                     if md == 'union' and not column['is_multiple']:
                         continue
                     if md == 'concat' and column['is_multiple']:
                         continue
-                    dropdown.addItem(titleLabels[md],QVariant(md))
+                    dropdown.addItem(titleLabels[md],md)
                 self.custcol_dropdowns[key] = dropdown
                 if key in prefs['custom_cols']:
-                    dropdown.setCurrentIndex(dropdown.findData(QVariant(prefs['custom_cols'][key])))
+                    dropdown.setCurrentIndex(dropdown.findData(prefs['custom_cols'][key]))
                 dropdown.setToolTip(_("How this column will be populated by default."))
                 grid.addWidget(dropdown,row,1)
                 row+=1

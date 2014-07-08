@@ -4,18 +4,41 @@ from __future__ import (unicode_literals, division,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2012, Jim Miller'
+__copyright__ = '2014, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import traceback
 from functools import partial
+try:
+    from PyQt5 import QtWidgets as QtGui
+    from PyQt5.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,
+                          QPushButton, QProgressDialog, QLabel, QCheckBox, QIcon, QTextCursor,
+                          QTextEdit, QLineEdit, QInputDialog, QComboBox, QClipboard, QVariant,
+                          QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView )
+except ImportError as e:
+    from PyQt4 import QtGui
+    from PyQt4.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,
+                          QPushButton, QProgressDialog, QString, QLabel, QCheckBox, QIcon, QTextCursor,
+                          QTextEdit, QLineEdit, QInputDialog, QComboBox, QClipboard, QVariant,
+                          QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView )
 
-from PyQt4 import QtGui
-from PyQt4.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,
-                      QPushButton, QProgressDialog, QString, QLabel, QCheckBox, QIcon, QTextCursor,
-                      QTextEdit, QLineEdit, QInputDialog, QComboBox, QClipboard, QVariant,
-                      QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView, SIGNAL )
+try:
+    from calibre.gui2 import QVariant
+    del QVariant
+except ImportError:
+    is_qt4 = False
+    convert_qvariant = lambda x: x
+else:
+    is_qt4 = True
 
+    def convert_qvariant(x):
+        vt = x.type()
+        if vt == x.String:
+            return unicode(x.toString())
+        if vt == x.List:
+            return [convert_qvariant(i) for i in x.toList()]
+        return x.toPyObject()
+    
 from calibre.gui2 import error_dialog, warning_dialog, question_dialog, info_dialog
 from calibre.gui2.dialogs.confirm_delete import confirm
 from calibre.ebooks.metadata import fmt_sidx
@@ -47,7 +70,7 @@ class LoopProgressDialog(QProgressDialog):
                  status_prefix=_("Completed so far")):
         QProgressDialog.__init__(self,
                                  init_label,
-                                 QString(), 0, len(book_list), gui)
+                                 u'', 0, len(book_list), gui)
         self.setWindowTitle(win_title)
         self.setMinimumWidth(500)
         self.gui = gui
@@ -205,10 +228,7 @@ class StoryListTableWidget(QTableWidget):
         #self.verticalHeader().setDefaultSectionSize(24)
         self.verticalHeader().hide()
 
-        # need sortingEnbled to sort, but off to up & down.
-        self.connect(self.horizontalHeader(),
-                     SIGNAL('sectionClicked(int)'),
-                     self.on_headersection_clicked)
+        self.horizontalHeader().sectionClicked.connect(self.on_headersection_clicked)
 
         self.books={}
         for row, book in enumerate(books):
@@ -228,7 +248,7 @@ class StoryListTableWidget(QTableWidget):
     def populate_table_row(self, row, book):
 
         title_cell = ReadOnlyTableWidgetItem(book['title'])
-        title_cell.setData(Qt.UserRole, QVariant(row))
+        title_cell.setData(Qt.UserRole, row)
         self.setItem(row, 0, title_cell)
 
         self.setItem(row, 1, AuthorTableWidgetItem(' & '.join(book['authors']),
@@ -240,7 +260,7 @@ class StoryListTableWidget(QTableWidget):
     def get_books(self):
         books = []
         for row in range(self.rowCount()):
-            rnum = self.item(row, 0).data(Qt.UserRole).toPyObject()
+            rnum = convert_qvariant(self.item(row, 0).data(Qt.UserRole))
             book = self.books[rnum]
             books.append(book)
         return books
