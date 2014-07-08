@@ -4,13 +4,17 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2012, Jim Miller'
+__copyright__ = '2014, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import traceback, copy
 
-from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
-                      QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QVariant, QScrollArea)
+try:
+    from PyQt5.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
+                          QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QScrollArea)
+except ImportError as e:    
+    from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
+                          QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QScrollArea)
 
 from calibre.gui2 import dynamic, info_dialog
 from calibre.utils.config import JSONConfig
@@ -345,11 +349,11 @@ class CustomColumnsTab(QWidget):
         horz = QHBoxLayout()
         self.sourcecol = QComboBox(self)
         self.sourcecol.setToolTip(_("Choose a column to populate with template on split."))
-        self.sourcecol.addItem('',QVariant('none'))
+        self.sourcecol.addItem('','none')
         for key, column in custom_columns.iteritems():
             if column['datatype'] in ('text','comments'):
-                self.sourcecol.addItem(column['name'],QVariant(key))
-        self.sourcecol.setCurrentIndex(self.sourcecol.findData(QVariant(prefs['sourcecol'])))
+                self.sourcecol.addItem(column['name'],key)
+        self.sourcecol.setCurrentIndex(self.sourcecol.findData(prefs['sourcecol']))
         horz.addWidget(self.sourcecol)
         
         self.sourcetemplate = QLineEdit(self)

@@ -4,18 +4,42 @@ from __future__ import (unicode_literals, division,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2012, Jim Miller'
+__copyright__ = '2014, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import traceback
 from functools import partial
 
-from PyQt4 import QtGui
-from PyQt4.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,
-                      QPushButton, QProgressDialog, QString, QLabel, QCheckBox, QIcon, QTextCursor,
-                      QTextEdit, QLineEdit, QInputDialog, QComboBox, QClipboard, QVariant,
-                      QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView, SIGNAL, QTableWidgetItem )
+try:
+    from PyQt5 import QtWidgets as QtGui
+    from PyQt5.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,
+                          QPushButton, QProgressDialog, QLabel, QCheckBox, QIcon, QTextCursor,
+                          QTextEdit, QLineEdit, QInputDialog, QComboBox, QClipboard, 
+                          QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView, QTableWidgetItem )
+except ImportError as e:
+    from PyQt4 import QtGui
+    from PyQt4.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,
+                          QPushButton, QProgressDialog, QLabel, QCheckBox, QIcon, QTextCursor,
+                          QTextEdit, QLineEdit, QInputDialog, QComboBox, QClipboard,
+                          QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView, QTableWidgetItem )
 
+try:
+    from calibre.gui2 import QVariant
+    del QVariant
+except ImportError:
+    is_qt4 = False
+    convert_qvariant = lambda x: x
+else:
+    is_qt4 = True
+
+    def convert_qvariant(x):
+        vt = x.type()
+        if vt == x.String:
+            return unicode(x.toString())
+        if vt == x.List:
+            return [convert_qvariant(i) for i in x.toList()]
+        return x.toPyObject()
+    
 from calibre.gui2 import error_dialog, warning_dialog, question_dialog, info_dialog
 from calibre.gui2.dialogs.confirm_delete import confirm
 from calibre.ebooks.metadata import fmt_sidx
@@ -116,7 +140,7 @@ class LinesTableWidget(QTableWidget):
             
         href_cell = ReadOnlyTableWidgetItem(href)
         href_cell.setToolTip(line['sample'])
-        href_cell.setData(Qt.UserRole, QVariant(line['num']))
+        href_cell.setData(Qt.UserRole, line['num'])
         self.setItem(row, 0, href_cell)
 
         if 'guide' in line:
@@ -129,7 +153,7 @@ class LinesTableWidget(QTableWidget):
 
         toc_str = "|".join(line['toc'])
         toc_cell = QTableWidgetItem(toc_str)
-        toc_cell.setData(Qt.UserRole, QVariant(toc_str))
+        toc_cell.setData(Qt.UserRole, toc_str)
         toc_cell.setToolTip(_('''Click and copy hotkey to copy text.
 Double-click to edit ToC entry.
 Pipes(|) divide different ToC entries to the same place.'''))
@@ -146,10 +170,10 @@ Pipes(|) divide different ToC entries to the same place.'''))
         changedtocs = {}
         
         for row in self.selectionModel().selectedRows():
-            linenum = row.data(Qt.UserRole).toPyObject()
+            linenum = convert_qvariant(row.data(Qt.UserRole))
             linenums.append(linenum)
             # changed tocs only.
-            if self.item(row.row(),2).data(Qt.UserRole).toPyObject() != self.item(row.row(),2).text():
+            if convert_qvariant(self.item(row.row(),2).data(Qt.UserRole)) != self.item(row.row(),2).text():
                 changedtocs[linenum] = unicode(self.item(row.row(),2).text()).strip().split('|')
 
         linenums.sort()

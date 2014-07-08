@@ -4,7 +4,7 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2012, Jim Miller'
+__copyright__ = '2014, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import time, os, copy, threading
@@ -13,7 +13,10 @@ from StringIO import StringIO
 from functools import partial
 from datetime import datetime
 
-from PyQt4.Qt import (QApplication, QMenu, QToolButton)
+try:
+    from PyQt5.Qt import (QApplication, QMenu, QToolButton)
+except ImportError as e:
+    from PyQt4.Qt import (QApplication, QMenu, QToolButton)
 
 from calibre.ptempfile import PersistentTemporaryFile
 from calibre.ebooks.metadata import MetaInformation, authors_to_string
