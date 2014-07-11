@@ -13,15 +13,13 @@ try:
     from PyQt5.Qt import (Qt, QIcon, QPixmap, QLabel, QDialog, QHBoxLayout,
                           QTableWidgetItem, QFont, QLineEdit, QComboBox,
                           QVBoxLayout, QDialogButtonBox, QStyledItemDelegate, QDateTime,
-                          QTextEdit,
-                          QListWidget, QAbstractItemView)
+                          QTextEdit, QListWidget, QAbstractItemView)
 except ImportError as e:
     from PyQt4 import QtGui
     from PyQt4.Qt import (Qt, QIcon, QPixmap, QLabel, QDialog, QHBoxLayout,
                           QTableWidgetItem, QFont, QLineEdit, QComboBox,
                           QVBoxLayout, QDialogButtonBox, QStyledItemDelegate, QDateTime,
-                          QTextEdit,
-                          QListWidget, QAbstractItemView)
+                          QTextEdit, QListWidget, QAbstractItemView)
 
 from calibre.constants import iswindows
 from calibre.gui2 import gprefs, error_dialog, UNDEFINED_QDATETIME, info_dialog

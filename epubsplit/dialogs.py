@@ -12,16 +12,12 @@ from functools import partial
 
 try:
     from PyQt5 import QtWidgets as QtGui
-    from PyQt5.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,
-                          QPushButton, QProgressDialog, QLabel, QCheckBox, QIcon, QTextCursor,
-                          QTextEdit, QLineEdit, QInputDialog, QComboBox, QClipboard, 
-                          QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView, QTableWidgetItem )
+    from PyQt5.Qt import (QTableWidget, QVBoxLayout, QHBoxLayout, 
+                          QDialogButtonBox, Qt, QAbstractItemView, QTableWidgetItem)
 except ImportError as e:
     from PyQt4 import QtGui
-    from PyQt4.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,
-                          QPushButton, QProgressDialog, QLabel, QCheckBox, QIcon, QTextCursor,
-                          QTextEdit, QLineEdit, QInputDialog, QComboBox, QClipboard,
-                          QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView, QTableWidgetItem )
+    from PyQt4.Qt import (QTableWidget, QVBoxLayout, QHBoxLayout, 
+                          QDialogButtonBox, Qt, QAbstractItemView, QTableWidgetItem)
 
 try:
     from calibre.gui2 import QVariant

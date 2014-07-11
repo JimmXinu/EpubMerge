@@ -30,7 +30,6 @@ except ImportError:
     convert_qvariant = lambda x: x
 else:
     is_qt4 = True
-
     def convert_qvariant(x):
         vt = x.type()
         if vt == x.String:
@@ -70,7 +69,7 @@ class LoopProgressDialog(QProgressDialog):
                  status_prefix=_("Completed so far")):
         QProgressDialog.__init__(self,
                                  init_label,
-                                 u'', 0, len(book_list), gui)
+                                 _('Cancel'), 0, len(book_list), gui)
         self.setWindowTitle(win_title)
         self.setMinimumWidth(500)
         self.gui = gui
