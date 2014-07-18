@@ -168,7 +168,7 @@ class ConfigWidget(QWidget):
             #print("colsmap[%s]:%s"%(col,colsmap[col]))
         prefs['custom_cols'] = colsmap
 
-        prefs['sourcecol'] = unicode(self.columns_tab.sourcecol.itemData(self.columns_tab.sourcecol.currentIndex()).toString())
+        prefs['sourcecol'] = unicode(self.columns_tab.sourcecol.itemData(self.columns_tab.sourcecol.currentIndex()))
         prefs['sourcetemplate'] = unicode(self.columns_tab.sourcetemplate.text())
         
         prefs.save_to_db()
