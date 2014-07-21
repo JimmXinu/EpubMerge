@@ -15,6 +15,21 @@ try:
 except ImportError as e:    
     from PyQt4.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
                           QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QScrollArea)
+try:
+    from calibre.gui2 import QVariant
+    del QVariant
+except ImportError:
+    is_qt4 = False
+    convert_qvariant = lambda x: x
+else:
+    is_qt4 = True
+    def convert_qvariant(x):
+        vt = x.type()
+        if vt == x.String:
+            return unicode(x.toString())
+        if vt == x.List:
+            return [convert_qvariant(i) for i in x.toList()]
+        return x.toPyObject()
 
 from calibre.gui2 import dynamic, info_dialog
 from calibre.utils.config import JSONConfig
@@ -168,7 +183,7 @@ class ConfigWidget(QWidget):
             #print("colsmap[%s]:%s"%(col,colsmap[col]))
         prefs['custom_cols'] = colsmap
 
-        prefs['sourcecol'] = unicode(self.columns_tab.sourcecol.itemData(self.columns_tab.sourcecol.currentIndex()))
+        prefs['sourcecol'] = unicode(convert_qvariant(self.columns_tab.sourcecol.itemData(self.columns_tab.sourcecol.currentIndex())))
         prefs['sourcetemplate'] = unicode(self.columns_tab.sourcetemplate.text())
         
         prefs.save_to_db()

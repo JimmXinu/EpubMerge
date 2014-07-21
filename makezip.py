@@ -18,12 +18,12 @@ def addFolderToZip(myZipFile,folder,exclude=[]):
             continue
         if os.path.isfile(file):
             #print file
-            myZipFile.write(file, file, zipfile.ZIP_DEFLATED)
+            myZipFile.write(file, file)
         elif os.path.isdir(file):
             addFolderToZip(myZipFile,file,exclude=exclude)
 
 def createZipFile(filename,mode,files,exclude=[]):
-    myZipFile = zipfile.ZipFile( filename, mode ) # Open the zip file for writing
+    myZipFile = zipfile.ZipFile( filename, mode, zipfile.ZIP_STORED ) # Open the zip file for writing
     excludelist=[]
     for ex in exclude:
         excludelist.extend(glob(ex))
@@ -34,7 +34,7 @@ def createZipFile(filename,mode,files,exclude=[]):
         if os.path.isfile(file):
             (filepath, filename) = os.path.split(file)
             #print file
-            myZipFile.write( file, filename, zipfile.ZIP_DEFLATED )
+            myZipFile.write( file, filename )
         if os.path.isdir(file):
             addFolderToZip(myZipFile,file,exclude=exclude)
     myZipFile.close()
