@@ -3,11 +3,12 @@
 #
 # Translators:
 # Adolfo Jayme Barrientos <fitoschido@ubuntu.com>, 2014
+# Jellby <jellby@yahoo.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2013-11-11 22:12+Central Standard Time\n"
-"PO-Revision-Date: 2014-07-02 19:24-0600\n"
+"POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
+"PO-Revision-Date: 2014-07-22 15:15-0600\n"
 "Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/projects/p/calibre-plugins/"
 "language/es/)\n"
@@ -23,188 +24,188 @@ msgstr ""
 msgid "UI plugin to split off parts of an epub into a new book."
 msgstr "Complemento para dividir partes de un archivo EPUB en un libro nuevo."
 
-#: config.py:140
+#: config.py:144
 msgid "Basic"
 msgstr "Básico"
 
-#: config.py:143
+#: config.py:147
 msgid "Custom Columns"
 msgstr "Columnas personalizadas"
 
-#: config.py:188
+#: config.py:192
 msgid ""
 "When making a new Epub, the metadata from the source book will be copied or "
 "not as you choose below."
 msgstr ""
 "Cuando se crea un nuevo epub, los metadatos del libro origen se copiarán o "
-"no según seleccione debajo"
+"no según seleccione debajo."
 
-#: config.py:202
+#: config.py:206
 msgid "Copy Title"
 msgstr "Copiar título"
 
-#: config.py:203
+#: config.py:207
 msgid ""
 "Copy Title from the source Epub to the Split Epub.  Adds \"Split\" to the "
 "title."
 msgstr ""
-"Copiar título del epub original al epub dividido. Añade \"Split\" al título."
+"Copiar título del epub original al epub dividido. Añade «Dividido» al título."
 
-#: config.py:207
+#: config.py:211
 msgid "Copy Authors"
 msgstr "Copiar autores"
 
-#: config.py:208
+#: config.py:212
 msgid "Copy Authors from the source Epub to the Split Epub."
 msgstr "Copiar autores del epub original al epub dividido."
 
-#: config.py:212
+#: config.py:216
 msgid "Copy Series"
 msgstr "Copiar serie"
 
-#: config.py:213
+#: config.py:217
 msgid "Copy Series from the source Epub to the Split Epub."
 msgstr "Copiar serie del epub original al epub dividido."
 
-#: config.py:217
+#: config.py:221
 msgid "Copy Cover"
 msgstr "Copiar portada"
 
-#: config.py:218
+#: config.py:222
 msgid "Copy Cover from the source Epub to the Split Epub."
 msgstr "Copiar portada del epub original al epub dividido."
 
-#: config.py:222
+#: config.py:226
 msgid "Copy Rating"
 msgstr "Copiar valoración"
 
-#: config.py:223
+#: config.py:227
 msgid "Copy Rating from the source Epub to the Split Epub."
 msgstr "Copiar valoración del epub original al epub dividido."
 
-#: config.py:227
+#: config.py:231
 msgid "Copy Tags"
 msgstr "Copiar etiquetas"
 
-#: config.py:228
+#: config.py:232
 msgid "Copy Tags from the source Epub to the Split Epub."
 msgstr "Copiar etiquetas del epub original al epub dividido."
 
-#: config.py:232
+#: config.py:236
 msgid "Copy Identifiers"
 msgstr "Copiar identificadores"
 
-#: config.py:233
+#: config.py:237
 msgid "Copy Identifiers from the source Epub to the Split Epub."
 msgstr "Copiar identificadores del epub original al epub dividido."
 
-#: config.py:237
+#: config.py:241
 msgid "Copy Date"
 msgstr "Copiar fecha"
 
-#: config.py:238
+#: config.py:242
 msgid "Copy Date from the source Epub to the Split Epub."
 msgstr "Copiar fecha del epub original al epub dividido."
 
-#: config.py:242
+#: config.py:246
 msgid "Copy Published Date"
 msgstr "Copiar fecha de publicación"
 
-#: config.py:243
+#: config.py:247
 msgid "Copy Published Date from the source Epub to the Split Epub."
 msgstr "Copiar fecha de publicación del epub original al epub dividido."
 
-#: config.py:247
+#: config.py:251
 msgid "Copy Publisher"
 msgstr "Copiar editorial"
 
-#: config.py:248
+#: config.py:252
 msgid "Copy Publisher from the source Epub to the Split Epub."
 msgstr "Copiar editorial del epub original al epub dividido."
 
-#: config.py:252
+#: config.py:256
 msgid "Copy Languages"
 msgstr "Copiar idiomas"
 
-#: config.py:253
+#: config.py:257
 msgid "Copy Languages from the source Epub to the Split Epub."
 msgstr "Copiar idiomas del epub original al epub dividido."
 
-#: config.py:257
+#: config.py:261
 msgid "Copy Comments"
 msgstr "Copiar comentarios"
 
-#: config.py:258
+#: config.py:262
 msgid ""
 "Copy Comments from the source Epub to the Split Epub.  Adds \"Split from:\" "
 "to the comments."
 msgstr ""
-"Copiar comentarios del epub original al epub dividido. Añade \"Split from:\" "
+"Copiar comentarios del epub original al epub dividido. Añade «Dividido de:» "
 "a los comentarios."
 
-#: config.py:266
+#: config.py:270
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubSplit confirmation "
 "dialogs back again."
 msgstr ""
-"Estos controles no son opciones de configuración del plugin como tales, sino "
-"botones útiles para configurar los atajos de teclado y volver a mostrar "
+"Estos controles no son opciones de configuración del complemento como tales, "
+"sino botones útiles para configurar los atajos de teclado y volver a mostrar "
 "todos los diálogos de confirmación de EpubSplit."
 
-#: config.py:271
+#: config.py:275
 msgid "Keyboard shortcuts..."
 msgstr "Atajos de teclado..."
 
-#: config.py:272
-msgid "Edit the keyboard shortcuts associated with this plugin"
-msgstr "Edita los atajos de teclado asociados con este plugin"
-
 #: config.py:276
-msgid "Reset disabled &confirmation dialogs"
-msgstr "Resetea los diálogos de &confirmación deshabilitados"
+msgid "Edit the keyboard shortcuts associated with this plugin"
+msgstr "Modificar los atajos de teclado asociados con este complemento"
 
-#: config.py:277
-msgid "Reset all show me again dialogs for the EpubSplit plugin"
-msgstr ""
-"Resetea todos los diálogos de \"Muéstramelo de nuevo\" para el plugin "
-"EpubSplit"
+#: config.py:280
+msgid "Reset disabled &confirmation dialogs"
+msgstr "Retablecer los diálogos de &confirmación deshabilitados"
 
 #: config.py:281
+msgid "Reset all show me again dialogs for the EpubSplit plugin"
+msgstr ""
+"Restablecer todos los diálogos de «Mostrar otra vez» para el complemento "
+"EpubSplit"
+
+#: config.py:285
 msgid "View library preferences..."
 msgstr "Ver preferencias de biblioteca..."
 
-#: config.py:282
+#: config.py:286
 msgid "View data stored in the library database for this plugin"
 msgstr ""
-"Muestra los datos almacenados en la base de datos de la biblioteca para este "
-"plugin"
+"Mostrar los datos almacenados en la base de datos de la biblioteca para este "
+"complemento"
 
-#: config.py:295 dialogs.py:64
+#: config.py:299 dialogs.py:88
 msgid "Done"
 msgstr "Hecho"
 
-#: config.py:296
+#: config.py:300
 msgid "Confirmation dialogs have all been reset"
-msgstr "Todos los diálogos de confirmación han sido reseteados"
+msgstr "Todos los diálogos de confirmación han sido restablecidos"
 
-#: config.py:310
+#: config.py:314
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose if "
 "you would like these columns copied to new split books."
 msgstr ""
 "Si tiene definidas columnas personalizadas se mostrarán abajo. Elija si "
-"desea que estas columnas se copien a los nuevos libros."
+"desea que estas columnas se copien a los nuevos libros divididos."
 
-#: config.py:332
+#: config.py:336
 msgid "Copy this %s column to new split books..."
-msgstr "Copia esta %s columna a los nuevos libros divididos..."
+msgstr "Copiar esta columna %s a los nuevos libros divididos..."
 
-#: config.py:340
+#: config.py:344
 msgid "Source column:"
 msgstr "Columna origen:"
 
-#: config.py:341
+#: config.py:345
 msgid ""
 "If set, the column below will be populated with the template below to record "
 "the source of the split file."
@@ -212,82 +213,82 @@ msgstr ""
 "Si está marcado, la columna que se encuentra debajo se rellenará con la "
 "plantilla mostrada para registrar el origen del libro dividido."
 
-#: config.py:347
+#: config.py:351
 msgid "Choose a column to populate with template on split."
-msgstr "Elige una columna para rellenar con la plantilla al dividir."
+msgstr "Elija una columna para rellenar con una plantilla al dividir."
 
-#: config.py:356
+#: config.py:360
 msgid "Template from source book. Example: {title} by {authors}"
 msgstr "Plantilla del libro origen. Ejemplo: {title} por {authors}"
 
-#: dialogs.py:61
+#: dialogs.py:85
 msgid "New Book"
 msgstr "Libro nuevo"
 
-#: dialogs.py:90
+#: dialogs.py:114
 msgid "Guide"
 msgstr "Guía"
 
-#: dialogs.py:90
+#: dialogs.py:114
 msgid "HREF"
 msgstr "HREF"
 
-#: dialogs.py:90
+#: dialogs.py:114
 msgid "Table of Contents"
-msgstr "Tabla de contenidos"
+msgstr "Índice"
 
-#: dialogs.py:127
+#: dialogs.py:151
 msgid "Indicates 'special' pages: copyright, titlepage, etc."
-msgstr "Indica páginas \"especiales\": copyright, página de título, etc."
+msgstr "Indica páginas «especiales»: copyright, página de título, etc."
 
-#: dialogs.py:133
+#: dialogs.py:157
 msgid ""
 "Click and copy hotkey to copy text.\n"
 "Double-click to edit ToC entry.\n"
 "Pipes(|) divide different ToC entries to the same place."
 msgstr ""
-"Pulsa la tecla aceleradora de copia para copiar texto.\n"
-"Doble pulsación para editar la entrada en la ToC.\n"
-"Las barras verticales (|) dividen diferentes entradas de la ToC en el mismo "
+"Pulse y use el atajo de copia para copiar texto.\n"
+"Pulse dos veces para modificar la entrada en el índice.\n"
+"Las barras verticales (|) dividen diferentes entradas del índice en el mismo "
 "lugar."
 
-#: epubsplit_plugin.py:59
+#: epubsplit_plugin.py:62
 msgid "EpubSplit"
 msgstr "EpubSplit"
 
-#: epubsplit_plugin.py:60
+#: epubsplit_plugin.py:63
 msgid "Split off part of an EPUB into a new book."
 msgstr "Divide parte de un EPUB en un nuevo libro."
 
-#: epubsplit_plugin.py:108
+#: epubsplit_plugin.py:111
 msgid "Select One Book"
 msgstr "Seleccione un libro"
 
-#: epubsplit_plugin.py:109
+#: epubsplit_plugin.py:112
 msgid "Please select exactly one book to split."
-msgstr "Seleccione solo un libro que dividir."
+msgstr "Seleccione sólo un libro para dividir."
 
-#: epubsplit_plugin.py:126
+#: epubsplit_plugin.py:129
 msgid "No EPUB"
 msgstr "No es EPUB"
 
-#: epubsplit_plugin.py:127
+#: epubsplit_plugin.py:130
 msgid "This plugin only works on EPUB format ebooks."
-msgstr "Este complemento funciona solo con libros en el formato EPUB"
+msgstr "Este complemento funciona sólo con libros en el formato EPUB."
 
-#: epubsplit_plugin.py:138
+#: epubsplit_plugin.py:141
 msgid "Select Sections to Split Off"
 msgstr "Seleccione secciones para dividir"
 
-#: epubsplit_plugin.py:165
+#: epubsplit_plugin.py:168
 msgid "%s Split"
 msgstr "%s dividido"
 
-#: epubsplit_plugin.py:197
+#: epubsplit_plugin.py:200
 msgid "Split from:"
 msgstr "Dividido de:"
 
-#: epubsplit_plugin.py:244
+#: epubsplit_plugin.py:247
 msgid ""
 "The book for the new Split EPUB has been created and default metadata filled "
 "in.\n"
@@ -301,7 +302,8 @@ msgid ""
 "If you download or add a cover image, it will be included in the generated "
 "EPUB."
 msgstr ""
-"Se ha creado el nuevo libro y se han rellenado los metadatos por defecto.\n"
+"Se ha creado el nuevo libro dividido y se han rellenado los metadatos por "
+"defecto.\n"
 "\n"
 "Sin embargo, el EPUB *no* se creará hasta que revise, edite y cierre el "
 "diálogo de metadatos que sigue.\n"
@@ -311,10 +313,10 @@ msgstr ""
 "\n"
 "Si descarga o añade una imagen de portada, se incluirá en el EPUB generado."
 
-#: epubsplit_plugin.py:260
+#: epubsplit_plugin.py:263
 msgid "Splitting off from EPUB..."
 msgstr "Dividiendo desde EPUB..."
 
-#: epubsplit_plugin.py:290
+#: epubsplit_plugin.py:293
 msgid "Finished splitting off EPUB."
-msgstr "Finalizada división de EPUB."
+msgstr "Finalizada la división de EPUB."

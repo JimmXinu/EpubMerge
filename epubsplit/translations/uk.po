@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2013-11-11 22:12+Central Standard Time\n"
-"PO-Revision-Date: 2014-07-02 19:25-0600\n"
+"POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
+"PO-Revision-Date: 2014-07-22 15:16-0600\n"
 "Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/projects/p/calibre-"
 "plugins/language/uk/)\n"
@@ -24,15 +24,15 @@ msgstr ""
 msgid "UI plugin to split off parts of an epub into a new book."
 msgstr "Додаток для поділу файла EPub на декілька нових електронних книг."
 
-#: config.py:140
+#: config.py:144
 msgid "Basic"
 msgstr "Основні"
 
-#: config.py:143
+#: config.py:147
 msgid "Custom Columns"
 msgstr "Нетипові стовпчики"
 
-#: config.py:188
+#: config.py:192
 msgid ""
 "When making a new Epub, the metadata from the source book will be copied or "
 "not as you choose below."
@@ -40,11 +40,11 @@ msgstr ""
 "Під час створення нових книг Epub метадані з початкової книги може бути "
 "скопійовано до них, залежно від описаних нижче параметрів."
 
-#: config.py:202
+#: config.py:206
 msgid "Copy Title"
 msgstr "Копіювати назву"
 
-#: config.py:203
+#: config.py:207
 msgid ""
 "Copy Title from the source Epub to the Split Epub.  Adds \"Split\" to the "
 "title."
@@ -52,94 +52,94 @@ msgstr ""
 "Копіювати запис назви із початкової книги Epub до вирізаної частини. До "
 "назви буде додано запис «(частина)»."
 
-#: config.py:207
+#: config.py:211
 msgid "Copy Authors"
 msgstr "Копіювати авторів"
 
-#: config.py:208
+#: config.py:212
 msgid "Copy Authors from the source Epub to the Split Epub."
 msgstr "Копіювати запис авторів з початкової книги Epub до вирізаної частини."
 
-#: config.py:212
+#: config.py:216
 msgid "Copy Series"
 msgstr "Копіювати серію"
 
-#: config.py:213
+#: config.py:217
 msgid "Copy Series from the source Epub to the Split Epub."
 msgstr "Копіювати запис серії з початкової книги Epub до вирізаної частини."
 
-#: config.py:217
+#: config.py:221
 msgid "Copy Cover"
 msgstr "Копіювати обкладинку"
 
-#: config.py:218
+#: config.py:222
 msgid "Copy Cover from the source Epub to the Split Epub."
 msgstr ""
 "Копіювати зображення обкладинки з початкової книги Epub до вирізаної частини."
 
-#: config.py:222
+#: config.py:226
 msgid "Copy Rating"
 msgstr "Копіювати оцінку"
 
-#: config.py:223
+#: config.py:227
 msgid "Copy Rating from the source Epub to the Split Epub."
 msgstr "Копіювати запис оцінки з початкової книги Epub до вирізаної частини."
 
-#: config.py:227
+#: config.py:231
 msgid "Copy Tags"
 msgstr "Копіювати мітки"
 
-#: config.py:228
+#: config.py:232
 msgid "Copy Tags from the source Epub to the Split Epub."
 msgstr "Копіювати запис міток з початкової книги Epub до вирізаної частини."
 
-#: config.py:232
+#: config.py:236
 msgid "Copy Identifiers"
 msgstr "Копіювати ідентифікатори"
 
-#: config.py:233
+#: config.py:237
 msgid "Copy Identifiers from the source Epub to the Split Epub."
 msgstr ""
 "Копіювати запис ідентифікаторів з початкової книги Epub до вирізаної частини."
 
-#: config.py:237
+#: config.py:241
 msgid "Copy Date"
 msgstr "Копіювати дату"
 
-#: config.py:238
+#: config.py:242
 msgid "Copy Date from the source Epub to the Split Epub."
 msgstr "Копіювати запис дати з початкової книги Epub до вирізаної частини."
 
-#: config.py:242
+#: config.py:246
 msgid "Copy Published Date"
 msgstr "Копіювати дату публікації"
 
-#: config.py:243
+#: config.py:247
 msgid "Copy Published Date from the source Epub to the Split Epub."
 msgstr ""
 "Копіювати запис дати публікації з початкової книги Epub до вирізаної частини."
 
-#: config.py:247
+#: config.py:251
 msgid "Copy Publisher"
 msgstr "Копіювати видавця"
 
-#: config.py:248
+#: config.py:252
 msgid "Copy Publisher from the source Epub to the Split Epub."
 msgstr "Копіювати запис видавця з початкової книги Epub до вирізаної частини."
 
-#: config.py:252
+#: config.py:256
 msgid "Copy Languages"
 msgstr "Копіювати мови"
 
-#: config.py:253
+#: config.py:257
 msgid "Copy Languages from the source Epub to the Split Epub."
 msgstr "Копіювати запис мов з початкової книги Epub до вирізаної частини."
 
-#: config.py:257
+#: config.py:261
 msgid "Copy Comments"
 msgstr "Копіювати коментарі"
 
-#: config.py:258
+#: config.py:262
 msgid ""
 "Copy Comments from the source Epub to the Split Epub.  Adds \"Split from:\" "
 "to the comments."
@@ -147,7 +147,7 @@ msgstr ""
 "Копіювати запис коментарів із початкової книги Epub до вирізаної частини. До "
 "коментарів буде додано запис «Частина:»."
 
-#: config.py:266
+#: config.py:270
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubSplit confirmation "
@@ -157,40 +157,40 @@ msgstr ""
 "кнопками для визначення клавіатурних скорочень і відновлення показу "
 "діалогових вікон підтвердження поділу Epub."
 
-#: config.py:271
+#: config.py:275
 msgid "Keyboard shortcuts..."
 msgstr "Клавіатурні скорочення…"
 
-#: config.py:272
+#: config.py:276
 msgid "Edit the keyboard shortcuts associated with this plugin"
 msgstr "Редагувати клавіатурні скорочення, пов’язані із роботою цього додатка."
 
-#: config.py:276
+#: config.py:280
 msgid "Reset disabled &confirmation dialogs"
 msgstr "Відновити всі вимкнені ві&кна підтвердження"
 
-#: config.py:277
+#: config.py:281
 msgid "Reset all show me again dialogs for the EpubSplit plugin"
 msgstr ""
 "Відновити показ усіх діалогових вікон підтвердження для додатка поділу Epub"
 
-#: config.py:281
+#: config.py:285
 msgid "View library preferences..."
 msgstr "Переглянути налаштування бібліотеки…"
 
-#: config.py:282
+#: config.py:286
 msgid "View data stored in the library database for this plugin"
 msgstr "Переглянути дані, збережені у базі даних бібліотеки для цього додатка"
 
-#: config.py:295 dialogs.py:64
+#: config.py:299 dialogs.py:88
 msgid "Done"
 msgstr "Виконано"
 
-#: config.py:296
+#: config.py:300
 msgid "Confirmation dialogs have all been reset"
 msgstr "Показ діалогових вікон підтвердження відновлено"
 
-#: config.py:310
+#: config.py:314
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose if "
 "you would like these columns copied to new split books."
@@ -198,15 +198,15 @@ msgstr ""
 "Якщо у вас є нетипові стовпчики, їх буде показано у списку нижче. Вкажіть, "
 "чи слід копіювати вміст цих стовпчиків до новостворених частин книги."
 
-#: config.py:332
+#: config.py:336
 msgid "Copy this %s column to new split books..."
 msgstr "Копіювати цей стовпчик %s до новостворених частин книги…"
 
-#: config.py:340
+#: config.py:344
 msgid "Source column:"
 msgstr "Стовпчик джерела:"
 
-#: config.py:341
+#: config.py:345
 msgid ""
 "If set, the column below will be populated with the template below to record "
 "the source of the split file."
@@ -214,37 +214,37 @@ msgstr ""
 "Якщо позначено, наведений нижче стовпчик буде заповнено за наведеним нижче "
 "шаблоном для запису даних джерела файла поділу."
 
-#: config.py:347
+#: config.py:351
 msgid "Choose a column to populate with template on split."
 msgstr "Виберіть стовпчик, який буде заповнено за шаблоном під час поділу."
 
-#: config.py:356
+#: config.py:360
 msgid "Template from source book. Example: {title} by {authors}"
 msgstr "Шаблон на основі даних початкової книги. Приклад: {title}, {authors}"
 
-#: dialogs.py:61
+#: dialogs.py:85
 msgid "New Book"
 msgstr "Нова книга"
 
-#: dialogs.py:90
+#: dialogs.py:114
 msgid "Guide"
 msgstr "Путівник"
 
-#: dialogs.py:90
+#: dialogs.py:114
 msgid "HREF"
 msgstr "HREF"
 
-#: dialogs.py:90
+#: dialogs.py:114
 msgid "Table of Contents"
 msgstr "Зміст"
 
-#: dialogs.py:127
+#: dialogs.py:151
 msgid "Indicates 'special' pages: copyright, titlepage, etc."
 msgstr ""
 "Позначає «особливі» сторінки: сторінка авторських прав, титульна сторінка "
 "тощо"
 
-#: dialogs.py:133
+#: dialogs.py:157
 msgid ""
 "Click and copy hotkey to copy text.\n"
 "Double-click to edit ToC entry.\n"
@@ -255,43 +255,43 @@ msgstr ""
 "Символи вертикальної риски (|) поділяють різні записи змісту, які слід "
 "зберегти у одному місці."
 
-#: epubsplit_plugin.py:59
+#: epubsplit_plugin.py:62
 msgid "EpubSplit"
 msgstr "Поділ Epub"
 
-#: epubsplit_plugin.py:60
+#: epubsplit_plugin.py:63
 msgid "Split off part of an EPUB into a new book."
 msgstr "Вирізати частину книги EPUB до нової книги."
 
-#: epubsplit_plugin.py:108
+#: epubsplit_plugin.py:111
 msgid "Select One Book"
 msgstr "Виберіть одну книгу"
 
-#: epubsplit_plugin.py:109
+#: epubsplit_plugin.py:112
 msgid "Please select exactly one book to split."
 msgstr "Будь ласка, виберіть точно одну книгу для поділу."
 
-#: epubsplit_plugin.py:126
+#: epubsplit_plugin.py:129
 msgid "No EPUB"
 msgstr "Не є книгою EPUB"
 
-#: epubsplit_plugin.py:127
+#: epubsplit_plugin.py:130
 msgid "This plugin only works on EPUB format ebooks."
 msgstr "Цей додаток може обробляти лише книги у форматі EPUB."
 
-#: epubsplit_plugin.py:138
+#: epubsplit_plugin.py:141
 msgid "Select Sections to Split Off"
 msgstr "Виберіть розділи для поділу"
 
-#: epubsplit_plugin.py:165
+#: epubsplit_plugin.py:168
 msgid "%s Split"
 msgstr "%s (частина)"
 
-#: epubsplit_plugin.py:197
+#: epubsplit_plugin.py:200
 msgid "Split from:"
 msgstr "Частина:"
 
-#: epubsplit_plugin.py:244
+#: epubsplit_plugin.py:247
 msgid ""
 "The book for the new Split EPUB has been created and default metadata filled "
 "in.\n"
@@ -318,10 +318,10 @@ msgstr ""
 "Якщо ви отримаєте або додасте зображення обкладинки, його буде включено до "
 "створеного програмою файла EPUB."
 
-#: epubsplit_plugin.py:260
+#: epubsplit_plugin.py:263
 msgid "Splitting off from EPUB..."
 msgstr "Вирізаємо частину з EPUB…"
 
-#: epubsplit_plugin.py:290
+#: epubsplit_plugin.py:293
 msgid "Finished splitting off EPUB."
 msgstr "Розрізання EPUB завершено."
