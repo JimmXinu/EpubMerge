@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2013-11-15 14:56+Central Standard Time\n"
-"PO-Revision-Date: 2014-07-02 19:13-0600\n"
+"POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
+"PO-Revision-Date: 2014-07-22 15:17-0600\n"
 "Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/calibre-plugins/"
 "language/sv/)\n"
@@ -26,54 +26,54 @@ msgstr ""
 "Användargränssnittprogram för att undersöka duplikat/saknade/tillagda böcker "
 "när enhet kopplas bort."
 
-#: config.py:103
+#: config.py:107
 msgid "Basic"
 msgstr "Grundläggande"
 
-#: config.py:106
+#: config.py:110
 msgid "Searches"
 msgstr "Sökningar"
 
-#: config.py:136
+#: config.py:140
 msgid "When Ejecting a Device, Check for:"
 msgstr "När enhets kopplas bort, undersök:"
 
-#: config.py:150
+#: config.py:154
 msgid "Reading List books to Sync"
 msgstr "Läser lista av böcker att synkroniseras"
 
-#: config.py:151
+#: config.py:155
 msgid ""
 "Check Reading List plugin for books ready to Sync to the current device."
 msgstr ""
 "Undersök läslista efter böcker som är redo att synkroniseras till aktuell "
 "enhet."
 
-#: config.py:157
+#: config.py:161
 msgid "Duplicated Books"
 msgstr "Duplicerade böcker"
 
-#: config.py:158
+#: config.py:162
 msgid "Check for books that are on the device more than once."
 msgstr "Söker efter böcker som finns mer än en gång på enheten."
 
-#: config.py:162
+#: config.py:166
 msgid "Deleted Books (not in Library)"
 msgstr "Ta bort böcker (inte i bibliotektet)"
 
-#: config.py:163
+#: config.py:167
 msgid "Check for books on the device that are not in the current library."
 msgstr "Söker efter böcker på enheten som inte finns i aktuellt bibliotek."
 
-#: config.py:167
+#: config.py:171
 msgid "Added Books (not on Device)"
 msgstr "Tillagda böcker (inte på enhet)"
 
-#: config.py:168
+#: config.py:172
 msgid "Check for books in the current library that are not on the device."
 msgstr "Sök efter böcker i aktuellt bibliotek som inte finns på enheten."
 
-#: config.py:176
+#: config.py:180
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and viewing all plugins settings."
@@ -82,56 +82,56 @@ msgstr ""
 "men är bekväma knappar för att ställa in tangentbordssnabbbval och visa alla "
 "inställningar."
 
-#: config.py:181
+#: config.py:185
 msgid "Keyboard shortcuts..."
 msgstr "Tangentbordssnabbval..."
 
-#: config.py:182
+#: config.py:186
 msgid "Edit the keyboard shortcuts associated with this plugin"
 msgstr ""
 "Redigera tangentbordssnabbval som är associerade med detta insticksprogram"
 
-#: config.py:186
+#: config.py:190
 msgid "&View library preferences..."
 msgstr "&Visa biblioteksval..."
 
-#: config.py:187
+#: config.py:191
 msgid "View data stored in the library database for this plugin"
 msgstr "Visa data lagrat i biblioteksdatabasen för detta insticksprogram"
 
-#: config.py:200
+#: config.py:204
 msgid "Done"
 msgstr "Klar"
 
-#: config.py:201
+#: config.py:205
 msgid "Confirmation dialogs have all been reset"
 msgstr "Konfirmationsdialoger har alla blivit nollställda"
 
-#: config.py:215
+#: config.py:219
 msgid "Searches to use for:"
 msgstr "Sökningar att användas för:"
 
-#: config.py:230
+#: config.py:234
 msgid "Search for Duplicated Books:"
 msgstr "Sökning av duplicerade böcker:"
 
-#: config.py:234 config.py:241 config.py:248
+#: config.py:238 config.py:245 config.py:252
 msgid "Default is %s"
 msgstr "Grundinställning är %s"
 
-#: config.py:237
+#: config.py:241
 msgid "Deleted Books (not in Library):"
 msgstr "Borttagna böcker (in i bibliotek):"
 
-#: config.py:244
+#: config.py:248
 msgid "Added Books (not on Device):"
 msgstr "Tillagda böcker (inte på enhet):"
 
-#: config.py:254
+#: config.py:258
 msgid "Restore Defaults"
 msgstr "Återställ grundinställning"
 
-#: config.py:255
+#: config.py:259
 msgid "Revert all searches to the defaults."
 msgstr "Återställ alla sökningar till grundinställningar."
 

@@ -8,13 +8,13 @@ msgstr ""
 "POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
 "PO-Revision-Date: 2014-07-22 15:17-0600\n"
 "Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/calibre-plugins/"
-"language/fr/)\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
+"calibre-plugins/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"Language: fr\n"
+"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 1.5.7\n"
 
@@ -22,172 +22,166 @@ msgstr ""
 msgid ""
 "UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices."
 msgstr ""
-"Greffon UI (Interface Utilisateur) pour vérifier la présence de livres  "
-"Doublons/Manquants/Ajoutés à l'éjection du dispositif."
+"Plugin para Verificar livros duplicados/ausentes/adicionados ao ejetar "
+"dispositivos."
 
 #: config.py:107
 msgid "Basic"
-msgstr "De base"
+msgstr "Báico"
 
 #: config.py:110
 msgid "Searches"
-msgstr "Recherches"
+msgstr "Buscas"
 
 #: config.py:140
 msgid "When Ejecting a Device, Check for:"
-msgstr "A l'éjection d'un dispositif, vérifier :"
+msgstr "Ao ejetar um dispositivo, verificar:"
 
 #: config.py:154
 msgid "Reading List books to Sync"
-msgstr "Liste de Lecture des livres à synchroniser"
+msgstr "Lendo lista de livros para sincronizar"
 
 #: config.py:155
 msgid ""
 "Check Reading List plugin for books ready to Sync to the current device."
 msgstr ""
-"Vérifier le greffon Liste de Lecture pour les livres qui sont prêts à être "
-"synchronisés sur le dispositif actuel."
+"Verificar o plugin Lista de Leitura para livros lidos, para sincronização "
+"com o dispositivo atual."
 
 #: config.py:161
 msgid "Duplicated Books"
-msgstr "Livres en doublon"
+msgstr "Livros duplicados"
 
 #: config.py:162
 msgid "Check for books that are on the device more than once."
-msgstr "Vérifier les livres qui sont plus d'une fois sur le dispositif."
+msgstr "Verificar livros que estão à mais no dispositivo."
 
 #: config.py:166
 msgid "Deleted Books (not in Library)"
-msgstr "Livres supprimés (absents de la bibliothèque)"
+msgstr "Apagar livros (não da biblioteca)"
 
 #: config.py:167
 msgid "Check for books on the device that are not in the current library."
-msgstr ""
-"Vérifier les livres sur le dispositif qui ne sont pas dnas la bibliothèque "
-"actuelle."
+msgstr "Verificar livros no dispositivo que não estão na biblioteca atual."
 
 #: config.py:171
 msgid "Added Books (not on Device)"
-msgstr "Livres ajoutés (absents du dispositif)"
+msgstr "Adicionar livros (não no dispositivo)"
 
 #: config.py:172
 msgid "Check for books in the current library that are not on the device."
-msgstr ""
-"Vérifier les livres dans la bibliothèque actuelle qui ne sont pas sur le "
-"dispositif."
+msgstr "Verificar livros na biblioteca atual que não estão no dispositivo."
 
 #: config.py:180
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and viewing all plugins settings."
 msgstr ""
-"Ces contrôles ne sont pas des paramètres du greffon en soi, mais des boutons "
-"de commodité pour paramétrer les raccourcis clavier et afficher les "
-"paramètres de tous les greffons."
+"Esses controles não são configurações de plugin, mas os botões convenientes "
+"para a criação de atalhos de teclado e visualização de todas as "
+"configurações de plugins."
 
 #: config.py:185
 msgid "Keyboard shortcuts..."
-msgstr "Raccourcis clavier..."
+msgstr "Atalhos do teclado..."
 
 #: config.py:186
 msgid "Edit the keyboard shortcuts associated with this plugin"
-msgstr "Éditer les raccourcis clavier associés avec ce greffon"
+msgstr "Editar atalhos do teclado associados com este plugin."
 
 #: config.py:190
 msgid "&View library preferences..."
-msgstr "&Voir les préférences de la bibliothèque"
+msgstr "&Visualizar preferências da biblioteca..."
 
 #: config.py:191
 msgid "View data stored in the library database for this plugin"
 msgstr ""
-"Voir les données conservées dans la base de données de la bibliothèque pour "
-"ce greffon"
+"Visualizar dados armazenados no banco de dados da biblioteca para este "
+"plugin."
 
 #: config.py:204
 msgid "Done"
-msgstr "Terminé"
+msgstr "Ok"
 
 #: config.py:205
 msgid "Confirmation dialogs have all been reset"
-msgstr "Les dialogues de confirmations ont tous été réinitialisés"
+msgstr "Os diálogos de confirmação foram todos redefinidos"
 
 #: config.py:219
 msgid "Searches to use for:"
-msgstr "Recherches à utiliser pour :"
+msgstr "Buscas para usar:"
 
 #: config.py:234
 msgid "Search for Duplicated Books:"
-msgstr "Recherche de livres en doublon :"
+msgstr "Buscar livros duplicados:"
 
 #: config.py:238 config.py:245 config.py:252
 msgid "Default is %s"
-msgstr "La configuration par défaut est %s"
+msgstr "O padrão é %s"
 
 #: config.py:241
 msgid "Deleted Books (not in Library):"
-msgstr "Livres supprimés (absents de la bibliothèque) :"
+msgstr "Apagar livros (não na biblioteca):"
 
 #: config.py:248
 msgid "Added Books (not on Device):"
-msgstr "Livres ajoutés (absents du dispositif) :"
+msgstr "Adicionar livros (não no dispositivo):"
 
 #: config.py:258
 msgid "Restore Defaults"
-msgstr "Restaurer les paramètres par défaut"
+msgstr "Restaurar Padrões"
 
 #: config.py:259
 msgid "Revert all searches to the defaults."
-msgstr "Restaurer toutes les recherches à la configuration par défaut."
+msgstr "Reverter todas as buscas para padrões."
 
 #: smarteject_plugin.py:34 smarteject_plugin.py:67
 msgid "SmartEject"
-msgstr "SmartEject (Éjection Intelligente)"
+msgstr "SmartEject"
 
 #: smarteject_plugin.py:35
 msgid "Check for duplicated/deleted/added books before ejecting."
-msgstr ""
-"Vérifier la présence de livres en doublon/supprimés/ajoutés avant l'éjection."
+msgstr "Verificar livros duplicados/apagados/adicionados antes de ejetar."
 
 #: smarteject_plugin.py:86
 msgid "Sync Reading List?"
-msgstr "Synchroniser la Liste de Lecture ?"
+msgstr "Sincronizar a lista de leitura?"
 
 #: smarteject_plugin.py:86
 msgid ""
 "There are books that need syncing according to Reading List.<p>Sync Books?"
 msgstr ""
-"Il y a des livres qui ont besoin d'être synchronisés selon la Liste de "
-"Lecture.<p>Synchroniser les livres ?"
+"Existem livros que precisam ser sincronizados de acordo com a Lista de "
+"Leitura.<p>Sincronizar esses livros?"
 
 #: smarteject_plugin.py:93
 msgid "Duplicates on Device"
-msgstr "Doublons sur le dispositif"
+msgstr "Duplicados no Dispositivo"
 
 #: smarteject_plugin.py:93
 msgid "There are duplicate ebooks on the device.<p>Display duplicates?"
-msgstr ""
-"Il y a des livres en doublon sur le dispositif.<p>Afficher les doublons ?"
+msgstr "Existem e-books duplicados no dispositivo.<p>Exibir duplicados?"
 
 #: smarteject_plugin.py:114
 msgid "Books in Library not on Device"
-msgstr "Livres dans la bibliothèque absents du dispositif"
+msgstr "Livros na Biblioteca e não no Dispositivo"
 
 #: smarteject_plugin.py:115
 msgid ""
 "There are books in the Library that are not on the Device.<p>Display books "
 "not on Device?"
 msgstr ""
-"Il y a des livres dans la bibliothèque  qui ne sont pas sur le  dispositif."
-"<p>Afficher les livres qui ne sont pas sur le dispositif ?"
+"Existem livros na biblioteca que não estão no dispositivo.<p>Exibir livros "
+"que não estão no dispositivo?"
 
 #: smarteject_plugin.py:138
 msgid "Books on Device not in Library"
-msgstr "Livres sur le dispositif absents de la bibliothèque"
+msgstr "Livros no Dispositivo e não na Biblioteca"
 
 #: smarteject_plugin.py:138
 msgid ""
 "There are books on the device in %s that are not in the Library.<p>Display "
 "books not in Library?"
 msgstr ""
-"Il y a des livres sur le dispositif dans %s qui ne sont pas dans la "
-"bibliothèque.<p>Afficher les livres qui ne sont pas dans la bibliothèque ?"
+"Existem livros no dispositivo %s que não estão na biblioteca.<p>Exibir "
+"livros que não estão na biblioteca?"
