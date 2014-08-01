@@ -1,22 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Translators:
+# Armin Geller <armingeller@t-online.de>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2014-07-08 10:30+Central Daylight Time\n"
-"PO-Revision-Date: 2014-07-22 15:18-0600\n"
-"Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
-"Language-Team: German (http://www.transifex.com/projects/p/calibre-plugins/"
-"language/de/)\n"
+"PO-Revision-Date: 2014-07-24 23:00+0000\n"
+"Last-Translator: Armin Geller <armingeller@t-online.de>\n"
+"Language-Team: German (http://www.transifex.com/projects/p/calibre-plugins/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: ENCODING\n"
 "Generated-By: pygettext.py 1.5\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.7\n"
 
 #: __init__.py:32
 msgid "UI plugin to concatenate multiple epubs into one."
@@ -46,10 +45,7 @@ msgstr "Inhaltsverzeichnis für jeden Titel einfügen?"
 msgid ""
 "If set, a new TOC entry will be made for each title and\n"
 "it's existing TOC nested underneath it."
-msgstr ""
-"Wenn markiert wird für jeden Titel ein neuer Eintrag\n"
-"im Inhaltsverzeichnis angelegt, mit dem eigenen\n"
-"Inhaltsverzeichnis eine Ebene darunter."
+msgstr "Wenn markiert wird für jeden Titel ein neuer Eintrag\nim Inhaltsverzeichnis angelegt, mit dem eigenen\nInhaltsverzeichnis eine Ebene darunter."
 
 #: config.py:186
 msgid "Flatten Table of Contents?"
@@ -57,9 +53,7 @@ msgstr "Inhaltsverzeichnis flach darstellen?"
 
 #: config.py:187
 msgid "Remove nesting and make TOC all on one level."
-msgstr ""
-"Schachtelung entfernen und Inhaltsverzeichnis\n"
-"in einer einzigen Ebene darstellen."
+msgstr "Schachtelung entfernen und Inhaltsverzeichnis\nin einer einzigen Ebene darstellen."
 
 #: config.py:191
 msgid "Keep UnMerge Metadata?"
@@ -70,11 +64,7 @@ msgid ""
 "If set, a copy of the original metadata for each merged book will\n"
 "be included, allowing for UnMerge.  This includes your calibre custom\n"
 "columns.  Leave off if you plan to distribute the epub to others."
-msgstr ""
-"Wenn markiert wird eine Kopie der originalen Metadaten jeden\n"
-"Buchs eingefügt, um ein Teilen zu ermöglichen. Dies schliesst\n"
-"Ihre in calibre definierten Spalten ein. Aktivieren Sie diese\n"
-"Option nicht, wenn Sie das ePub weitergeben wollen."
+msgstr "Wenn markiert wird eine Kopie der originalen Metadaten jeden\nBuchs eingefügt, um ein Teilen zu ermöglichen. Dies schliesst\nIhre in calibre definierten Spalten ein. Aktivieren Sie diese\nOption nicht, wenn Sie das ePub weitergeben wollen."
 
 #: config.py:198
 msgid "Show UnMerge Option?"
@@ -84,10 +74,7 @@ msgstr "Teilen-Option anzeigen?"
 msgid ""
 "If set, the UnMerge Epub option will be shown on the EpubMerge menu.\n"
 "Only Epubs merged with 'Keep UnMerge Metadata' can be UnMerged."
-msgstr ""
-"Wenn markiert wird die Teilen-Option im EpubMerge-Menü angezeigt.\n"
-"Nur ePubs, die mit aktivierter Option erstellt wurden, können später\n"
-"geteilt werden."
+msgstr "Wenn markiert wird die Teilen-Option im EpubMerge-Menü angezeigt.\nNur ePubs, die mit aktivierter Option erstellt wurden, können später\ngeteilt werden."
 
 #: config.py:205
 msgid "Add tags to merged books:"
@@ -95,8 +82,7 @@ msgstr "Schlagwörter für neue Bücher:"
 
 #: config.py:209
 msgid "Tags you enter here will be added to all new merged books"
-msgstr ""
-"Hier angegebene Schlagwörter werden zu allen neuen Büchern hinzugefügt."
+msgstr "Hier angegebene Schlagwörter werden zu allen neuen Büchern hinzugefügt."
 
 #: config.py:214
 msgid "Merged Book Word:"
@@ -107,9 +93,7 @@ msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "Defaults back to Anthology if cleared.\n"
 "For people who don't like the word Anthology."
-msgstr ""
-"Name für Titel und Zusammenfassung neuer Bücher im Kommentar.\n"
-"Wenn Sie nichts eingeben, wird 'Sammlung' benutzt."
+msgstr "Name für Titel und Zusammenfassung neuer Bücher im Kommentar.\nWenn Sie nichts eingeben, wird 'Sammlung' benutzt."
 
 #: config.py:226
 msgid ""
@@ -198,9 +182,7 @@ msgstr "Werte aus allen Quellbüchern aneinanderhängen"
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose how "
 "you would like these columns handled."
-msgstr ""
-"Benutzerdefinierte Spalten werden unten angezeigt. Wählen Sie, wie diese "
-"Spalten behandelt werden sollen."
+msgstr "Benutzerdefinierte Spalten werden unten angezeigt. Wählen Sie, wie diese Spalten behandelt werden sollen."
 
 #: config.py:324
 msgid "Set this %s column on new merged books..."
@@ -308,11 +290,9 @@ msgstr "Kann keine Nicht-ePubs teilen"
 
 #: epubmerge_plugin.py:208 epubmerge_plugin.py:220
 msgid ""
-"To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge "
-"Metadata enabled."
-msgstr ""
-"Zum Teilen muss das Buch von EpubMerge mit der Option 'Teilen-Metadaten "
-"behalten' erzeugt sein."
+"To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
+" Metadata enabled."
+msgstr "Zum Teilen muss das Buch von EpubMerge mit der Option 'Teilen-Metadaten behalten' erzeugt sein."
 
 #: epubmerge_plugin.py:219
 msgid "No UnMerge data found"
@@ -323,10 +303,7 @@ msgid ""
 "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
 "the same title, Overwrite the Epub in the existing book, or Discard this "
 "Epub."
-msgstr ""
-"Es gibt schon ein Buch <i>%s</i> von <i>%s</i>. Sie können ein neues Buch "
-"mit dem gleichen Titel hinzufügen, das vorhandeneBuch überschreiben, oder "
-"das Buch verwrfen."
+msgstr "Es gibt schon ein Buch <i>%s</i> von <i>%s</i>. Sie können ein neues Buch mit dem gleichen Titel hinzufügen, das vorhandeneBuch überschreiben, oder das Buch verwrfen."
 
 #: epubmerge_plugin.py:274 epubmerge_plugin.py:302
 msgid "Cannot Merge Epubs"
@@ -346,7 +323,7 @@ msgstr "Lese ePubs"
 
 #: epubmerge_plugin.py:293
 msgid "EPUBs collected"
-msgstr "ePubs gesammelt"
+msgstr "Gesammelte ePubs"
 
 #: epubmerge_plugin.py:303
 msgid "%s books failed."
@@ -354,7 +331,7 @@ msgstr "%s Bücher fehlgeschlagen."
 
 #: epubmerge_plugin.py:308
 msgid "Order EPUBs to Merge"
-msgstr "Sortiere ePubs"
+msgstr "Sortiere ePubs zum Zusammenfügen"
 
 #: epubmerge_plugin.py:362
 msgid "%s containing:"
@@ -366,24 +343,16 @@ msgstr "%s von %s"
 
 #: epubmerge_plugin.py:521
 msgid ""
-"The book for the new Merged EPUB has been created and default metadata "
-"filled in.\n"
+"The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
-"However, the EPUB will *not* be created until after you've reviewed, edited, "
-"and closed the metadata dialog that follows."
-msgstr ""
-"Das neue ePub wurde erzeugt und Default-Metadaten eingefügt.\n"
-"\n"
-"Das neue Buch wird *erst dann* erzeugt, wenn Sie den folgenden Metadaten-"
-"Dialog überprüft, bearbeitet und geschlossen haben."
+"However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
+msgstr "Das neue ePub wurde erzeugt und Default-Metadaten eingefügt.\n\nDas neue Buch wird *erst dann* erzeugt, wenn Sie den folgenden Metadaten-Dialog überprüft, bearbeitet und geschlossen haben."
 
 #: epubmerge_plugin.py:537
 msgid ""
-"You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge "
-"is finished."
-msgstr ""
-"Sie fügen %s ePubs zusammen, gesamt %s. Calibre wird bis zum Abschluss "
-"gesperrt."
+"You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge"
+" is finished."
+msgstr "Sie fügen %s ePubs zusammen, gesamt %s. Calibre wird bis zum Abschluss gesperrt."
 
 #: epubmerge_plugin.py:541
 msgid "Merging %s EPUBs..."
@@ -393,9 +362,7 @@ msgstr "Füge %s ePubs zusammen..."
 msgid ""
 "Merge finished, output in:\n"
 "%s"
-msgstr ""
-"Aktion abgeschlossen, Ausgabe nach:\n"
-"%s"
+msgstr "Aktion abgeschlossen, Ausgabe nach:\n%s"
 
 #: epubmerge_plugin.py:576
 msgid "Finished merging %s EPUBs."

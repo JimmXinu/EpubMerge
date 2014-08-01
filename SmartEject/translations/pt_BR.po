@@ -1,29 +1,25 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
-"PO-Revision-Date: 2014-07-22 15:17-0600\n"
-"Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
-"calibre-plugins/language/pt_BR/)\n"
+"PO-Revision-Date: 2014-07-18 16:40+0000\n"
+"Last-Translator: Paulo_Neto <layoutbr@lexxa.com.br>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/calibre-plugins/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: ENCODING\n"
 "Generated-By: pygettext.py 1.5\n"
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.5.7\n"
 
 #: __init__.py:32
 msgid ""
 "UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices."
-msgstr ""
-"Plugin para Verificar livros duplicados/ausentes/adicionados ao ejetar "
-"dispositivos."
+msgstr "Plugin para Verificar livros duplicados/ausentes/adicionados ao ejetar dispositivos."
 
 #: config.py:107
 msgid "Basic"
@@ -44,9 +40,7 @@ msgstr "Lendo lista de livros para sincronizar"
 #: config.py:155
 msgid ""
 "Check Reading List plugin for books ready to Sync to the current device."
-msgstr ""
-"Verificar o plugin Lista de Leitura para livros lidos, para sincronização "
-"com o dispositivo atual."
+msgstr "Verificar o plugin Lista de Leitura para livros lidos, para sincronização com o dispositivo atual."
 
 #: config.py:161
 msgid "Duplicated Books"
@@ -76,10 +70,7 @@ msgstr "Verificar livros na biblioteca atual que não estão no dispositivo."
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and viewing all plugins settings."
-msgstr ""
-"Esses controles não são configurações de plugin, mas os botões convenientes "
-"para a criação de atalhos de teclado e visualização de todas as "
-"configurações de plugins."
+msgstr "Esses controles não são configurações de plugin, mas os botões convenientes para a criação de atalhos de teclado e visualização de todas as configurações de plugins."
 
 #: config.py:185
 msgid "Keyboard shortcuts..."
@@ -95,9 +86,7 @@ msgstr "&Visualizar preferências da biblioteca..."
 
 #: config.py:191
 msgid "View data stored in the library database for this plugin"
-msgstr ""
-"Visualizar dados armazenados no banco de dados da biblioteca para este "
-"plugin."
+msgstr "Visualizar dados armazenados no banco de dados da biblioteca para este plugin."
 
 #: config.py:204
 msgid "Done"
@@ -150,9 +139,7 @@ msgstr "Sincronizar a lista de leitura?"
 #: smarteject_plugin.py:86
 msgid ""
 "There are books that need syncing according to Reading List.<p>Sync Books?"
-msgstr ""
-"Existem livros que precisam ser sincronizados de acordo com a Lista de "
-"Leitura.<p>Sincronizar esses livros?"
+msgstr "Existem livros que precisam ser sincronizados de acordo com a Lista de Leitura.<p>Sincronizar esses livros?"
 
 #: smarteject_plugin.py:93
 msgid "Duplicates on Device"
@@ -170,9 +157,7 @@ msgstr "Livros na Biblioteca e não no Dispositivo"
 msgid ""
 "There are books in the Library that are not on the Device.<p>Display books "
 "not on Device?"
-msgstr ""
-"Existem livros na biblioteca que não estão no dispositivo.<p>Exibir livros "
-"que não estão no dispositivo?"
+msgstr "Existem livros na biblioteca que não estão no dispositivo.<p>Exibir livros que não estão no dispositivo?"
 
 #: smarteject_plugin.py:138
 msgid "Books on Device not in Library"
@@ -182,6 +167,4 @@ msgstr "Livros no Dispositivo e não na Biblioteca"
 msgid ""
 "There are books on the device in %s that are not in the Library.<p>Display "
 "books not in Library?"
-msgstr ""
-"Existem livros no dispositivo %s que não estão na biblioteca.<p>Exibir "
-"livros que não estão na biblioteca?"
+msgstr "Existem livros no dispositivo %s que não estão na biblioteca.<p>Exibir livros que não estão na biblioteca?"

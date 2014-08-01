@@ -1,30 +1,26 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Translators:
 # Merarom <merarom@yahoo.es>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
-"PO-Revision-Date: 2014-07-22 15:17-0600\n"
-"Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
-"Language-Team: Swedish (http://www.transifex.com/projects/p/calibre-plugins/"
-"language/sv/)\n"
+"PO-Revision-Date: 2014-06-21 16:12+0000\n"
+"Last-Translator: Merarom <merarom@yahoo.es>\n"
+"Language-Team: Swedish (http://www.transifex.com/projects/p/calibre-plugins/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: ENCODING\n"
 "Generated-By: pygettext.py 1.5\n"
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.7\n"
 
 #: __init__.py:32
 msgid ""
 "UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices."
-msgstr ""
-"Användargränssnittprogram för att undersöka duplikat/saknade/tillagda böcker "
-"när enhet kopplas bort."
+msgstr "Användargränssnittprogram för att undersöka duplikat/saknade/tillagda böcker när enhet kopplas bort."
 
 #: config.py:107
 msgid "Basic"
@@ -45,9 +41,7 @@ msgstr "Läser lista av böcker att synkroniseras"
 #: config.py:155
 msgid ""
 "Check Reading List plugin for books ready to Sync to the current device."
-msgstr ""
-"Undersök läslista efter böcker som är redo att synkroniseras till aktuell "
-"enhet."
+msgstr "Undersök läslista efter böcker som är redo att synkroniseras till aktuell enhet."
 
 #: config.py:161
 msgid "Duplicated Books"
@@ -77,10 +71,7 @@ msgstr "Sök efter böcker i aktuellt bibliotek som inte finns på enheten."
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and viewing all plugins settings."
-msgstr ""
-"Dessa kontroller är inte inställningar för insticksprogrammet som sådant, "
-"men är bekväma knappar för att ställa in tangentbordssnabbbval och visa alla "
-"inställningar."
+msgstr "Dessa kontroller är inte inställningar för insticksprogrammet som sådant, men är bekväma knappar för att ställa in tangentbordssnabbbval och visa alla inställningar."
 
 #: config.py:185
 msgid "Keyboard shortcuts..."
@@ -88,8 +79,7 @@ msgstr "Tangentbordssnabbval..."
 
 #: config.py:186
 msgid "Edit the keyboard shortcuts associated with this plugin"
-msgstr ""
-"Redigera tangentbordssnabbval som är associerade med detta insticksprogram"
+msgstr "Redigera tangentbordssnabbval som är associerade med detta insticksprogram"
 
 #: config.py:190
 msgid "&View library preferences..."
@@ -150,9 +140,7 @@ msgstr "Synkronisera läslista?"
 #: smarteject_plugin.py:86
 msgid ""
 "There are books that need syncing according to Reading List.<p>Sync Books?"
-msgstr ""
-"Det finns böcker som behöver synkroniseras enligt läslista. <p>Synkronisera "
-"böcker?"
+msgstr "Det finns böcker som behöver synkroniseras enligt läslista. <p>Synkronisera böcker?"
 
 #: smarteject_plugin.py:93
 msgid "Duplicates on Device"
@@ -170,9 +158,7 @@ msgstr "Böcker i bibliotek inte på enhet"
 msgid ""
 "There are books in the Library that are not on the Device.<p>Display books "
 "not on Device?"
-msgstr ""
-"Det finns böcker i biblioteket som inte finns på enheten.<p>Visa böcker som "
-"inte finns på enhet?"
+msgstr "Det finns böcker i biblioteket som inte finns på enheten.<p>Visa böcker som inte finns på enhet?"
 
 #: smarteject_plugin.py:138
 msgid "Books on Device not in Library"
@@ -182,6 +168,4 @@ msgstr "Böcker på enhet inte i bibliotek"
 msgid ""
 "There are books on the device in %s that are not in the Library.<p>Display "
 "books not in Library?"
-msgstr ""
-"Det finns böcker på enheten i % som inte finns i biblioteket.<p>Visa böcker "
-"som inte finns i bibliotek?"
+msgstr "Det finns böcker på enheten i % som inte finns i biblioteket.<p>Visa böcker som inte finns i bibliotek?"

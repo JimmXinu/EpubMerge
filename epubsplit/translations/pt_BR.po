@@ -1,23 +1,21 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR ORGANIZATION
-#
+# 
 # Translators:
 # Paulo_Neto <layoutbr@lexxa.com.br>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
-"PO-Revision-Date: 2014-07-22 15:16-0600\n"
-"Last-Translator: Jim Miller <RetiefJimm@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/"
-"calibre-plugins/language/pt_BR/)\n"
+"PO-Revision-Date: 2014-07-18 16:40+0000\n"
+"Last-Translator: Paulo_Neto <layoutbr@lexxa.com.br>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/calibre-plugins/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
+"Content-Transfer-Encoding: ENCODING\n"
 "Generated-By: pygettext.py 1.5\n"
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.5.7\n"
 
 #: __init__.py:32
 msgid "UI plugin to split off parts of an epub into a new book."
@@ -35,9 +33,7 @@ msgstr "Personalizar Colunas"
 msgid ""
 "When making a new Epub, the metadata from the source book will be copied or "
 "not as you choose below."
-msgstr ""
-"Ao fazer um novo Epub, os metadados do livro de origem serão copiados ou "
-"não, conforme suas escolhas a seguir."
+msgstr "Ao fazer um novo Epub, os metadados do livro de origem serão copiados ou não, conforme suas escolhas a seguir."
 
 #: config.py:206
 msgid "Copy Title"
@@ -47,9 +43,7 @@ msgstr "Copiar Título"
 msgid ""
 "Copy Title from the source Epub to the Split Epub.  Adds \"Split\" to the "
 "title."
-msgstr ""
-"Copia o título do Epub de origem para o Epub dividido. Adiciona \"Dividir\" "
-"para o título."
+msgstr "Copia o título do Epub de origem para o Epub dividido. Adiciona \"Dividir\" para o título."
 
 #: config.py:211
 msgid "Copy Authors"
@@ -139,19 +133,14 @@ msgstr "Copiar Comentários"
 msgid ""
 "Copy Comments from the source Epub to the Split Epub.  Adds \"Split from:\" "
 "to the comments."
-msgstr ""
-"Copia comentários do Epub de origem para o Epub dividido. Adiciona \"Dividir "
-"de\" para os comentários."
+msgstr "Copia comentários do Epub de origem para o Epub dividido. Adiciona \"Dividir de\" para os comentários."
 
 #: config.py:270
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubSplit confirmation "
 "dialogs back again."
-msgstr ""
-"Esses controles não são configurações do plugin como sugere o nome, mas "
-"botões convenientes para a criação de atalhos de teclado e recebendo todos "
-"os diálogos de confirmação do EpubSplit."
+msgstr "Esses controles não são configurações do plugin como sugere o nome, mas botões convenientes para a criação de atalhos de teclado e recebendo todos os diálogos de confirmação do EpubSplit."
 
 #: config.py:275
 msgid "Keyboard shortcuts..."
@@ -167,8 +156,7 @@ msgstr "Redefinir diálogos de &confirmação desativados"
 
 #: config.py:281
 msgid "Reset all show me again dialogs for the EpubSplit plugin"
-msgstr ""
-"Redefinir tudo, mostre-me novamente os diálogos para o plugin EpubSplit"
+msgstr "Redefinir tudo, mostre-me novamente os diálogos para o plugin EpubSplit"
 
 #: config.py:285
 msgid "View library preferences..."
@@ -176,8 +164,7 @@ msgstr "Visualizar preferências da biblioteca..."
 
 #: config.py:286
 msgid "View data stored in the library database for this plugin"
-msgstr ""
-"Visualizar dados armazenados no banco de dados da biblioteca para este plugin"
+msgstr "Visualizar dados armazenados no banco de dados da biblioteca para este plugin"
 
 #: config.py:299 dialogs.py:88
 msgid "Done"
@@ -191,10 +178,7 @@ msgstr "Os diálogos de confirmação foram redefinidos"
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose if "
 "you would like these columns copied to new split books."
-msgstr ""
-"Se você tiver colunas personalizadas definidas, elas serão listadas abaixo. "
-"Escolha se você gostaria que estas colunas fossem copiadas para novos livros "
-"divididos."
+msgstr "Se você tiver colunas personalizadas definidas, elas serão listadas abaixo. Escolha se você gostaria que estas colunas fossem copiadas para novos livros divididos."
 
 #: config.py:336
 msgid "Copy this %s column to new split books..."
@@ -206,11 +190,9 @@ msgstr "Coluna de origem:"
 
 #: config.py:345
 msgid ""
-"If set, the column below will be populated with the template below to record "
-"the source of the split file."
-msgstr ""
-"Se for definido, a coluna abaixo será preenchida com o modelo abaixo para "
-"gravar a origem do arquivo dividido."
+"If set, the column below will be populated with the template below to record"
+" the source of the split file."
+msgstr "Se for definido, a coluna abaixo será preenchida com o modelo abaixo para gravar a origem do arquivo dividido."
 
 #: config.py:351
 msgid "Choose a column to populate with template on split."
@@ -245,10 +227,7 @@ msgid ""
 "Click and copy hotkey to copy text.\n"
 "Double-click to edit ToC entry.\n"
 "Pipes(|) divide different ToC entries to the same place."
-msgstr ""
-"Clicar e copiar atalho para copiar o texto.\n"
-"Clique duas vezes para editar entradas do índice.\n"
-"Pipes(|) divide diferentes entradas do índice para o mesmo local."
+msgstr "Clicar e copiar atalho para copiar o texto.\nClique duas vezes para editar entradas do índice.\nPipes(|) divide diferentes entradas do índice para o mesmo local."
 
 #: epubsplit_plugin.py:62
 msgid "EpubSplit"
@@ -288,28 +267,14 @@ msgstr "Dividir de:"
 
 #: epubsplit_plugin.py:247
 msgid ""
-"The book for the new Split EPUB has been created and default metadata filled "
-"in.\n"
+"The book for the new Split EPUB has been created and default metadata filled in.\n"
 "\n"
-"However, the EPUB will *not* be created until after you've reviewed, edited, "
-"and closed the metadata dialog that follows.\n"
+"However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows.\n"
 "\n"
-"You can fill in the metadata yourself, or use download metadata for known "
-"books.\n"
+"You can fill in the metadata yourself, or use download metadata for known books.\n"
 "\n"
-"If you download or add a cover image, it will be included in the generated "
-"EPUB."
-msgstr ""
-"O livro para a nova divisão EPUB foi criado e metadados padrão preenchidos.\n"
-"\n"
-"Contudo, o EPUB *não* vai ser criado enquanto você não revisar, editar, e "
-"fechar a janela de metadados a seguir.\n"
-"\n"
-"Você mesmo pode preencher os metadados, ou utilizar os metadados de "
-"transferência de livros conhecidos.\n"
-"\n"
-"Se você transferir ou adicionar uma imagem de capa, ela será incluída no "
-"EPUB gerado."
+"If you download or add a cover image, it will be included in the generated EPUB."
+msgstr "O livro para a nova divisão EPUB foi criado e metadados padrão preenchidos.\n\nContudo, o EPUB *não* vai ser criado enquanto você não revisar, editar, e fechar a janela de metadados a seguir.\n\nVocê mesmo pode preencher os metadados, ou utilizar os metadados de transferência de livros conhecidos.\n\nSe você transferir ou adicionar uma imagem de capa, ela será incluída no EPUB gerado."
 
 #: epubsplit_plugin.py:263
 msgid "Splitting off from EPUB..."
