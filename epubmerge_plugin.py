@@ -359,9 +359,14 @@ class EpubMergePlugin(InterfaceAction):
 
             mi.series = ''
 
-            mi.comments = (_("%s containing:")+"\n\n") % prefs['mergeword'] + \
-                '\n'.join(map(lambda x : _("%s by %s") % \
-                                  (x['title'],' & '.join(x['authors'])), book_list))
+            # print("======================= mi.authors:\n%s\n========================="%mi.authors)
+            if len(mi.authors) > 1:
+                mi.comments = (_("%s containing:")+"\n\n") % prefs['mergeword'] + \
+                    '\n'.join(map(lambda x : _("%s by %s") % \
+                                      (x['title'],' & '.join(x['authors'])), book_list))
+            else:
+                mi.comments = (_("%s containing:")+"\n\n") % prefs['mergeword'] + \
+                    '\n'.join(map(lambda x : x['title'], book_list))
             
 
             # print("======================= mi.languages:\n%s\n========================="%mi.languages)
