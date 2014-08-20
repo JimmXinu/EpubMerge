@@ -1,0 +1,171 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# 
+# Translators:
+# embryo, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: calibre-plugins\n"
+"POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
+"PO-Revision-Date: 2014-08-18 21:00+0000\n"
+"Last-Translator: embryo\n"
+"Language-Team: Greek (http://www.transifex.com/projects/p/calibre-plugins/language/el/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:32
+msgid ""
+"UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices."
+msgstr "Γραφικό πρόσθετο για τον έλεγχο Διπλών/Χαμένων/Πρόσθετων βιβλίων κατά την αποσύνδεση συσκευών."
+
+#: config.py:107
+msgid "Basic"
+msgstr "Βασικό"
+
+#: config.py:110
+msgid "Searches"
+msgstr "Αναζητήσεις"
+
+#: config.py:140
+msgid "When Ejecting a Device, Check for:"
+msgstr "Όταν αποσυνδέεται μια συσκευή, έλεγξε για:"
+
+#: config.py:154
+msgid "Reading List books to Sync"
+msgstr "Βιβλία της Λίστας Ανάγνωσης για συγχρονισμό"
+
+#: config.py:155
+msgid ""
+"Check Reading List plugin for books ready to Sync to the current device."
+msgstr "Έλεγξε το πρόσθετο της Λίστας Ανάγνωσης για βιβλία έτοιμα για συγχρονισμό με την τρέχουσα συσκευή."
+
+#: config.py:161
+msgid "Duplicated Books"
+msgstr "Διπλά βιβλία"
+
+#: config.py:162
+msgid "Check for books that are on the device more than once."
+msgstr "Έλεγξε για βιβλία που υπάρχουν στη συσκευή πάνω από μία φορά."
+
+#: config.py:166
+msgid "Deleted Books (not in Library)"
+msgstr "Διαγραμμένα βιβλία (όχι στη Βιβλιοθήκη)"
+
+#: config.py:167
+msgid "Check for books on the device that are not in the current library."
+msgstr "Έλεγξε για βιβλία στη συσκευή που δεν βρίσκονται στη τρέχουσα Βιβλιοθήκη."
+
+#: config.py:171
+msgid "Added Books (not on Device)"
+msgstr "Πρόσθετα βιβλία (όχι στη συσκευή)"
+
+#: config.py:172
+msgid "Check for books in the current library that are not on the device."
+msgstr "Έλεγξε για βιβλία στην τρέχουσα Βιβλιοθήκη που δεν υπάρχουν στην συσκευή."
+
+#: config.py:180
+msgid ""
+"These controls aren't plugin settings as such, but convenience buttons for "
+"setting Keyboard shortcuts and viewing all plugins settings."
+msgstr "Αυτά τα χειριστήρια δεν είναι πρόσθετα ως έχουν, αλλά βολικά κουμπιά για την επεξεργασία  των συντομεύσεων πληκτρολογίου και την εμφάνιση όλων των ρυθμίσεων του πρόσθετου."
+
+#: config.py:185
+msgid "Keyboard shortcuts..."
+msgstr "Συντομεύσεις πληκτρολογίου..."
+
+#: config.py:186
+msgid "Edit the keyboard shortcuts associated with this plugin"
+msgstr "Επεξεργασία των συντομεύσεων πληκτρολογίου για αυτό το πρόσθετο"
+
+#: config.py:190
+msgid "&View library preferences..."
+msgstr "&Εμφάνιση προτιμήσεων για την Βιβλιοθήκη..."
+
+#: config.py:191
+msgid "View data stored in the library database for this plugin"
+msgstr "Εμφάνιση των στοιχείων που βρίσκονται αποθηκευμένα στη βάση δεδομένων για αυτό το πρόσθετο"
+
+#: config.py:204
+msgid "Done"
+msgstr "Ολοκληρώθηκε"
+
+#: config.py:205
+msgid "Confirmation dialogs have all been reset"
+msgstr "Οι διάλογοι επικυρώσεων έχουν επανέλθει στην αρχική ρύθμιση"
+
+#: config.py:219
+msgid "Searches to use for:"
+msgstr "Αναζητήσεις για να χρησιμοποιηθούν για:"
+
+#: config.py:234
+msgid "Search for Duplicated Books:"
+msgstr "Αναζήτηση διπλών βιβλίων:"
+
+#: config.py:238 config.py:245 config.py:252
+msgid "Default is %s"
+msgstr "Προεπιλογή είναι %s"
+
+#: config.py:241
+msgid "Deleted Books (not in Library):"
+msgstr "Διαγραμμένα βιβλία (όχι στη Βιβλιοθήκη)"
+
+#: config.py:248
+msgid "Added Books (not on Device):"
+msgstr "Πρόσθετα βιβλία (όχι στη συσκευή)"
+
+#: config.py:258
+msgid "Restore Defaults"
+msgstr "Επαναφορά προεπιλογών"
+
+#: config.py:259
+msgid "Revert all searches to the defaults."
+msgstr "Επαναφορά όλων των αναζητήσεων στις προεπιλογές."
+
+#: smarteject_plugin.py:34 smarteject_plugin.py:67
+msgid "SmartEject"
+msgstr "ΈξυπνηΑποσύνδεση"
+
+#: smarteject_plugin.py:35
+msgid "Check for duplicated/deleted/added books before ejecting."
+msgstr "Έλεγξε για διπλά/χαμένα/πρόσθετα βιβλία πριν την αποσύνδεση."
+
+#: smarteject_plugin.py:86
+msgid "Sync Reading List?"
+msgstr "Συγχρονισμός της Λίστας Ανάγνωσης;"
+
+#: smarteject_plugin.py:86
+msgid ""
+"There are books that need syncing according to Reading List.<p>Sync Books?"
+msgstr "Υπάρχουν βιβλία που χρειάζονται συγχρονισμό σύμφωνα με την Λίστα Ανάγνωσης.<p>Συγχρονισμός βιβλίων;"
+
+#: smarteject_plugin.py:93
+msgid "Duplicates on Device"
+msgstr "Διπλά βιβλία στην συσκευή"
+
+#: smarteject_plugin.py:93
+msgid "There are duplicate ebooks on the device.<p>Display duplicates?"
+msgstr "Υπάρχουν διπλά βιβλία στην συσκευή.<p>Εμφάνιση των διπλών;"
+
+#: smarteject_plugin.py:114
+msgid "Books in Library not on Device"
+msgstr "Βιβλία στην Βιβλιοθήκη αλλά όχι στην συσκευή"
+
+#: smarteject_plugin.py:115
+msgid ""
+"There are books in the Library that are not on the Device.<p>Display books "
+"not on Device?"
+msgstr "Υπάρχουν βιβλία στην Βιβλιοθήκη που δεν υπάρχουν στην συσκευή.<p>Εμφάνιση βιβλίων που δεν υπάρχουν στην συσκευή;"
+
+#: smarteject_plugin.py:138
+msgid "Books on Device not in Library"
+msgstr "Βιβλία στην συσκευή αλλά όχι στην Βιβλιοθήκη"
+
+#: smarteject_plugin.py:138
+msgid ""
+"There are books on the device in %s that are not in the Library.<p>Display "
+"books not in Library?"
+msgstr "Υπάρχουν βιβλία στο %s που δεν υπάρχουν στην Βιβλιοθήκη.<p>Εμφάνιση βιβλίων που δεν υπάρχουν στην Βιβλιοθήκη;"
