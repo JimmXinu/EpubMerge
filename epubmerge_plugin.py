@@ -301,7 +301,7 @@ class EpubMergePlugin(InterfaceAction):
             d = error_dialog(self.gui,
                              _('Cannot Merge Epubs'),
                              _('%s books failed.')%len(bad_list),
-                             det_msg='\n'.join(map(lambda x : x['comment'] , bad_list)))
+                             det_msg='\n'.join(map(lambda x : x['error'] , bad_list)))
             d.exec_()
         else:
             d = OrderEPUBsDialog(self.gui,
@@ -359,17 +359,29 @@ class EpubMergePlugin(InterfaceAction):
 
             mi.series = ''
 
-            # print("======================= mi.authors:\n%s\n========================="%mi.authors)
-            if len(mi.authors) > 1:
-                mi.comments = (_("%s containing:")+"\n\n") % prefs['mergeword'] + \
-                    '\n'.join(map(lambda x : _("%s by %s") % \
-                                      (x['title'],' & '.join(x['authors'])), book_list))
-            else:
-                mi.comments = (_("%s containing:")+"\n\n") % prefs['mergeword'] + \
-                    '\n'.join(map(lambda x : x['title'], book_list))
+            # ======================= make book comments =========================
             
-
-            # print("======================= mi.languages:\n%s\n========================="%mi.languages)
+            if len(mi.authors) > 1:
+                booktitle = lambda x : _("%s by %s") % (x['title'],' & '.join(x['authors']))
+            else:
+                booktitle = lambda x : x['title']
+                
+            mi.comments = (_("%s containing:")+"\n\n") % prefs['mergeword']
+            
+            if prefs['includecomments']:
+                def bookcomments(x):
+                    if x['comments']:
+                        return '<b>%s</b>\n\n%s'%(booktitle(x),x['comments'])
+                    else:
+                        return '<b>%s</b>\n'%booktitle(x)
+                    
+                mi.comments += ('<div class="mergedbook">' +
+                                '<hr></div><div class="mergedbook">'.join([ bookcomments(x) for x in book_list]) +
+                                '</div>')
+            else:
+                mi.comments += '\n'.join( [ booktitle(x) for x in book_list ] )
+                
+            # ======================= make book entry =========================
 
             book_id = db.create_book_entry(mi,
                                            add_duplicates=True)
@@ -596,7 +608,8 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
         book['title'] = _('Unknown')
         book['author'] = _('Unknown')
         book['author_sort'] = _('Unknown')
-        book['comment'] = ''
+        book['error'] = ''
+        book['comments'] = ''
       
         return book
         
@@ -610,12 +623,13 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
         book['author_sort'] = mi.author_sort
         book['tags'] = mi.tags
         book['series'] = mi.series
+        book['comments'] = mi.comments
         if book['series']:
             book['series_index'] = mi.series_index
         else:
             book['series_index'] = None
         book['languages'] = mi.languages
-        book['comment'] = ''
+        book['error'] = ''
         if db.has_format(mi.id,'EPUB',index_is_id=True):
             book['epub'] = StringIO(db.format(mi.id,'EPUB',index_is_id=True))
             if prefs['keepmeta']:
@@ -623,7 +637,7 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
             book['epub_size'] = len(book['epub'].getvalue())
         else:
             book['good'] = False;
-            book['comment'] = _("%s by %s doesn't have an EPUB.")%(mi.title,', '.join(mi.authors))
+            book['error'] = _("%s by %s doesn't have an EPUB.")%(mi.title,', '.join(mi.authors))
 
 def gethumanreadable(size,precision=1):
     suffixes=['B','KB','MB','GB','TB']

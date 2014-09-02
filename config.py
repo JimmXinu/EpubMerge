@@ -51,6 +51,7 @@ PREFS_KEY_SETTINGS = 'settings'
 # take from here.
 default_prefs = {}
 default_prefs['flattentoc'] = False
+default_prefs['includecomments'] = False
 default_prefs['titlenavpoints'] = True
 default_prefs['keepmeta'] = True
 default_prefs['showunmerge'] = True
@@ -152,6 +153,7 @@ class ConfigWidget(QWidget):
     def save_settings(self):
         # basic
         prefs['flattentoc'] = self.basic_tab.flattentoc.isChecked()
+        prefs['includecomments'] = self.basic_tab.includecomments.isChecked()
         prefs['titlenavpoints'] = self.basic_tab.titlenavpoints.isChecked()
         prefs['keepmeta'] = self.basic_tab.keepmeta.isChecked()
         prefs['showunmerge'] = self.basic_tab.showunmerge.isChecked()
@@ -202,6 +204,12 @@ it's existing TOC nested underneath it.'''))
         self.flattentoc.setToolTip(_('Remove nesting and make TOC all on one level.'))
         self.flattentoc.setChecked(prefs['flattentoc'])
         self.l.addWidget(self.flattentoc)
+        
+        self.includecomments = QCheckBox(_("Include Books' Comments?"),self)
+        self.includecomments.setToolTip(_('''Include all the merged books' comments in the new book's comments.
+Default is a list of included titles only.'''))
+        self.includecomments.setChecked(prefs['includecomments'])
+        self.l.addWidget(self.includecomments)
         
         self.keepmeta = QCheckBox(_('Keep UnMerge Metadata?'),self)
         self.keepmeta.setToolTip(_('''If set, a copy of the original metadata for each merged book will
