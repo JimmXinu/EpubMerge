@@ -25,6 +25,8 @@ except NameError:
 
 class SmartEjectPlugin(InterfaceAction):
 
+    name = 'SmartEject'
+    
     # Declare the main action associated with this plugin
     # The keyboard shortcut can be None if you dont want to use a keyboard
     # shortcut. Remember that currently calibre has no central management for
