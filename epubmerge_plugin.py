@@ -18,6 +18,8 @@ try:
 except ImportError as e:
     from PyQt4.Qt import (QApplication, QMenu, QToolButton)
 
+from calibre.constants import numeric_version as calibre_version
+
 from calibre.ptempfile import PersistentTemporaryFile, PersistentTemporaryDirectory, remove_dir
 from calibre.ebooks.metadata import MetaInformation, authors_to_string
 from calibre.ebooks.metadata.meta import set_metadata, metadata_from_formats
@@ -104,58 +106,32 @@ class EpubMergePlugin(InterfaceAction):
 
         # Assign our menu to this action
         self.menu = QMenu()
-        self.old_actions_unique_map = {}
-        # menu_actions is just to keep a live reference to the menu
-        # items to prevent GC removing it.
-        self.menu_actions = []
         self.qaction.setMenu(self.menu)
-        self.menus_lock = threading.RLock()
-        self.menu.aboutToShow.connect(self.about_to_show_menu)
         
     def initialization_complete(self):
-        # otherwise configured hot keys won't work until the menu's
-        # been displayed once.
-        self.rebuild_menus()
+        # setup menu.
+        self.merge_action = self.create_menu_item_ex(self.menu, _('&Merge Epubs'), image='images/icon.png',
+                                                     unique_name=_('&Merge Epubs'),
+                                                     triggered=self.plugin_button )
 
-    def about_to_show_menu(self):
-        self.rebuild_menus()
+        self.unmerge_action = self.create_menu_item_ex(self.menu, _('&UnMerge Epub'), image='images/unmerge.png',
+                                                       unique_name=_('&UnMerge Epub'),
+                                                       triggered=self.unmerge )
 
-    def library_changed(self, db):
-        # We need to reset our menus after switching libraries
-        self.rebuild_menus()
-        
-    def rebuild_menus(self):
-        with self.menus_lock:
+
+        # print("platform.system():%s"%platform.system())
+        # print("platform.mac_ver()[0]:%s"%platform.mac_ver()[0])
+        if not self.check_macmenuhack(): # not platform.mac_ver()[0]: # Some macs crash on these menu items for unknown reasons.
             do_user_config = self.interface_action_base_plugin.do_user_config
-            self.menu.clear()
-            self.actions_unique_map = {}
-            self.menu_actions = []
-            
-            self.merge_action = self.create_menu_item_ex(self.menu, _('&Merge Epubs'), image='images/icon.png',
-                                                         triggered=self.plugin_button )
-
-            if prefs['showunmerge']:
-                self.unmerge_action = self.create_menu_item_ex(self.menu, _('&UnMerge Epub'), image='images/unmerge.png',
-                                                               triggered=self.unmerge )
-
-
-            # print("platform.system():%s"%platform.system())
-            # print("platform.mac_ver()[0]:%s"%platform.mac_ver()[0])
-            if not self.check_macmenuhack(): # not platform.mac_ver()[0]: # Some macs crash on these menu items for unknown reasons.
-                self.menu.addSeparator()
-                self.config_action = self.create_menu_item_ex(self.menu, _('&Configure Plugin'),
-                                                              image= 'config.png',
-                                                              unique_name=_('Configure EpubMerge'),
-                                                              shortcut_name=_('Configure EpubMerge'),
-                                                              triggered=partial(do_user_config,parent=self.gui))
-            
-            
-            # Before we finalize, make sure we delete any actions for menus that are no longer displayed
-            for menu_id, unique_name in self.old_actions_unique_map.iteritems():
-                if menu_id not in self.actions_unique_map:
-                    self.gui.keyboard.unregister_shortcut(unique_name)
-            self.old_actions_unique_map = self.actions_unique_map
-            self.gui.keyboard.finalize()
+            self.menu.addSeparator()
+            self.config_action = self.create_menu_item_ex(self.menu, _('&Configure Plugin'),
+                                                          image= 'config.png',
+                                                          unique_name=_('Configure EpubMerge'),
+                                                          shortcut_name=_('Configure EpubMerge'),
+                                                          triggered=partial(do_user_config,parent=self.gui))
+        
+        
+        self.gui.keyboard.finalize()
 
     def create_menu_item_ex(self, parent_menu, menu_text, image=None, tooltip=None,
                            shortcut=None, triggered=None, is_checked=None, shortcut_name=None,
@@ -163,8 +139,6 @@ class EpubMergePlugin(InterfaceAction):
         #print("create_menu_item_ex before %s"%menu_text)
         ac = create_menu_action_unique(self, parent_menu, menu_text, image, tooltip,
                                        shortcut, triggered, is_checked, shortcut_name, unique_name)
-        self.actions_unique_map[ac.calibre_shortcut_unique_name] = ac.calibre_shortcut_unique_name
-        self.menu_actions.append(ac)
         #print("create_menu_item_ex after %s"%menu_text)
         return ac
 
