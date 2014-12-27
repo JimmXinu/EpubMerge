@@ -1,0 +1,113 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2014-10-10 13:29+Central Daylight Time\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: ENCODING\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: __init__.py:32
+msgid "UI plugin to calculate aggregate values for numeric columns of selected books."
+msgstr ""
+
+#: columnsum_plugin.py:32 columnsum_plugin.py:71
+msgid "ColumnSum"
+msgstr ""
+
+#: columnsum_plugin.py:34
+msgid "Calculate Sum or other Aggregate for numeric columns of selected books."
+msgstr ""
+
+#: columnsum_plugin.py:85
+msgid "No Selected Books for ColumnSum"
+msgstr ""
+
+#: columnsum_plugin.py:93
+msgid "ColumnSum only works in libary"
+msgstr ""
+
+#: columnsum_plugin.py:130
+msgid "Collecting ..."
+msgstr ""
+
+#: columnsum_plugin.py:131
+msgid "Summing Columns"
+msgstr ""
+
+#: columnsum_plugin.py:132
+msgid "Books collected"
+msgstr ""
+
+#: columnsum_plugin.py:135
+msgid "Cancel"
+msgstr ""
+
+#: config.py:103
+msgid "Basic"
+msgstr ""
+
+#: config.py:130
+msgid "When Summing Columns, Calculate:"
+msgstr ""
+
+#: config.py:144
+msgid "Sum"
+msgstr ""
+
+#: config.py:145
+msgid "Sum of numeric columns for selected books."
+msgstr ""
+
+#: config.py:151
+msgid "Average"
+msgstr ""
+
+#: config.py:152
+msgid "Average of numeric columns for selected books."
+msgstr ""
+
+#: config.py:156
+msgid "Standard Deviation"
+msgstr ""
+
+#: config.py:157
+msgid "Standard Deviation of numeric columns for selected books."
+msgstr ""
+
+#: config.py:165
+msgid "These controls aren't plugin settings as such, but convenience buttons for setting Keyboard shortcuts and viewing all plugins settings."
+msgstr ""
+
+#: config.py:170
+msgid "Keyboard shortcuts..."
+msgstr ""
+
+#: config.py:171
+msgid "Edit the keyboard shortcuts associated with this plugin"
+msgstr ""
+
+#: config.py:175
+msgid "&View library preferences..."
+msgstr ""
+
+#: config.py:176
+msgid "View data stored in the library database for this plugin"
+msgstr ""
+
+#: config.py:189
+msgid "Done"
+msgstr ""
+
+#: config.py:190
+msgid "Confirmation dialogs have all been reset"
+msgstr ""
+
