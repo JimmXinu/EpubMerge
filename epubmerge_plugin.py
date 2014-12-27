@@ -7,26 +7,20 @@ __license__   = 'GPL v3'
 __copyright__ = '2014, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
-import time, os, copy, threading
-from ConfigParser import SafeConfigParser
+import time, os
 from StringIO import StringIO
 from functools import partial
-from datetime import datetime
 
 try:
-    from PyQt5.Qt import (QApplication, QMenu, QToolButton)
+    from PyQt5.Qt import (QMenu)
 except ImportError as e:
-    from PyQt4.Qt import (QApplication, QMenu, QToolButton)
-
-from calibre.constants import numeric_version as calibre_version
+    from PyQt4.Qt import (QMenu)
 
 from calibre.ptempfile import PersistentTemporaryFile, PersistentTemporaryDirectory, remove_dir
-from calibre.ebooks.metadata import MetaInformation, authors_to_string
+from calibre.ebooks.metadata import MetaInformation
 from calibre.ebooks.metadata.meta import set_metadata, metadata_from_formats
-from calibre.gui2 import error_dialog, warning_dialog, question_dialog, info_dialog
-from calibre.gui2.dialogs.message_box import ViewLog
+from calibre.gui2 import error_dialog
 from calibre.gui2.dialogs.confirm_delete import confirm
-from calibre.utils.date import local_tz
 from calibre.constants import config_dir as calibre_config_dir
 
 # The class that all interface action plugins must inherit from
