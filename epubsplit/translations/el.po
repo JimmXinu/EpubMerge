@@ -7,7 +7,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
+"POT-Creation-Date: 2014-12-27 13:16+Central Standard Time\n"
 "PO-Revision-Date: 2014-08-19 00:10+0000\n"
 "Last-Translator: embryo\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/calibre-plugins/language/el/)\n"
@@ -22,208 +22,208 @@ msgstr ""
 msgid "UI plugin to split off parts of an epub into a new book."
 msgstr ""
 
-#: config.py:144
+#: config.py:159
 msgid "Basic"
 msgstr "Βασικό"
 
-#: config.py:147
+#: config.py:162
 msgid "Custom Columns"
 msgstr "Προσαρμοσμένες στήλες"
 
-#: config.py:192
+#: config.py:207
 msgid ""
 "When making a new Epub, the metadata from the source book will be copied or "
 "not as you choose below."
 msgstr "Δημιουργώντας ένα καινούργιο Epub, τα μεταδεδομένα από το πηγαίο βιβλίο θα αντιγραφούν ή όχι αναλόγως των παρακάτω επιλογών."
 
-#: config.py:206
+#: config.py:221
 msgid "Copy Title"
 msgstr "Αντιγραφή τίτλου"
 
-#: config.py:207
+#: config.py:222
 msgid ""
 "Copy Title from the source Epub to the Split Epub.  Adds \"Split\" to the "
 "title."
 msgstr "Αντιγραφή τίτλου από το πηγαίο Epub στο διαχωρισμένο Epub. Προσθήκη \"Split\" στον τίτλο."
 
-#: config.py:211
+#: config.py:226
 msgid "Copy Authors"
 msgstr "Αντιγραφή συγγραφέων"
 
-#: config.py:212
+#: config.py:227
 msgid "Copy Authors from the source Epub to the Split Epub."
 msgstr "Αντιγραφή συγγραφέων από το πηγαίο Epub στο διαχωρισμένο Epub."
 
-#: config.py:216
+#: config.py:231
 msgid "Copy Series"
 msgstr "Αντιγραφή σειρών"
 
-#: config.py:217
+#: config.py:232
 msgid "Copy Series from the source Epub to the Split Epub."
 msgstr "Αντιγραφή σειράς από το πηγαίο Epub στο διαχωρισμένο Epub."
 
-#: config.py:221
+#: config.py:236
 msgid "Copy Cover"
 msgstr "Αντιγραφή εξωφύλλου"
 
-#: config.py:222
+#: config.py:237
 msgid "Copy Cover from the source Epub to the Split Epub."
 msgstr "Αντιγραφή εξωφύλλου από το πηγαίο Epub στο διαχωρισμένο Epub."
 
-#: config.py:226
+#: config.py:241
 msgid "Copy Rating"
 msgstr "Αντιγραφή αξιολόγησης"
 
-#: config.py:227
+#: config.py:242
 msgid "Copy Rating from the source Epub to the Split Epub."
 msgstr "Αντιγραφή αξιολόγησης από το πηγαίο Epub στο διαχωρισμένο Epub."
 
-#: config.py:231
+#: config.py:246
 msgid "Copy Tags"
 msgstr "Αντιγραφή ετικετών"
 
-#: config.py:232
+#: config.py:247
 msgid "Copy Tags from the source Epub to the Split Epub."
 msgstr "Αντιγραφή ετικετών από το πηγαίο Epub στο διαχωρισμένο Epub."
 
-#: config.py:236
+#: config.py:251
 msgid "Copy Identifiers"
 msgstr ""
 
-#: config.py:237
+#: config.py:252
 msgid "Copy Identifiers from the source Epub to the Split Epub."
 msgstr ""
 
-#: config.py:241
+#: config.py:256
 msgid "Copy Date"
 msgstr "Αντιγραφή ημερομηνίας"
 
-#: config.py:242
+#: config.py:257
 msgid "Copy Date from the source Epub to the Split Epub."
 msgstr "Αντιγραφή ημερομηνίας από το πηγαίο Epub στο διαχωρισμένο Epub."
 
-#: config.py:246
+#: config.py:261
 msgid "Copy Published Date"
 msgstr "Αντιγραφή ημερομηνίας έκδοσης"
 
-#: config.py:247
+#: config.py:262
 msgid "Copy Published Date from the source Epub to the Split Epub."
 msgstr "Αντιγραφή ημερομηνίας έκδοσης από το πηγαίο Epub στο διαχωρισμένο Epub."
 
-#: config.py:251
+#: config.py:266
 msgid "Copy Publisher"
 msgstr "Αντιγραφή εκδότη"
 
-#: config.py:252
+#: config.py:267
 msgid "Copy Publisher from the source Epub to the Split Epub."
 msgstr "Αντιγραφή εκδότη από το πηγαίο Epub στο διαχωρισμένο Epub."
 
-#: config.py:256
+#: config.py:271
 msgid "Copy Languages"
 msgstr "Αντιγραφή γλωσσών"
 
-#: config.py:257
+#: config.py:272
 msgid "Copy Languages from the source Epub to the Split Epub."
 msgstr "Αντιγραφή γλωσσών από το πηγαίο Epub στο διαχωρισμένο Epub."
 
-#: config.py:261
+#: config.py:276
 msgid "Copy Comments"
 msgstr "Αντιγραφή σχολίων"
 
-#: config.py:262
+#: config.py:277
 msgid ""
 "Copy Comments from the source Epub to the Split Epub.  Adds \"Split from:\" "
 "to the comments."
 msgstr "Αντιγραφή σχολίων από το πηγαίο Epub στο διαχωρισμένο Epub. Προσθήκη \"Split from:\" στα σχόλια."
 
-#: config.py:270
+#: config.py:285
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubSplit confirmation "
 "dialogs back again."
 msgstr "Αυτά τα χειριστήρια δεν είναι πρόσθετα ως έχουν, αλλά βολικά κουμπιά για την επεξεργασία των συντομεύσεων πληκτρολογίου και την επαναφορά των διαλόγων επιβεβαίωσης του ΔιαχωρισμούEpub."
 
-#: config.py:275
+#: config.py:290
 msgid "Keyboard shortcuts..."
 msgstr "Συντομεύσεις πληκτρολογίου..."
 
-#: config.py:276
+#: config.py:291
 msgid "Edit the keyboard shortcuts associated with this plugin"
 msgstr "Επεξεργασία των συντομεύσεων πληκτρολογίου για αυτό το πρόσθετο"
 
-#: config.py:280
+#: config.py:295
 msgid "Reset disabled &confirmation dialogs"
 msgstr "Επαναφορά απενεργοποιημένων διαλόγων &επιβεβαίωσης"
 
-#: config.py:281
+#: config.py:296
 msgid "Reset all show me again dialogs for the EpubSplit plugin"
 msgstr "Επαναφορά όλων, εμφάνιση ξανά των διαλόγων για το πρόσθετο ΔιαχωρισμόςEpub"
 
-#: config.py:285
+#: config.py:300
 msgid "View library preferences..."
 msgstr "Εμφάνιση προτιμήσεων για την Βιβλιοθήκη..."
 
-#: config.py:286
+#: config.py:301
 msgid "View data stored in the library database for this plugin"
 msgstr "Εμφάνιση των στοιχείων που βρίσκονται αποθηκευμένα στη βάση δεδομένων για αυτό το πρόσθετο"
 
-#: config.py:299 dialogs.py:88
+#: config.py:314 dialogs.py:84
 msgid "Done"
 msgstr "Ολοκληρώθηκε"
 
-#: config.py:300
+#: config.py:315
 msgid "Confirmation dialogs have all been reset"
 msgstr "Οι διάλογοι επικυρώσεων έχουν επανέλθει στην αρχική ρύθμιση"
 
-#: config.py:314
+#: config.py:329
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose if "
 "you would like these columns copied to new split books."
 msgstr ""
 
-#: config.py:336
+#: config.py:351
 msgid "Copy this %s column to new split books..."
 msgstr "Αντιγραφή της %s στήλης στα νέα διαχωρισμένα βιβλία."
 
-#: config.py:344
+#: config.py:359
 msgid "Source column:"
 msgstr "Πηγαία στήλη:"
 
-#: config.py:345
+#: config.py:360
 msgid ""
 "If set, the column below will be populated with the template below to record"
 " the source of the split file."
 msgstr ""
 
-#: config.py:351
+#: config.py:366
 msgid "Choose a column to populate with template on split."
 msgstr ""
 
-#: config.py:360
+#: config.py:375
 msgid "Template from source book. Example: {title} by {authors}"
 msgstr ""
 
-#: dialogs.py:85
+#: dialogs.py:81
 msgid "New Book"
 msgstr "Νέο βιβλίο"
 
-#: dialogs.py:114
+#: dialogs.py:110
 msgid "Guide"
 msgstr "Οδηγός"
 
-#: dialogs.py:114
+#: dialogs.py:110
 msgid "HREF"
 msgstr ""
 
-#: dialogs.py:114
+#: dialogs.py:110
 msgid "Table of Contents"
 msgstr "Πίνακας Περιεχομένων"
 
-#: dialogs.py:151
+#: dialogs.py:147
 msgid "Indicates 'special' pages: copyright, titlepage, etc."
 msgstr ""
 
-#: dialogs.py:157
+#: dialogs.py:153
 msgid ""
 "Click and copy hotkey to copy text.\n"
 "Double-click to edit ToC entry.\n"

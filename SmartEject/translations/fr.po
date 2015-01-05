@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2014-07-08 10:29+Central Daylight Time\n"
+"POT-Creation-Date: 2014-12-27 13:16+Central Standard Time\n"
 "PO-Revision-Date: 2014-06-19 23:11+0000\n"
 "Last-Translator: JimmXinu <retiefjimm@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/projects/p/calibre-plugins/language/fr/)\n"
@@ -124,46 +124,46 @@ msgstr "Restaurer les paramètres par défaut"
 msgid "Revert all searches to the defaults."
 msgstr "Restaurer toutes les recherches à la configuration par défaut."
 
-#: smarteject_plugin.py:34 smarteject_plugin.py:67
+#: smarteject_plugin.py:36 smarteject_plugin.py:69
 msgid "SmartEject"
 msgstr "SmartEject (Éjection Intelligente)"
 
-#: smarteject_plugin.py:35
+#: smarteject_plugin.py:37
 msgid "Check for duplicated/deleted/added books before ejecting."
 msgstr "Vérifier la présence de livres en doublon/supprimés/ajoutés avant l'éjection."
 
-#: smarteject_plugin.py:86
+#: smarteject_plugin.py:88
 msgid "Sync Reading List?"
 msgstr "Synchroniser la Liste de Lecture ?"
 
-#: smarteject_plugin.py:86
+#: smarteject_plugin.py:88
 msgid ""
 "There are books that need syncing according to Reading List.<p>Sync Books?"
 msgstr "Il y a des livres qui ont besoin d'être synchronisés selon la Liste de Lecture.<p>Synchroniser les livres ?"
 
-#: smarteject_plugin.py:93
+#: smarteject_plugin.py:95
 msgid "Duplicates on Device"
 msgstr "Doublons sur le dispositif"
 
-#: smarteject_plugin.py:93
+#: smarteject_plugin.py:95
 msgid "There are duplicate ebooks on the device.<p>Display duplicates?"
 msgstr "Il y a des livres en doublon sur le dispositif.<p>Afficher les doublons ?"
 
-#: smarteject_plugin.py:114
+#: smarteject_plugin.py:116
 msgid "Books in Library not on Device"
 msgstr "Livres dans la bibliothèque absents du dispositif"
 
-#: smarteject_plugin.py:115
+#: smarteject_plugin.py:117
 msgid ""
 "There are books in the Library that are not on the Device.<p>Display books "
 "not on Device?"
 msgstr "Il y a des livres dans la bibliothèque  qui ne sont pas sur le  dispositif.<p>Afficher les livres qui ne sont pas sur le dispositif ?"
 
-#: smarteject_plugin.py:138
+#: smarteject_plugin.py:140
 msgid "Books on Device not in Library"
 msgstr "Livres sur le dispositif absents de la bibliothèque"
 
-#: smarteject_plugin.py:138
+#: smarteject_plugin.py:140
 msgid ""
 "There are books on the device in %s that are not in the Library.<p>Display "
 "books not in Library?"
