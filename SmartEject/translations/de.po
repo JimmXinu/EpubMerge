@@ -5,12 +5,13 @@
 # Armin Geller <armingeller@t-online.de>, 2014
 # ILB, 2014
 # Max <mail@max-vogl.de>, 2014
+# Simon_Schuette <simonschuette@arcor.de>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2014-12-27 13:16+Central Standard Time\n"
-"PO-Revision-Date: 2014-09-05 16:41+0000\n"
-"Last-Translator: ILB\n"
+"PO-Revision-Date: 2015-03-11 19:24+0000\n"
+"Last-Translator: Simon_Schuette <simonschuette@arcor.de>\n"
 "Language-Team: German (http://www.transifex.com/projects/p/calibre-plugins/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,7 +23,7 @@ msgstr ""
 #: __init__.py:32
 msgid ""
 "UI plugin to Check for Duplicate/Missing/Added Books when Ejecting Devices."
-msgstr ""
+msgstr "UI Plugin, dass beim Auswerfen von Geräten überprüft, ob es doppelte/fehlende/hinzugefügte Büchern gibt."
 
 #: config.py:107
 msgid "Basic"
@@ -38,7 +39,7 @@ msgstr "Beim Auswerfen eines Geräts überprüfen Sie:"
 
 #: config.py:154
 msgid "Reading List books to Sync"
-msgstr ""
+msgstr "Buchliste wird zum Synchronisieren gelesen"
 
 #: config.py:155
 msgid ""
@@ -73,7 +74,7 @@ msgstr "Suche nach Büchern die in der Bibliothek vertreten sind, aber nicht auf
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and viewing all plugins settings."
-msgstr ""
+msgstr "Diese Werte sind keine Plugin-Einstellungen als solche, sondern Komfort-Schaltflächen, um Tastenkombination festzulegen und alle Plugin-Einstellungen zu betrachten."
 
 #: config.py:185
 msgid "Keyboard shortcuts..."
