@@ -314,7 +314,14 @@ class EpubMergePlugin(InterfaceAction):
             #mi.author_sort = ' & '.join(map(lambda x : x['author_sort'], book_list))
 
             # print("======================= mi.author_sort:\n%s\n========================="%mi.author_sort)
+
+            # set publisher if all from same publisher.
+            publishers = set(map(lambda x : x['publisher'], book_list))
+            if len(publishers) == 1:
+                mi.publisher = publishers.pop()
             
+            # print("======================= mi.publisher:\n%s\n========================="%mi.publisher)
+
             tagslists = map(lambda x : x['tags'], book_list)
             mi.tags = [item for sublist in tagslists for item in sublist]
             mi.tags.extend(prefs['mergetags'].split(','))
@@ -592,6 +599,8 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
         book['tags'] = mi.tags
         book['series'] = mi.series
         book['comments'] = mi.comments
+        book['publisher'] = mi.publisher
+        book['pubdate'] = mi.pubdate
         if book['series']:
             book['series_index'] = mi.series_index
         else:
