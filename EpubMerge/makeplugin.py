@@ -13,11 +13,11 @@ from makezip import createZipFile
 
 if __name__=="__main__":
     
-    filename="ColumnSum.zip"
-    exclude=['*.pyc','*~','*.xcf','makezip.py','makeplugin.py','*.po','*.pot','*.notes','*default.mo']
+    filename="EpubMerge.zip"
+    exclude=['*.pyc','*~','*.xcf','*[0-9].png','makezip.py','makeplugin.py','*.po','*.pot','*default.mo']
     # from top dir. 'w' for overwrite
     #from calibre-plugin dir. 'a' for append
-    files=['translations',]
+    files=['images','translations']
     files.extend(glob('*.py'))
     files.extend(glob('plugin-import-name-*.txt'))
     createZipFile(filename,"w",
