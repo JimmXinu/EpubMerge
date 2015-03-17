@@ -5,7 +5,7 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2014, Jim Miller'
+__copyright__ = '2015, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 # The class that all Interface Action plugin wrappers must inherit from
@@ -32,7 +32,7 @@ class EpubSplitBase(InterfaceActionBase):
     description         = _('UI plugin to split off parts of an epub into a new book.')
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'Jim Miller'
-    version             = (2, 0, 2)
+    version             = (2, 0, 3)
     minimum_calibre_version = (0, 9, 29)
 
     #: This field defines the GUI plugin class that contains all the code
