@@ -216,3 +216,9 @@ pip-log.txt
 .mr.developer.cfg
 
 *.zip
+
+
+
+# Emacs autosave files
+\#*#
+
