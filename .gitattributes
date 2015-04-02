@@ -8,6 +8,7 @@ text eol=crlf
 *.jpg binary
 *.xcf binary
 *.zip binary
+*.po binary
 
 # Custom for Visual Studio
 *.cs     diff=csharp
