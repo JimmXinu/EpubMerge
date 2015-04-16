@@ -206,7 +206,7 @@ class EpubMergePlugin(InterfaceAction):
                         text = _("You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, Overwrite the Epub in the existing book, or Discard this Epub.")%(mi.title,", ".join(mi.authors))
                         over=True
                     else:
-                        text = ("You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, or Discard this Epub.")%(mi.title,", ".join(mi.authors))
+                        text = _("You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, or Discard this Epub.")%(mi.title,", ".join(mi.authors))
                         over=False
                     d = AddOverDiscardDialog(self.gui,self.qaction.icon(),text,over=over)
                     d.exec_()

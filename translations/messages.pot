@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2015-03-13 13:25+Central Daylight Time\n"
+"POT-Creation-Date: 2015-04-16 11:21+Central Daylight Time\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -295,6 +295,10 @@ msgstr ""
 
 #: epubmerge_plugin.py:206
 msgid "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, Overwrite the Epub in the existing book, or Discard this Epub."
+msgstr ""
+
+#: epubmerge_plugin.py:209
+msgid "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, or Discard this Epub."
 msgstr ""
 
 #: epubmerge_plugin.py:242 epubmerge_plugin.py:270
