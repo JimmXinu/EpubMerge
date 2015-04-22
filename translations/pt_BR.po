@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2014-12-27 13:15+Central Standard Time\n"
-"PO-Revision-Date: 2014-12-28 10:01+0000\n"
+"POT-Creation-Date: 2015-04-16 11:21+Central Daylight Time\n"
+"PO-Revision-Date: 2015-04-17 08:27+0000\n"
 "Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/projects/p/calibre-plugins/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -309,6 +309,12 @@ msgid ""
 "Epub."
 msgstr "Você já tem um livro <i>%s</i> por <i>%s</i>.  Você pode adicionar um novo livro do mesmo título, substituir o Epub no livro existente, ou descartar este Epub."
 
+#: epubmerge_plugin.py:209
+msgid ""
+"You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
+"new book of the same title, or Discard this Epub."
+msgstr ""
+
 #: epubmerge_plugin.py:242 epubmerge_plugin.py:270
 msgid "Cannot Merge Epubs"
 msgstr "Não foi possível mesclar estes Epubs"
@@ -337,45 +343,45 @@ msgstr "%s livros falharam."
 msgid "Order EPUBs to Merge"
 msgstr "Ordem dos EPUBs para mesclagem"
 
-#: epubmerge_plugin.py:333
+#: epubmerge_plugin.py:340
 msgid "%s by %s"
 msgstr "%s por %s"
 
-#: epubmerge_plugin.py:337
+#: epubmerge_plugin.py:344
 msgid "%s containing:"
 msgstr "%s contendo:"
 
-#: epubmerge_plugin.py:506
+#: epubmerge_plugin.py:513
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "O livro para o novo EPUB mesclado foi criado e preenchido com metadados padrão.\n\nContudo, o EPUB *não* vai ser criado até que você tenha revisado, editado, e fechado a janela de metadados a seguir."
 
-#: epubmerge_plugin.py:522
+#: epubmerge_plugin.py:529
 msgid ""
 "You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge"
 " is finished."
 msgstr "Você está mesclando %s EPUBs, totalizando %s. O calibre será bloqueado até que a mesclagem seja concluída."
 
-#: epubmerge_plugin.py:526
+#: epubmerge_plugin.py:533
 msgid "Merging %s EPUBs..."
 msgstr "Mesclando %s EPUBs..."
 
-#: epubmerge_plugin.py:552
+#: epubmerge_plugin.py:559
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr "Mesclagem concluída, saída em:\n%s"
 
-#: epubmerge_plugin.py:561
+#: epubmerge_plugin.py:568
 msgid "Finished merging %s EPUBs."
 msgstr "Concluída a mesclagem de %s EPUBs."
 
-#: epubmerge_plugin.py:576 epubmerge_plugin.py:577 epubmerge_plugin.py:578
+#: epubmerge_plugin.py:583 epubmerge_plugin.py:584 epubmerge_plugin.py:585
 msgid "Unknown"
 msgstr "Desconhecido"
 
-#: epubmerge_plugin.py:608
+#: epubmerge_plugin.py:617
 msgid "%s by %s doesn't have an EPUB."
 msgstr "%s por %s não tem um EPUB."

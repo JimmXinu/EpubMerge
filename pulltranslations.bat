@@ -1,5 +1,5 @@
 set PYTHONIOENCODING=UTF-8
-c:\Python27\tx.exe pull --minimum-perc=80 -f -a
+c:\Python27\tx.exe pull --minimum-perc=25 -f -a
 
 cd translations
 for %%f in (*.po) do (

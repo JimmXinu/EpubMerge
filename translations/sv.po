@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2014-12-27 13:15+Central Standard Time\n"
-"PO-Revision-Date: 2014-12-28 10:01+0000\n"
+"POT-Creation-Date: 2015-04-16 11:21+Central Daylight Time\n"
+"PO-Revision-Date: 2015-04-17 08:27+0000\n"
 "Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
 "Language-Team: Swedish (http://www.transifex.com/projects/p/calibre-plugins/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -309,6 +309,12 @@ msgid ""
 "Epub."
 msgstr "Du har redan en bok <i>%s</i> av <i>%s</i>. Du kan lägga till en ny bok med samma titel, skriv över Epub i befintlig bok, eller släng denna Epub."
 
+#: epubmerge_plugin.py:209
+msgid ""
+"You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
+"new book of the same title, or Discard this Epub."
+msgstr ""
+
 #: epubmerge_plugin.py:242 epubmerge_plugin.py:270
 msgid "Cannot Merge Epubs"
 msgstr "Kan inte slå samman EPUB:ar"
@@ -337,45 +343,45 @@ msgstr "%s böcker misslyckades."
 msgid "Order EPUBs to Merge"
 msgstr "Beordra EPUB:ar att slås samman"
 
-#: epubmerge_plugin.py:333
+#: epubmerge_plugin.py:340
 msgid "%s by %s"
 msgstr "%s av %s"
 
-#: epubmerge_plugin.py:337
+#: epubmerge_plugin.py:344
 msgid "%s containing:"
 msgstr "%s innehåller:"
 
-#: epubmerge_plugin.py:506
+#: epubmerge_plugin.py:513
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "Boken för den nya sammanslagna EPUB har skapats och standard metadata fylls in.\n\nMen EPUB kommer *inte* att skapas förrän du har granskat, redigerat, och stängt metadata dialogrutan som följer."
 
-#: epubmerge_plugin.py:522
+#: epubmerge_plugin.py:529
 msgid ""
 "You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge"
 " is finished."
 msgstr "Du slår samman %s EPUBar totalt %s. Calibre kommer att vara låst till dess att sammanslagningen är klar."
 
-#: epubmerge_plugin.py:526
+#: epubmerge_plugin.py:533
 msgid "Merging %s EPUBs..."
 msgstr "Slår samman %s EPUB:ar..."
 
-#: epubmerge_plugin.py:552
+#: epubmerge_plugin.py:559
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr "Sammanslagning klar, resultat i:\n%s"
 
-#: epubmerge_plugin.py:561
+#: epubmerge_plugin.py:568
 msgid "Finished merging %s EPUBs."
 msgstr "Klar med sammanslagning av %s EPUB:ar."
 
-#: epubmerge_plugin.py:576 epubmerge_plugin.py:577 epubmerge_plugin.py:578
+#: epubmerge_plugin.py:583 epubmerge_plugin.py:584 epubmerge_plugin.py:585
 msgid "Unknown"
 msgstr "Okänd"
 
-#: epubmerge_plugin.py:608
+#: epubmerge_plugin.py:617
 msgid "%s by %s doesn't have an EPUB."
 msgstr "%s av %s har inte en EPUB."
