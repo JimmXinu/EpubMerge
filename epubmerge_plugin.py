@@ -4,7 +4,7 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2014, Jim Miller'
+__copyright__ = '2015, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import time, os
@@ -144,7 +144,7 @@ class EpubMergePlugin(InterfaceAction):
             return self.macmenuhack
         except:
             file_path = os.path.join(calibre_config_dir,
-                                     *("plugins/fanfictiondownloader_macmenuhack.txt".split('/')))
+                                     *("plugins/fanficfare_macmenuhack.txt".split('/')))
             file_path = os.path.abspath(file_path)
             print("macmenuhack file_path:%s"%file_path)
             self.macmenuhack = os.access(file_path, os.F_OK)

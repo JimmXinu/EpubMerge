@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __license__   = 'GPL v3'
-__copyright__ = '2014, Jim Miller'
+__copyright__ = '2015, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import sys
@@ -217,8 +217,10 @@ def doMerge(outputio,
         is_ffdl_epub.append(False)
 
         for c in metadom.getElementsByTagName("dc:contributor"):
+            # print("dc:contributor:%s"%getText(c.childNodes))
             if c.getAttribute("opf:role") == "bkp" and \
-                    getText(c.childNodes) == "fanficdownloader [http://fanficdownloader.googlecode.com]":
+                    getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
+                                              "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]:
                 is_ffdl_epub[-1] = True # set last.
                 break;
 
