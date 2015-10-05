@@ -56,7 +56,7 @@ default_prefs['titlenavpoints'] = True
 default_prefs['keepmeta'] = True
 #default_prefs['showunmerge'] = True
 default_prefs['mergetags'] = ''
-default_prefs['mergeword'] = 'Anthology'
+default_prefs['mergeword'] = _('Anthology')
 default_prefs['custom_cols'] = {}
 
 def set_library_config(library_config):
@@ -159,8 +159,8 @@ class ConfigWidget(QWidget):
         # prefs['showunmerge'] = self.basic_tab.showunmerge.isChecked()
         prefs['mergetags'] = unicode(self.basic_tab.mergetags.text())
         prefs['mergeword'] = unicode(self.basic_tab.mergeword.text())
-        if not prefs['mergeword']:
-            prefs['mergeword'] = _('Anthology')
+        # if not prefs['mergeword']:
+        #     prefs['mergeword'] = _('Anthology')
         
         # Custom Columns tab
         colsmap = {}
@@ -239,8 +239,9 @@ columns.  Leave off if you plan to distribute the epub to others.'''))
         self.mergeword = QLineEdit(self)
         self.mergeword.setText(prefs['mergeword'])
         self.mergeword.setToolTip(_('''Word use to describe merged books in default title and summary.
-Defaults back to Anthology if cleared.
 For people who don't like the word Anthology.'''))
+## Defaults back to Anthology if cleared.
+
         horz.addWidget(self.mergeword)
         self.l.addLayout(horz)
 
