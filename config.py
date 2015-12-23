@@ -7,6 +7,9 @@ __license__   = 'GPL v3'
 __copyright__ = '2014, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
+import logging
+logger = logging.getLogger(__name__)
+
 import traceback, copy
 
 try:
@@ -71,13 +74,13 @@ def get_library_config():
     # Check whether this is a configuration needing to be migrated
     # from json into database.  If so: get it, set it, wipe it from json.
     if library_id in old_prefs:
-        #print("get prefs from old_prefs")
+        #logger.debug("get prefs from old_prefs")
         library_config = old_prefs[library_id]
         set_library_config(library_config)
         del old_prefs[library_id]
 
     if library_config is None:
-        #print("get prefs from db")
+        #logger.debug("get prefs from db")
         library_config = db.prefs.get_namespaced(PREFS_NAMESPACE, PREFS_KEY_SETTINGS,
                                                  copy.deepcopy(default_prefs))
     return library_config
@@ -101,7 +104,7 @@ class PrefsFacade():
     def _get_prefs(self):
         libraryid = get_library_uuid(get_gui().current_db)
         if self.current_prefs == None or self.libraryid != libraryid:
-            #print("self.current_prefs == None(%s) or self.libraryid != libraryid(%s)"%(self.current_prefs == None,self.libraryid != libraryid))
+            #logger.debug("self.current_prefs == None(%s) or self.libraryid != libraryid(%s)"%(self.current_prefs == None,self.libraryid != libraryid))
             self.libraryid = libraryid
             self.current_prefs = get_library_config()
         return self.current_prefs
@@ -168,7 +171,7 @@ class ConfigWidget(QWidget):
             val = unicode(convert_qvariant(combo.itemData(combo.currentIndex())))
             if val != 'none':
                 colsmap[col] = val
-                #print("colsmap[%s]:%s"%(col,colsmap[col]))
+                #logger.debug("colsmap[%s]:%s"%(col,colsmap[col]))
         prefs['custom_cols'] = colsmap
 
         prefs.save_to_db()
@@ -341,9 +344,9 @@ class CustomColumnsTab(QWidget):
         row=0
         for key, column in custom_columns.iteritems():
             if column['datatype'] in permitted_values:
-                # print("\n============== %s ===========\n"%key)
+                # logger.debug("\n============== %s ===========\n"%key)
                 # for (k,v) in column.iteritems():
-                #     print("column['%s'] => %s"%(k,v))
+                #     logger.debug("column['%s'] => %s"%(k,v))
                 label = QLabel('%s(%s)'%(column['name'],key))
                 label.setToolTip(_("Set this %s column on new merged books...")%column['datatype'])
                 grid.addWidget(label,row,0)
@@ -366,4 +369,4 @@ class CustomColumnsTab(QWidget):
         
         self.sl.insertStretch(-1)
 
-        #print("prefs['custom_cols'] %s"%prefs['custom_cols'])
+        #logger.debug("prefs['custom_cols'] %s"%prefs['custom_cols'])

@@ -3,6 +3,9 @@
 from __future__ import (unicode_literals, division,
                         print_function)
 
+import logging
+logger = logging.getLogger(__name__)
+
 __license__   = 'GPL v3'
 __copyright__ = '2014, Jim Miller'
 __docformat__ = 'restructuredtext en'
@@ -100,7 +103,7 @@ class LoopProgressDialog(QProgressDialog):
         except Exception as e:
             book['good']=False
             book['comment']=unicode(e)
-            print("Exception: %s:%s"%(book,unicode(e)))
+            logger.error("Exception: %s:%s"%(book,unicode(e)))
             traceback.print_exc()
 
         self.updateStatus()
@@ -345,12 +348,16 @@ class AddOverDiscardDialog(QDialog):
 
         layout = QVBoxLayout(self)
         self.setLayout(layout)
-        self.setWindowTitle('UnMerge Epub')
+        self.setWindowTitle(_('UnMerge Epub'))
 
         label = QLabel(text)
         label.setOpenExternalLinks(True)
         label.setWordWrap(True)
         layout.addWidget(label)
+
+        self.applyall = QCheckBox(_('Apply to all EPUBs?'),self)
+        self.applyall.setToolTip(_('Apply the same action to the rest of the EPUBs after this.'))
+        layout.addWidget(self.applyall)
 
         button_box = QDialogButtonBox(self)
         button = button_box.addButton(_("Add"), button_box.AcceptRole)
@@ -366,6 +373,8 @@ class AddOverDiscardDialog(QDialog):
 
         layout.addWidget(button_box)
 
+    def get_applyall(self):
+        return self.applyall.isChecked()
 
     def add(self):
         self.state="add"

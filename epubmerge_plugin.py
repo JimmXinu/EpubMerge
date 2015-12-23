@@ -7,6 +7,9 @@ __license__   = 'GPL v3'
 __copyright__ = '2015, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
+import logging
+logger = logging.getLogger(__name__)
+
 import time, os
 from StringIO import StringIO
 from functools import partial
@@ -108,13 +111,13 @@ class EpubMergePlugin(InterfaceAction):
                                                      unique_name=_('&Merge Epubs'),
                                                      triggered=self.plugin_button )
 
-        self.unmerge_action = self.create_menu_item_ex(self.menu, _('&UnMerge Epub'), image='images/unmerge.png',
-                                                       unique_name=_('&UnMerge Epub'),
+        self.unmerge_action = self.create_menu_item_ex(self.menu, _('&UnMerge Epubs'), image='images/unmerge.png',
+                                                       unique_name=_('&UnMerge Epubs'),
                                                        triggered=self.unmerge )
 
 
-        # print("platform.system():%s"%platform.system())
-        # print("platform.mac_ver()[0]:%s"%platform.mac_ver()[0])
+        # logger.debug("platform.system():%s"%platform.system())
+        # logger.debug("platform.mac_ver()[0]:%s"%platform.mac_ver()[0])
         if not self.check_macmenuhack(): # not platform.mac_ver()[0]: # Some macs crash on these menu items for unknown reasons.
             do_user_config = self.interface_action_base_plugin.do_user_config
             self.menu.addSeparator()
@@ -130,10 +133,10 @@ class EpubMergePlugin(InterfaceAction):
     def create_menu_item_ex(self, parent_menu, menu_text, image=None, tooltip=None,
                            shortcut=None, triggered=None, is_checked=None, shortcut_name=None,
                            unique_name=None):
-        #print("create_menu_item_ex before %s"%menu_text)
+        #logger.debug("create_menu_item_ex before %s"%menu_text)
         ac = create_menu_action_unique(self, parent_menu, menu_text, image, tooltip,
                                        shortcut, triggered, is_checked, shortcut_name, unique_name)
-        #print("create_menu_item_ex after %s"%menu_text)
+        #logger.debug("create_menu_item_ex after %s"%menu_text)
         return ac
 
     ## Kludgey, yes, but with the real configuration inside the
@@ -146,7 +149,7 @@ class EpubMergePlugin(InterfaceAction):
             file_path = os.path.join(calibre_config_dir,
                                      *("plugins/fanficfare_macmenuhack.txt".split('/')))
             file_path = os.path.abspath(file_path)
-            print("macmenuhack file_path:%s"%file_path)
+            logger.debug("macmenuhack file_path:%s"%file_path)
             self.macmenuhack = os.access(file_path, os.F_OK)
             return self.macmenuhack
 
@@ -159,66 +162,77 @@ class EpubMergePlugin(InterfaceAction):
         return doMerge(*args, **kwargs)
             
     def unmerge(self):
-        if len(self.gui.library_view.get_selected_ids()) != 1:
-            d = error_dialog(self.gui,
-                             _('Select One Book'),
-                             _('Please select exactly one book to UnMerge.'),
-                             show_copy_button=False)
-            d.exec_()
-        else:
-            db=self.gui.current_db
-            book_id=self.gui.library_view.get_selected_ids()[0]
+        db=self.gui.current_db
+        applyall = False
+        state = 'add'
+        for book_id in self.gui.library_view.get_selected_ids():
+            unmerge_mi = db.get_metadata(book_id,index_is_id=True)
+        
+        # if len(self.gui.library_view.get_selected_ids()) != 1:
+        #     d = error_dialog(self.gui,
+        #                      _('Select One Book'),
+        #                      _('Please select exactly one book to UnMerge.'),
+        #                      show_copy_button=False)
+        #     d.exec_()
+        # else:
+        #     book_id=[0]
             if db.has_format(book_id,'EPUB',index_is_id=True):
                 epub = StringIO(db.format(book_id,'EPUB',index_is_id=True))
             else:
                 d = error_dialog(self.gui,
                                  _('Cannot UnMerge Non-Epubs'),
-                                 _('To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge Metadata enabled.'),
+                                 unmerge_mi.title + '<br>'+_('To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge Metadata enabled.'),
                                  show_copy_button=False)
                 d.exec_()
-                remove_dir(tdir)
-                return
+                continue
                 
             tdir = PersistentTemporaryDirectory(prefix='epubmerge_')
-            print("tdir:%s"%tdir)
+            logger.debug("tdir:%s"%tdir)
             outfilenames = self.do_unmerge(epub,tdir)
             if not outfilenames:
                 d = error_dialog(self.gui,
                                  _('No UnMerge data found'),
-                                 _('To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge Metadata enabled.'),
+                                 unmerge_mi.title + '<br>'+_('To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge Metadata enabled.'),
                                  show_copy_button=False)
                 d.exec_()
-                return
+                remove_dir(tdir)
+                continue
 
             #db.import_book_directory_multiple(tdir) XXX
             #self.gui.library_view.model().books_added(len(outfilenames))
             added_list=[]
             updated_list=[]
             for formats in db.find_books_in_directory(tdir, False):
-                #print("formats:%s"%formats)
+                #logger.debug("formats:%s"%formats)
                 mi = metadata_from_formats(formats)
-                #print("mi:%s"%mi)
+                #logger.debug("mi:%s"%mi)
 
-                state = 'add'
                 identicalbooks = db.find_identical_books(mi)
                 if identicalbooks:
                     if len(identicalbooks) == 1:
-                        text = _("You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, Overwrite the Epub in the existing book, or Discard this Epub.")%(mi.title,", ".join(mi.authors))
+                        text = unmerge_mi.title + '<br>'+_("You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, Overwrite the Epub in the existing book, or Discard this Epub.")%(mi.title,", ".join(mi.authors))
                         over=True
                     else:
-                        text = _("You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, or Discard this Epub.")%(mi.title,", ".join(mi.authors))
+                        text = unmerge_mi.title + '<br>'+_("You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, or Discard this Epub.")%(mi.title,", ".join(mi.authors))
                         over=False
-                    d = AddOverDiscardDialog(self.gui,self.qaction.icon(),text,over=over)
-                    d.exec_()
-                    state=d.state
-                    
-                if not state or state == 'discard':
-                    continue
-                elif state == 'add':
+                        
+                    #logger.debug("applyall:%s over:%s state:%s"%(applyall,over, state))
+                    if applyall and ( over or state in ('add', 'discard') ):
+                        # use previous state.
+                        pass
+                    else:
+                        d = AddOverDiscardDialog(self.gui,self.qaction.icon(),text,over=over)
+                        d.exec_()
+                        state=d.state
+                        applyall=d.get_applyall()
+
+                if state == 'add' or len(identicalbooks) == 0:
                     book_id = db.create_book_entry(mi,
                                                    add_duplicates=True)
                     added_list.append(book_id)
-                else:
+                elif state == 'discard':
+                    continue
+                elif state == 'over':
                     book_id = identicalbooks.pop()
                         
                 db.add_format_with_hooks(book_id,
@@ -246,7 +260,7 @@ class EpubMergePlugin(InterfaceAction):
         else:
             db=self.gui.current_db
 
-            print("1:%s"%(time.time()-self.t))
+            logger.debug("1:%s"%(time.time()-self.t))
             self.t = time.time()
             
             book_list = map( partial(self._convert_id_to_book, good=False), self.gui.library_view.get_selected_ids() )
@@ -284,7 +298,7 @@ class EpubMergePlugin(InterfaceAction):
 
             book_list = d.get_books()
             
-            print("2:%s"%(time.time()-self.t))
+            logger.debug("2:%s"%(time.time()-self.t))
             self.t = time.time()
 
             deftitle = "%s %s" % (book_list[0]['title'],prefs['mergeword'])
@@ -299,7 +313,7 @@ class EpubMergePlugin(InterfaceAction):
                         mi.title = deftitle;
                         break
                 
-            # print("======================= mi.title:\n%s\n========================="%mi.title)
+            # logger.debug("======================= mi.title:\n%s\n========================="%mi.title)
 
             mi.authors = list()
             authorslists = map(lambda x : x['authors'], book_list)
@@ -309,25 +323,25 @@ class EpubMergePlugin(InterfaceAction):
                         mi.authors.append(a)
             #mi.authors = [item for sublist in authorslists for item in sublist]
 
-            # print("======================= mi.authors:\n%s\n========================="%mi.authors)
+            # logger.debug("======================= mi.authors:\n%s\n========================="%mi.authors)
             
             #mi.author_sort = ' & '.join(map(lambda x : x['author_sort'], book_list))
 
-            # print("======================= mi.author_sort:\n%s\n========================="%mi.author_sort)
+            # logger.debug("======================= mi.author_sort:\n%s\n========================="%mi.author_sort)
 
             # set publisher if all from same publisher.
             publishers = set(map(lambda x : x['publisher'], book_list))
             if len(publishers) == 1:
                 mi.publisher = publishers.pop()
             
-            # print("======================= mi.publisher:\n%s\n========================="%mi.publisher)
+            # logger.debug("======================= mi.publisher:\n%s\n========================="%mi.publisher)
 
             tagslists = map(lambda x : x['tags'], book_list)
             mi.tags = [item for sublist in tagslists for item in sublist]
             mi.tags.extend(prefs['mergetags'].split(','))
 
-            # print("======================= mergetags:\n%s\n========================="%prefs['mergetags'])
-            # print("======================= m.tags:\n%s\n========================="%mi.tags)
+            # logger.debug("======================= mergetags:\n%s\n========================="%prefs['mergetags'])
+            # logger.debug("======================= m.tags:\n%s\n========================="%mi.tags)
             
             languageslists = map(lambda x : x['languages'], book_list)
             mi.languages = [item for sublist in languageslists for item in sublist]
@@ -368,7 +382,7 @@ class EpubMergePlugin(InterfaceAction):
             
             # ======================= custom columns ===================
 
-            print("3:%s"%(time.time()-self.t))
+            logger.debug("3:%s"%(time.time()-self.t))
             self.t = time.time()
 
             # have to get custom from db for each book.
@@ -376,17 +390,17 @@ class EpubMergePlugin(InterfaceAction):
             
             custom_columns = self.gui.library_view.model().custom_columns
             for col, action in prefs['custom_cols'].iteritems():
-                #print("col: %s action: %s"%(col,action))
+                #logger.debug("col: %s action: %s"%(col,action))
                 
                 if col not in custom_columns:
-                    print("%s not an existing column, skipping."%col)
+                    logger.debug("%s not an existing column, skipping."%col)
                     continue
                 
                 coldef = custom_columns[col]
-                #print("coldef:%s"%coldef)
+                #logger.debug("coldef:%s"%coldef)
                 
                 if action not in permitted_values[coldef['datatype']]:
-                    print("%s not a valid column type for %s, skipping."%(col,action))
+                    logger.debug("%s not a valid column type for %s, skipping."%(col,action))
                     continue
                 
                 label = coldef['label']
@@ -501,13 +515,13 @@ class EpubMergePlugin(InterfaceAction):
                 
             db.commit()
             
-            print("4:%s"%(time.time()-self.t))
+            logger.debug("4:%s"%(time.time()-self.t))
             self.t = time.time()
             
             self.gui.library_view.model().books_added(1)
             self.gui.library_view.select_rows([book_id])
             
-            print("5:%s"%(time.time()-self.t))
+            logger.debug("5:%s"%(time.time()-self.t))
             self.t = time.time()
             
             confirm('\n'+_('''The book for the new Merged EPUB has been created and default metadata filled in.
@@ -518,13 +532,13 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
             
             self.gui.iactions['Edit Metadata'].edit_metadata(False)
 
-            print("5:%s"%(time.time()-self.t))
+            logger.debug("5:%s"%(time.time()-self.t))
             self.t = time.time()
             self.gui.tags_view.recount()
 
             totalsize = sum(map(lambda x : x['epub_size'], book_list))
 
-            print("merging %s EPUBs totaling %s"%(len(book_list),gethumanreadable(totalsize)))
+            logger.debug("merging %s EPUBs totaling %s"%(len(book_list),gethumanreadable(totalsize)))
             if len(book_list) > 100 or totalsize > 5*1024*1024:
                 confirm('\n'+_('''You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is finished.''')%(len(book_list),gethumanreadable(totalsize)),
                         'epubmerge_edited_now_merge_again',
@@ -555,14 +569,14 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
                            coverjpgpath=coverjpgpath,
                            keepmetadatafiles=prefs['keepmeta'] )
                  
-            print("6:%s"%(time.time()-self.t))
-            print(_("Merge finished, output in:\n%s")%mergedepub.name)
+            logger.debug("6:%s"%(time.time()-self.t))
+            logger.debug(_("Merge finished, output in:\n%s")%mergedepub.name)
             self.t = time.time()
             db.add_format_with_hooks(book_id,
                                      'EPUB',
                                      mergedepub, index_is_id=True)
             
-            print("7:%s"%(time.time()-self.t))
+            logger.debug("7:%s"%(time.time()-self.t))
             self.t = time.time()
             
             self.gui.status_bar.show_message(_('Finished merging %s EPUBs.')%len(book_list), 3000)
