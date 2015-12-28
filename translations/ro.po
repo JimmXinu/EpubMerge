@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2015-10-04 22:41+Central Daylight Time\n"
-"PO-Revision-Date: 2015-10-05 08:53+0000\n"
+"POT-Creation-Date: 2015-12-19 16:47+Central Standard Time\n"
+"PO-Revision-Date: 2015-12-23 09:56+0000\n"
 "Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
 "Language-Team: Romanian (http://www.transifex.com/calibre/calibre-plugins/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -21,366 +21,370 @@ msgstr ""
 msgid "UI plugin to concatenate multiple epubs into one."
 msgstr "Conectează UI pentru a concentra multiple epubs într-unul singur."
 
-#: config.py:59
+#: config.py:62
 msgid "Anthology"
 msgstr "Antologie"
 
-#: config.py:148
+#: config.py:151
 msgid "Basic"
 msgstr "De bază"
 
-#: config.py:151
+#: config.py:154
 msgid "Custom Columns"
 msgstr "Coloane personalizate"
 
-#: config.py:192
+#: config.py:195
 msgid "These settings control the basic features of the plugin."
 msgstr "Aceste setări controlează funcțiile de bază ale conectării. "
 
-#: config.py:197
+#: config.py:200
 msgid "Insert Table of Contents entry for each title?"
 msgstr "Inserați intrarea Cuprins pentru fiecare titlu? "
 
-#: config.py:198
+#: config.py:201
 msgid ""
 "If set, a new TOC entry will be made for each title and\n"
 "it's existing TOC nested underneath it."
 msgstr "Dacă este setată, o nouă intrare TOC va fi făcută pentru fiecare titlu și TOC-ul său existent este sub el."
 
-#: config.py:203
+#: config.py:206
 msgid "Flatten Table of Contents?"
 msgstr "Nivelați Cuprinsul?"
 
-#: config.py:204
+#: config.py:207
 msgid "Remove nesting and make TOC all on one level."
 msgstr "Eliminați adăpostirea și faceți toate TOC la același nivel."
 
-#: config.py:208
+#: config.py:211
 msgid "Include Books' Comments?"
 msgstr "Includeți Comentariile Cărților?"
 
-#: config.py:209
+#: config.py:212
 msgid ""
 "Include all the merged books' comments in the new book's comments.\n"
 "Default is a list of included titles only."
 msgstr "Includeți toate comentariile cărților fuzionate în noile comentarii ale cărții. Standardul este o listă numai a titlurilor incluse. "
 
-#: config.py:214
+#: config.py:217
 msgid "Keep UnMerge Metadata?"
 msgstr "Păstrați Metadata nefuzionate?"
 
-#: config.py:215
+#: config.py:218
 msgid ""
 "If set, a copy of the original metadata for each merged book will\n"
 "be included, allowing for UnMerge.  This includes your calibre custom\n"
 "columns.  Leave off if you plan to distribute the epub to others."
 msgstr "Dacă setată,o copie a metadata originală pentru fiecare carte fuzionată va fi inclusă, permițând nefuzionarea. Acest lucru include coloanele dumneavoastră personalizate de valoare. Păstrați off dacă plănuiți să distribuiți epub către alții."
 
-#: config.py:228
+#: config.py:231
 msgid "Add tags to merged books:"
 msgstr "Adăugați etichete la cărțile fuzionate:"
 
-#: config.py:232
+#: config.py:235
 msgid "Tags you enter here will be added to all new merged books"
 msgstr "Etichetele pe care le introduceți aici vor fi adăugate la toate cărțile nou fuzionate"
 
-#: config.py:237
+#: config.py:240
 msgid "Merged Book Word:"
 msgstr "Cuvântul cărții fuzionate:"
 
-#: config.py:241
+#: config.py:244
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
 msgstr ""
 
-#: config.py:250
+#: config.py:253
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubMerge confirmation "
 "dialogs back again."
 msgstr "Aceste controale nu sunt setări de conectare ca atare, ci butoane de conveniență pentru setarea scurtăturilor tastaturii și obținerea din nou a tuturor dialogurilor de confirmare EpubMerge.  "
 
-#: config.py:255
+#: config.py:258
 msgid "Keyboard shortcuts..."
 msgstr "Scurtăturile tastaturii..."
 
-#: config.py:256
+#: config.py:259
 msgid "Edit the keyboard shortcuts associated with this plugin"
 msgstr "Editați scurtăturile tastaturii asociate cu această conectare"
 
-#: config.py:260
+#: config.py:263
 msgid "Reset disabled &confirmation dialogs"
 msgstr "Resetați dialogurile dezactivate și de confirmare"
 
-#: config.py:261
+#: config.py:264
 msgid "Reset all show me again dialogs for the EpubMerge plugin"
 msgstr "Resetați toate dialogurile show me again pentru conectarea EpubMerge"
 
-#: config.py:265
+#: config.py:268
 msgid "View library preferences..."
 msgstr "Vizualizați preferințele librăriei..."
 
-#: config.py:266
+#: config.py:269
 msgid "View data stored in the library database for this plugin"
 msgstr "Vizualizați datele stocate în baza de date a librăriei pentru această conectare"
 
-#: config.py:281
+#: config.py:284
 msgid "Done"
 msgstr "Făcut"
 
-#: config.py:282
+#: config.py:285
 msgid "Confirmation dialogs have all been reset"
 msgstr "Toate dialogurile de confirmare au fost resetate"
 
-#: config.py:298
+#: config.py:301
 msgid "Take value from first source book"
 msgstr "Luați valoarea din prima carte sursă"
 
-#: config.py:299
+#: config.py:302
 msgid "Take value from last source book"
 msgstr "Luați valoarea din ultima carte sursă"
 
-#: config.py:300
+#: config.py:303
 msgid "Add values from all source books"
 msgstr "Adăugați valori din toate cărțile sursă"
 
-#: config.py:301
+#: config.py:304
 msgid "Average value from ALL source books"
 msgstr "Valoarea medie din TOATE cărțile sursă"
 
-#: config.py:302
+#: config.py:305
 msgid "Average value from source books with values"
 msgstr "Valoarea medie din cărțile sursă cu valori"
 
-#: config.py:303
+#: config.py:306
 msgid "True if true on all source books (and)"
 msgstr "Adevărat dacă adevărat pe toate cărțile sursă (și)"
 
-#: config.py:304
+#: config.py:307
 msgid "True if true on any source books (or)"
 msgstr "Adevărat dacă adevărat pe orice carte sursă (sau)"
 
-#: config.py:305
+#: config.py:308
 msgid "Take newest value from source books"
 msgstr "Luați cea mai nouă valoare din cărțile sursă"
 
-#: config.py:306
+#: config.py:309
 msgid "Take oldest value from source books"
 msgstr "Luați cea mai veche valoare din cărțile sursă"
 
-#: config.py:307
+#: config.py:310
 msgid "Include values from all source books"
 msgstr "Includeți valorile din toate cărțile sursă"
 
-#: config.py:308
+#: config.py:311
 msgid "Concatenate values from all source books"
 msgstr "Legați valorile din toate cărțile sursă"
 
-#: config.py:321
+#: config.py:324
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose how "
 "you would like these columns handled."
 msgstr "Dacă aveți definite coloane personalizate, acestea vori fi listate mai jos. Alegeți cum ați dori să fie gestionate aceste coloane."
 
-#: config.py:348
+#: config.py:351
 msgid "Set this %s column on new merged books..."
 msgstr "Setați această coloană %s pe cărțile nou fuzionate..."
 
-#: config.py:363
+#: config.py:366
 msgid "How this column will be populated by default."
 msgstr "Cum va fi populată această coloană în mod implicit."
 
-#: dialogs.py:67
+#: dialogs.py:70
 msgid "Starting..."
 msgstr "Pornire..."
 
-#: dialogs.py:68
+#: dialogs.py:71
 msgid "Working"
 msgstr "În lucru"
 
-#: dialogs.py:69
+#: dialogs.py:72
 msgid "Completed so far"
 msgstr "Terminat până acum"
 
-#: dialogs.py:72
+#: dialogs.py:75
 msgid "Cancel"
 msgstr "Anulare"
 
-#: dialogs.py:116
+#: dialogs.py:119
 msgid "Starting Merge..."
 msgstr "Pornire fuzionare..."
 
-#: dialogs.py:174
+#: dialogs.py:177
 msgid "Move selected books up the list"
 msgstr "Mutați cărțile selectate în partea de sus a listei"
 
-#: dialogs.py:179
+#: dialogs.py:182
 msgid "Remove selected books from the list"
 msgstr "Ștergeți cărțile selectate din listă"
 
-#: dialogs.py:184
+#: dialogs.py:187
 msgid "Move selected books down the list"
 msgstr "Mutați cărțile selectate în partea de jos a listei"
 
-#: dialogs.py:223
+#: dialogs.py:226
 msgid "Author(s)"
 msgstr "Autor(i)"
 
-#: dialogs.py:223
+#: dialogs.py:226
 msgid "Series"
 msgstr "Serie"
 
-#: dialogs.py:223
+#: dialogs.py:226
 msgid "Title"
 msgstr "Titlu"
 
-#: dialogs.py:272
+#: dialogs.py:275
 msgid "Are you sure you want to remove this book from the list?"
 msgstr "Sunteți sigur că vreți să ștergeți această carte din listă?"
 
-#: dialogs.py:274
+#: dialogs.py:277
 msgid "Are you sure you want to remove the selected %d books from the list?"
 msgstr "Sunteți sigur că vreți să ștergeți cărțile %d selectate din listă?"
 
-#: dialogs.py:356
+#: dialogs.py:351
+msgid "UnMerge Epub"
+msgstr ""
+
+#: dialogs.py:358
+msgid "Apply to all EPUBs?"
+msgstr ""
+
+#: dialogs.py:359
+msgid "Apply the same action to the rest of the EPUBs after this."
+msgstr ""
+
+#: dialogs.py:363
 msgid "Add"
 msgstr "Adăugare"
 
-#: dialogs.py:360
+#: dialogs.py:367
 msgid "Overwrite"
 msgstr "Suprascriere "
 
-#: dialogs.py:363
+#: dialogs.py:370
 msgid "Discard"
 msgstr "Ștergere"
 
-#: epubmerge_plugin.py:57
+#: epubmerge_plugin.py:60
 msgid "EpubMerge"
 msgstr "EpubMerge"
 
-#: epubmerge_plugin.py:58
+#: epubmerge_plugin.py:61
 msgid "Merge multiple EPUBs into one in a new book."
 msgstr "Fuzionați multiple EPUB într-unul singur într-o nouă carte."
 
-#: epubmerge_plugin.py:107 epubmerge_plugin.py:108
+#: epubmerge_plugin.py:110 epubmerge_plugin.py:111
 msgid "&Merge Epubs"
 msgstr "și fuzionați Epub-uri"
 
-#: epubmerge_plugin.py:111 epubmerge_plugin.py:112
-msgid "&UnMerge Epub"
-msgstr "și decontopiți Epub"
+#: epubmerge_plugin.py:114 epubmerge_plugin.py:115
+msgid "&UnMerge Epubs"
+msgstr ""
 
-#: epubmerge_plugin.py:121
+#: epubmerge_plugin.py:124
 msgid "&Configure Plugin"
 msgstr "și configurați conectarea "
 
-#: epubmerge_plugin.py:123 epubmerge_plugin.py:124
+#: epubmerge_plugin.py:126 epubmerge_plugin.py:127
 msgid "Configure EpubMerge"
 msgstr "Configurați EpubMerge"
 
-#: epubmerge_plugin.py:164
-msgid "Select One Book"
-msgstr "Selectați o carte"
-
-#: epubmerge_plugin.py:165
-msgid "Please select exactly one book to UnMerge."
-msgstr "Selectați exact o carte pentru decontopire."
-
-#: epubmerge_plugin.py:175
+#: epubmerge_plugin.py:183
 msgid "Cannot UnMerge Non-Epubs"
 msgstr "Nu se poate decontopi non-Epub-urile"
 
-#: epubmerge_plugin.py:176 epubmerge_plugin.py:188
+#: epubmerge_plugin.py:184 epubmerge_plugin.py:195
 msgid ""
 "To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
 " Metadata enabled."
 msgstr "Pentru a decontopi sursa trebuie să fie Epub(uri) create de EpubMerge cu păstrare metadata nefuzionată activată."
 
-#: epubmerge_plugin.py:187
+#: epubmerge_plugin.py:194
 msgid "No UnMerge data found"
 msgstr "Nici o dată despre fuzionare nu a fost găsită"
 
-#: epubmerge_plugin.py:206
+#: epubmerge_plugin.py:213
 msgid ""
 "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
 "the same title, Overwrite the Epub in the existing book, or Discard this "
 "Epub."
 msgstr "Aveți deja o carte <i>%s</i> de <i>%s</i>. Puteți Adăuga o nouă carte cu același titlu, Suprascrie Epub în cartea existentă sau să Ștergeți acest Epub.  "
 
-#: epubmerge_plugin.py:209
+#: epubmerge_plugin.py:216
 msgid ""
 "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
 "new book of the same title, or Discard this Epub."
 msgstr "Aveți deja mai mult de o carte <i>%s</i> de <i>%s</i>. Puteți Adăuga o nouă carte cu același titlu sau să Ștergeți acest Epub. "
 
-#: epubmerge_plugin.py:242 epubmerge_plugin.py:270
+#: epubmerge_plugin.py:255 epubmerge_plugin.py:283
 msgid "Cannot Merge Epubs"
 msgstr "Nu se pot fuziona Epub-urile"
 
-#: epubmerge_plugin.py:243
+#: epubmerge_plugin.py:256
 msgid "Less than 2 books selected."
 msgstr "Mai puțin de 2 cărți selectate."
 
-#: epubmerge_plugin.py:259
+#: epubmerge_plugin.py:272
 msgid "Collecting EPUBs for merger..."
 msgstr "Colectare EPUB-uro pentru fuzionare..."
 
-#: epubmerge_plugin.py:260
+#: epubmerge_plugin.py:273
 msgid "Get EPUBs for merge"
 msgstr "Luați EPUB-uri pentru fuzionare"
 
-#: epubmerge_plugin.py:261
+#: epubmerge_plugin.py:274
 msgid "EPUBs collected"
 msgstr "EPUB-uri colectate"
 
-#: epubmerge_plugin.py:271
+#: epubmerge_plugin.py:284
 msgid "%s books failed."
 msgstr "%s cărți eșuate. "
 
-#: epubmerge_plugin.py:276
+#: epubmerge_plugin.py:289
 msgid "Order EPUBs to Merge"
 msgstr "Comandați EPUB-urilor să fuzioneze"
 
-#: epubmerge_plugin.py:340
+#: epubmerge_plugin.py:353
 msgid "%s by %s"
 msgstr "%s de %s"
 
-#: epubmerge_plugin.py:344
+#: epubmerge_plugin.py:357
 msgid "%s containing:"
 msgstr "%s conținând:"
 
-#: epubmerge_plugin.py:513
+#: epubmerge_plugin.py:526
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "Cartea pentru noul EPUB fuzionat a fost creată și metadata standard completată. Totuși, EPUB *nu* va fi creat până când nu terminați de revizuit, editat și închis dialogul metadata care urmează."
 
-#: epubmerge_plugin.py:529
+#: epubmerge_plugin.py:542
 msgid ""
 "You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge"
 " is finished."
 msgstr "Fuzionați %s EPUB-uri totalizând %s. Calibrul va fi blocat până când fuzionare se încheie."
 
-#: epubmerge_plugin.py:533
+#: epubmerge_plugin.py:546
 msgid "Merging %s EPUBs..."
 msgstr "Fuzionare %s EPUB-uri..."
 
-#: epubmerge_plugin.py:559
+#: epubmerge_plugin.py:572
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr "Fuzionare terminată, rezultat în: %s"
 
-#: epubmerge_plugin.py:568
+#: epubmerge_plugin.py:581
 msgid "Finished merging %s EPUBs."
 msgstr "Terminare fuzionare %s EPUB-uri."
 
-#: epubmerge_plugin.py:583 epubmerge_plugin.py:584 epubmerge_plugin.py:585
+#: epubmerge_plugin.py:596 epubmerge_plugin.py:597 epubmerge_plugin.py:598
 msgid "Unknown"
 msgstr "Necunoscut"
 
-#: epubmerge_plugin.py:617
+#: epubmerge_plugin.py:630
 msgid "%s by %s doesn't have an EPUB."
 msgstr "%s din %s nu are un EPUB. "
