@@ -2,390 +2,389 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Jonatan Nyberg <jonatan@autistici.org>, 2016
-# Merarom <merarom@yahoo.es>, 2014-2015
+# Maidur, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2015-12-19 16:47+Central Standard Time\n"
-"PO-Revision-Date: 2016-02-09 04:11+0000\n"
-"Last-Translator: Jonatan Nyberg <jonatan@autistici.org>\n"
-"Language-Team: Swedish (http://www.transifex.com/calibre/calibre-plugins/language/sv/)\n"
+"PO-Revision-Date: 2016-02-05 00:30+0000\n"
+"Last-Translator: Maidur\n"
+"Language-Team: Estonian (http://www.transifex.com/calibre/calibre-plugins/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: ENCODING\n"
 "Generated-By: pygettext.py 1.5\n"
-"Language: sv\n"
+"Language: et\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: __init__.py:32
 msgid "UI plugin to concatenate multiple epubs into one."
-msgstr "Användargränssnitts program för att slå samman flera EPUB-filer till en."
+msgstr "Kasutajaliidese plugin mitme e-raamatu ühendamiseks üheks."
 
 #: config.py:62
 msgid "Anthology"
-msgstr "Antologi"
+msgstr "Antoloogia"
 
 #: config.py:151
 msgid "Basic"
-msgstr "Grundläggande"
+msgstr "Peamised"
 
 #: config.py:154
 msgid "Custom Columns"
-msgstr "Anpassa kolumner"
+msgstr "Kohandatud veerud"
 
 #: config.py:195
 msgid "These settings control the basic features of the plugin."
-msgstr "Dessa inställningar styr grundläggande funktioner av tilläggsprogrammet."
+msgstr "Need sätted juhivad plugina põhilisi võmalusi."
 
 #: config.py:200
 msgid "Insert Table of Contents entry for each title?"
-msgstr "Lägga till innehållsförteckningselement för varje titel?"
+msgstr "Sisesta igale pealkirjale sisukorra kirje?"
 
 #: config.py:201
 msgid ""
 "If set, a new TOC entry will be made for each title and\n"
 "it's existing TOC nested underneath it."
-msgstr "Om satt, kommer ett nytt innehållsförteckningselement skapas för varje titel och\ndess existerande innehållsförteckning nästlas under det."
+msgstr "Kui märgitud, luuakse iga pealkirja kohta sisukorra kirje\nja selle olemasolev sisukord pesastatakse selle alla."
 
 #: config.py:206
 msgid "Flatten Table of Contents?"
-msgstr "Platta ut innehållsförteckning?"
+msgstr "Tasanda sisukord?"
 
 #: config.py:207
 msgid "Remove nesting and make TOC all on one level."
-msgstr "Ta bort nästning och skapa hela innehållsförteckning på en  och samma nivå."
+msgstr "Eemalda pesastamine ja pane kõik sisukorra kirjed samale tasandile."
 
 #: config.py:211
 msgid "Include Books' Comments?"
-msgstr "Inkludera bokens kommentarer?"
+msgstr "Kaasa raamatute kommentaarid?"
 
 #: config.py:212
 msgid ""
 "Include all the merged books' comments in the new book's comments.\n"
 "Default is a list of included titles only."
-msgstr "Inkludera alla de sammanslagna böckernas kommentarer i den nya bokens kommentar.\nStandard är en lista över endast inkluderade titlar."
+msgstr "Kaasa kõik ühendatud raamatute kommentaarid uue raamatu kommentaaridesse.\nVaikesätteks on ainult kaasatud pealkirjade loend."
 
 #: config.py:217
 msgid "Keep UnMerge Metadata?"
-msgstr "Behålla metadata för isärtagning?"
+msgstr "Säilita Lahutamise metaandmed?"
 
 #: config.py:218
 msgid ""
 "If set, a copy of the original metadata for each merged book will\n"
 "be included, allowing for UnMerge.  This includes your calibre custom\n"
 "columns.  Leave off if you plan to distribute the epub to others."
-msgstr "Om satt, kommer en kopia av originalets metadata för varje hopslagen\nbok inkluderas, vilket möjliggör isärtagning. Detta inkluderar dina \nanpassade calibre-kolumner. Lämna orörd om du planear att fördela EPUB till andra."
+msgstr "Kõi märgitud, kaasatakse iga ühendatud raamatu esialgsed metaandmed,\nvõimaldades ühendatud raamatu lahutamist. See sisaldab sinu\ncalibre kohandatud veergusid. Eemalda märgistus, kui sa plaanid\nühendatud epub-faili teistega jagada."
 
 #: config.py:231
 msgid "Add tags to merged books:"
-msgstr "Lägg till etiketter till sammanslagna böcker:"
+msgstr "Lisa ühendatud raamatutele sildid:"
 
 #: config.py:235
 msgid "Tags you enter here will be added to all new merged books"
-msgstr "Etikett du matar in här kommer att läggas till alla nya sammanslagna böcker"
+msgstr "Siia sisestatud sildid lisatakse kõigile uutele ühendatud raamatutele"
 
 #: config.py:240
 msgid "Merged Book Word:"
-msgstr "Sammanslaget bokord:"
+msgstr "Ühendatud raamatu sõna:"
 
 #: config.py:244
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
-msgstr "Ordet används för att beskriva sammanslagna böcker i standard titel och summering.\nFör människor som inte gillar ordet Antologi."
+msgstr "Sõna, mida kasutada ühendatud raamatute kirjeldamisel vaikimisi pealkirjas ja kokkuvõttes.\nInimestele, kes ei taha kasutada sõna Antoloogia."
 
 #: config.py:253
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubMerge confirmation "
 "dialogs back again."
-msgstr "Dessa kontroller är inte tilläggsinställningar som sådana, men bekväma knappar för ställa in kortkommandon och få alla EpubMerge-bekräftelsedialogrutor tillbaka igen."
+msgstr "Need juhtelemendid pole iseenesest plugina sätted, vaid pigem mugavad nupud klaviatuuri otseteede seadistamiseks ja kõigi plugina EpubMerge kinnituste dialoogide tagasi saamiseks."
 
 #: config.py:258
 msgid "Keyboard shortcuts..."
-msgstr "Kortkommando..."
+msgstr "Klaviatuuri otseteed..."
 
 #: config.py:259
 msgid "Edit the keyboard shortcuts associated with this plugin"
-msgstr "Redigera tangentbordets kortkommandon som hör samman med detta tilläggsprogram"
+msgstr "Muuda selle pluginaga seostatud klaviatuuri otseteid"
 
 #: config.py:263
 msgid "Reset disabled &confirmation dialogs"
-msgstr "Återställ avstängda &konfirmationsdialogrutor"
+msgstr "Lähtesta keelatud kinnituste dialoogid"
 
 #: config.py:264
 msgid "Reset all show me again dialogs for the EpubMerge plugin"
-msgstr "Återställ alla visa mig igen dialoger för EPUB-sammanslagningstillägget"
+msgstr "Lähtesta plugina EpubMerge kõik \"Näita uuesti\" dialoogid"
 
 #: config.py:268
 msgid "View library preferences..."
-msgstr "Visa biblioteksval"
+msgstr "Näita kogu eelistusi..."
 
 #: config.py:269
 msgid "View data stored in the library database for this plugin"
-msgstr "Visa data lagrat i biblioteksdatabasen för detta tilläggsprogram"
+msgstr "Näita selle plugina jaoks talletatud andmeid kogude andmebaasis"
 
 #: config.py:284
 msgid "Done"
-msgstr "Klar"
+msgstr "Valmis"
 
 #: config.py:285
 msgid "Confirmation dialogs have all been reset"
-msgstr "Alla konfirmationsdialogrutor har blivit återställda."
+msgstr "Kõik kinnituste dialoogid on lähtestatud"
 
 #: config.py:301
 msgid "Take value from first source book"
-msgstr "Ta värde från första källboken"
+msgstr "Võta väärtus esimesest lähteraamatust"
 
 #: config.py:302
 msgid "Take value from last source book"
-msgstr "Ta värde från sista källboken"
+msgstr "Võta väärtus viimasest lähteraamatust"
 
 #: config.py:303
 msgid "Add values from all source books"
-msgstr "Ta värde från alla källböcker"
+msgstr "Lisa väärtused kõikidest lähteraamatutest"
 
 #: config.py:304
 msgid "Average value from ALL source books"
-msgstr "Snittvärde från alla källböcker"
+msgstr "Keskmine väärtus KÕIKIDEST lähteraamatutest"
 
 #: config.py:305
 msgid "Average value from source books with values"
-msgstr "Snittvärde från  källböcker med värden"
+msgstr "Keskmine väärtus väärtustega lähteraamatutest"
 
 #: config.py:306
 msgid "True if true on all source books (and)"
-msgstr "Sant om sant för alla källböcker (och)"
+msgstr "Tõene, kui käib kõikide lähteraamatute kohta (ja)"
 
 #: config.py:307
 msgid "True if true on any source books (or)"
-msgstr "Sant om sant för någon källbok"
+msgstr "Tõene, kui käib ükskõik millise lähteraamatu kohta (või)"
 
 #: config.py:308
 msgid "Take newest value from source books"
-msgstr "Ta nyaste värde från källböcker"
+msgstr "Võta lähteraamatutest uusim väärtus"
 
 #: config.py:309
 msgid "Take oldest value from source books"
-msgstr "Ta äldsta värde från källböcker"
+msgstr "Võta lähteraamatutest vanim väärtus"
 
 #: config.py:310
 msgid "Include values from all source books"
-msgstr "Inkludera värden från alla källböcker"
+msgstr "Kaasa väärtused kõikidest lähteraamatutest"
 
 #: config.py:311
 msgid "Concatenate values from all source books"
-msgstr "Slå ihop värden från alla källböcker"
+msgstr "Ühenda väärtused kõikidest lähteraamatutest"
 
 #: config.py:324
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose how "
 "you would like these columns handled."
-msgstr "Om du har definierat anpassade kolumner, kommer de listas nedan. Välj hur du skulle vilja dessa kolumner hanteras."
+msgstr "Kui oled loonud kasutajamääratud veergusid, on nende loend all. Vali, kuidas sa tahad, et neid veergusid käsitletakse."
 
 #: config.py:351
 msgid "Set this %s column on new merged books..."
-msgstr "Ange denna %s kolumn på nya sammanslagna böcker..."
+msgstr "Määra see %s veerg kõikidel uutel ühendatud raamatutel..."
 
 #: config.py:366
 msgid "How this column will be populated by default."
-msgstr "Hur denna kolumn kommer att fyllas som standard."
+msgstr "Kuidas vaikimisi see veerg täidetakse."
 
 #: dialogs.py:70
 msgid "Starting..."
-msgstr "Påbörjar..."
+msgstr "Alustamine..."
 
 #: dialogs.py:71
 msgid "Working"
-msgstr "Arbeterar"
+msgstr "Töötamine"
 
 #: dialogs.py:72
 msgid "Completed so far"
-msgstr "Färdiga hittills"
+msgstr "Seni valmis"
 
 #: dialogs.py:75
 msgid "Cancel"
-msgstr "Avbryt"
+msgstr "Loobu"
 
 #: dialogs.py:119
 msgid "Starting Merge..."
-msgstr "Påbörja sammanslagning..."
+msgstr "Ühendamise alustamine..."
 
 #: dialogs.py:177
 msgid "Move selected books up the list"
-msgstr "Flytta valda böcker uppåt i listan"
+msgstr "Liiguta valitud raamatud loendis üles"
 
 #: dialogs.py:182
 msgid "Remove selected books from the list"
-msgstr "Ta bort valda böcker från listan"
+msgstr "Eemalda valitud raamatud loendist"
 
 #: dialogs.py:187
 msgid "Move selected books down the list"
-msgstr "Flytta valda böcker neråt i listan"
+msgstr "Liiguta valitud raamatud loendis alla"
 
 #: dialogs.py:226
 msgid "Author(s)"
-msgstr "Författare"
+msgstr "Autor(id)"
 
 #: dialogs.py:226
 msgid "Series"
-msgstr "Serier"
+msgstr "Sari"
 
 #: dialogs.py:226
 msgid "Title"
-msgstr "Titel"
+msgstr "Pealkiri"
 
 #: dialogs.py:275
 msgid "Are you sure you want to remove this book from the list?"
-msgstr "Är du säker du vill ta bort denna bok från listan?"
+msgstr "Kas oled kindel, et tahad selle raamatu loendist eemaldada?"
 
 #: dialogs.py:277
 msgid "Are you sure you want to remove the selected %d books from the list?"
-msgstr "Är du säker du vill ta bort valda %d böcker från listan?"
+msgstr "Kas oled kindel, et tahad %d valitud raamatut loendist eemaldada?"
 
 #: dialogs.py:351
 msgid "UnMerge Epub"
-msgstr "Separera EPUB"
+msgstr "Lahuta Epub"
 
 #: dialogs.py:358
 msgid "Apply to all EPUBs?"
-msgstr "Applicera på alla EPUB-filer?"
+msgstr "Rakenda kõikidele EPUB-idele?"
 
 #: dialogs.py:359
 msgid "Apply the same action to the rest of the EPUBs after this."
-msgstr "Applicera samma handling för resten av EPUB-filer efter det här."
+msgstr "Rakenda sama toimingut ülejäänud EPUB-idele pärast seda."
 
 #: dialogs.py:363
 msgid "Add"
-msgstr "Lägg till"
+msgstr "Lisa"
 
 #: dialogs.py:367
 msgid "Overwrite"
-msgstr "Skriv över"
+msgstr "Kirjuta üle"
 
 #: dialogs.py:370
 msgid "Discard"
-msgstr "Släng"
+msgstr "Tühista"
 
 #: epubmerge_plugin.py:60
 msgid "EpubMerge"
-msgstr "EPUB-sammanslagning"
+msgstr "EpubMerge"
 
 #: epubmerge_plugin.py:61
 msgid "Merge multiple EPUBs into one in a new book."
-msgstr "Lägg samman flera EPUB-filer i en ny bok."
+msgstr "Ühenda mitu EPUB-i üheks uueks raamatuks."
 
 #: epubmerge_plugin.py:110 epubmerge_plugin.py:111
 msgid "&Merge Epubs"
-msgstr "&Slå samman EPUB-filer"
+msgstr "Ühenda Epubid"
 
 #: epubmerge_plugin.py:114 epubmerge_plugin.py:115
 msgid "&UnMerge Epubs"
-msgstr "Separera EPUB-filer"
+msgstr "Lahuta Epubid"
 
 #: epubmerge_plugin.py:124
 msgid "&Configure Plugin"
-msgstr "&Konfigurera tillägg"
+msgstr "Seadista pluginat"
 
 #: epubmerge_plugin.py:126 epubmerge_plugin.py:127
 msgid "Configure EpubMerge"
-msgstr "Konfigurera EPUB-sammanslagning"
+msgstr "Plugina EpubMerge seadistamine"
 
 #: epubmerge_plugin.py:183
 msgid "Cannot UnMerge Non-Epubs"
-msgstr "Kan inte plocka isär icke-EPUB-filer"
+msgstr "Ei saa mitte-Epube lahutada"
 
 #: epubmerge_plugin.py:184 epubmerge_plugin.py:195
 msgid ""
 "To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
 " Metadata enabled."
-msgstr "För att kunna plocka isär källa måste EPUB-filer vara skapade med EPUB-sammanslagning med delningsmetadatasparning är aktiverad."
+msgstr "Lahutamiseks peab lähteraamat olema Epub, mis loodud pluginaga EpubMerge ja sisselülitatud sättega \"Säilita Lahutamise metaandmed\"."
 
 #: epubmerge_plugin.py:194
 msgid "No UnMerge data found"
-msgstr "Ingen uppdelningsdata hittades"
+msgstr "Lahutamise andmeid ei leitud"
 
 #: epubmerge_plugin.py:213
 msgid ""
 "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
 "the same title, Overwrite the Epub in the existing book, or Discard this "
 "Epub."
-msgstr "Du har redan en bok <i>%s</i> av <i>%s</i>. Du kan lägga till en ny bok med samma titel, skriv över EPUB i befintlig bok, eller släng denna EPUB."
+msgstr "Sul juba on raamat <i>%s</i>, autoriga <i>%s</i>.  Sa võid lisada uue samapealkirjalise raamatu, kirjutada raamatu olemasoleva Epub-formaadi üle või tühistada selle Epubi."
 
 #: epubmerge_plugin.py:216
 msgid ""
 "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
 "new book of the same title, or Discard this Epub."
-msgstr "Du har redan mer än en bok <i>%s</i> av <i>%s</i>.  Du kan lägga till en ny bok med samma titel eller ta bort denna EPUB."
+msgstr "Sul juba on rohkem kui üks raamat <i>%s</i>, autoriga <i>%s</i>.  Sa võid lisada uue samapealkirjalise raamatu, või tühistada selle Epubi."
 
 #: epubmerge_plugin.py:255 epubmerge_plugin.py:283
 msgid "Cannot Merge Epubs"
-msgstr "Kan inte slå samman EPUB-filer"
+msgstr "Ei saa Epube ühendada"
 
 #: epubmerge_plugin.py:256
 msgid "Less than 2 books selected."
-msgstr "Mindre än 2 böcker valda."
+msgstr "Valitud on vähem kui 2 raamatut."
 
 #: epubmerge_plugin.py:272
 msgid "Collecting EPUBs for merger..."
-msgstr "Samlar EPUB-filer för sammanslagning..."
+msgstr "EPUBide kogumine ühendamiseks..."
 
 #: epubmerge_plugin.py:273
 msgid "Get EPUBs for merge"
-msgstr "Hämta EPUB-filer för sammanslagning"
+msgstr "EPUBide hankimine ühendamiseks"
 
 #: epubmerge_plugin.py:274
 msgid "EPUBs collected"
-msgstr "EPUB-filer ihopsamlade"
+msgstr "EPUBid kogutud"
 
 #: epubmerge_plugin.py:284
 msgid "%s books failed."
-msgstr "%s böcker misslyckades."
+msgstr "%s raamatut ebaõnnestus."
 
 #: epubmerge_plugin.py:289
 msgid "Order EPUBs to Merge"
-msgstr "Beordra EPUB-filer att slås samman"
+msgstr "EPUBide järjestamine ühendamiseks"
 
 #: epubmerge_plugin.py:353
 msgid "%s by %s"
-msgstr "%s av %s"
+msgstr "%s, autor %s"
 
 #: epubmerge_plugin.py:357
 msgid "%s containing:"
-msgstr "%s innehåller:"
+msgstr "%s, mis sisaldab:"
 
 #: epubmerge_plugin.py:526
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
-msgstr "Boken för den nya sammanslagna EPUB har skapats och standard metadata fylls in.\n\nMen EPUB kommer *inte* att skapas förrän du har granskat, redigerat, och stängt metadata dialogrutan som följer."
+msgstr "Uus ühendatud EPUB-raamat on loodud ja täidetud vaikimisi metaandmetega.\n\nKuid EPUBi *ei* looda enne, kui oled jägneva dialoogi üle vaatanud, muutnud ja sulgenud."
 
 #: epubmerge_plugin.py:542
 msgid ""
 "You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge"
 " is finished."
-msgstr "Du slår samman %s EPUB:ar totalt %s. Calibre kommer att vara låst till dess att sammanslagningen är klar."
+msgstr "Sa oled ühendamas %s EPUBi kogumahuga %s.  Calibre lukustatakse, kuni ühendamine valmis saab."
 
 #: epubmerge_plugin.py:546
 msgid "Merging %s EPUBs..."
-msgstr "Slår samman %s EPUB-filer..."
+msgstr "%s EPUBi ühendamine..."
 
 #: epubmerge_plugin.py:572
 msgid ""
 "Merge finished, output in:\n"
 "%s"
-msgstr "Sammanslagning klar, resultat i:\n%s"
+msgstr "Ühendamine valmis, väljund:\n%s"
 
 #: epubmerge_plugin.py:581
 msgid "Finished merging %s EPUBs."
-msgstr "Klar med sammanslagning av %s EPUB-filer."
+msgstr "%s EPUBi ühendamine valmis."
 
 #: epubmerge_plugin.py:596 epubmerge_plugin.py:597 epubmerge_plugin.py:598
 msgid "Unknown"
-msgstr "Okänd"
+msgstr "Tundmatu"
 
 #: epubmerge_plugin.py:630
 msgid "%s by %s doesn't have an EPUB."
-msgstr "%s av %s har inte en EPUB."
+msgstr "%s autoriga %s ei sisalda EPUB-formaati."

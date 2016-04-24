@@ -2,7 +2,7 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Zygimantus <zygimantus@gmail.com>, 2015
+# Zygi Mantus <zygimantus@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
