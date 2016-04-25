@@ -11,15 +11,21 @@ __docformat__ = 'restructuredtext en'
 # The class that all Interface Action plugin wrappers must inherit from
 from calibre.customize import InterfaceActionBase
 
-import sys
+import sys, os
 if sys.version_info >= (2, 7):
     import logging
     logger = logging.getLogger(__name__)
     loghandler=logging.StreamHandler()
-    loghandler.setFormatter(logging.Formatter("EpubMerge:%(levelname)s:%(filename)s(%(lineno)d):%(message)s"))
+    loghandler.setFormatter(logging.Formatter("EpubMerge: %(levelname)s: %(asctime)s: %(filename)s(%(lineno)d): %(message)s"))
     logger.addHandler(loghandler)
-    loghandler.setLevel(logging.DEBUG)
-    logger.setLevel(logging.DEBUG)
+
+    from calibre.constants import DEBUG
+    if os.environ.get('CALIBRE_WORKER', None) is not None or DEBUG:
+        loghandler.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
+    else:
+        loghandler.setLevel(logging.CRITICAL)
+        logger.setLevel(logging.CRITICAL)
 
 # pulls in translation files for _() strings
 try:
