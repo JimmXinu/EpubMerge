@@ -58,7 +58,27 @@ from calibre_plugins.epubmerge.common_utils \
     import (ReadOnlyTableWidgetItem, SizePersistedDialog,
             ImageTitleLayout, get_icon)
 
-class LoopProgressDialog(QProgressDialog):
+def LoopProgressDialog(gui,
+                       book_list,
+                       foreach_function,
+                       finish_function,
+                       init_label=_("Starting..."),
+                       win_title=_("Working"),
+                       status_prefix=_("Completed so far")):
+    ld = _LoopProgressDialog(gui,
+                             book_list,
+                             foreach_function,
+                             init_label,
+                             win_title,
+                             status_prefix)
+    # Mac OS X gets upset if the finish_function is called from inside
+    # the real _LoopProgressDialog class.
+    
+    # reflect old behavior.
+    if not ld.wasCanceled():
+        finish_function(book_list)
+        
+class _LoopProgressDialog(QProgressDialog):
     '''
     ProgressDialog displayed while fetching metadata for each story.
     '''
@@ -66,7 +86,6 @@ class LoopProgressDialog(QProgressDialog):
                  gui,
                  book_list,
                  foreach_function,
-                 finish_function,
                  init_label=_("Starting..."),
                  win_title=_("Working"),
                  status_prefix=_("Completed so far")):
@@ -75,10 +94,8 @@ class LoopProgressDialog(QProgressDialog):
                                  _('Cancel'), 0, len(book_list), gui)
         self.setWindowTitle(win_title)
         self.setMinimumWidth(500)
-        self.gui = gui
         self.book_list = book_list
         self.foreach_function = foreach_function
-        self.finish_function = finish_function
         self.status_prefix = status_prefix
         self.i = 0
 
@@ -103,8 +120,7 @@ class LoopProgressDialog(QProgressDialog):
         except Exception as e:
             book['good']=False
             book['comment']=unicode(e)
-            logger.error("Exception: %s:%s"%(book,unicode(e)))
-            traceback.print_exc()
+            logger.error("Exception: %s:%s"%(book,unicode(e)),exc_info=True)
 
         self.updateStatus()
         self.i += 1
@@ -119,8 +135,6 @@ class LoopProgressDialog(QProgressDialog):
         self.setLabelText(_("Starting Merge..."))
         self.setValue(self.i+1)
 
-        self.finish_function(self.book_list)
-        self.gui = None
         self.hide()
 
 class AuthorTableWidgetItem(ReadOnlyTableWidgetItem):
