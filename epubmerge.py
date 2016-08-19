@@ -292,15 +292,24 @@ def doMerge(outputio,
                             filecount+=1
                         items.append((itemid,href,item.getAttribute("media-type")))
                         filelist.append(href)
-                    except KeyError, ke:
-                        pass # Skip missing files.
+                    except KeyError, ke: # Skip missing files.
+                        logger.info("Skipping missing file %s (%s)"%(href,relpath+itemhref))
+                        del itemhrefs[itemid]
 
         itemreflist = metadom.getElementsByTagNameNS("*","itemref")
         # logger.debug("itemreflist:%s"%itemreflist)
         # logger.debug("itemhrefs:%s"%itemhrefs)
         # logger.debug("bookid:%s"%bookid)
         # logger.debug("itemreflist[0].getAttribute(idref):%s"%itemreflist[0].getAttribute("idref"))
-        firstitemhrefs.append(itemhrefs[bookid+itemreflist[0].getAttribute("idref")])
+
+        # Looking for the first item in itemreflist that wasn't
+        # discarded due to missing files.
+        for itemref in itemreflist:
+            idref = bookid+itemref.getAttribute("idref")
+            if idref in itemhrefs:
+                firstitemhrefs.append(itemhrefs[idref])
+                break
+
         for itemref in itemreflist:
             itemrefs.append(bookid+itemref.getAttribute("idref"))
 
