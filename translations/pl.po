@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Adam Humienny <adam.humienny@gmail.com>, 2015
+# konrad … <konrad.krulikowski@gmail.com>, 2016
 # Ola Kleniewska <anyzeklove@gmail.com>, 2016
 # Piotr Parafiniuk <koliberek@gmail.com>, 2015
 # Piotr Strębski <strebski@o2.pl>, 2015
@@ -10,8 +11,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2015-12-19 16:47+Central Standard Time\n"
-"PO-Revision-Date: 2016-04-06 19:22+0000\n"
-"Last-Translator: Ola Kleniewska <anyzeklove@gmail.com>\n"
+"PO-Revision-Date: 2016-07-12 07:38+0000\n"
+"Last-Translator: konrad … <konrad.krulikowski@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/calibre/calibre-plugins/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -196,7 +197,7 @@ msgstr ""
 
 #: dialogs.py:70
 msgid "Starting..."
-msgstr "Uruchamianie..."
+msgstr "Rozpoczynanie…"
 
 #: dialogs.py:71
 msgid "Working"
@@ -212,7 +213,7 @@ msgstr "Anuluj"
 
 #: dialogs.py:119
 msgid "Starting Merge..."
-msgstr "Rozpoczynanie łączenia..."
+msgstr "Rozpoczynanie scalania…"
 
 #: dialogs.py:177
 msgid "Move selected books up the list"
@@ -280,11 +281,11 @@ msgstr "Łączy wiele plików EPUB w jedną nową książkę."
 
 #: epubmerge_plugin.py:110 epubmerge_plugin.py:111
 msgid "&Merge Epubs"
-msgstr "&Połącz pliki Epub"
+msgstr "&Scal pliki Epub"
 
 #: epubmerge_plugin.py:114 epubmerge_plugin.py:115
 msgid "&UnMerge Epubs"
-msgstr "&Rozdziel Epuby"
+msgstr "&Rozdziel pliki Epub"
 
 #: epubmerge_plugin.py:124
 msgid "&Configure Plugin"
