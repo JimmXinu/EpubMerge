@@ -13,7 +13,7 @@ import os
 import re
 from StringIO import StringIO
 from urllib import unquote
-from optparse import OptionParser      
+from optparse import OptionParser
 from functools import partial
 
 from zipfile import ZipFile, ZIP_STORED, ZIP_DEFLATED
@@ -22,7 +22,7 @@ from time import time
 from exceptions import KeyError
 
 from xml.dom.minidom import parse, parseString, getDOMImplementation, Element
-        
+
 def main(argv,usage=None):
 
     if not usage:
@@ -32,7 +32,7 @@ def main(argv,usage=None):
 
 Given list of epubs will be merged together into one new epub.
 ''')
-    
+
     optparser.add_option("-o", "--output", dest="outputopt", default="merge.epub",
                       help="Set OUTPUT file, Default: merge.epub", metavar="OUTPUT")
     optparser.add_option("-t", "--title", dest="titleopt", default=None,
@@ -61,13 +61,13 @@ Given list of epubs will be merged together into one new epub.
                       help="Keep original metadata files in merged epub.  Use for UnMerging.",)
     optparser.add_option("-s", "--source", dest="sourceopt", default=None,
                       help="Include URL as dc:source and dc:identifier(opf:scheme=URL).", metavar="URL")
-    
+
     optparser.add_option("-u", "--unmerge",
                       action="store_true", dest="unmerge",
                       help="UnMerge an existing epub that was created by merging with --keep-meta.",)
     optparser.add_option("-D", "--outputdir", dest="outputdir", default=".",
                       help="Set output directory for unmerge, Default: (current dir)", metavar="OUTPUTDIR")
-    
+
     (options, args) = optparser.parse_args(argv)
 
     ## Add .epub if not already there.
@@ -100,7 +100,15 @@ Given list of epubs will be merged together into one new epub.
 def cond_print(flag,arg):
     if flag:
         logger.debug(arg)
-    
+
+imagetypes = {
+    'jpg':'image/jpeg',
+    'jpeg':'image/jpeg',
+    'png':'image/png',
+    'gif':'image/gif',
+    'svg':'image/svg+xml',
+    }
+
 def doMerge(outputio,
             files,
             authoropts=[],
@@ -128,7 +136,7 @@ def doMerge(outputio,
     '''
 
     printt = partial(cond_print,printtimes)
-    
+
     ## Python 2.5 ZipFile is rather more primative than later
     ## versions.  It can operate on a file, or on a StringIO, but
     ## not on an open stream.  OTOH, I suspect we would have had
@@ -137,7 +145,7 @@ def doMerge(outputio,
 
     filecount=0
     t = time()
-    
+
     ## Write mimetype file, must be first and uncompressed.
     ## Older versions of python(2.4/5) don't allow you to specify
     ## compression by individual file.
@@ -161,10 +169,10 @@ def doMerge(outputio,
     containertop.appendChild(rootfiles)
     rootfiles.appendChild(newTag(containerdom,"rootfile",{"full-path":"content.opf",
                                                           "media-type":"application/oebps-package+xml"}))
-    outputepub.writestr("META-INF/container.xml",containerdom.toprettyxml(indent='   ',encoding='utf-8'))    
+    outputepub.writestr("META-INF/container.xml",containerdom.toprettyxml(indent='   ',encoding='utf-8'))
 
     ## Process input epubs.
-    
+
     items = [] # list of (id, href, type) tuples(all strings) -- From .opfs' manifests
     items.append(("ncx","toc.ncx","application/x-dtbncx+xml")) ## we'll generate the toc.ncx file,
                                                                ## but it needs to be in the items manifest.
@@ -179,19 +187,19 @@ def doMerge(outputio,
     allauthors = [] # list of lists of strings -- Each book's list of authors.
 
     filelist = []
-    
+
     printt("prep output:%s"%(time()-t))
     t = time()
-    
+
     booknum=1
     firstmetadom = None
     for file in files:
         if file == None : continue
-        
+
         book = "%d" % booknum
         bookdir = "%d/" % booknum
         bookid = "a%d" % booknum
-        
+
         epub = ZipFile(file, 'r')
 
         ## Find the .opf file.
@@ -202,7 +210,7 @@ def doMerge(outputio,
 
         ## Save the path to the .opf file--hrefs inside it are relative to it.
         relpath = get_path_part(rootfilename)
-            
+
         metadom = parseString(epub.read(rootfilename))
         #logger.debug("metadom:%s"%epub.read(rootfilename))
         if booknum==1 and not source:
@@ -251,7 +259,7 @@ def doMerge(outputio,
             outputepub.writestr(href,
                                 epub.read(itemhref))
             items.append((itemid,href,"origrootfile/xml"))
-            
+
         # spin through the manifest--only place there are item tags.
         # Correction--only place there *should* be item tags.  But
         # somebody found one that did.
@@ -314,11 +322,11 @@ def doMerge(outputio,
             itemrefs.append(bookid+itemref.getAttribute("idref"))
 
         booknum=booknum+1;
-        
+
     printt("after file loop:%s"%(time()-t))
     t = time()
-    
-    ## create content.opf file. 
+
+    ## create content.opf file.
     uniqueid="epubmerge-uid-%d" % time() # real sophisticated uid scheme.
     contentdom = getDOMImplementation().createDocument(None, "package", None)
     package = contentdom.documentElement
@@ -333,14 +341,14 @@ def doMerge(outputio,
     if( titleopt is None ):
         titleopt = booktitles[0]+" Anthology"
     metadata.appendChild(newTag(contentdom,"dc:title",text=titleopt))
-    
+
     # If cmdline authors, use those instead of those collected from the epubs
     # (allauthors kept for TOC & description gen below.
     if( len(authoropts) > 1  ):
         useauthors=[authoropts]
     else:
         useauthors=allauthors
-        
+
     usedauthors=dict()
     for authorlist in useauthors:
         for author in authorlist:
@@ -349,39 +357,48 @@ def doMerge(outputio,
                 metadata.appendChild(newTag(contentdom,"dc:creator",
                                             attrs={"opf:role":"aut"},
                                             text=author))
-    
+
     metadata.appendChild(newTag(contentdom,"dc:contributor",text="epubmerge",attrs={"opf:role":"bkp"}))
     metadata.appendChild(newTag(contentdom,"dc:rights",text="Copyrights as per source stories"))
-    
+
     for l in languages:
         metadata.appendChild(newTag(contentdom,"dc:language",text=l))
-    
+
     if not descopt:
         # created now, but not filled in until TOC generation to save loops.
         description = newTag(contentdom,"dc:description",text="Anthology containing:\n")
     else:
         description = newTag(contentdom,"dc:description",text=descopt)
     metadata.appendChild(description)
-    
+
     if source:
         metadata.appendChild(newTag(contentdom,"dc:identifier",
                                     attrs={"opf:scheme":"URL"},
                                     text=source))
         metadata.appendChild(newTag(contentdom,"dc:source",
                                     text=source))
-        
+
     for tag in tags:
         metadata.appendChild(newTag(contentdom,"dc:subject",text=tag))
-    
+
     package.appendChild(metadata)
-    
+
     manifest = contentdom.createElement("manifest")
     package.appendChild(manifest)
 
     spine = newTag(contentdom,"spine",attrs={"toc":"ncx"})
     package.appendChild(spine)
-    
+
     if coverjpgpath:
+        # in case coverjpg isn't a jpg:
+        coverext = 'jpg'
+        covertype = 'image/jpeg'
+        try:
+            coverext = coverjpgpath.split('.')[-1].lower()
+            covertype = imagetypes.get(coverext,covertype)
+        except:
+            pass
+        logger.debug("coverjpgpath:%s coverext:%s covertype:%s"%(coverjpgpath,coverext,covertype))
         # <meta name="cover" content="cover.jpg"/>
         metadata.appendChild(newTag(contentdom,"meta",{"name":"cover",
                                                        "content":"coverimageid"}))
@@ -393,27 +410,27 @@ def doMerge(outputio,
 
         manifest.appendChild(newTag(contentdom,"item",
                                     attrs={'id':"coverimageid",
-                                           'href':"cover.jpg",
-                                           'media-type':"image/jpeg"}))            
-        
+                                           'href':"cover."+coverext,
+                                           'media-type':covertype}))
+
         # Note that the id of the cover xhmtl *must* be 'cover'
         # for it to work on Nook.
         manifest.appendChild(newTag(contentdom,"item",
                                     attrs={'id':"cover",
                                            'href':"cover.xhtml",
                                            'media-type':"application/xhtml+xml"}))
-        
+
         spine.appendChild(newTag(contentdom,"itemref",
                                  attrs={"idref":"cover",
-                                        "linear":"yes"}))    
-            
+                                        "linear":"yes"}))
+
     for item in items:
         (id,href,type)=item
         manifest.appendChild(newTag(contentdom,"item",
                                        attrs={'id':id,
                                               'href':href,
                                               'media-type':type}))
-        
+
     for itemref in itemrefs:
         spine.appendChild(newTag(contentdom,"itemref",
                                     attrs={"idref":itemref,
@@ -435,11 +452,11 @@ def doMerge(outputio,
                             attrs={"name":"dtb:totalPageCount", "content":"0"}))
     head.appendChild(newTag(tocncxdom,"meta",
                             attrs={"name":"dtb:maxPageNumber", "content":"0"}))
-    
+
     docTitle = tocncxdom.createElement("docTitle")
     docTitle.appendChild(newTag(tocncxdom,"text",text=titleopt))
     ncx.appendChild(docTitle)
-    
+
     tocnavMap = tocncxdom.createElement("navMap")
     ncx.appendChild(tocnavMap)
 
@@ -447,7 +464,7 @@ def doMerge(outputio,
 
     printt("wrote initial metadata:%s"%(time()-t))
     t = time()
-    
+
     for navmap in navmaps:
         navpoints = filter( lambda x : isinstance(x,Element) and x.tagName=="navPoint",
                             navmap.childNodes) #getElementsByTagNameNS("*","navPoint")
@@ -461,7 +478,7 @@ def doMerge(outputio,
                 title = booktitles[booknum]+" by "+allauthors[booknum][0]
             else:
                 title = booktitles[booknum]
-                
+
             navlabel.appendChild(newTag(tocncxdom,"text",text=title))
             # Find the first 'spine' item's content for the title navpoint.
             # Many epubs have the first chapter as first navpoint, so we can't just
@@ -473,15 +490,15 @@ def doMerge(outputio,
             tocnavMap.appendChild(newnav)
         else:
             newnav = tocnavMap
-        
+
         if not descopt and len(allauthors[booknum]) > 0:
             description.appendChild(contentdom.createTextNode(booktitles[booknum]+" by "+allauthors[booknum][0]+"\n"))
-            
+
         if len(navpoints) > 1 :
             for navpoint in navpoints:
                 newnav.appendChild(navpoint)
                 navpoint.is_ffdl_epub = is_ffdl_epub[booknum]
-        
+
         booknum=booknum+1;
         # end of navmaps loop.
 
@@ -501,9 +518,9 @@ def doMerge(outputio,
                 contentsrc = n.getAttribute("src")
                 # logger.debug("contentsrc: %s"%contentsrc)
                 break
-            
+
         if( contentsrc not in contentsrcs ):
-            
+
             parent = navpoint.parentNode
             try:
                 # if the epub was ever edited with Sigil, it changed
@@ -520,30 +537,30 @@ def doMerge(outputio,
                         parent.removeChild(sibs[1])
                         removednodes.append(sibs[1])
             except:
-                pass                
-            
+                pass
+
             # New src, new number.
             contentsrcs[contentsrc] = navpoint.getAttribute("id")
             playorder += 1
             navpoint.setAttribute("playOrder","%d" % playorder)
             # logger.debug("playorder:%d:"%playorder)
-            
+
             # need to know depth of deepest navpoint for <meta name="dtb:depth" content="2"/>
             npdepth = 1
             dp = navpoint.parentNode
             while dp and dp.tagName != "navMap":
                 npdepth += 1
                 dp = dp.parentNode
-            
+
             if npdepth > maxdepth:
                 maxdepth = npdepth
         else:
             # same content, look for ffdl and title_page and/or single chapter.
-            
+
             # easier to just set it now, even if the node gets removed later.
             navpoint.setAttribute("playOrder","%d" % playorder)
             # logger.debug("playorder:%d:"%playorder)
-            
+
             parent = navpoint.parentNode
             try:
                 # if the epub was ever edited with Sigil, it changed
@@ -570,17 +587,17 @@ def doMerge(outputio,
         flattocnavMap = tocncxdom.createElement("navMap")
         for n in tocnavMap.getElementsByTagNameNS("*","navPoint"):
             flattocnavMap.appendChild(n)
-            
+
         ncx.replaceChild(flattocnavMap,tocnavMap)
-        
+
     printt("navmap/toc maddess:%s"%(time()-t))
     t = time()
-    
+
     depthnode.setAttribute("content","%d"%maxdepth)
 
     ## content.opf written now due to description being filled in
     ## during TOC generation to save loops.
-    contentxml = contentdom.toprettyxml(indent='   ',encoding='utf-8')        
+    contentxml = contentdom.toprettyxml(indent='   ',encoding='utf-8')
     # tweak for brain damaged Nook STR.  Nook insists on name before content.
     contentxml = contentxml.replace('<meta content="coverimageid" name="cover"/>',
                                     '<meta name="cover" content="coverimageid"/>')
@@ -589,27 +606,27 @@ def doMerge(outputio,
 
     printt("wrote opf/ncx files:%s"%(time()-t))
     t = time()
-    
+
     if coverjpgpath:
         # write, not write string.  Pulling from file.
-        outputepub.write(coverjpgpath,"cover.jpg")
-        
+        outputepub.write(coverjpgpath,"cover."+coverext)
+
         outputepub.writestr("cover.xhtml",'''
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><title>Cover</title><style type="text/css" title="override_css">
 @page {padding: 0pt; margin:0pt}
 body { text-align: center; padding:0pt; margin: 0pt; }
 div { margin: 0pt; padding: 0pt; }
 </style></head><body><div>
-<img src="cover.jpg" alt="cover"/>
+<img src="cover.'''+coverext+'''" alt="cover"/>
 </div></body></html>
 ''')
-        
+
     # declares all the files created by Windows.  otherwise, when
     # it runs in appengine, windows unzips the files as 000 perms.
     for zf in outputepub.filelist:
         zf.create_system = 0
     outputepub.close()
-    
+
     printt("closed outputepub:%s"%(time()-t))
     t = time()
 
@@ -630,7 +647,7 @@ def doUnMerge(inputio,outdir=None):
     ## Save the path to the .opf file--hrefs inside it are relative to it.
     relpath = get_path_part(rootfilename)
     #logger.debug("relpath:%s"%relpath)
-            
+
     # spin through the manifest--only place there are item tags.
     # Correction--only place there *should* be item tags.  But
     # somebody found one that did.
@@ -645,13 +662,13 @@ def doUnMerge(inputio,outdir=None):
             curepubpath = re.sub(r'([^\d/]+/)+$','',get_path_part(itemhref))
             savehref = itemhref[len(curepubpath):]
             #logger.debug("curepubpath:%s"%curepubpath)
-            
+
             outputio = StringIO()
             outputepub = ZipFile(outputio, "w", compression=ZIP_STORED)
             outputepub.debug = 3
             outputepub.writestr("mimetype", "application/epub+zip")
             outputepub.close()
-        
+
             ## Re-open file for content.
             outputepub = ZipFile(outputio, "a", compression=ZIP_DEFLATED)
             outputepub.debug = 3
@@ -668,7 +685,7 @@ def doUnMerge(inputio,outdir=None):
             outputepub.writestr("META-INF/container.xml",containerdom.toprettyxml(indent='   ',encoding='utf-8'))
 
             outputepub.writestr(savehref,epub.read(itemhref))
-            
+
             for item2 in contentdom.getElementsByTagName("item"):
                 item2href = relpath+unquote(item2.getAttribute("href"))
                 if item2href.startswith(curepubpath) and item2href != itemhref:
@@ -681,7 +698,7 @@ def doUnMerge(inputio,outdir=None):
             for zf in outputepub.filelist:
                 zf.create_system = 0
             outputepub.close()
-            
+
             outputios.append(outputio)
 
     if outdir:
@@ -713,7 +730,7 @@ def newTag(dom,name,attrs=None,text=None):
     if( text is not None ):
         tag.appendChild(dom.createTextNode(text))
     return tag
-    
+
 def getText(nodelist):
     rc = []
     for node in nodelist:
