@@ -3,14 +3,15 @@
 # 
 # Translators:
 # Fernanda Regina Mistieri <mistierifernanda@gmail.com>, 2015
+# Gabito Luz <gluzcons@gmail.com>, 2016
 # Paulo_Neto <layoutbr@lexxa.com.br>, 2014
 # Wagner Marques Oliveira <wagnermarques00@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2015-12-19 16:47+Central Standard Time\n"
-"PO-Revision-Date: 2015-12-29 00:58+0000\n"
-"Last-Translator: Fernanda Regina Mistieri <mistierifernanda@gmail.com>\n"
+"PO-Revision-Date: 2016-08-21 12:35+0000\n"
+"Last-Translator: Gabito Luz <gluzcons@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/calibre/calibre-plugins/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -94,7 +95,7 @@ msgstr "Corresponder palavra do livro:"
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
-msgstr ""
+msgstr "Palavra usada para descrever livros correspondentes no título padrão e resumo. Para pessoas que não gostam da palavra Antologia."
 
 #: config.py:253
 msgid ""
