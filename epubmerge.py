@@ -466,8 +466,11 @@ def doMerge(outputio,
     t = time()
 
     for navmap in navmaps:
+        depthnavpoints = navmap.getElementsByTagNameNS("*","navPoint") # for checking more than one TOC entry
+
+        ## only gets top level TOC entries.  sub entries carried inside.
         navpoints = filter( lambda x : isinstance(x,Element) and x.tagName=="navPoint",
-                            navmap.childNodes) #getElementsByTagNameNS("*","navPoint")
+                            navmap.childNodes)
         newnav = None
         if titlenavpoints:
             newnav = newTag(tocncxdom,"navPoint",{"id":"book%03d"%booknum})
@@ -494,7 +497,8 @@ def doMerge(outputio,
         if not descopt and len(allauthors[booknum]) > 0:
             description.appendChild(contentdom.createTextNode(booktitles[booknum]+" by "+allauthors[booknum][0]+"\n"))
 
-        if len(navpoints) > 1 :
+        if len(depthnavpoints) > 1 or not titlenavpoints: # If only one TOC point(total, not top level), or if not
+                                                          # including title nav point, include sub book TOC entries.
             for navpoint in navpoints:
                 newnav.appendChild(navpoint)
                 navpoint.is_ffdl_epub = is_ffdl_epub[booknum]
