@@ -2,13 +2,13 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Maidur, 2016
+# Maidur, 2016-2017
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2016-12-07 12:51+Central Standard Time\n"
-"PO-Revision-Date: 2016-12-09 09:31+0000\n"
-"Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
+"PO-Revision-Date: 2017-03-13 03:46+0000\n"
+"Last-Translator: Maidur\n"
 "Language-Team: Estonian (http://www.transifex.com/calibre/calibre-plugins/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr "Peamised"
 
 #: config.py:155
 msgid "Columns"
-msgstr ""
+msgstr "Veerud"
 
 #: config.py:197
 msgid "These settings control the basic features of the plugin."
@@ -179,21 +179,21 @@ msgstr "Ühenda väärtused kõikidest lähteraamatutest"
 
 #: config.py:326
 msgid "Standard Columns:"
-msgstr ""
+msgstr "Standard-veerud:"
 
 #: config.py:331
 msgid "Take Series from first book"
-msgstr ""
+msgstr "Võta Sari esimesest raamatust"
 
 #: config.py:332
 msgid ""
 "If set, the Series name and index from the first book will be set on the "
 "merged book."
-msgstr ""
+msgstr "Kui märgistatud, võetakse ühendatud raamatu sarjanimi ja järjenumber esimesest raamatust."
 
 #: config.py:337
 msgid "Custom Columns:"
-msgstr ""
+msgstr "Kohandatud veerud:"
 
 #: config.py:340
 msgid ""

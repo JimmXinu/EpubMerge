@@ -3,14 +3,15 @@
 # 
 # Translators:
 # Ptit Prince <leporello1791@gmail.com>, 2014-2015
+# Nicolas F. <fernetn@gmail.com>, 2017
 # Ptit Prince <leporello1791@gmail.com>, 2016
 # JimmXinu <retiefjimm@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2016-12-07 12:51+Central Standard Time\n"
-"PO-Revision-Date: 2016-12-09 15:35+0000\n"
-"Last-Translator: Ptit Prince <leporello1791@gmail.com>\n"
+"PO-Revision-Date: 2017-01-25 21:13+0000\n"
+"Last-Translator: Nicolas F. <fernetn@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/calibre/calibre-plugins/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -101,7 +102,7 @@ msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubMerge confirmation "
 "dialogs back again."
-msgstr "Ces contrôles ne sont pas des paramètres du greffon en soi, mais des boutons de commodité pour paramétrer Raccourcis clavier et obtenir le retour de tous les dialogues de confirmation d'EpubMerge"
+msgstr "Ces contrôles ne sont pas des paramètres de l'extension en soi, mais des boutons de commodité pour paramétrer Raccourcis clavier et obtenir le retour de tous les dialogues de confirmation d'EpubMerge"
 
 #: config.py:260
 msgid "Keyboard shortcuts..."
@@ -109,7 +110,7 @@ msgstr "Raccourcis clavier..."
 
 #: config.py:261
 msgid "Edit the keyboard shortcuts associated with this plugin"
-msgstr "Editer les raccourcis clavier associés avec ce greffon"
+msgstr "Editer les raccourcis clavier associés avec cette extension"
 
 #: config.py:265
 msgid "Reset disabled &confirmation dialogs"
@@ -117,7 +118,7 @@ msgstr "Réinitialiser &les dialogues de confirmation désactivés"
 
 #: config.py:266
 msgid "Reset all show me again dialogs for the EpubMerge plugin"
-msgstr "Réinitialiser tous les Montrer moi encore du greffon EpubMerge"
+msgstr "Réinitialiser tous les Montrer moi encore de l'extension EpubMerge"
 
 #: config.py:270
 msgid "View library preferences..."
@@ -125,7 +126,7 @@ msgstr "Voir les préférences de la bibliothèque"
 
 #: config.py:271
 msgid "View data stored in the library database for this plugin"
-msgstr "Voir les données stockées dans la base de donnée de la librairie pour ce greffon"
+msgstr "Voir les données stockées dans la base de donnée de la librairie pour cette extension"
 
 #: config.py:286
 msgid "Done"
@@ -305,7 +306,7 @@ msgstr "&Dé-fusionner les Epubs"
 
 #: epubmerge_plugin.py:124
 msgid "&Configure Plugin"
-msgstr "&Configurer le greffon"
+msgstr "&Configurer l'extension"
 
 #: epubmerge_plugin.py:126 epubmerge_plugin.py:127
 msgid "Configure EpubMerge"

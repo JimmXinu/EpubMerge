@@ -2,12 +2,13 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Yuri Chornoivan <yurchor@ukr.net>, 2014-2016
+# Yuri Chornoivan <yurchor@ukr.net>, 2014-2017
+# Yuri Chornoivan <yurchor@ukr.net>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2016-12-07 12:51+Central Standard Time\n"
-"PO-Revision-Date: 2016-12-09 17:04+0000\n"
+"PO-Revision-Date: 2017-03-19 21:05+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/calibre/calibre-plugins/language/uk/)\n"
 "MIME-Version: 1.0\n"
@@ -183,13 +184,13 @@ msgstr "Стандартні стовпчики:"
 
 #: config.py:331
 msgid "Take Series from first book"
-msgstr "Взяти значення серії з першої книги"
+msgstr "Взяти значення циклу з першої книги"
 
 #: config.py:332
 msgid ""
 "If set, the Series name and index from the first book will be set on the "
 "merged book."
-msgstr "Якщо позначено, назву та індекс серії у об’єднаній книзі буде визначено за першою з книг. "
+msgstr "Якщо позначено, назву та індекс циклу у об’єднаній книзі буде визначено за першою з книг. "
 
 #: config.py:337
 msgid "Custom Columns:"
@@ -247,7 +248,7 @@ msgstr "Автор(и)"
 
 #: dialogs.py:240
 msgid "Series"
-msgstr "Серія"
+msgstr "Цикл"
 
 #: dialogs.py:240
 msgid "Title"
