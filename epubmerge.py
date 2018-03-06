@@ -13,6 +13,7 @@ import os
 import re
 from StringIO import StringIO
 from urllib import unquote
+from posixpath import normpath
 from optparse import OptionParser
 from functools import partial
 
@@ -266,12 +267,12 @@ def doMerge(outputio,
         manifesttag=metadom.getElementsByTagNameNS("*","manifest")[0]
         for item in manifesttag.getElementsByTagNameNS("*","item"):
             itemid=bookid+item.getAttribute("id")
-            itemhref = unquote(item.getAttribute("href")) # remove %20, etc.
+            itemhref = normpath(unquote(item.getAttribute("href"))) # remove %20, etc.
             href=bookdir+relpath+itemhref
             if( item.getAttribute("media-type") == "application/x-dtbncx+xml" ):
                 # TOC file is only one with this type--as far as I know.
                 # grab the whole navmap, deal with it later.
-                tocdom = parseString(epub.read(relpath+item.getAttribute("href")))
+                tocdom = parseString(epub.read(normpath(relpath+item.getAttribute("href"))))
 
                 # update all navpoint ids with bookid for uniqueness.
                 for navpoint in tocdom.getElementsByTagNameNS("*","navPoint"):
@@ -279,14 +280,14 @@ def doMerge(outputio,
 
                 # update all content paths with bookdir for uniqueness.
                 for content in tocdom.getElementsByTagNameNS("*","content"):
-                    content.setAttribute("src",bookdir+relpath+content.getAttribute("src"))
+                    content.setAttribute("src",normpath(bookdir+relpath+content.getAttribute("src")))
 
                 navmaps.append(tocdom.getElementsByTagNameNS("*","navMap")[0])
 
                 if keepmetadatafiles:
                     #logger.debug("write toc.ncx %s to %s"%(relpath+itemhref,href))
                     outputepub.writestr(href,
-                                        epub.read(relpath+itemhref))
+                                        epub.read(normpath(relpath+itemhref)))
                     items.append((itemid,href,"origtocncx/xml"))
             else:
                 href=href.encode('utf8')
@@ -295,7 +296,7 @@ def doMerge(outputio,
                 if href not in filelist:
                     try:
                         outputepub.writestr(href,
-                                            epub.read(relpath+itemhref))
+                                            epub.read(normpath(relpath+itemhref)))
                         if re.match(r'.*/(file|chapter)\d+\.x?html',href):
                             filecount+=1
                         items.append((itemid,href,item.getAttribute("media-type")))
@@ -661,7 +662,7 @@ def doUnMerge(inputio,outdir=None):
         if( item.getAttribute("media-type") == "origrootfile/xml" ):
             # found one, assume the dir containing it is a complete
             # original epub, do initial setup of epub.
-            itemhref = relpath+unquote(item.getAttribute("href"))
+            itemhref = normpath(relpath+unquote(item.getAttribute("href")))
             #logger.debug("Found origrootfile:%s"%itemhref)
             curepubpath = re.sub(r'([^\d/]+/)+$','',get_path_part(itemhref))
             savehref = itemhref[len(curepubpath):]
@@ -691,7 +692,7 @@ def doUnMerge(inputio,outdir=None):
             outputepub.writestr(savehref,epub.read(itemhref))
 
             for item2 in contentdom.getElementsByTagName("item"):
-                item2href = relpath+unquote(item2.getAttribute("href"))
+                item2href = normpath(relpath+unquote(item2.getAttribute("href")))
                 if item2href.startswith(curepubpath) and item2href != itemhref:
                     save2href = item2href[len(curepubpath):]
                     #logger.debug("Found %s -> %s"%(item2href,save2href))
