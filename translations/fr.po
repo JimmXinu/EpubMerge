@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2016-12-07 12:51+Central Standard Time\n"
-"PO-Revision-Date: 2017-01-25 21:13+0000\n"
+"PO-Revision-Date: 2017-12-01 10:25+0000\n"
 "Last-Translator: Nicolas F. <fernetn@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/calibre/calibre-plugins/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: __init__.py:48
 msgid "UI plugin to concatenate multiple epubs into one."
-msgstr "Extension à Interface Utilisateur pour concaténer plusieurs ePubs en un seul."
+msgstr "Extension pour fusionner plusieurs ePubs en un seul."
 
 #: config.py:62
 msgid "Anthology"
