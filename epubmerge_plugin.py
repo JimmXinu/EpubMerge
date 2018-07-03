@@ -358,20 +358,20 @@ class EpubMergePlugin(InterfaceAction):
             else:
                 booktitle = lambda x : x['title']
 
-            mi.comments = (_("%s containing:")+"\n\n") % prefs['mergeword']
+            mi.comments = ("<p>"+_("%s containing:")+"</p>") % prefs['mergeword']
 
             if prefs['includecomments']:
                 def bookcomments(x):
                     if x['comments']:
-                        return '<b>%s</b>\n\n%s'%(booktitle(x),x['comments'])
+                        return '<p><b>%s</b></p>%s'%(booktitle(x),x['comments'])
                     else:
-                        return '<b>%s</b>\n'%booktitle(x)
+                        return '<b>%s</b><br/>'%booktitle(x)
 
                 mi.comments += ('<div class="mergedbook">' +
                                 '<hr></div><div class="mergedbook">'.join([ bookcomments(x) for x in book_list]) +
                                 '</div>')
             else:
-                mi.comments += '\n'.join( [ booktitle(x) for x in book_list ] )
+                mi.comments += '<br/>'.join( [ booktitle(x) for x in book_list ] )
 
             # ======================= make book entry =========================
 
