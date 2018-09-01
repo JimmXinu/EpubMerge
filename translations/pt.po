@@ -2,12 +2,12 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Paulo Pereira <pauloizidoro@gmail.com>, 2014-2015,2017
+# Paulo Pereira <pauloizidoro@gmail.com>, 2014-2015,2017-2018
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2016-12-07 12:51+Central Standard Time\n"
-"PO-Revision-Date: 2017-09-23 19:59+0000\n"
+"PO-Revision-Date: 2018-08-09 11:53+0000\n"
 "Last-Translator: Paulo Pereira <pauloizidoro@gmail.com>\n"
 "Language-Team: Portuguese (http://www.transifex.com/calibre/calibre-plugins/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: config.py:208
 msgid "Flatten Table of Contents?"
-msgstr ""
+msgstr "Índice plano?"
 
 #: config.py:209
 msgid "Remove nesting and make TOC all on one level."
@@ -78,7 +78,7 @@ msgstr ""
 
 #: config.py:233
 msgid "Add tags to merged books:"
-msgstr ""
+msgstr "Adicionar etiquetas aos livros fundidos:"
 
 #: config.py:237
 msgid "Tags you enter here will be added to all new merged books"
@@ -231,15 +231,15 @@ msgstr "Iniciar a fusão..."
 
 #: dialogs.py:191
 msgid "Move selected books up the list"
-msgstr ""
+msgstr "Mover livros selecionados para cima na lista"
 
 #: dialogs.py:196
 msgid "Remove selected books from the list"
-msgstr ""
+msgstr "Remover da lista os livros selecionados"
 
 #: dialogs.py:201
 msgid "Move selected books down the list"
-msgstr ""
+msgstr "Mover livros selecionados para baixo na lista"
 
 #: dialogs.py:240
 msgid "Author(s)"
@@ -255,7 +255,7 @@ msgstr "Título"
 
 #: dialogs.py:289
 msgid "Are you sure you want to remove this book from the list?"
-msgstr ""
+msgstr "Pretende mesmo remover este livro da lista?"
 
 #: dialogs.py:291
 msgid "Are you sure you want to remove the selected %d books from the list?"
@@ -267,7 +267,7 @@ msgstr ""
 
 #: dialogs.py:372
 msgid "Apply to all EPUBs?"
-msgstr ""
+msgstr "Aplicar a todos os EPUB?"
 
 #: dialogs.py:373
 msgid "Apply the same action to the rest of the EPUBs after this."
@@ -283,31 +283,31 @@ msgstr "Sobrescrever"
 
 #: dialogs.py:384
 msgid "Discard"
-msgstr ""
+msgstr "Rejeitar"
 
 #: epubmerge_plugin.py:60
 msgid "EpubMerge"
-msgstr ""
+msgstr "EpubFundir"
 
 #: epubmerge_plugin.py:61
 msgid "Merge multiple EPUBs into one in a new book."
-msgstr ""
+msgstr "Fundir vários EPUB num novo livro."
 
 #: epubmerge_plugin.py:110 epubmerge_plugin.py:111
 msgid "&Merge Epubs"
-msgstr ""
+msgstr "&Fundir Epubs"
 
 #: epubmerge_plugin.py:114 epubmerge_plugin.py:115
 msgid "&UnMerge Epubs"
-msgstr ""
+msgstr "&Não fundir Epubs"
 
 #: epubmerge_plugin.py:124
 msgid "&Configure Plugin"
-msgstr ""
+msgstr "&Configurar plugin"
 
 #: epubmerge_plugin.py:126 epubmerge_plugin.py:127
 msgid "Configure EpubMerge"
-msgstr ""
+msgstr "Configurar EpubFundir"
 
 #: epubmerge_plugin.py:183
 msgid "Cannot UnMerge Non-Epubs"
@@ -342,7 +342,7 @@ msgstr ""
 
 #: epubmerge_plugin.py:257
 msgid "Less than 2 books selected."
-msgstr ""
+msgstr "Menos de dois livros selecionados."
 
 #: epubmerge_plugin.py:273
 msgid "Collecting EPUBs for merger..."
@@ -350,11 +350,11 @@ msgstr ""
 
 #: epubmerge_plugin.py:274
 msgid "Get EPUBs for merge"
-msgstr ""
+msgstr "Obter EPUB para fusão"
 
 #: epubmerge_plugin.py:275
 msgid "EPUBs collected"
-msgstr ""
+msgstr "EPUB obtidos"
 
 #: epubmerge_plugin.py:285
 msgid "%s books failed."
@@ -362,7 +362,7 @@ msgstr "Falhas em %s livros."
 
 #: epubmerge_plugin.py:290
 msgid "Order EPUBs to Merge"
-msgstr ""
+msgstr "Ordenar os EPUB a fundir"
 
 #: epubmerge_plugin.py:357
 msgid "%s by %s"
@@ -370,7 +370,7 @@ msgstr "%s por %s"
 
 #: epubmerge_plugin.py:361
 msgid "%s containing:"
-msgstr ""
+msgstr "%s contendo:"
 
 #: epubmerge_plugin.py:530
 msgid ""
@@ -393,11 +393,11 @@ msgstr "A fundir %s EPUB..."
 msgid ""
 "Merge finished, output in:\n"
 "%s"
-msgstr ""
+msgstr "Fusão terminada, resultado em:\n%s"
 
 #: epubmerge_plugin.py:585
 msgid "Finished merging %s EPUBs."
-msgstr ""
+msgstr "Fusão terminada %s EPUB."
 
 #: epubmerge_plugin.py:600 epubmerge_plugin.py:601 epubmerge_plugin.py:602
 msgid "Unknown"
