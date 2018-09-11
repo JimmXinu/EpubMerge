@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __license__   = 'GPL v3'
-__copyright__ = '2015, Jim Miller'
+__copyright__ = '2018, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import logging
@@ -504,8 +504,9 @@ def doMerge(outputio,
         if not descopt and len(allauthors[booknum]) > 0:
             description.appendChild(contentdom.createTextNode(booktitles[booknum]+" by "+allauthors[booknum][0]+"\n"))
 
-        if originalnavpoints and (len(depthnavpoints) > 1 or not titlenavpoints): # If only one TOC point(total, not top level), or if not
-                                                          # including title nav point, include sub book TOC entries.
+        # If only one TOC point(total, not top level), or if not
+        # including title nav point, include sub book TOC entries.
+        if originalnavpoints and (len(depthnavpoints) > 1 or not titlenavpoints):
             for navpoint in navpoints:
                 newnav.appendChild(navpoint)
                 navpoint.is_ffdl_epub = is_ffdl_epub[booknum]

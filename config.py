@@ -4,7 +4,7 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2014, Jim Miller'
+__copyright__ = '2018, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import logging
@@ -35,6 +35,7 @@ else:
         return x.toPyObject()
 
 from calibre.gui2 import dynamic, info_dialog
+from calibre.gui2.dialogs.confirm_delete import confirm
 from calibre.utils.config import JSONConfig
 from calibre.gui2.ui import get_gui
 
@@ -201,16 +202,27 @@ class BasicTab(QWidget):
         self.l.addWidget(label)
         self.l.addSpacing(5)
 
+        no_toc_warning = _('''If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'
+are unchecked, there will be no Table of Contents in merged books.''')
         self.titlenavpoints = QCheckBox(_('Insert Table of Contents entry for each title?'),self)
         self.titlenavpoints.setToolTip(_('''If set, a new TOC entry will be made for each title and
-it's existing TOC nested underneath it.'''))
+it's existing TOC nested underneath it.''')+'\n'+no_toc_warning)
         self.titlenavpoints.setChecked(prefs['titlenavpoints'])
         self.l.addWidget(self.titlenavpoints)
 
-        self.originalnavpoints = QCheckBox(_('Copy Table of Contents entries from each input epub?'),self)
-        self.originalnavpoints.setToolTip(_('''If set, the original TOC entries will be merged into the new epub.'''))
+        self.originalnavpoints = QCheckBox(_('Copy Table of Contents entries from each title?'),self)
+        self.originalnavpoints.setToolTip(_('''If set, the original TOC entries will be included the new epub.''')+'\n'+no_toc_warning)
         self.originalnavpoints.setChecked(prefs['originalnavpoints'])
         self.l.addWidget(self.originalnavpoints)
+
+        def f():
+            if not self.originalnavpoints.isChecked() and not self.titlenavpoints.isChecked():
+                confirm("<br>"+no_toc_warning, # force HTML to get auto wrap.
+                        'epubmerge_no_toc_warning_again',
+                        parent=self,
+                        show_cancel_button=False)
+        self.originalnavpoints.stateChanged.connect(f)
+        self.titlenavpoints.stateChanged.connect(f)
 
         self.flattentoc = QCheckBox(_('Flatten Table of Contents?'),self)
         self.flattentoc.setToolTip(_('Remove nesting and make TOC all on one level.'))
