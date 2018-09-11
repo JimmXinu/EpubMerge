@@ -567,6 +567,7 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
                            tags=mi.tags,
                            languages=mi.languages,
                            titlenavpoints=prefs['titlenavpoints'],
+                           originalnavpoints=prefs['originalnavpoints'],
                            flattentoc=prefs['flattentoc'],
                            printtimes=True,
                            coverjpgpath=coverjpgpath,

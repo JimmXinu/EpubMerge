@@ -52,6 +52,9 @@ Given list of epubs will be merged together into one new epub.
     optparser.add_option("-n", "--no-titles-in-toc",
                       action="store_false", dest="titlenavpoints", default=True,
                       help="Default is to put an entry in the TOC for each epub, nesting each epub's chapters under it.",)
+    optparser.add_option("-N", "--no-original-toc",
+                      action="store_false", dest="originalnavpoints", default=True,
+                      help="Default is to include the TOC from each original epub.",)
     optparser.add_option("-f", "--flatten-toc",
                       action="store_true", dest="flattentoc",
                       help="Flatten TOC down to one level only.",)
@@ -92,6 +95,7 @@ Given list of epubs will be merged together into one new epub.
                 options.tagopts,
                 options.languageopts,
                 options.titlenavpoints,
+                options.originalnavpoints,
                 options.flattentoc,
                 coverjpgpath=options.coveropt,
                 keepmetadatafiles=options.keepmeta,
@@ -118,6 +122,7 @@ def doMerge(outputio,
             tags=[],
             languages=['en'],
             titlenavpoints=True,
+            originalnavpoints=True,
             flattentoc=False,
             printtimes=False,
             coverjpgpath=None,
@@ -132,6 +137,7 @@ def doMerge(outputio,
     tags = dc:subject tags to include, otherwise none.
     languages = dc:language tags to include
     titlenavpoints if true, put in a new TOC entry for each epub, nesting each epub's chapters under it
+    originalnavpoints if true, include the original TOCs from each epub
     flattentoc if true, flatten TOC down to one level only.
     coverjpgpath, Path to a jpg to use as cover image.
     '''
@@ -498,7 +504,7 @@ def doMerge(outputio,
         if not descopt and len(allauthors[booknum]) > 0:
             description.appendChild(contentdom.createTextNode(booktitles[booknum]+" by "+allauthors[booknum][0]+"\n"))
 
-        if len(depthnavpoints) > 1 or not titlenavpoints: # If only one TOC point(total, not top level), or if not
+        if originalnavpoints and (len(depthnavpoints) > 1 or not titlenavpoints): # If only one TOC point(total, not top level), or if not
                                                           # including title nav point, include sub book TOC entries.
             for navpoint in navpoints:
                 newnav.appendChild(navpoint)
