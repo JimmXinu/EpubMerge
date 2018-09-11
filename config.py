@@ -56,6 +56,7 @@ default_prefs = {}
 default_prefs['flattentoc'] = False
 default_prefs['includecomments'] = False
 default_prefs['titlenavpoints'] = True
+default_prefs['originalnavpoints'] = True
 default_prefs['keepmeta'] = True
 #default_prefs['showunmerge'] = True
 default_prefs['mergetags'] = ''
@@ -159,6 +160,7 @@ class ConfigWidget(QWidget):
         prefs['flattentoc'] = self.basic_tab.flattentoc.isChecked()
         prefs['includecomments'] = self.basic_tab.includecomments.isChecked()
         prefs['titlenavpoints'] = self.basic_tab.titlenavpoints.isChecked()
+        prefs['originalnavpoints'] = self.basic_tab.originalnavpoints.isChecked()
         prefs['keepmeta'] = self.basic_tab.keepmeta.isChecked()
         # prefs['showunmerge'] = self.basic_tab.showunmerge.isChecked()
         prefs['mergetags'] = unicode(self.basic_tab.mergetags.text())
@@ -204,6 +206,11 @@ class BasicTab(QWidget):
 it's existing TOC nested underneath it.'''))
         self.titlenavpoints.setChecked(prefs['titlenavpoints'])
         self.l.addWidget(self.titlenavpoints)
+
+        self.originalnavpoints = QCheckBox(_('Copy Table of Contents entries from each input epub?'),self)
+        self.originalnavpoints.setToolTip(_('''If set, the original TOC entries will be merged into the new epub.'''))
+        self.originalnavpoints.setChecked(prefs['originalnavpoints'])
+        self.l.addWidget(self.originalnavpoints)
 
         self.flattentoc = QCheckBox(_('Flatten Table of Contents?'),self)
         self.flattentoc.setToolTip(_('Remove nesting and make TOC all on one level.'))
