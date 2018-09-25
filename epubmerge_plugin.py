@@ -70,6 +70,8 @@ class EpubMergePlugin(InterfaceAction):
         enabled = loc == 'library'
         self.qaction.setEnabled(enabled)
         self.menuless_qaction.setEnabled(enabled)
+        for action in self.menu.actions():
+            action.setEnabled(enabled)
 
     def genesis(self):
 
