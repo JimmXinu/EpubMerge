@@ -157,13 +157,13 @@ def doMerge(outputio,
     ## Older versions of python(2.4/5) don't allow you to specify
     ## compression by individual file.
     ## Overwrite if existing output file.
-    outputepub = ZipFile(outputio, "w", compression=ZIP_STORED)
+    outputepub = ZipFile(outputio, "w", compression=ZIP_STORED, allowZip64=True)
     outputepub.debug = 3
     outputepub.writestr("mimetype", "application/epub+zip")
     outputepub.close()
 
     ## Re-open file for content.
-    outputepub = ZipFile(outputio, "a", compression=ZIP_DEFLATED)
+    outputepub = ZipFile(outputio, "a", compression=ZIP_DEFLATED, allowZip64=True)
     outputepub.debug = 3
 
     ## Create META-INF/container.xml file.  The only thing it does is
@@ -307,7 +307,7 @@ def doMerge(outputio,
                             filecount+=1
                         items.append((itemid,href,item.getAttribute("media-type")))
                         filelist.append(href)
-                    except KeyError, ke: # Skip missing files.
+                    except KeyError as ke: # Skip missing files.
                         logger.info("Skipping missing file %s (%s)"%(href,relpath+itemhref))
                         del itemhrefs[itemid]
 
@@ -676,13 +676,13 @@ def doUnMerge(inputio,outdir=None):
             #logger.debug("curepubpath:%s"%curepubpath)
 
             outputio = StringIO()
-            outputepub = ZipFile(outputio, "w", compression=ZIP_STORED)
+            outputepub = ZipFile(outputio, "w", compression=ZIP_STORED, allowZip64=True)
             outputepub.debug = 3
             outputepub.writestr("mimetype", "application/epub+zip")
             outputepub.close()
 
             ## Re-open file for content.
-            outputepub = ZipFile(outputio, "a", compression=ZIP_DEFLATED)
+            outputepub = ZipFile(outputio, "a", compression=ZIP_DEFLATED, allowZip64=True)
             outputepub.debug = 3
             ## Create META-INF/container.xml file.  The only thing it does is
             ## point to content.opf
