@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-09-11 18:21+Central Daylight Time\n"
+"POT-Creation-Date: 2018-12-22 15:07+Central Standard Time\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -298,108 +298,108 @@ msgstr ""
 msgid "Merge multiple EPUBs into one in a new book."
 msgstr ""
 
-#: epubmerge_plugin.py:110 epubmerge_plugin.py:111
+#: epubmerge_plugin.py:112 epubmerge_plugin.py:113
 msgid "&Merge Epubs"
 msgstr ""
 
-#: epubmerge_plugin.py:114 epubmerge_plugin.py:115
+#: epubmerge_plugin.py:116 epubmerge_plugin.py:117
 msgid "&UnMerge Epubs"
 msgstr ""
 
-#: epubmerge_plugin.py:124
+#: epubmerge_plugin.py:126
 msgid "&Configure Plugin"
 msgstr ""
 
-#: epubmerge_plugin.py:126 epubmerge_plugin.py:127
+#: epubmerge_plugin.py:128 epubmerge_plugin.py:129
 msgid "Configure EpubMerge"
 msgstr ""
 
-#: epubmerge_plugin.py:183
+#: epubmerge_plugin.py:185
 msgid "Cannot UnMerge Non-Epubs"
 msgstr ""
 
-#: epubmerge_plugin.py:184 epubmerge_plugin.py:195
+#: epubmerge_plugin.py:186 epubmerge_plugin.py:197
 msgid "To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge Metadata enabled."
 msgstr ""
 
-#: epubmerge_plugin.py:194
+#: epubmerge_plugin.py:196
 msgid "No UnMerge data found"
 msgstr ""
 
-#: epubmerge_plugin.py:213
+#: epubmerge_plugin.py:215
 msgid "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, Overwrite the Epub in the existing book, or Discard this Epub."
 msgstr ""
 
-#: epubmerge_plugin.py:216
+#: epubmerge_plugin.py:218
 msgid "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a new book of the same title, or Discard this Epub."
 msgstr ""
 
-#: epubmerge_plugin.py:256 epubmerge_plugin.py:284
+#: epubmerge_plugin.py:258 epubmerge_plugin.py:286
 msgid "Cannot Merge Epubs"
 msgstr ""
 
-#: epubmerge_plugin.py:257
+#: epubmerge_plugin.py:259
 msgid "Less than 2 books selected."
 msgstr ""
 
-#: epubmerge_plugin.py:273
+#: epubmerge_plugin.py:275
 msgid "Collecting EPUBs for merger..."
 msgstr ""
 
-#: epubmerge_plugin.py:274
+#: epubmerge_plugin.py:276
 msgid "Get EPUBs for merge"
 msgstr ""
 
-#: epubmerge_plugin.py:275
+#: epubmerge_plugin.py:277
 msgid "EPUBs collected"
 msgstr ""
 
-#: epubmerge_plugin.py:285
+#: epubmerge_plugin.py:287
 msgid "%s books failed."
 msgstr ""
 
-#: epubmerge_plugin.py:290
+#: epubmerge_plugin.py:292
 msgid "Order EPUBs to Merge"
 msgstr ""
 
-#: epubmerge_plugin.py:357
+#: epubmerge_plugin.py:359
 msgid "%s by %s"
 msgstr ""
 
-#: epubmerge_plugin.py:361
+#: epubmerge_plugin.py:363
 msgid "%s containing:"
 msgstr ""
 
-#: epubmerge_plugin.py:530
+#: epubmerge_plugin.py:532
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr ""
 
-#: epubmerge_plugin.py:546
+#: epubmerge_plugin.py:548
 msgid "You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is finished."
 msgstr ""
 
-#: epubmerge_plugin.py:550
+#: epubmerge_plugin.py:552
 msgid "Merging %s EPUBs..."
 msgstr ""
 
-#: epubmerge_plugin.py:577
+#: epubmerge_plugin.py:579
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr ""
 
-#: epubmerge_plugin.py:586
+#: epubmerge_plugin.py:588
 msgid "Finished merging %s EPUBs."
 msgstr ""
 
-#: epubmerge_plugin.py:601 epubmerge_plugin.py:602 epubmerge_plugin.py:603
+#: epubmerge_plugin.py:603 epubmerge_plugin.py:604 epubmerge_plugin.py:605
 msgid "Unknown"
 msgstr ""
 
-#: epubmerge_plugin.py:635
+#: epubmerge_plugin.py:637
 msgid "%s by %s doesn't have an EPUB."
 msgstr ""
 
