@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-12-22 15:07+Central Standard Time\n"
+"POT-Creation-Date: 2018-12-23 15:03+Central Standard Time\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,198 +19,202 @@ msgstr ""
 msgid "UI plugin to concatenate multiple epubs into one."
 msgstr ""
 
-#: config.py:64
+#: config.py:54
+msgid "Translation"
+msgstr ""
+
+#: config.py:66
 msgid "Anthology"
 msgstr ""
 
-#: config.py:154
+#: config.py:156
 msgid "Basic"
 msgstr ""
 
-#: config.py:157
+#: config.py:159
 msgid "Columns"
 msgstr ""
 
-#: config.py:200
+#: config.py:202
 msgid "These settings control the basic features of the plugin."
 msgstr ""
 
-#: config.py:205
+#: config.py:207
 msgid ""
 "If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'\n"
 "are unchecked, there will be no Table of Contents in merged books."
 msgstr ""
 
-#: config.py:207
+#: config.py:209
 msgid "Insert Table of Contents entry for each title?"
 msgstr ""
 
-#: config.py:208
+#: config.py:210
 msgid ""
 "If set, a new TOC entry will be made for each title and\n"
 "it's existing TOC nested underneath it."
 msgstr ""
 
-#: config.py:213
+#: config.py:215
 msgid "Copy Table of Contents entries from each title?"
 msgstr ""
 
-#: config.py:214
+#: config.py:216
 msgid "If set, the original TOC entries will be included the new epub."
 msgstr ""
 
-#: config.py:227
+#: config.py:229
 msgid "Flatten Table of Contents?"
 msgstr ""
 
-#: config.py:228
+#: config.py:230
 msgid "Remove nesting and make TOC all on one level."
 msgstr ""
 
-#: config.py:232
+#: config.py:234
 msgid "Include Books' Comments?"
 msgstr ""
 
-#: config.py:233
+#: config.py:235
 msgid ""
 "Include all the merged books' comments in the new book's comments.\n"
 "Default is a list of included titles only."
 msgstr ""
 
-#: config.py:238
+#: config.py:240
 msgid "Keep UnMerge Metadata?"
 msgstr ""
 
-#: config.py:239
+#: config.py:241
 msgid ""
 "If set, a copy of the original metadata for each merged book will\n"
 "be included, allowing for UnMerge.  This includes your calibre custom\n"
 "columns.  Leave off if you plan to distribute the epub to others."
 msgstr ""
 
-#: config.py:252
+#: config.py:254
 msgid "Add tags to merged books:"
 msgstr ""
 
-#: config.py:256
+#: config.py:258
 msgid "Tags you enter here will be added to all new merged books"
 msgstr ""
 
-#: config.py:261
+#: config.py:263
 msgid "Merged Book Word:"
 msgstr ""
 
-#: config.py:265
+#: config.py:267
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
 msgstr ""
 
-#: config.py:274
+#: config.py:276
 msgid "These controls aren't plugin settings as such, but convenience buttons for setting Keyboard shortcuts and getting all the EpubMerge confirmation dialogs back again."
 msgstr ""
 
-#: config.py:279
+#: config.py:281
 msgid "Keyboard shortcuts..."
 msgstr ""
 
-#: config.py:280
+#: config.py:282
 msgid "Edit the keyboard shortcuts associated with this plugin"
 msgstr ""
 
-#: config.py:284
+#: config.py:286
 msgid "Reset disabled &confirmation dialogs"
 msgstr ""
 
-#: config.py:285
+#: config.py:287
 msgid "Reset all show me again dialogs for the EpubMerge plugin"
 msgstr ""
 
-#: config.py:289
+#: config.py:291
 msgid "View library preferences..."
 msgstr ""
 
-#: config.py:290
+#: config.py:292
 msgid "View data stored in the library database for this plugin"
 msgstr ""
 
-#: config.py:305
+#: config.py:307
 msgid "Done"
 msgstr ""
 
-#: config.py:306
+#: config.py:308
 msgid "Confirmation dialogs have all been reset"
 msgstr ""
 
-#: config.py:322
+#: config.py:324
 msgid "Take value from first source book"
 msgstr ""
 
-#: config.py:323
+#: config.py:325
 msgid "Take value from last source book"
 msgstr ""
 
-#: config.py:324
+#: config.py:326
 msgid "Add values from all source books"
 msgstr ""
 
-#: config.py:325
+#: config.py:327
 msgid "Average value from ALL source books"
 msgstr ""
 
-#: config.py:326
+#: config.py:328
 msgid "Average value from source books with values"
 msgstr ""
 
-#: config.py:327
+#: config.py:329
 msgid "True if true on all source books (and)"
 msgstr ""
 
-#: config.py:328
+#: config.py:330
 msgid "True if true on any source books (or)"
 msgstr ""
 
-#: config.py:329
+#: config.py:331
 msgid "Take newest value from source books"
 msgstr ""
 
-#: config.py:330
+#: config.py:332
 msgid "Take oldest value from source books"
 msgstr ""
 
-#: config.py:331
+#: config.py:333
 msgid "Include values from all source books"
 msgstr ""
 
-#: config.py:332
+#: config.py:334
 msgid "Concatenate values from all source books"
 msgstr ""
 
-#: config.py:345
+#: config.py:347
 msgid "Standard Columns:"
 msgstr ""
 
-#: config.py:350
+#: config.py:352
 msgid "Take Series from first book"
 msgstr ""
 
-#: config.py:351
+#: config.py:353
 msgid "If set, the Series name and index from the first book will be set on the merged book."
 msgstr ""
 
-#: config.py:356
+#: config.py:358
 msgid "Custom Columns:"
 msgstr ""
 
-#: config.py:359
+#: config.py:361
 msgid "If you have custom columns defined, they will be listed below.  Choose how you would like these columns handled."
 msgstr ""
 
-#: config.py:386
+#: config.py:388
 msgid "Set this %s column on new merged books..."
 msgstr ""
 
-#: config.py:401
+#: config.py:403
 msgid "How this column will be populated by default."
 msgstr ""
 
