@@ -11,9 +11,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2016-12-07 12:51+Central Standard Time\n"
-"PO-Revision-Date: 2018-07-05 09:36+0000\n"
-"Last-Translator: pitfd <pitfd@posteo.de>\n"
+"POT-Creation-Date: 2018-12-25 08:53+Central Standard Time\n"
+"PO-Revision-Date: 2018-12-25 15:54+0000\n"
+"Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
 "Language-Team: German (http://www.transifex.com/calibre/calibre-plugins/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,191 +26,205 @@ msgstr ""
 msgid "UI plugin to concatenate multiple epubs into one."
 msgstr "UI-Plugin zum Zusammenfügen mehrerer EPUBs zu einer neuen Datei."
 
-#: config.py:62
+#: config.py:64
 msgid "Anthology"
 msgstr "Sammlung"
 
-#: config.py:152
+#: config.py:154
 msgid "Basic"
 msgstr "Basis"
 
-#: config.py:155
+#: config.py:157
 msgid "Columns"
 msgstr "Spalten"
 
-#: config.py:197
+#: config.py:200
 msgid "These settings control the basic features of the plugin."
 msgstr "Hier steuern Sie grundlegende Einstellungen des Plugins."
 
-#: config.py:202
+#: config.py:205
+msgid ""
+"If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'\n"
+"are unchecked, there will be no Table of Contents in merged books."
+msgstr ""
+
+#: config.py:207
 msgid "Insert Table of Contents entry for each title?"
 msgstr "Inhaltsverzeichnis für jeden Titel einfügen?"
 
-#: config.py:203
+#: config.py:208
 msgid ""
 "If set, a new TOC entry will be made for each title and\n"
 "it's existing TOC nested underneath it."
 msgstr "Wenn ausgewählt, wird für jeden Titel ein neuer Eintrag\nim Inhaltsverzeichnis angelegt, mit dem eigenen\nInhaltsverzeichnis eine Ebene darunter."
 
-#: config.py:208
+#: config.py:213
+msgid "Copy Table of Contents entries from each title?"
+msgstr ""
+
+#: config.py:214
+msgid "If set, the original TOC entries will be included the new epub."
+msgstr ""
+
+#: config.py:227
 msgid "Flatten Table of Contents?"
 msgstr "Inhaltsverzeichnis flach darstellen?"
 
-#: config.py:209
+#: config.py:228
 msgid "Remove nesting and make TOC all on one level."
 msgstr "Schachtelung entfernen und Inhaltsverzeichnis in einer einzigen Ebene darstellen."
 
-#: config.py:213
+#: config.py:232
 msgid "Include Books' Comments?"
 msgstr "Buchkommentare mit einschließen?"
 
-#: config.py:214
+#: config.py:233
 msgid ""
 "Include all the merged books' comments in the new book's comments.\n"
 "Default is a list of included titles only."
 msgstr "Alle zusammengefügten Bücherkommentare in den Kommentaren des neuen Buches miteinbeziehen.\nStandardmäßig ist nur eine Liste der Titel enthalten."
 
-#: config.py:219
+#: config.py:238
 msgid "Keep UnMerge Metadata?"
 msgstr "Teilen-Metadaten behalten?"
 
-#: config.py:220
+#: config.py:239
 msgid ""
 "If set, a copy of the original metadata for each merged book will\n"
 "be included, allowing for UnMerge.  This includes your calibre custom\n"
 "columns.  Leave off if you plan to distribute the epub to others."
 msgstr "Wenn ausgewählt, wird eine Kopie der originalen Metadaten jedem\nBuchs eingefügt, um ein Teilen zu ermöglichen. Dies schließt\nIhre in calibre definierten Spalten ein. Aktivieren Sie diese\nOption nicht, wenn Sie das EPUB weitergeben wollen."
 
-#: config.py:233
+#: config.py:252
 msgid "Add tags to merged books:"
 msgstr "Fügen Sie den zusammengeführten Büchern Tags hinzu:"
 
-#: config.py:237
+#: config.py:256
 msgid "Tags you enter here will be added to all new merged books"
 msgstr "Hier angegebene Schlagwörter werden zu allen neuen zusammengeführten Büchern hinzugefügt."
 
-#: config.py:242
+#: config.py:261
 msgid "Merged Book Word:"
 msgstr "Kommentar für zusammengeführtes Buch:"
 
-#: config.py:246
+#: config.py:265
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
 msgstr "Begriff zum Beschreiben von zusammengeführten Bücher in Standardtitel und Zusammenfassung.\nFür Leute, die das Wort Anthologie nicht mögen."
 
-#: config.py:255
+#: config.py:274
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubMerge confirmation "
 "dialogs back again."
 msgstr "Verschiedenes"
 
-#: config.py:260
+#: config.py:279
 msgid "Keyboard shortcuts..."
 msgstr "Tastenkombinationen..."
 
-#: config.py:261
+#: config.py:280
 msgid "Edit the keyboard shortcuts associated with this plugin"
 msgstr "Bearbeiten Sie die Tastaturkürzel, die dieses Plugin verwendet."
 
-#: config.py:265
+#: config.py:284
 msgid "Reset disabled &confirmation dialogs"
 msgstr "Deaktivierte &Bestätigungsdialoge zurücksetzen"
 
-#: config.py:266
+#: config.py:285
 msgid "Reset all show me again dialogs for the EpubMerge plugin"
 msgstr "Alle Bestätigungsdialoge für das EpubMerge-Plugin zurücksetzen"
 
-#: config.py:270
+#: config.py:289
 msgid "View library preferences..."
 msgstr "Bibliothekseinstellungen ansehen..."
 
-#: config.py:271
+#: config.py:290
 msgid "View data stored in the library database for this plugin"
 msgstr "In der Bibliothekdatenabnk gespeicherte Daten von diesem Plugin ansehen"
 
-#: config.py:286
+#: config.py:305
 msgid "Done"
 msgstr "Fertig"
 
-#: config.py:287
+#: config.py:306
 msgid "Confirmation dialogs have all been reset"
 msgstr "Bestätigungsdialoge wurden zurückgesetzt"
 
-#: config.py:303
+#: config.py:322
 msgid "Take value from first source book"
 msgstr "Wert aus erstem Quellbuch übernehmen"
 
-#: config.py:304
+#: config.py:323
 msgid "Take value from last source book"
 msgstr "Wert aus letztem Quellbuch übernehmen"
 
-#: config.py:305
+#: config.py:324
 msgid "Add values from all source books"
 msgstr "Werte aus allen Quellbüchern hinzufügen"
 
-#: config.py:306
+#: config.py:325
 msgid "Average value from ALL source books"
 msgstr "Durchschnittswert aus ALLEN Quellbüchern"
 
-#: config.py:307
+#: config.py:326
 msgid "Average value from source books with values"
 msgstr "Durchschnittswert aus Quellbüchern, die Werte enthalten"
 
-#: config.py:308
+#: config.py:327
 msgid "True if true on all source books (and)"
 msgstr "Wahr wenn wahr in allen Quellbüchern (UND)"
 
-#: config.py:309
+#: config.py:328
 msgid "True if true on any source books (or)"
 msgstr "Wahr wenn wahr in beliebigem Quellbuch (ODER)"
 
-#: config.py:310
+#: config.py:329
 msgid "Take newest value from source books"
 msgstr "Neuesten Wert aus Quellbüchern übernehmen"
 
-#: config.py:311
+#: config.py:330
 msgid "Take oldest value from source books"
 msgstr "Ältesten Wert aus Quellbüchern übernehmen"
 
-#: config.py:312
+#: config.py:331
 msgid "Include values from all source books"
 msgstr "Werte aus allen Quellbüchern einfügen"
 
-#: config.py:313
+#: config.py:332
 msgid "Concatenate values from all source books"
 msgstr "Werte aus allen Quellbüchern aneinanderhängen"
 
-#: config.py:326
+#: config.py:345
 msgid "Standard Columns:"
 msgstr "Standardspalten:"
 
-#: config.py:331
+#: config.py:350
 msgid "Take Series from first book"
 msgstr "Serie aus dem ersten Buch übernehmen"
 
-#: config.py:332
+#: config.py:351
 msgid ""
 "If set, the Series name and index from the first book will be set on the "
 "merged book."
 msgstr "Wenn gesetzt, werden der Serienname und der Index aus dem ersten Buch auf das zusammengeführte Buch gesetzt."
 
-#: config.py:337
+#: config.py:356
 msgid "Custom Columns:"
 msgstr "Benutzerdefinierte Spalten"
 
-#: config.py:340
+#: config.py:359
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose how "
 "you would like these columns handled."
 msgstr "Benutzerdefinierte Spalten werden unten angezeigt. Wählen Sie, wie diese Spalten behandelt werden sollen."
 
-#: config.py:367
+#: config.py:386
 msgid "Set this %s column on new merged books..."
 msgstr "Die Spalte %s in neuen Büchern verwenden..."
 
-#: config.py:382
+#: config.py:401
 msgid "How this column will be populated by default."
 msgstr "Standardwert für diese Spalte."
 
@@ -298,116 +312,116 @@ msgstr "EpubMerge"
 msgid "Merge multiple EPUBs into one in a new book."
 msgstr "Mehrere EPUBs zu einem neuen Buch zusammenfügen."
 
-#: epubmerge_plugin.py:110 epubmerge_plugin.py:111
+#: epubmerge_plugin.py:112 epubmerge_plugin.py:113
 msgid "&Merge Epubs"
 msgstr "EPUBs &zusammenfügen"
 
-#: epubmerge_plugin.py:114 epubmerge_plugin.py:115
+#: epubmerge_plugin.py:116 epubmerge_plugin.py:117
 msgid "&UnMerge Epubs"
 msgstr "Epubs &teilen"
 
-#: epubmerge_plugin.py:124
+#: epubmerge_plugin.py:126
 msgid "&Configure Plugin"
 msgstr "Plugin &konfigurieren"
 
-#: epubmerge_plugin.py:126 epubmerge_plugin.py:127
+#: epubmerge_plugin.py:128 epubmerge_plugin.py:129
 msgid "Configure EpubMerge"
 msgstr "EpubMerge konfigurieren"
 
-#: epubmerge_plugin.py:183
+#: epubmerge_plugin.py:185
 msgid "Cannot UnMerge Non-Epubs"
 msgstr "Kann keine Nicht-EPUBs teilen"
 
-#: epubmerge_plugin.py:184 epubmerge_plugin.py:195
+#: epubmerge_plugin.py:186 epubmerge_plugin.py:197
 msgid ""
 "To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
 " Metadata enabled."
 msgstr "Zum Teilen muss das EPUB(s) von EpubMerge mit der Option 'Teilen-Metadaten behalten' erzeugt sein."
 
-#: epubmerge_plugin.py:194
+#: epubmerge_plugin.py:196
 msgid "No UnMerge data found"
 msgstr "Keine Teilen-Daten gefunden"
 
-#: epubmerge_plugin.py:213
+#: epubmerge_plugin.py:215
 msgid ""
 "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
 "the same title, Overwrite the Epub in the existing book, or Discard this "
 "Epub."
 msgstr "Es gibt schon ein Buch <i>%s</i> von <i>%s</i>. Sie können ein neues Buch mit dem gleichen Titel hinzufügen, das vorhandene EPUB überschreiben oder dieses EPUB verwerfen."
 
-#: epubmerge_plugin.py:216
+#: epubmerge_plugin.py:218
 msgid ""
 "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
 "new book of the same title, or Discard this Epub."
 msgstr "Sie haben bereits mehr als ein Buch <i>%s</i> von <i>%s</i>. Sie können ein neues Buch mit dem gleichen Titel hinzufügen oder dieses EPUB verwerfen."
 
-#: epubmerge_plugin.py:256 epubmerge_plugin.py:284
+#: epubmerge_plugin.py:258 epubmerge_plugin.py:286
 msgid "Cannot Merge Epubs"
 msgstr "Kann EPUBs nicht zusammenfügen"
 
-#: epubmerge_plugin.py:257
+#: epubmerge_plugin.py:259
 msgid "Less than 2 books selected."
 msgstr "Weniger als 2 Bücher ausgewählt."
 
-#: epubmerge_plugin.py:273
+#: epubmerge_plugin.py:275
 msgid "Collecting EPUBs for merger..."
 msgstr "EPUBs zum Zusammenfügen werden gesammelt..."
 
-#: epubmerge_plugin.py:274
+#: epubmerge_plugin.py:276
 msgid "Get EPUBs for merge"
 msgstr "EPUBs zum Zusammenfügen holen"
 
-#: epubmerge_plugin.py:275
+#: epubmerge_plugin.py:277
 msgid "EPUBs collected"
 msgstr "EPUBs gesammelt"
 
-#: epubmerge_plugin.py:285
+#: epubmerge_plugin.py:287
 msgid "%s books failed."
 msgstr "%s Bücher fehlgeschlagen."
 
-#: epubmerge_plugin.py:290
+#: epubmerge_plugin.py:292
 msgid "Order EPUBs to Merge"
 msgstr "EPUBs zum Zusammenfügen sortieren"
 
-#: epubmerge_plugin.py:357
+#: epubmerge_plugin.py:359
 msgid "%s by %s"
 msgstr "%s von %s"
 
-#: epubmerge_plugin.py:361
+#: epubmerge_plugin.py:363
 msgid "%s containing:"
 msgstr "%s enthält:"
 
-#: epubmerge_plugin.py:530
+#: epubmerge_plugin.py:532
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "Das neue ePub wurde erzeugt und Default-Metadaten eingefügt.\n\nDas neue Buch wird *erst dann* erzeugt, wenn Sie den folgenden Metadaten-Dialog überprüft, bearbeitet und geschlossen haben."
 
-#: epubmerge_plugin.py:546
+#: epubmerge_plugin.py:548
 msgid ""
 "You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge"
 " is finished."
 msgstr "Sie fügen %s ePubs zusammen, gesamt %s. Calibre wird bis zum Abschluss gesperrt."
 
-#: epubmerge_plugin.py:550
+#: epubmerge_plugin.py:552
 msgid "Merging %s EPUBs..."
 msgstr "%s EPUBs werden zusammengefügt..."
 
-#: epubmerge_plugin.py:576
+#: epubmerge_plugin.py:579
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr "Aktion abgeschlossen, Ausgabe nach:\n%s"
 
-#: epubmerge_plugin.py:585
+#: epubmerge_plugin.py:588
 msgid "Finished merging %s EPUBs."
 msgstr "Zusammenfügen von %s EPUBs beendet."
 
-#: epubmerge_plugin.py:600 epubmerge_plugin.py:601 epubmerge_plugin.py:602
+#: epubmerge_plugin.py:603 epubmerge_plugin.py:604 epubmerge_plugin.py:605
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: epubmerge_plugin.py:634
+#: epubmerge_plugin.py:637
 msgid "%s by %s doesn't have an EPUB."
 msgstr "%s von %s hat kein EPUB."
