@@ -591,6 +591,8 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
             current = self.gui.library_view.currentIndex()
             self.gui.library_view.model().current_changed(current, self.previous)
             #self.gui.iactions['View'].view_book(False)
+            if self.gui.cover_flow:
+                self.gui.cover_flow.dataChanged()
 
     def apply_settings(self):
         # No need to do anything with perfs here, but we could.
