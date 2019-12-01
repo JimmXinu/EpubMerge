@@ -2,16 +2,17 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Gaius Anderson, 2016
+# cb445fb3dfd1fe3c2b9f58ac5638f478, 2016
 # Jonatan Nyberg, 2016-2017
+# Jonatan Nyberg, 2019
 # Mars Northman <marsnorthman@gmail.com>, 2017
 # Merarom <merarom@yahoo.es>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2018-12-25 08:53+Central Standard Time\n"
-"PO-Revision-Date: 2018-12-25 15:54+0000\n"
-"Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
+"PO-Revision-Date: 2019-01-12 03:42+0000\n"
+"Last-Translator: Jonatan Nyberg\n"
 "Language-Team: Swedish (http://www.transifex.com/calibre/calibre-plugins/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -44,7 +45,7 @@ msgstr "Dessa inställningar styr tilläggsprogrammets grundläggande funktioner
 msgid ""
 "If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'\n"
 "are unchecked, there will be no Table of Contents in merged books."
-msgstr ""
+msgstr "Om båda \"Infoga innehållsförteckningspost\" och \"Kopiera innehållsförteckningsposter\"\när markerade kommer det inte att finnas någon innehållsförteckning i sammanslagna böcker."
 
 #: config.py:207
 msgid "Insert Table of Contents entry for each title?"
@@ -58,11 +59,11 @@ msgstr "Om satt, kommer ett nytt innehållsförteckningselement skapas för varj
 
 #: config.py:213
 msgid "Copy Table of Contents entries from each title?"
-msgstr ""
+msgstr "Kopiera Innehållsförteckningsposter från varje titel?"
 
 #: config.py:214
 msgid "If set, the original TOC entries will be included the new epub."
-msgstr ""
+msgstr "Om den är inställd kommer de ursprungliga TOC-posterna att inkluderas i den nya epub."
 
 #: config.py:227
 msgid "Flatten Table of Contents?"

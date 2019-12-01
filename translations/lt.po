@@ -3,8 +3,8 @@
 # 
 # Translators:
 # Tadas Misiūnas <tadujo@gmail.com>, 2016
-# Zygi Mantus <zygimantus@gmail.com>, 2015
-# Zygi Mantus <zygimantus@gmail.com>, 2017
+# Zygimantus <zygimantus@gmail.com>, 2015
+# Zygimantus <zygimantus@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"

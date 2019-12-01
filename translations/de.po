@@ -4,16 +4,18 @@
 # Translators:
 # Armin Geller <armin.geller@t-online.de>, 2014
 # Ettore Atalan <atalanttore@googlemail.com>, 2014-2015
+# Janina Schlappkohl <mirataria@gmail.com>, 2019
 # Maria K, 2018
-# pitfd <pitfd@posteo.de>, 2018
-# Simon_Schuette <simonschuette@arcor.de>, 2016
+# Patrick Wacker <crayzyone@gmail.com>, 2019
+# pitfd, 2018
+# Simon Schütte, 2016
 # valsu <valsu@hylia.de>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2018-12-25 08:53+Central Standard Time\n"
-"PO-Revision-Date: 2018-12-25 15:54+0000\n"
-"Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
+"PO-Revision-Date: 2019-08-04 21:34+0000\n"
+"Last-Translator: Janina Schlappkohl <mirataria@gmail.com>\n"
 "Language-Team: German (http://www.transifex.com/calibre/calibre-plugins/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -46,7 +48,7 @@ msgstr "Hier steuern Sie grundlegende Einstellungen des Plugins."
 msgid ""
 "If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'\n"
 "are unchecked, there will be no Table of Contents in merged books."
-msgstr ""
+msgstr "Wenn sowohl 'Eintrag für Inhaltsverzeichnisse einfügen' als auch 'Eintrag für Inhaltsverzeichnisse kopieren' deaktiviert sind, gibt es in den zusammengeführten Bücher keine Inhaltsverzeichnisse."
 
 #: config.py:207
 msgid "Insert Table of Contents entry for each title?"
@@ -60,11 +62,11 @@ msgstr "Wenn ausgewählt, wird für jeden Titel ein neuer Eintrag\nim Inhaltsver
 
 #: config.py:213
 msgid "Copy Table of Contents entries from each title?"
-msgstr ""
+msgstr "Kopieren Sie Inhaltsverzeichnisse von jedem Titel?"
 
 #: config.py:214
 msgid "If set, the original TOC entries will be included the new epub."
-msgstr ""
+msgstr "Wenn gesetzt, werden die ursprünglichen Inhaltsverzeichniseinträge in den neuen EPUB aufgenommen."
 
 #: config.py:227
 msgid "Flatten Table of Contents?"
@@ -118,7 +120,7 @@ msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubMerge confirmation "
 "dialogs back again."
-msgstr "Verschiedenes"
+msgstr "Diese Werte sind keine Plugin-Einstellungen als solche, sondern Komfort-Schaltflächen, um Tastenkombination festzulegen und alle EpubMerge-Bestätigungsdialoge wieder zurückzusetzen."
 
 #: config.py:279
 msgid "Keyboard shortcuts..."
