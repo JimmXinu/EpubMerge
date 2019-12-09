@@ -49,7 +49,7 @@ class EpubMergeBase(InterfaceActionBase):
     supported_platforms = ['windows', 'osx', 'linux']
     author              = 'Jim Miller'
     version             = (2, 7, 0)
-    minimum_calibre_version = (0, 8, 57)
+    minimum_calibre_version = (3, 48, 0)
 
     #: This field defines the GUI plugin class that contains all the code
     #: that actually does something. Its format is module_path:class_name
