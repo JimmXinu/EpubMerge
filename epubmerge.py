@@ -284,7 +284,7 @@ def doMerge(outputio,
         relpath = get_path_part(rootfilename)
 
         metadom = parseString(epub.read(rootfilename))
-        logger.debug("metadom:%s"%epub.read(rootfilename))
+        # logger.debug("metadom:%s"%epub.read(rootfilename))
         if booknum==1 and not source:
             try:
                 firstmetadom = metadom.getElementsByTagNameNS("*","metadata")[0]
@@ -298,7 +298,7 @@ def doMerge(outputio,
         is_ffdl_epub.append(False)
 
         for c in metadom.getElementsByTagName("dc:contributor"):
-            logger.debug("dc:contributor:%s"%getText(c.childNodes))
+            # logger.debug("dc:contributor:%s"%getText(c.childNodes))
             if c.getAttribute("opf:role") == "bkp" and \
                     getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
                                               "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]:
@@ -377,7 +377,7 @@ def doMerge(outputio,
                         del itemhrefs[itemid]
 
         itemreflist = metadom.getElementsByTagNameNS("*","itemref")
-        logger.debug("itemhrefs:%s"%itemhrefs)
+        # logger.debug("itemhrefs:%s"%itemhrefs)
         logger.debug("bookid:%s"%bookid)
         logger.debug("itemreflist[0].getAttribute(idref):%s"%itemreflist[0].getAttribute("idref"))
 
@@ -391,7 +391,7 @@ def doMerge(outputio,
 
         for itemref in itemreflist:
             itemrefs.append(bookid+itemref.getAttribute("idref"))
-            logger.debug("adding to itemrefs:%s"%itemref.toprettyxml())
+            # logger.debug("adding to itemrefs:%s"%itemref.toprettyxml())
 
         booknum=booknum+1;
 
@@ -497,7 +497,7 @@ def doMerge(outputio,
                                         "linear":"yes"}))
 
     for item in items:
-        logger.debug("new item:%s %s %s"%item)
+        # logger.debug("new item:%s %s %s"%item)
         (id,href,type)=item
         manifest.appendChild(newTag(contentdom,"item",
                                        attrs={'id':id,
@@ -505,7 +505,7 @@ def doMerge(outputio,
                                               'media-type':type}))
 
     for itemref in itemrefs:
-        logger.debug("itemref:%s"%itemref)
+        # logger.debug("itemref:%s"%itemref)
         spine.appendChild(newTag(contentdom,"itemref",
                                     attrs={"idref":itemref,
                                            "linear":"yes"}))
@@ -545,8 +545,8 @@ def doMerge(outputio,
         # logger.debug( [ x.toprettyxml() for x in navmap.childNodes ] )
         ## only gets top level TOC entries.  sub entries carried inside.
         navpoints = [ x for x in navmap.childNodes if isinstance(x,Element) and x.tagName=="navPoint" ]
-        logger.debug("len(navpoints):%s"%len(navpoints))
-        logger.debug( [ x.toprettyxml() for x in navpoints ] )
+        # logger.debug("len(navpoints):%s"%len(navpoints))
+        # logger.debug( [ x.toprettyxml() for x in navpoints ] )
         newnav = None
         if titlenavpoints:
             newnav = newTag(tocncxdom,"navPoint",{"id":"book%03d"%booknum})
@@ -565,9 +565,9 @@ def doMerge(outputio,
             newnav.appendChild(newTag(tocncxdom,"content",
                                       {"src":firstitemhrefs[booknum]}))
 
-            logger.debug("newnav:%s"%newnav.toprettyxml())
+            # logger.debug("newnav:%s"%newnav.toprettyxml())
             tocnavMap.appendChild(newnav)
-            logger.debug("tocnavMap:%s"%tocnavMap.toprettyxml())
+            # logger.debug("tocnavMap:%s"%tocnavMap.toprettyxml())
         else:
             newnav = tocnavMap
 
@@ -578,7 +578,7 @@ def doMerge(outputio,
         # including title nav point, include sub book TOC entries.
         if originalnavpoints and (len(depthnavpoints) > 1 or not titlenavpoints):
             for navpoint in navpoints:
-                logger.debug("navpoint:%s"%navpoint.toprettyxml())
+                # logger.debug("navpoint:%s"%navpoint.toprettyxml())
                 newnav.appendChild(navpoint)
                 navpoint.is_ffdl_epub = is_ffdl_epub[booknum]
 
@@ -591,9 +591,9 @@ def doMerge(outputio,
     removednodes = []
     ## Force strict ordering of playOrder, stripping out some.
     playorder=0
-    logger.debug("tocncxdom:%s"%tocncxdom.toprettyxml())
+    # logger.debug("tocncxdom:%s"%tocncxdom.toprettyxml())
     for navpoint in tocncxdom.getElementsByTagNameNS("*","navPoint"):
-        logger.debug("navpoint:%s"%navpoint.toprettyxml())
+        # logger.debug("navpoint:%s"%navpoint.toprettyxml())
         if navpoint in removednodes:
             continue
         # need content[src] to compare for dups.  epub wants dup srcs to have same playOrder.
