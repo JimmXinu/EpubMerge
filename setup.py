@@ -71,7 +71,6 @@ setup(
     # You can just specify the packages manually here if your project is
     # simple. Or you can use find_packages().
     # packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
-    # packages=['fanficfare', 'fanficfare.adapters', 'fanficfare.writers'],
 
     # for package_data
     package_dir={'epubmerge': 'epubmerge'},

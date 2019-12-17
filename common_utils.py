@@ -8,6 +8,10 @@ __copyright__ = '2011, Grant Drake <grant.drake@gmail.com>'
 __docformat__ = 'restructuredtext en'
 
 import os
+
+import six
+from six import text_type as unicode
+
 try:
     from PyQt5 import QtWidgets as QtGui
     from PyQt5.Qt import (Qt, QIcon, QPixmap, QLabel, QDialog, QHBoxLayout,
@@ -22,7 +26,7 @@ except ImportError as e:
                           QVBoxLayout, QDialogButtonBox, QStyledItemDelegate, QDateTime,
                           QTextEdit,
                           QListWidget, QAbstractItemView)
-    
+
 from calibre.constants import iswindows
 from calibre.gui2 import gprefs, error_dialog, UNDEFINED_QDATETIME, info_dialog
 from calibre.gui2.actions import menu_action_unique_name
@@ -348,7 +352,7 @@ class KeyValueComboBox(QComboBox):
     def populate_combo(self, selected_key):
         self.clear()
         selected_idx = idx = -1
-        for key, value in self.values.iteritems():
+        for key, value in six.iteritems(self.values):
             idx = idx + 1
             self.addItem(value)
             if key == selected_key:
@@ -356,7 +360,7 @@ class KeyValueComboBox(QComboBox):
         self.setCurrentIndex(selected_idx)
 
     def selected_key(self):
-        for key, value in self.values.iteritems():
+        for key, value in six.iteritems(self.values):
             if value == unicode(self.currentText()).strip():
                 return key
 
@@ -456,7 +460,7 @@ class DateDelegate(QStyledItemDelegate):
             model.setData(index, UNDEFINED_QDATETIME, Qt.EditRole)
         else:
             model.setData(index, QDateTime(val), Qt.EditRole)
-            
+
 class PrefsViewerDialog(SizePersistedDialog):
 
     def __init__(self, gui, namespace):
@@ -502,7 +506,7 @@ class PrefsViewerDialog(SizePersistedDialog):
     def _populate_settings(self):
         self.keys_list.clear()
         ns_prefix = self._get_ns_prefix()
-        keys = sorted([k[len(ns_prefix):] for k in self.db.prefs.iterkeys()
+        keys = sorted([k[len(ns_prefix):] for k in six.iterkeys(self.db.prefs)
                        if k.startswith(ns_prefix)])
         for key in keys:
             self.keys_list.addItem(key)
@@ -516,10 +520,10 @@ class PrefsViewerDialog(SizePersistedDialog):
         key = unicode(self.keys_list.currentItem().text())
         val = self.db.prefs.get_namespaced(self.namespace, key, '')
         self.value_text.setPlainText(self.db.prefs.to_raw(val))
-        
+
     def _get_ns_prefix(self):
         return 'namespaced:%s:'% self.namespace
-        
+
     def _clear_settings(self):
         from calibre.gui2.dialogs.confirm_delete import confirm
         message = '<p>Are you sure you want to clear your settings in this library for this plugin?</p>' \
@@ -529,11 +533,11 @@ class PrefsViewerDialog(SizePersistedDialog):
         if not confirm(message, self.namespace+'_clear_settings', self):
             return
         ns_prefix = self._get_ns_prefix()
-        keys = [k for k in self.db.prefs.iterkeys() if k.startswith(ns_prefix)]
+        keys = [k for k in six.iterkeys(self.db.prefs) if k.startswith(ns_prefix)]
         for k in keys:
             del self.db.prefs[k]
         self._populate_settings()
-        d = info_dialog(self, 'Settings deleted', 
+        d = info_dialog(self, 'Settings deleted',
                         '<p>All settings for this plugin in this library have been cleared.</p>'
                         '<p>Please restart calibre now.</p>',
                         show_copy_button=False)
@@ -549,4 +553,4 @@ class PrefsViewerDialog(SizePersistedDialog):
         self.close()
         if d.do_restart:
             self.gui.quit(restart=True)
-        
+

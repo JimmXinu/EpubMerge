@@ -13,8 +13,8 @@ version="2.7.0"
 
 # py2 vs py3 transition
 from six import text_type as unicode
-from six import BytesIO # StringIO under py2
 from six.moves.urllib.parse import unquote
+from io import BytesIO
 
 import re
 from posixpath import normpath

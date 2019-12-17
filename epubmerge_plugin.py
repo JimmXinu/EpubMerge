@@ -4,15 +4,17 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2018, Jim Miller'
+__copyright__ = '2019, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import logging
 logger = logging.getLogger(__name__)
 
 import time, os
-from StringIO import StringIO
+from io import BytesIO
 from functools import partial
+
+import six
 
 try:
     from PyQt5.Qt import (QMenu)
@@ -179,7 +181,7 @@ class EpubMergePlugin(InterfaceAction):
         # else:
         #     book_id=[0]
             if db.has_format(book_id,'EPUB',index_is_id=True):
-                epub = StringIO(db.format(book_id,'EPUB',index_is_id=True))
+                epub = BytesIO(db.format(book_id,'EPUB',index_is_id=True))
             else:
                 d = error_dialog(self.gui,
                                  _('Cannot UnMerge Non-Epubs'),
@@ -265,7 +267,7 @@ class EpubMergePlugin(InterfaceAction):
             logger.debug("1:%s"%(time.time()-self.t))
             self.t = time.time()
 
-            book_list = map( partial(self._convert_id_to_book, good=False), self.gui.library_view.get_selected_ids() )
+            book_list = [ self._convert_id_to_book(x, good=False) for x in self.gui.library_view.get_selected_ids() ]
             # book_ids = self.gui.library_view.get_selected_ids()
 
             LoopProgressDialog(self.gui,
@@ -280,12 +282,12 @@ class EpubMergePlugin(InterfaceAction):
         db=self.gui.current_db
         self.previous = self.gui.library_view.currentIndex()
         # if any bad, bail.
-        bad_list = filter(lambda x : not x['good'], book_list)
+        bad_list = [ x for x in book_list if not x['good'] ]
         if len(bad_list) > 0:
             d = error_dialog(self.gui,
                              _('Cannot Merge Epubs'),
                              _('%s books failed.')%len(bad_list),
-                             det_msg='\n'.join(map(lambda x : x['error'] , bad_list)))
+                             det_msg='\n'.join( [ x['error'] for x in bad_list ]))
             d.exec_()
         else:
             d = OrderEPUBsDialog(self.gui,
@@ -307,7 +309,7 @@ class EpubMergePlugin(InterfaceAction):
             mi = MetaInformation(deftitle,["Temp Author"])
 
             # if all same series, use series for name.  But only if all.
-            serieslist = map(lambda x : x['series'], filter(lambda x : x['series'] != None, book_list))
+            serieslist = [ x['series'] for x in book_list if x['series'] != None ]
             if len(serieslist) == len(book_list):
                 mi.title = serieslist[0]
                 for sr in serieslist:
@@ -318,7 +320,7 @@ class EpubMergePlugin(InterfaceAction):
             # logger.debug("======================= mi.title:\n%s\n========================="%mi.title)
 
             mi.authors = list()
-            authorslists = map(lambda x : x['authors'], book_list)
+            authorslists = [ x['authors'] for x in book_list ]
             for l in authorslists:
                 for a in l:
                     if a not in mi.authors:
@@ -327,25 +329,25 @@ class EpubMergePlugin(InterfaceAction):
 
             # logger.debug("======================= mi.authors:\n%s\n========================="%mi.authors)
 
-            #mi.author_sort = ' & '.join(map(lambda x : x['author_sort'], book_list))
+            #mi.author_sort = ' & '.join([ x['author_sort'] for x in book_list ])
 
             # logger.debug("======================= mi.author_sort:\n%s\n========================="%mi.author_sort)
 
             # set publisher if all from same publisher.
-            publishers = set(map(lambda x : x['publisher'], book_list))
+            publishers = set([ x['publisher'] for x in book_list ])
             if len(publishers) == 1:
                 mi.publisher = publishers.pop()
 
             # logger.debug("======================= mi.publisher:\n%s\n========================="%mi.publisher)
 
-            tagslists = map(lambda x : x['tags'], book_list)
+            tagslists = [ x['tags'] for x in book_list ]
             mi.tags = [item for sublist in tagslists for item in sublist]
             mi.tags.extend(prefs['mergetags'].split(','))
 
             # logger.debug("======================= mergetags:\n%s\n========================="%prefs['mergetags'])
             # logger.debug("======================= m.tags:\n%s\n========================="%mi.tags)
 
-            languageslists = map(lambda x : x['languages'], book_list)
+            languageslists = [ x['languages'] for x in book_list ]
             mi.languages = [item for sublist in languageslists for item in sublist]
 
             mi.series = ''
@@ -391,10 +393,10 @@ class EpubMergePlugin(InterfaceAction):
             self.t = time.time()
 
             # have to get custom from db for each book.
-            idslist = map(lambda x : x['calibre_id'], book_list)
+            idslist = [ x['calibre_id'] for x in book_list ]
 
             custom_columns = self.gui.library_view.model().custom_columns
-            for col, action in prefs['custom_cols'].iteritems():
+            for col, action in six.iteritems(prefs['custom_cols']):
                 #logger.debug("col: %s action: %s"%(col,action))
 
                 if col not in custom_columns:
@@ -541,7 +543,7 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
             self.t = time.time()
             self.gui.tags_view.recount()
 
-            totalsize = sum(map(lambda x : x['epub_size'], book_list))
+            totalsize = sum([ x['epub_size'] for x in book_list ])
 
             logger.debug("merging %s EPUBs totaling %s"%(len(book_list),gethumanreadable(totalsize)))
             if len(book_list) > 100 or totalsize > 5*1024*1024:
@@ -554,7 +556,7 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
             mi = db.get_metadata(book_id,index_is_id=True)
 
             mergedepub = PersistentTemporaryFile(suffix='.epub')
-            epubstomerge = map(lambda x : x['epub'] , book_list)
+            epubstomerge = [ x['epub'] for x in book_list ]
 
             coverjpgpath = None
             if mi.has_cover:
@@ -630,7 +632,7 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
         book['languages'] = mi.languages
         book['error'] = ''
         if db.has_format(mi.id,'EPUB',index_is_id=True):
-            book['epub'] = StringIO(db.format(mi.id,'EPUB',index_is_id=True))
+            book['epub'] = BytesIO(db.format(mi.id,'EPUB',index_is_id=True))
             if prefs['keepmeta']:
                 set_metadata(book['epub'], mi, stream_type='epub')
             book['epub_size'] = len(book['epub'].getvalue())

@@ -12,6 +12,10 @@ __docformat__ = 'restructuredtext en'
 
 import traceback
 from functools import partial
+
+from six import text_type as unicode
+from six.moves import range
+
 try:
     from PyQt5 import QtWidgets as QtGui
     from PyQt5.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,

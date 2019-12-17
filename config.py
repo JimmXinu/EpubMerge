@@ -4,13 +4,16 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2018, Jim Miller'
+__copyright__ = '2019, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import logging
 logger = logging.getLogger(__name__)
 
 import traceback, copy
+
+import six
+from six import text_type as unicode
 
 try:
     from PyQt5.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
@@ -172,7 +175,7 @@ class ConfigWidget(QWidget):
         # Columns tab
         prefs['firstseries'] = self.columns_tab.firstseries.isChecked()
         colsmap = {}
-        for (col,combo) in self.columns_tab.custcol_dropdowns.iteritems():
+        for (col,combo) in six.iteritems(self.columns_tab.custcol_dropdowns):
             val = unicode(convert_qvariant(combo.itemData(combo.currentIndex())))
             if val != 'none':
                 colsmap[col] = val
@@ -377,11 +380,9 @@ class ColumnsTab(QWidget):
         grid = QGridLayout()
         self.sl.addLayout(grid)
         row=0
-        for key, column in custom_columns.iteritems():
+        for key, column in six.iteritems(custom_columns):
             if column['datatype'] in permitted_values:
                 # logger.debug("\n============== %s ===========\n"%key)
-                # for (k,v) in column.iteritems():
-                #     logger.debug("column['%s'] => %s"%(k,v))
                 label = QLabel('%s(%s)'%(column['name'],key))
                 label.setToolTip(_("Set this %s column on new merged books...")%column['datatype'])
                 grid.addWidget(label,row,0)
