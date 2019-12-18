@@ -2,14 +2,15 @@
 # -*- coding: utf-8 -*-
 
 __license__   = 'GPL v3'
-__copyright__ = '2014, Jim Miller'
+__copyright__ = '2019, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import os, zipfile, sys
 from glob import glob
+from six import text_type as unicode
 
 def addFolderToZip(myZipFile,folder,exclude=[]):
-    folder = folder.encode('ascii') #convert path to ascii for ZipFile Method
+    folder = unicode(folder) #convert path to ascii for ZipFile Method
     excludelist=[]
     for ex in exclude:
         excludelist.extend(glob(folder+"/"+ex))
@@ -30,7 +31,7 @@ def createZipFile(filename,mode,files,exclude=[]):
     for file in files:
         if file in excludelist:
             continue
-        file = file.encode('ascii') #convert path to ascii for ZipFile Method
+        file = unicode(file) #convert path to ascii for ZipFile Method
         if os.path.isfile(file):
             (filepath, filename) = os.path.split(file)
             #print file
