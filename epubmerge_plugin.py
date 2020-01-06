@@ -11,6 +11,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import time, os
+from datetime import datetime
 from io import BytesIO
 from functools import partial
 
@@ -517,7 +518,13 @@ class EpubMergePlugin(InterfaceAction):
                             pass
                     value = value.strip()
 
+                if action == 'now':
+                    value = datetime.now()
+                    found = True
+                    logger.debug("now: %s"%value)
+
                 if found and value != None:
+                    logger.debug("value: %s"%value)
                     db.set_custom(book_id,value,label=label,commit=False)
 
             db.commit()

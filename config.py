@@ -314,7 +314,7 @@ permitted_values = {
     'int' : ['add', 'averageall', 'average', 'first', 'last'],
     'float' : ['add', 'averageall', 'average', 'first', 'last'],
     'bool' : ['and', 'or', 'first', 'last'],
-    'datetime' : ['newest', 'oldest', 'first', 'last'],
+    'datetime' : ['newest', 'oldest', 'first', 'last', 'now'],
     'enumeration' : ['first', 'last'],
     'series' : ['first', 'last'],
     'text' : ['union', 'concat', 'first', 'last'],
@@ -333,6 +333,7 @@ titleLabels = {
     'oldest':_('Take oldest value from source books'),
     'union':_('Include values from all source books'),
     'concat':_('Concatenate values from all source books'),
+    'now':_('Set to current time when created'),
     }
 
 class ColumnsTab(QWidget):
