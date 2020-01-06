@@ -381,7 +381,8 @@ class ColumnsTab(QWidget):
         grid = QGridLayout()
         self.sl.addLayout(grid)
         row=0
-        for key, column in six.iteritems(custom_columns):
+        ## sort by visible Column Name (vs #name)
+        for key, column in sorted(custom_columns.items(), key=lambda x: x[1]['name']):
             if column['datatype'] in permitted_values:
                 # logger.debug("\n============== %s ===========\n"%key)
                 label = QLabel('%s(%s)'%(column['name'],key))
