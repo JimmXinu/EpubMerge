@@ -1,3 +1,3 @@
-python3 makeplugin.py
+python makeplugin.py
 
 calibre-customize -a EpubMerge.zip
