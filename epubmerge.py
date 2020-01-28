@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __license__   = 'GPL v3'
-__copyright__ = '2019, Jim Miller'
+__copyright__ = '2020, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import sys, os
@@ -340,8 +340,12 @@ def doMerge(outputio,
             itemid=bookid+item.getAttribute("id")
             itemhref = normpath(unquote(item.getAttribute("href"))) # remove %20, etc.
             href=bookdir+relpath+itemhref
-            if( item.getAttribute("media-type") == "application/x-dtbncx+xml" ):
-                # TOC file is only one with this type--as far as I know.
+            # if item.getAttribute("properties") == "nav":
+            #     # epub3 TOC file is only one with this type--as far as I know.
+            #     # grab the whole navmap, deal with it later.
+            # el
+            if item.getAttribute("media-type") == "application/x-dtbncx+xml":
+                # epub2 TOC file is only one with this type--as far as I know.
                 # grab the whole navmap, deal with it later.
                 tocdom = parseString(epub.read(normpath(relpath+item.getAttribute("href"))))
 

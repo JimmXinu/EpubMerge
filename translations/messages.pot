@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2020-01-06 17:23-0600\n"
+"POT-Creation-Date: 2020-01-28 12:34-0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -404,6 +404,10 @@ msgid "Unknown"
 msgstr ""
 
 #: epubmerge_plugin.py:648
+msgid "%s by %s is EPUB3, EpubMerge only supports EPUB2."
+msgstr ""
+
+#: epubmerge_plugin.py:657
 msgid "%s by %s doesn't have an EPUB."
 msgstr ""
 

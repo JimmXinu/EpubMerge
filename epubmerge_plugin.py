@@ -4,7 +4,7 @@ from __future__ import (unicode_literals, division, absolute_import,
                         print_function)
 
 __license__   = 'GPL v3'
-__copyright__ = '2019, Jim Miller'
+__copyright__ = '2020, Jim Miller'
 __docformat__ = 'restructuredtext en'
 
 import logging
@@ -640,9 +640,18 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
         book['error'] = ''
         if db.has_format(mi.id,'EPUB',index_is_id=True):
             book['epub'] = BytesIO(db.format(mi.id,'EPUB',index_is_id=True))
-            if prefs['keepmeta']:
-                set_metadata(book['epub'], mi, stream_type='epub')
-            book['epub_size'] = len(book['epub'].getvalue())
+
+            from calibre.ebooks.oeb.polish.container import get_container
+            container = get_container(db.format_abspath(mi.id,'EPUB',index_is_id=True))
+            if container.opf_version_parsed.major >= 3:
+                book['good'] = False;
+                book['error'] = _("%s by %s is EPUB3, EpubMerge only supports EPUB2.")%(mi.title,', '.join(mi.authors))
+            else:
+                if prefs['keepmeta']:
+                    # save calibre metadata inside epub if keeping unmerge
+                    # data.
+                    set_metadata(book['epub'], mi, stream_type='epub')
+                book['epub_size'] = len(book['epub'].getvalue())
         else:
             book['good'] = False;
             book['error'] = _("%s by %s doesn't have an EPUB.")%(mi.title,', '.join(mi.authors))
