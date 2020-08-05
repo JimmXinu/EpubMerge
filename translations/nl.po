@@ -4,8 +4,8 @@
 # Translators:
 # erkfuizfeuadjfjzefzfuzeff gbhygsregfges <erkfuizfeuadjfjzefzfuzeff@gmail.com>, 2017
 # Marius K <matriko@hotmail.com>, 2016
-# MATAC, 2014
-# M. de Boer <de.boer.melle@gmail.com>, 2019
+# 581439deeeb77bf7c15b4129f23d2364_739d3ec, 2014
+# M. de Boer <de.boer.melle@gmail.com>, 2019-2020
 # Meteor0id, 2019
 # Rodolfo_Jadon, 2014-2015
 # Volluta <volluta@tutanota.com>, 2015
@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2020-01-28 12:34-0600\n"
-"PO-Revision-Date: 2020-01-29 02:59+0000\n"
-"Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
+"PO-Revision-Date: 2020-02-25 16:00+0000\n"
+"Last-Translator: M. de Boer <de.boer.melle@gmail.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/calibre/calibre-plugins/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -200,7 +200,7 @@ msgstr "Aaneengeschakelde waarden van alle bronboeken"
 
 #: config.py:336
 msgid "Set to current time when created"
-msgstr ""
+msgstr "Stel in op de huidige tijd wanneer gemaakt"
 
 #: config.py:349
 msgid "Standard Columns:"
@@ -430,7 +430,7 @@ msgstr "Onbekend"
 
 #: epubmerge_plugin.py:648
 msgid "%s by %s is EPUB3, EpubMerge only supports EPUB2."
-msgstr ""
+msgstr "%svan de%s is EPUB3, EpubMerge ondersteunt alleen EPUB2."
 
 #: epubmerge_plugin.py:657
 msgid "%s by %s doesn't have an EPUB."

@@ -4,15 +4,15 @@
 # Translators:
 # Aleksandr P, 2019
 # Anna Evdokimova <anna.evdokimova@yahoo.com>, 2016
-# ashed <craysy@gmail.com>, 2017
+# ashed <craysy@gmail.com>, 2017,2020
 # Kirill Stryaponoff <stryaponoff@gmail.com>, 2016
 # Kirill Stryaponoff <stryaponoff@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2020-01-28 12:34-0600\n"
-"PO-Revision-Date: 2020-01-29 02:59+0000\n"
-"Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
+"PO-Revision-Date: 2020-05-18 11:03+0000\n"
+"Last-Translator: ashed <craysy@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/calibre/calibre-plugins/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -197,7 +197,7 @@ msgstr "Объединить значения из всех исходников
 
 #: config.py:336
 msgid "Set to current time when created"
-msgstr ""
+msgstr "Установить текущее время при создании"
 
 #: config.py:349
 msgid "Standard Columns:"
@@ -388,7 +388,7 @@ msgstr "Порядок EPUB для слияния"
 
 #: epubmerge_plugin.py:362
 msgid "%s by %s"
-msgstr "%s by %s"
+msgstr "%s от %s"
 
 #: epubmerge_plugin.py:366
 msgid "%s containing:"
@@ -427,8 +427,8 @@ msgstr "Неизвестный"
 
 #: epubmerge_plugin.py:648
 msgid "%s by %s is EPUB3, EpubMerge only supports EPUB2."
-msgstr ""
+msgstr " %s от %s это EPUB3, EpubMerge поддерживает только EPUB2."
 
 #: epubmerge_plugin.py:657
 msgid "%s by %s doesn't have an EPUB."
-msgstr "%s by %s не имеет EPUB."
+msgstr "%s от %s не имеет EPUB."
