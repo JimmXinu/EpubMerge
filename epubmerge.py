@@ -299,9 +299,8 @@ def doMerge(outputio,
 
         for c in metadom.getElementsByTagName("dc:contributor"):
             # logger.debug("dc:contributor:%s"%getText(c.childNodes))
-            if c.getAttribute("opf:role") == "bkp" and \
-                    getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
-                                              "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]:
+            if getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
+                                         "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]:
                 is_ffdl_epub[-1] = True # set last.
                 break;
 
@@ -434,7 +433,7 @@ def doMerge(outputio,
                                             attrs={"opf:role":"aut"},
                                             text=author))
 
-    metadata.appendChild(newTag(contentdom,"dc:contributor",text="epubmerge",attrs={"opf:role":"bkp"}))
+    metadata.appendChild(newTag(contentdom,"dc:contributor",text="epubmerge"))
     metadata.appendChild(newTag(contentdom,"dc:rights",text="Copyrights as per source stories"))
 
     for l in languages:
