@@ -639,19 +639,26 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
         book['languages'] = mi.languages
         book['error'] = ''
         if db.has_format(mi.id,'EPUB',index_is_id=True):
-            book['epub'] = BytesIO(db.format(mi.id,'EPUB',index_is_id=True))
-
-            from calibre.ebooks.oeb.polish.container import get_container
-            container = get_container(db.format_abspath(mi.id,'EPUB',index_is_id=True))
-            if container.opf_version_parsed.major >= 3:
-                book['good'] = False;
-                book['error'] = _("%s by %s is EPUB3, EpubMerge only supports EPUB2.")%(mi.title,', '.join(mi.authors))
+            # XXX delete temp files when done. Calibre will on
+            # quit, but some people run a long time.
+            # XXX move epub3 check to BG epub3->2 convert
+            # from calibre.ebooks.oeb.polish.container import get_container
+            # container = get_container(db.format_abspath(mi.id,'EPUB',index_is_id=True))
+            # if container.opf_version_parsed.major >= 3:
+            #     book['good'] = False;
+            #     book['error'] = _("%s by %s is EPUB3, EpubMerge only supports EPUB2.")%(mi.title,', '.join(mi.authors))
+            if prefs['keepmeta']:
+                # save calibre metadata inside epub if keeping unmerge
+                # data.
+                tmp = PersistentTemporaryFile(prefix='epubmerge-%s-'%mi.id,
+                                                       suffix='.epub')
+                db.copy_format_to(mi.id,'EPUB',tmp,index_is_id=True)
+                set_metadata(tmp, mi, stream_type='epub')
+                book['epub'] = tmp.name
             else:
-                if prefs['keepmeta']:
-                    # save calibre metadata inside epub if keeping unmerge
-                    # data.
-                    set_metadata(book['epub'], mi, stream_type='epub')
-                book['epub_size'] = len(book['epub'].getvalue())
+                # don't need metadata, use epub directly
+                book['epub'] = db.format_abspath(mi.id,'EPUB',index_is_id=True)
+            book['epub_size'] = os.stat(book['epub']).st_size
         else:
             book['good'] = False;
             book['error'] = _("%s by %s doesn't have an EPUB.")%(mi.title,', '.join(mi.authors))
