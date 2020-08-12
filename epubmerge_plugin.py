@@ -570,6 +570,35 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
                 # grab the path to the real image.
                 coverjpgpath = os.path.join(db.library_path, db.path(book_id, index_is_id=True), 'cover.jpg')
 
+
+            func = 'arbitrary_n'
+            cpus = self.gui.job_manager.server.pool_size
+            args = ['calibre_plugins.epubmerge_plugin.jobs', 'do_merge_bg',
+                    ((mergedepub,
+                      epubstomerge,
+                      # authoropts=mi.authors,
+                      # titleopt=mi.title,
+                      # descopt=mi.comments,
+                      # tags=mi.tags,
+                      # languages=mi.languages,
+                      # titlenavpoints=prefs['titlenavpoints'],
+                      # originalnavpoints=prefs['originalnavpoints'],
+                      # flattentoc=prefs['flattentoc'],
+                      # printtimes=True,
+                      # coverjpgpath=coverjpgpath,
+                      # keepmetadatafiles=prefs['keepmeta']
+                      ),
+                     cpus)]
+            desc = _('Merging Books')
+            job = self.gui.job_manager.run_job(
+                self.Dispatcher(self.fake_merge_done),
+                func, args=args,
+                description=desc)
+
+            self.gui.jobs_pointer.start()
+            self.gui.status_bar.show_message(_('Starting EpubMErge'),3000)
+
+'''                
             self.do_merge( mergedepub,
                            epubstomerge,
                            authoropts=mi.authors,
@@ -583,25 +612,30 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
                            printtimes=True,
                            coverjpgpath=coverjpgpath,
                            keepmetadatafiles=prefs['keepmeta'] )
+'''
 
-            logger.debug("6:%s"%(time.time()-self.t))
-            logger.debug(_("Merge finished, output in:\n%s")%mergedepub.name)
-            self.t = time.time()
-            db.add_format_with_hooks(book_id,
-                                     'EPUB',
-                                     mergedepub, index_is_id=True)
+    def fake_merge_done(self,job):
+        logger.error("fake_merge_done(%s)"%job)
 
-            logger.debug("7:%s"%(time.time()-self.t))
-            self.t = time.time()
-
-            self.gui.status_bar.show_message(_('Finished merging %s EPUBs.')%len(book_list), 3000)
-            self.gui.library_view.model().refresh_ids([book_id])
-            self.gui.tags_view.recount()
-            current = self.gui.library_view.currentIndex()
-            self.gui.library_view.model().current_changed(current, self.previous)
+    def merge_done(self,job):
+        logger.debug("6:%s"%(time.time()-self.t))
+        logger.debug(_("Merge finished, output in:\n%s")%mergedepub.name)
+        self.t = time.time()
+        db.add_format_with_hooks(book_id,
+                                 'EPUB',
+                                 mergedepub, index_is_id=True)
+        
+        logger.debug("7:%s"%(time.time()-self.t))
+        self.t = time.time()
+        
+        self.gui.status_bar.show_message(_('Finished merging %s EPUBs.')%len(book_list), 3000)
+        self.gui.library_view.model().refresh_ids([book_id])
+        self.gui.tags_view.recount()
+        current = self.gui.library_view.currentIndex()
+        self.gui.library_view.model().current_changed(current, self.previous)
             #self.gui.iactions['View'].view_book(False)
-            if self.gui.cover_flow:
-                self.gui.cover_flow.dataChanged()
+        if self.gui.cover_flow:
+            self.gui.cover_flow.dataChanged()
 
     def apply_settings(self):
         # No need to do anything with perfs here, but we could.
