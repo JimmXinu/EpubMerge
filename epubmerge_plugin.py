@@ -172,15 +172,6 @@ class EpubMergePlugin(InterfaceAction):
         state = 'add'
         for book_id in self.gui.library_view.get_selected_ids():
             unmerge_mi = db.get_metadata(book_id,index_is_id=True)
-
-        # if len(self.gui.library_view.get_selected_ids()) != 1:
-        #     d = error_dialog(self.gui,
-        #                      _('Select One Book'),
-        #                      _('Please select exactly one book to UnMerge.'),
-        #                      show_copy_button=False)
-        #     d.exec_()
-        # else:
-        #     book_id=[0]
             if db.has_format(book_id,'EPUB',index_is_id=True):
                 epub = BytesIO(db.format(book_id,'EPUB',index_is_id=True))
             else:
@@ -271,15 +262,19 @@ class EpubMergePlugin(InterfaceAction):
             book_list = [ self._convert_id_to_book(x, good=False) for x in self.gui.library_view.get_selected_ids() ]
             # book_ids = self.gui.library_view.get_selected_ids()
 
+            # put all temp epubs in a temp dir for convenience of
+            # deleting and not needing to keep track of temp input
+            # epubs vs using library epub.
+            tdir = PersistentTemporaryDirectory(prefix='epubmerge_')
             LoopProgressDialog(self.gui,
                                book_list,
-                               partial(self._populate_book_from_calibre_id, db=self.gui.current_db),
-                               self._start_merge,
+                               partial(self._populate_book_from_calibre_id, db=self.gui.current_db, tdir=tdir),
+                               partial(self._start_merge,tdir=tdir),
                                init_label=_("Collecting EPUBs for merger..."),
                                win_title=_("Get EPUBs for merge"),
                                status_prefix=_("EPUBs collected"))
 
-    def _start_merge(self,book_list):
+    def _start_merge(self,book_list,tdir=None):
         db=self.gui.current_db
         self.previous = self.gui.library_view.currentIndex()
         # if any bad, bail.
@@ -551,18 +546,25 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
             self.gui.tags_view.recount()
 
             totalsize = sum([ x['epub_size'] for x in book_list ])
-
             logger.debug("merging %s EPUBs totaling %s"%(len(book_list),gethumanreadable(totalsize)))
-            if len(book_list) > 100 or totalsize > 5*1024*1024:
-                confirm('\n'+_('''You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is finished.''')%(len(book_list),gethumanreadable(totalsize)),
-                        'epubmerge_edited_now_merge_again',
-                        self.gui)
+            confirm('\n'+_('''EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.
+
+You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(totalsize)),
+                    'epubmerge_background_merge_again',
+                    self.gui)
+
+            # if len(book_list) > 100 or totalsize > 5*1024*1024:
+            #     confirm('\n'+_('''You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is finished.''')%(len(book_list),gethumanreadable(totalsize)),
+            #             'epubmerge_edited_now_merge_again',
+            #             self.gui)
 
             self.gui.status_bar.show_message(_('Merging %s EPUBs...')%len(book_list), 60000)
 
             mi = db.get_metadata(book_id,index_is_id=True)
 
-            mergedepub = PersistentTemporaryFile(suffix='.epub')
+            mergedepub = PersistentTemporaryFile(prefix="output_",
+                                                 suffix='.epub',
+                                                 dir=tdir)
             epubstomerge = [ x['epub'] for x in book_list ]
 
             coverjpgpath = None
@@ -577,6 +579,7 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
                     'do_merge_bg',
                     ({'book_id':book_id,
                       'book_count':len(book_list),
+                      'tdir':tdir,
                       'outputepubfn':mergedepub.name,
                       'inputepubfns':epubstomerge, # already .name'ed
                       'authoropts':mi.authors,
@@ -592,7 +595,7 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
                       'keepmetadatafiles':prefs['keepmeta']
                       },
                      cpus)]
-            desc = _('Merging Books')
+            desc = _('EpubMerge')
             job = self.gui.job_manager.run_job(
                 self.Dispatcher(self.merge_done),
                 func, args=args,
@@ -638,6 +641,9 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
         logger.debug("7:%s"%(time.time()-self.t))
         self.t = time.time()
 
+        # clean up temp files.
+        remove_dir(args['tdir'])
+
         self.gui.status_bar.show_message(_('Finished merging %s EPUBs.')%book_count, 3000)
         self.gui.library_view.model().refresh_ids([book_id])
         self.gui.tags_view.recount()
@@ -663,7 +669,7 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
 
         return book
 
-    def _populate_book_from_calibre_id(self, book, db=None):
+    def _populate_book_from_calibre_id(self, book, db=None, tdir=None):
         mi = db.get_metadata(book['calibre_id'], index_is_id=True)
         #book = {}
         book['good'] = True
@@ -683,8 +689,6 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
         book['languages'] = mi.languages
         book['error'] = ''
         if db.has_format(mi.id,'EPUB',index_is_id=True):
-            # XXX delete temp files when done. Calibre will on
-            # quit, but some people run a long time.
             # XXX move epub3 check to BG epub3->2 convert
             # from calibre.ebooks.oeb.polish.container import get_container
             # container = get_container(db.format_abspath(mi.id,'EPUB',index_is_id=True))
@@ -694,8 +698,9 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
             if prefs['keepmeta']:
                 # save calibre metadata inside epub if keeping unmerge
                 # data.
-                tmp = PersistentTemporaryFile(prefix='epubmerge-%s-'%mi.id,
-                                                       suffix='.epub')
+                tmp = PersistentTemporaryFile(prefix='input_%s_'%mi.id,
+                                              suffix='.epub',
+                                              dir=tdir)
                 db.copy_format_to(mi.id,'EPUB',tmp,index_is_id=True)
                 set_metadata(tmp, mi, stream_type='epub')
                 book['epub'] = tmp.name
