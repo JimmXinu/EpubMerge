@@ -573,32 +573,35 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
 
             func = 'arbitrary_n'
             cpus = self.gui.job_manager.server.pool_size
-            args = ['calibre_plugins.epubmerge_plugin.jobs', 'do_merge_bg',
-                    ((mergedepub,
-                      epubstomerge,
-                      # authoropts=mi.authors,
-                      # titleopt=mi.title,
-                      # descopt=mi.comments,
-                      # tags=mi.tags,
-                      # languages=mi.languages,
-                      # titlenavpoints=prefs['titlenavpoints'],
-                      # originalnavpoints=prefs['originalnavpoints'],
-                      # flattentoc=prefs['flattentoc'],
-                      # printtimes=True,
-                      # coverjpgpath=coverjpgpath,
-                      # keepmetadatafiles=prefs['keepmeta']
-                      ),
+            args = ['calibre_plugins.epubmerge.jobs',
+                    'do_merge_bg',
+                    ({'book_id':book_id,
+                      'book_count':len(book_list),
+                      'outputepubfn':mergedepub.name,
+                      'inputepubfns':epubstomerge, # already .name'ed
+                      'authoropts':mi.authors,
+                      'titleopt':mi.title,
+                      'descopt':mi.comments,
+                      'tags':mi.tags,
+                      'languages':mi.languages,
+                      'titlenavpoints':prefs['titlenavpoints'],
+                      'originalnavpoints':prefs['originalnavpoints'],
+                      'flattentoc':prefs['flattentoc'],
+                      'printtimes':True,
+                      'coverjpgpath':coverjpgpath,
+                      'keepmetadatafiles':prefs['keepmeta']
+                      },
                      cpus)]
             desc = _('Merging Books')
             job = self.gui.job_manager.run_job(
-                self.Dispatcher(self.fake_merge_done),
+                self.Dispatcher(self.merge_done),
                 func, args=args,
                 description=desc)
 
             self.gui.jobs_pointer.start()
-            self.gui.status_bar.show_message(_('Starting EpubMErge'),3000)
+            self.gui.status_bar.show_message(_('Starting EpubMerge'),3000)
 
-'''                
+            '''
             self.do_merge( mergedepub,
                            epubstomerge,
                            authoropts=mi.authors,
@@ -612,23 +615,30 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
                            printtimes=True,
                            coverjpgpath=coverjpgpath,
                            keepmetadatafiles=prefs['keepmeta'] )
-'''
-
-    def fake_merge_done(self,job):
-        logger.error("fake_merge_done(%s)"%job)
+           '''
 
     def merge_done(self,job):
+        db=self.gui.current_db
+        logger.info("fake_merge_done(%s,%s)"%(job.failed,job.result))
+        (args,code) = job.result
+        if job.failed:
+            logger.info("Temp files left for debugging:\nout:%s\nin:%s"%(outputepubfn,args['inputepubfns']))
+            self.gui.job_exception(job, dialog_title='EpubMerge Failed')
+            return
+        outputepubfn = args['outputepubfn']
+        book_id = args['book_id']
+        book_count = args['book_count']
         logger.debug("6:%s"%(time.time()-self.t))
-        logger.debug(_("Merge finished, output in:\n%s")%mergedepub.name)
+        logger.debug(_("Merge finished, output in:\n%s")%outputepubfn)
         self.t = time.time()
         db.add_format_with_hooks(book_id,
                                  'EPUB',
-                                 mergedepub, index_is_id=True)
-        
+                                 outputepubfn, index_is_id=True)
+
         logger.debug("7:%s"%(time.time()-self.t))
         self.t = time.time()
-        
-        self.gui.status_bar.show_message(_('Finished merging %s EPUBs.')%len(book_list), 3000)
+
+        self.gui.status_bar.show_message(_('Finished merging %s EPUBs.')%book_count, 3000)
         self.gui.library_view.model().refresh_ids([book_id])
         self.gui.tags_view.recount()
         current = self.gui.library_view.currentIndex()
