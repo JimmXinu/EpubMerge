@@ -292,15 +292,22 @@ def doMerge(outputio,
             except:
                 source=""
 
-        # if the epub was ever edited with Sigil, it changed the unique-identifier,
-        # but dc:contributor was left.
-        #is_ffdl_epub.append(metadom.documentElement.getAttribute('unique-identifier') == "fanficdownloader-uid")
         is_ffdl_epub.append(False)
-
-        for c in metadom.getElementsByTagName("dc:contributor"):
-            # logger.debug("dc:contributor:%s"%getText(c.childNodes))
-            if getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
-                                         "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]:
+        ## looking for any of:
+        ##   <dc:contributor id="id-2">FanFicFare [https://github.com/JimmXinu/FanFicFare]</dc:contributor>
+        ##   <dc:identifier opf:scheme="FANFICFARE-UID">test1.com-u98765-s68</dc:identifier>
+        ##   <dc:identifier id="fanficfare-uid">fanficfare-uid:test1.com-u98765-s68</dc:identifier>
+        ## FFF writes dc:contributor and dc:identifier
+        ## Sigil changes the unique-identifier, but leaves dc:contributor
+        ## Calibre epub3->epub2 convert changes dc:contributor and modifies dc:identifier
+        for c in metadom.getElementsByTagName("dc:contributor") + metadom.getElementsByTagName("dc:identifier"):
+            # logger.debug("dc:contributor/identifier:%s"%getText(c.childNodes))
+            # logger.debug("dc:contributor/identifier:%s / %s"%(c.getAttribute('opf:scheme'),c.getAttribute('id')))
+            if ( getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
+                                           "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]
+                 or 'fanficfare-uid' in c.getAttribute('opf:scheme').lower()
+                 or 'fanficfare-uid' in c.getAttribute('id').lower() ):
+                logger.debug("------------> is_ffdl_epub <-----------------")
                 is_ffdl_epub[-1] = True # set last.
                 break;
 

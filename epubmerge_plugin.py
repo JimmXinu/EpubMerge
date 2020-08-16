@@ -194,8 +194,6 @@ class EpubMergePlugin(InterfaceAction):
                 remove_dir(tdir)
                 continue
 
-            #db.import_book_directory_multiple(tdir) XXX
-            #self.gui.library_view.model().books_added(len(outfilenames))
             added_list=[]
             updated_list=[]
             for formats in db.find_books_in_directory(tdir, False):
@@ -622,7 +620,7 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
 
     def merge_done(self,job):
         db=self.gui.current_db
-        logger.info("fake_merge_done(%s,%s)"%(job.failed,job.result))
+        logger.info("merge_done(%s,%s)"%(job.failed,job.result))
         (args,code) = job.result
         if job.failed:
             logger.info("Temp files left for debugging:\nout:%s\nin:%s"%(outputepubfn,args['inputepubfns']))
@@ -689,12 +687,6 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
         book['languages'] = mi.languages
         book['error'] = ''
         if db.has_format(mi.id,'EPUB',index_is_id=True):
-            # XXX move epub3 check to BG epub3->2 convert
-            # from calibre.ebooks.oeb.polish.container import get_container
-            # container = get_container(db.format_abspath(mi.id,'EPUB',index_is_id=True))
-            # if container.opf_version_parsed.major >= 3:
-            #     book['good'] = False;
-            #     book['error'] = _("%s by %s is EPUB3, EpubMerge only supports EPUB2.")%(mi.title,', '.join(mi.authors))
             if prefs['keepmeta']:
                 # save calibre metadata inside epub if keeping unmerge
                 # data.
