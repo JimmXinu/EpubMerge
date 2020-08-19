@@ -17,8 +17,6 @@ from io import StringIO
 from collections import defaultdict
 
 from calibre.ptempfile import PersistentTemporaryFile
-from calibre.utils.ipc.server import Server
-from calibre.utils.ipc.job import ParallelJob
 from calibre.ebooks.oeb.polish.container import get_container
 from calibre.ebooks.conversion.cli import main as ebook_convert_cli_main
 
@@ -39,22 +37,27 @@ except NameError:
 def do_merge_bg(args,
                 cpus,
                 notification=lambda x,y:x):
-    logger.info("do_merge_bg(%s,%s)"%(args,cpus))
+    # logger.debug("do_merge_bg(%s,%s)"%(args,cpus))
 
     # XXX - add meaningful % done
     # This server is an arbitrary_n job, so there is a notifier available.
     # Set the % complete to a small number to avoid the 'unavailable' indicator
-    # notification(0.01, _('Downloading FanFiction Stories'))
-    # notification(float(count)/total, _('%d of %d stories finished downloading')%(count,total))
 
-    # XXX - add error catching & reporting
+    ## for purposes of %done, autoconvert, merging output are each
+    ## considered 1/2 of total.
+    def notify_progress(percent):
+        notification(max(percent/2,0.01), _('Autoconverting...'))
+
+    notify_progress(0.01)
 
     for j in range(0,len(args['inputepubfns'])):
         fn = args['inputepubfns'][j]
+        title = args['epubtitles'][fn]
         try:
             container = get_container(fn)
             if container.opf_version_parsed.major >= 3:
-                logger.info("found epub3: %s"%fn)
+                print("=" * 50)
+                print("Found EPUB3 for %s, automatically creating a temporary EPUB2 for merging...\n"%title)
                 # this temp file is deleted when the BG process quits,
                 # so don't expect it to still be there.
                 epub2 = PersistentTemporaryFile(prefix="epub2_",
@@ -64,13 +67,22 @@ def do_merge_bg(args,
                 # ebook-convert epub3.epub epub2.epub --epub-version=2
                 ebook_convert_cli_main(['epubmerge calling convert',fn,fn2,'--epub-version=2','--no-default-epub-cover'])
                 args['inputepubfns'][j] = fn2
-                logger.info("Converted to epub2:%s"%fn2)
-                # book['good'] = False;
-                # book['error'] = _("%s by %s is EPUB3, EpubMerge only supports EPUB2.")%(mi.title,', '.join(mi.authors))
+                print("Converted to temporary EPUB2: %s"%fn2)
+            time.sleep(1)
+            notify_progress(float(j)/len(args['inputepubfns']))
         except:
+            print("=" * 20)
+            print("Exception auto converting %s to EPUB2 from EPUB3"%title)
+            print("Quiting...")
+            print("=" * 50)
             raise
-            # XXX do something useful
-            pass
+
+    def notify_progress(percent):
+        notification(percent/2 + 0.5, _('Merging...'))
+
+    print("=" * 50)
+    print("\nBeginning Merge...\n")
+    print("=" * 50)
 
     doMerge(args['outputepubfn'],
             args['inputepubfns'],
@@ -84,8 +96,8 @@ def do_merge_bg(args,
             args['flattentoc'],
             args['printtimes'],
             args['coverjpgpath'],
-            args['keepmetadatafiles'])
-
-#    time.sleep(30)
-    return (args,"Done")
-
+            args['keepmetadatafiles'],
+            notify_progress=notify_progress)
+    print("=" * 50)
+    print("\nFinished Merge...\n")
+    print("=" * 50)

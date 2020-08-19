@@ -22,7 +22,7 @@ from optparse import OptionParser
 from functools import partial
 
 from zipfile import ZipFile, ZIP_STORED, ZIP_DEFLATED
-from time import time
+from time import time, sleep
 
 from xml.dom.minidom import parse, parseString, getDOMImplementation, Element
 
@@ -192,7 +192,8 @@ def doMerge(outputio,
             printtimes=False,
             coverjpgpath=None,
             keepmetadatafiles=False,
-            source=None):
+            source=None,
+            notify_progress=lambda x,y:x):
     '''
     outputio = output file name or BytesIO.
     files = list of input file names or BytesIOs.
@@ -207,6 +208,7 @@ def doMerge(outputio,
     coverjpgpath, Path to a jpg to use as cover image.
     '''
 
+    notify_progress(0.0) # sets overall progress to 50%
     printt = partial(cond_print,printtimes)
 
     ## Python 2.5 ZipFile is rather more primative than later
@@ -372,7 +374,7 @@ def doMerge(outputio,
                     items.append((itemid,href,"origtocncx/xml"))
             else:
                 #href=href.encode('utf8')
-                logger.debug("item id: %s -> %s:"%(itemid,href))
+                # logger.debug("item id: %s -> %s:"%(itemid,href))
                 itemhrefs[itemid] = href
                 if href not in filelist:
                     try:
@@ -403,6 +405,8 @@ def doMerge(outputio,
             itemrefs.append(bookid+itemref.getAttribute("idref"))
             # logger.debug("adding to itemrefs:%s"%itemref.toprettyxml())
 
+        sleep(1)
+        notify_progress(float(booknum-1)/len(files))
         booknum=booknum+1;
 
     printt("after file loop:%s"%(time()-t))
@@ -611,13 +615,16 @@ def doMerge(outputio,
         for n in navpoint.childNodes:
             if isinstance(n,Element) and n.tagName == "content":
                 contentsrc = n.getAttribute("src")
-                logger.debug("contentsrc: %s"%contentsrc)
+                # logger.debug("contentsrc: %s"%contentsrc)
                 break
 
         if( contentsrc not in contentsrcs ):
 
             parent = navpoint.parentNode
             try:
+                # XXX - FFDL single-chapter handling tripped on
+                # test1.com story in my All Sites test library...
+
                 # if the epub was ever edited with Sigil, it changed
                 # the id, but the file name is the same.
                 if navpoint.is_ffdl_epub and \
@@ -638,7 +645,7 @@ def doMerge(outputio,
             contentsrcs[contentsrc] = navpoint.getAttribute("id")
             playorder += 1
             navpoint.setAttribute("playOrder","%d" % playorder)
-            logger.debug("playorder:%d:"%playorder)
+            # logger.debug("playorder:%d:"%playorder)
 
             # need to know depth of deepest navpoint for <meta name="dtb:depth" content="2"/>
             npdepth = 1

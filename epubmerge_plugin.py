@@ -26,6 +26,7 @@ from calibre.ptempfile import PersistentTemporaryFile, PersistentTemporaryDirect
 from calibre.ebooks.metadata import MetaInformation
 from calibre.ebooks.metadata.meta import set_metadata, metadata_from_formats
 from calibre.gui2 import error_dialog
+from calibre.gui2 import question_dialog
 from calibre.gui2.dialogs.confirm_delete import confirm
 from calibre.constants import config_dir as calibre_config_dir
 
@@ -537,6 +538,8 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
                     'epubmerge_created_now_edit_again',
                     self.gui)
 
+            ## XXX handle confirm cancels
+
             self.gui.iactions['Edit Metadata'].edit_metadata(False)
 
             logger.debug("5:%s"%(time.time()-self.t))
@@ -564,6 +567,10 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
                                                  suffix='.epub',
                                                  dir=tdir)
             epubstomerge = [ x['epub'] for x in book_list ]
+            epubtitles = {}
+            for x in book_list:
+                # save titles indexed by epub for reporting from BG
+                epubtitles[x['epub']]=_("%s by %s") % (x['title'],' & '.join(x['authors']))
 
             coverjpgpath = None
             if mi.has_cover:
@@ -580,6 +587,7 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
                       'tdir':tdir,
                       'outputepubfn':mergedepub.name,
                       'inputepubfns':epubstomerge, # already .name'ed
+                      'epubtitles':epubtitles, # for reporting
                       'authoropts':mi.authors,
                       'titleopt':mi.title,
                       'descopt':mi.comments,
@@ -593,7 +601,7 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
                       'keepmetadatafiles':prefs['keepmeta']
                       },
                      cpus)]
-            desc = _('EpubMerge')
+            desc = _('EpubMerge: %s')%mi.title
             job = self.gui.job_manager.run_job(
                 self.Dispatcher(self.merge_done),
                 func, args=args,
@@ -602,29 +610,25 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
             self.gui.jobs_pointer.start()
             self.gui.status_bar.show_message(_('Starting EpubMerge'),3000)
 
-            '''
-            self.do_merge( mergedepub,
-                           epubstomerge,
-                           authoropts=mi.authors,
-                           titleopt=mi.title,
-                           descopt=mi.comments,
-                           tags=mi.tags,
-                           languages=mi.languages,
-                           titlenavpoints=prefs['titlenavpoints'],
-                           originalnavpoints=prefs['originalnavpoints'],
-                           flattentoc=prefs['flattentoc'],
-                           printtimes=True,
-                           coverjpgpath=coverjpgpath,
-                           keepmetadatafiles=prefs['keepmeta'] )
-           '''
-
     def merge_done(self,job):
         db=self.gui.current_db
-        logger.info("merge_done(%s,%s)"%(job.failed,job.result))
-        (args,code) = job.result
+        logger.info("merge_done(%s,%s)"%(job.failed,job.args))
+        args = job.args[2][0]
         if job.failed:
-            logger.info("Temp files left for debugging:\nout:%s\nin:%s"%(outputepubfn,args['inputepubfns']))
-            self.gui.job_exception(job, dialog_title='EpubMerge Failed')
+            # self.gui.job_exception(job, dialog_title=_('EpubMerge Failed'))
+            if question_dialog(self.gui, _('Remove Failed Anthology Book?'),'''
+                          <h3>%s</h3>
+                          <p>%s</p>
+                          <p><b>%s</b></p>
+                          <p>%s</p>
+                          <p>%s</p>'''%(
+                    _("Remove Failed Anthology Book?"),
+                    _("EpubMerge failed, no new EPUB was created; see the background job details for any error messages."),
+                    _("Do you want to delete the empty book EpubMerge created?"),
+                    _("Click '<b>Yes</b>' to remove empty book from Libary,"),
+                    _("Click '<b>No</b>' to leave it in Library.")),
+                               show_copy_button=False):
+                self.gui.iactions['Remove Books'].do_library_delete([args['book_id']])
             return
         outputepubfn = args['outputepubfn']
         book_id = args['book_id']
