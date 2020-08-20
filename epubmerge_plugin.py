@@ -537,6 +537,7 @@ class EpubMergePlugin(InterfaceAction):
 However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows.'''),
                     'epubmerge_created_now_edit_again',
                     self.gui,
+                    title=_("EpubMerge"),
                     show_cancel_button=False)
 
             self.gui.iactions['Edit Metadata'].edit_metadata(False)
@@ -552,6 +553,7 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
 You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(totalsize)),
                     'epubmerge_background_merge_again',
                     self.gui,
+                    title=_("EpubMerge"),
                     show_cancel_button=False)
 
             # if len(book_list) > 100 or totalsize > 5*1024*1024:
@@ -654,6 +656,11 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
             #self.gui.iactions['View'].view_book(False)
         if self.gui.cover_flow:
             self.gui.cover_flow.dataChanged()
+        confirm('\n'+_('''EpubMerge has finished. The new EPUB has been added to the book previously created.'''),
+                'epubmerge_finished_again',
+                self.gui,
+                title=_("EpubMerge"),
+                show_cancel_button=False)
 
     def apply_settings(self):
         # No need to do anything with perfs here, but we could.
