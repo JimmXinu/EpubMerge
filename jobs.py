@@ -39,15 +39,13 @@ def do_merge_bg(args,
                 notification=lambda x,y:x):
     # logger.debug("do_merge_bg(%s,%s)"%(args,cpus))
 
-    # XXX - add meaningful % done
     # This server is an arbitrary_n job, so there is a notifier available.
-    # Set the % complete to a small number to avoid the 'unavailable' indicator
-
     ## for purposes of %done, autoconvert, merging output are each
     ## considered 1/2 of total.
     def notify_progress(percent):
         notification(max(percent/2,0.01), _('Autoconverting...'))
 
+    # Set the % complete to a small number to avoid the 'unavailable' indicator
     notify_progress(0.01)
 
     for j in range(0,len(args['inputepubfns'])):

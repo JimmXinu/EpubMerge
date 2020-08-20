@@ -622,9 +622,6 @@ def doMerge(outputio,
 
             parent = navpoint.parentNode
             try:
-                # XXX - FFDL single-chapter handling tripped on
-                # test1.com story in my All Sites test library...
-
                 # if the epub was ever edited with Sigil, it changed
                 # the id, but the file name is the same.
                 if navpoint.is_ffdl_epub and \
