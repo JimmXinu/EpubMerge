@@ -536,9 +536,8 @@ class EpubMergePlugin(InterfaceAction):
 
 However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows.'''),
                     'epubmerge_created_now_edit_again',
-                    self.gui)
-
-            ## XXX handle confirm cancels
+                    self.gui,
+                    show_cancel_button=False)
 
             self.gui.iactions['Edit Metadata'].edit_metadata(False)
 
@@ -552,7 +551,8 @@ However, the EPUB will *not* be created until after you've reviewed, edited, and
 
 You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(totalsize)),
                     'epubmerge_background_merge_again',
-                    self.gui)
+                    self.gui,
+                    show_cancel_button=False)
 
             # if len(book_list) > 100 or totalsize > 5*1024*1024:
             #     confirm('\n'+_('''You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge is finished.''')%(len(book_list),gethumanreadable(totalsize)),
