@@ -309,7 +309,7 @@ def doMerge(outputio,
                                            "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]
                  or 'fanficfare-uid' in c.getAttribute('opf:scheme').lower()
                  or 'fanficfare-uid' in c.getAttribute('id').lower() ):
-                logger.debug("------------> is_ffdl_epub <-----------------")
+                # logger.debug("------------> is_ffdl_epub <-----------------")
                 is_ffdl_epub[-1] = True # set last.
                 break;
 
