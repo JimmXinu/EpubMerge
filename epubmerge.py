@@ -290,7 +290,7 @@ def doMerge(outputio,
         if booknum==1 and not source:
             try:
                 firstmetadom = metadom.getElementsByTagNameNS("*","metadata")[0]
-                source=firstmetadom.getElementsByTagName("dc:source")[0].firstChild.data.encode("utf-8")
+                source=unicode(firstmetadom.getElementsByTagName("dc:source")[0].firstChild.data)
             except:
                 source=""
 
