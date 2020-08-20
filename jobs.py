@@ -66,7 +66,6 @@ def do_merge_bg(args,
                 ebook_convert_cli_main(['epubmerge calling convert',fn,fn2,'--epub-version=2','--no-default-epub-cover'])
                 args['inputepubfns'][j] = fn2
                 print("Converted to temporary EPUB2: %s"%fn2)
-            time.sleep(1)
             notify_progress(float(j)/len(args['inputepubfns']))
         except:
             print("=" * 20)

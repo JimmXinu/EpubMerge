@@ -405,7 +405,6 @@ def doMerge(outputio,
             itemrefs.append(bookid+itemref.getAttribute("idref"))
             # logger.debug("adding to itemrefs:%s"%itemref.toprettyxml())
 
-        sleep(1)
         notify_progress(float(booknum-1)/len(files))
         booknum=booknum+1;
 
