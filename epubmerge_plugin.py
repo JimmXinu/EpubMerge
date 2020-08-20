@@ -160,11 +160,15 @@ class EpubMergePlugin(InterfaceAction):
             return self.macmenuhack
 
     def do_unmerge(self, *args, **kwargs):
-        '''Also called by FFDL plugin.'''
+        '''Also called by FanFicFare plugin.'''
         return doUnMerge(*args, **kwargs)
 
     def do_merge(self, *args, **kwargs):
-        '''Also called by FFDL plugin.'''
+        '''
+        Also called by FanFicFare plugin.  Note that no epub2 vs epub3
+        check is done here--FFF(optionally) outputs epub3, but
+        includes back-compat files that will work for EpubMerge.
+        '''
         return doMerge(*args, **kwargs)
 
     def unmerge(self):
