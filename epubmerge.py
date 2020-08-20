@@ -193,7 +193,7 @@ def doMerge(outputio,
             coverjpgpath=None,
             keepmetadatafiles=False,
             source=None,
-            notify_progress=lambda x,y:x):
+            notify_progress=lambda x:x):
     '''
     outputio = output file name or BytesIO.
     files = list of input file names or BytesIOs.
