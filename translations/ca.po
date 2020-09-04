@@ -7,9 +7,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2020-01-28 12:34-0600\n"
-"PO-Revision-Date: 2020-01-29 02:59+0000\n"
-"Last-Translator: Kovid Goyal <kovid@kovidgoyal.net>\n"
+"POT-Creation-Date: 2020-09-03 14:25-0500\n"
+"PO-Revision-Date: 2020-09-04 05:17+0000\n"
+"Last-Translator: Transifex Bot <>\n"
 "Language-Team: Catalan (http://www.transifex.com/calibre/calibre-plugins/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -304,128 +304,162 @@ msgstr "Sobreescriu"
 msgid "Discard"
 msgstr "Descarta"
 
-#: epubmerge_plugin.py:63
+#: epubmerge_plugin.py:64 epubmerge_plugin.py:544 epubmerge_plugin.py:560
+#: epubmerge_plugin.py:666
 msgid "EpubMerge"
 msgstr "EpubMerge"
 
-#: epubmerge_plugin.py:64
+#: epubmerge_plugin.py:65
 msgid "Merge multiple EPUBs into one in a new book."
 msgstr "Fusiona diversos EPUB en un llibre nou."
 
-#: epubmerge_plugin.py:115 epubmerge_plugin.py:116
+#: epubmerge_plugin.py:116 epubmerge_plugin.py:117
 msgid "&Merge Epubs"
 msgstr "&Fusiona els epub"
 
-#: epubmerge_plugin.py:119 epubmerge_plugin.py:120
+#: epubmerge_plugin.py:120 epubmerge_plugin.py:121
 msgid "&UnMerge Epubs"
 msgstr ""
 
-#: epubmerge_plugin.py:129
+#: epubmerge_plugin.py:130
 msgid "&Configure Plugin"
 msgstr "&Configura el connector"
 
-#: epubmerge_plugin.py:131 epubmerge_plugin.py:132
+#: epubmerge_plugin.py:132 epubmerge_plugin.py:133
 msgid "Configure EpubMerge"
 msgstr "Configura EpubMerge"
 
-#: epubmerge_plugin.py:188
+#: epubmerge_plugin.py:184
 msgid "Cannot UnMerge Non-Epubs"
 msgstr ""
 
-#: epubmerge_plugin.py:189 epubmerge_plugin.py:200
+#: epubmerge_plugin.py:185 epubmerge_plugin.py:196
 msgid ""
 "To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
 " Metadata enabled."
 msgstr ""
 
-#: epubmerge_plugin.py:199
+#: epubmerge_plugin.py:195
 msgid "No UnMerge data found"
 msgstr ""
 
-#: epubmerge_plugin.py:218
+#: epubmerge_plugin.py:212
 msgid ""
 "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
 "the same title, Overwrite the Epub in the existing book, or Discard this "
 "Epub."
 msgstr ""
 
-#: epubmerge_plugin.py:221
+#: epubmerge_plugin.py:215
 msgid ""
 "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
 "new book of the same title, or Discard this Epub."
 msgstr ""
 
-#: epubmerge_plugin.py:261 epubmerge_plugin.py:289
+#: epubmerge_plugin.py:255 epubmerge_plugin.py:287
 msgid "Cannot Merge Epubs"
 msgstr "No es poden fusionar els Epub"
 
-#: epubmerge_plugin.py:262
+#: epubmerge_plugin.py:256
 msgid "Less than 2 books selected."
 msgstr "S'han seleccionat menys de 2 llibres."
 
-#: epubmerge_plugin.py:278
+#: epubmerge_plugin.py:276
 msgid "Collecting EPUBs for merger..."
 msgstr ""
 
-#: epubmerge_plugin.py:279
+#: epubmerge_plugin.py:277
 msgid "Get EPUBs for merge"
 msgstr "Obté els EPUB per a la fusió"
 
-#: epubmerge_plugin.py:280
+#: epubmerge_plugin.py:278
 msgid "EPUBs collected"
 msgstr ""
 
-#: epubmerge_plugin.py:290
+#: epubmerge_plugin.py:288
 msgid "%s books failed."
 msgstr "%s llibres han fallat."
 
-#: epubmerge_plugin.py:295
+#: epubmerge_plugin.py:293
 msgid "Order EPUBs to Merge"
 msgstr "Ordre dels EPUBs a fusionar"
 
-#: epubmerge_plugin.py:362
+#: epubmerge_plugin.py:360 epubmerge_plugin.py:579
 msgid "%s by %s"
 msgstr "%s per %s"
 
-#: epubmerge_plugin.py:366
+#: epubmerge_plugin.py:364
 msgid "%s containing:"
 msgstr "%s que contingui:"
 
-#: epubmerge_plugin.py:541
+#: epubmerge_plugin.py:539
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr ""
 
-#: epubmerge_plugin.py:557
+#: epubmerge_plugin.py:555
 msgid ""
-"You're merging %s EPUBs totaling %s.  Calibre will be locked until the merge"
-" is finished."
+"EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
+"\n"
+"You are merging %s EPUBs totaling %s."
 msgstr ""
 
-#: epubmerge_plugin.py:561
+#: epubmerge_plugin.py:568
 msgid "Merging %s EPUBs..."
 msgstr "S'estan fusionant %s EPUB..."
 
-#: epubmerge_plugin.py:588
+#: epubmerge_plugin.py:610
+msgid "EpubMerge: %s"
+msgstr ""
+
+#: epubmerge_plugin.py:617
+msgid "Starting EpubMerge"
+msgstr ""
+
+#: epubmerge_plugin.py:625 epubmerge_plugin.py:631
+msgid "Remove Failed Anthology Book?"
+msgstr ""
+
+#: epubmerge_plugin.py:632
+msgid ""
+"EpubMerge failed, no new EPUB was created; see the background job details "
+"for any error messages."
+msgstr ""
+
+#: epubmerge_plugin.py:633
+msgid "Do you want to delete the empty book EpubMerge created?"
+msgstr ""
+
+#: epubmerge_plugin.py:634
+msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
+msgstr ""
+
+#: epubmerge_plugin.py:635
+msgid "Click '<b>No</b>' to leave it in Library."
+msgstr ""
+
+#: epubmerge_plugin.py:643
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr ""
 
-#: epubmerge_plugin.py:597
+#: epubmerge_plugin.py:655
 msgid "Finished merging %s EPUBs."
 msgstr "Ha finalitzat la fusió de %s EPUB."
 
-#: epubmerge_plugin.py:614 epubmerge_plugin.py:615 epubmerge_plugin.py:616
+#: epubmerge_plugin.py:663
+msgid ""
+"EpubMerge has finished. The new EPUB has been added to the book previously "
+"created."
+msgstr ""
+
+#: epubmerge_plugin.py:677 epubmerge_plugin.py:678 epubmerge_plugin.py:679
 msgid "Unknown"
 msgstr "Desconegut"
 
-#: epubmerge_plugin.py:648
-msgid "%s by %s is EPUB3, EpubMerge only supports EPUB2."
-msgstr ""
-
-#: epubmerge_plugin.py:657
+#: epubmerge_plugin.py:720
 msgid "%s by %s doesn't have an EPUB."
 msgstr "%s per %s no té cap EPUB."
