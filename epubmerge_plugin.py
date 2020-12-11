@@ -62,7 +62,7 @@ class EpubMergePlugin(InterfaceAction):
     # (text, icon_path, tooltip, keyboard shortcut)
     # icon_path isn't in the zip--icon loaded below.
     action_spec = (_('EpubMerge'), None,
-                   _('Merge multiple EPUBs into one in a new book.'), ())
+                   _('Merge multiple EPUBs into one in a new book.'), None)
     # None for keyboard shortcut doesn't allow shortcut.  () does, there just isn't one yet
 
     action_type = 'global'
