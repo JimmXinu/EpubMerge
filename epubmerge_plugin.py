@@ -17,10 +17,7 @@ from functools import partial
 
 import six
 
-try:
-    from PyQt5.Qt import (QMenu)
-except ImportError as e:
-    from PyQt4.Qt import (QMenu)
+from PyQt5.Qt import (QMenu)
 
 from calibre.ptempfile import PersistentTemporaryFile, PersistentTemporaryDirectory, remove_dir
 from calibre.ebooks.metadata import MetaInformation
