@@ -17,21 +17,6 @@ from six import text_type as unicode
 
 from PyQt5.Qt import (QDialog, QWidget, QVBoxLayout, QHBoxLayout, QLabel, QLineEdit, QFont, QGridLayout,
                       QTextEdit, QComboBox, QCheckBox, QPushButton, QTabWidget, QScrollArea)
-try:
-    from calibre.gui2 import QVariant
-    del QVariant
-except ImportError:
-    is_qt4 = False
-    convert_qvariant = lambda x: x
-else:
-    is_qt4 = True
-    def convert_qvariant(x):
-        vt = x.type()
-        if vt == x.String:
-            return unicode(x.toString())
-        if vt == x.List:
-            return [convert_qvariant(i) for i in x.toList()]
-        return x.toPyObject()
 
 from calibre.gui2 import dynamic, info_dialog
 from calibre.gui2.dialogs.confirm_delete import confirm
@@ -172,7 +157,7 @@ class ConfigWidget(QWidget):
         prefs['firstseries'] = self.columns_tab.firstseries.isChecked()
         colsmap = {}
         for (col,combo) in six.iteritems(self.columns_tab.custcol_dropdowns):
-            val = unicode(convert_qvariant(combo.itemData(combo.currentIndex())))
+            val = unicode(combo.itemData(combo.currentIndex()))
             if val != 'none':
                 colsmap[col] = val
                 #logger.debug("colsmap[%s]:%s"%(col,colsmap[col]))
