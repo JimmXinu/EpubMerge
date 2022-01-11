@@ -5,7 +5,7 @@
 # Ptit Prince <leporello1791@gmail.com>, 2014-2015
 # Nicolas F. <fernetn@gmail.com>, 2017
 # Ptit Prince <leporello1791@gmail.com>, 2016,2019-2020
-# JimmXinu <retiefjimm@gmail.com>, 2014
+# JimmXinu, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"

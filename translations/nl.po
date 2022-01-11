@@ -3,6 +3,7 @@
 # 
 # Translators:
 # erkfuizfeuadjfjzefzfuzeff gbhygsregfges <erkfuizfeuadjfjzefzfuzeff@gmail.com>, 2017
+# Gideon van Melle <translations@gvmelle.com>, 2020
 # Marius K <matriko@hotmail.com>, 2016
 # 581439deeeb77bf7c15b4129f23d2364_739d3ec, 2014
 # M. de Boer <de.boer.melle@gmail.com>, 2019-2020
@@ -14,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2020-09-03 14:25-0500\n"
-"PO-Revision-Date: 2020-09-04 05:17+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"PO-Revision-Date: 2020-10-30 10:28+0000\n"
+"Last-Translator: Gideon van Melle <translations@gvmelle.com>\n"
 "Language-Team: Dutch (http://www.transifex.com/calibre/calibre-plugins/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -107,13 +108,13 @@ msgstr "Labels die u hier opgeeft worden toegevoegd aan alle samengevoegde boeke
 
 #: config.py:264
 msgid "Merged Book Word:"
-msgstr "Samengevoegde boek woord:"
+msgstr "Naam samengevoegde boek:"
 
 #: config.py:268
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
-msgstr "Woorden worden gebruikt om samengevoegde boeken de beschrijven in een standaard titel en samenvatting.\nVoor mensen die niet houden van het woord antologie."
+msgstr "Naam wordt gebruikt voor samengevoegde boeken te omschrijven in de standaard titel en samenvatting.\nVoor mensen die niet houden van het woord Bloemlezing."
 
 #: config.py:277
 msgid ""
@@ -376,7 +377,7 @@ msgstr "EPUB's verzamelen voor samenvoeging..."
 
 #: epubmerge_plugin.py:277
 msgid "Get EPUBs for merge"
-msgstr "EPUB's verkrijgen voor samenvoegen"
+msgstr "EPUB's downloaden voor samenvoegen"
 
 #: epubmerge_plugin.py:278
 msgid "EPUBs collected"
@@ -410,7 +411,7 @@ msgid ""
 "EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
 "\n"
 "You are merging %s EPUBs totaling %s."
-msgstr ""
+msgstr "EpubMerge zal als taak op de achtergrond uitgevoerd worden.  De samengevoegde EPUB zal niet verschijnen in de Bibliotheek voordat die gereed is.\n\nU voegt %s EPUB's samen met een totaal van %s."
 
 #: epubmerge_plugin.py:568
 msgid "Merging %s EPUBs..."
@@ -418,33 +419,33 @@ msgstr "%s EPUB's samenvoegen..."
 
 #: epubmerge_plugin.py:610
 msgid "EpubMerge: %s"
-msgstr ""
+msgstr "EpubMerge: %s"
 
 #: epubmerge_plugin.py:617
 msgid "Starting EpubMerge"
-msgstr ""
+msgstr "EpubMerge starten"
 
 #: epubmerge_plugin.py:625 epubmerge_plugin.py:631
 msgid "Remove Failed Anthology Book?"
-msgstr ""
+msgstr "Mislukte bloemlezing verwijderen?"
 
 #: epubmerge_plugin.py:632
 msgid ""
 "EpubMerge failed, no new EPUB was created; see the background job details "
 "for any error messages."
-msgstr ""
+msgstr "EpubMerge mislukt, er is geen nieuwe EPUB gemaakt; zie de details van de achtergrondstaken voor eventuele foutberichten."
 
 #: epubmerge_plugin.py:633
 msgid "Do you want to delete the empty book EpubMerge created?"
-msgstr ""
+msgstr "Wilt u het lege boek dat EpubMerge heeft gemaakt verwijderen?"
 
 #: epubmerge_plugin.py:634
 msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
-msgstr ""
+msgstr "Klik '<b>Ja</b>' om het lege boek te verwijderen uit de bibliotheek,"
 
 #: epubmerge_plugin.py:635
 msgid "Click '<b>No</b>' to leave it in Library."
-msgstr ""
+msgstr "Klik '<b>Nee</b>' om het in de bibliotheek te laten staan."
 
 #: epubmerge_plugin.py:643
 msgid ""
@@ -460,7 +461,7 @@ msgstr "Samenvoegen %s EPUB's voltooid."
 msgid ""
 "EpubMerge has finished. The new EPUB has been added to the book previously "
 "created."
-msgstr ""
+msgstr "EpubMerge is klaar. De nieuwe EPUB is toegevoegd aan het eerder gemaakte boek."
 
 #: epubmerge_plugin.py:677 epubmerge_plugin.py:678 epubmerge_plugin.py:679
 msgid "Unknown"

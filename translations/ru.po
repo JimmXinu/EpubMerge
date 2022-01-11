@@ -4,15 +4,15 @@
 # Translators:
 # Aleksandr P, 2019
 # Anna Evdokimova <anna.evdokimova@yahoo.com>, 2016
-# ashed <craysy@gmail.com>, 2017,2020
+# ashed <craysy@gmail.com>, 2017,2020-2021
 # Kirill Stryaponoff <stryaponoff@gmail.com>, 2016
 # Kirill Stryaponoff <stryaponoff@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2020-09-03 14:25-0500\n"
-"PO-Revision-Date: 2020-09-04 05:17+0000\n"
-"Last-Translator: Transifex Bot <>\n"
+"PO-Revision-Date: 2021-06-29 18:25+0000\n"
+"Last-Translator: ashed <craysy@gmail.com>\n"
 "Language-Team: Russian (http://www.transifex.com/calibre/calibre-plugins/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -407,7 +407,7 @@ msgid ""
 "EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
 "\n"
 "You are merging %s EPUBs totaling %s."
-msgstr ""
+msgstr "EpubMerge будет выполняться в фоновом режиме. Объединённый EPUB не появится в библиотеке, пока он не будет завершен.\n\nВы объединяете %s EPUB итого %s."
 
 #: epubmerge_plugin.py:568
 msgid "Merging %s EPUBs..."
@@ -415,33 +415,33 @@ msgstr "Слияние%s EPUBs..."
 
 #: epubmerge_plugin.py:610
 msgid "EpubMerge: %s"
-msgstr ""
+msgstr "EpubMerge: %s"
 
 #: epubmerge_plugin.py:617
 msgid "Starting EpubMerge"
-msgstr ""
+msgstr "Запуск EpubMerge"
 
 #: epubmerge_plugin.py:625 epubmerge_plugin.py:631
 msgid "Remove Failed Anthology Book?"
-msgstr ""
+msgstr "Удалить неудавшуюся антологию книг?"
 
 #: epubmerge_plugin.py:632
 msgid ""
 "EpubMerge failed, no new EPUB was created; see the background job details "
 "for any error messages."
-msgstr ""
+msgstr "Ошибка EpubMerge, новый EPUB не был создан; см. сведения о фоновом задании для получения сообщений об ошибках."
 
 #: epubmerge_plugin.py:633
 msgid "Do you want to delete the empty book EpubMerge created?"
-msgstr ""
+msgstr "Вы хотите удалить пустую книгу, созданную EpubMerge?"
 
 #: epubmerge_plugin.py:634
 msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
-msgstr ""
+msgstr "Нажмите '<b>Да</b>', чтобы удалить пустую книгу из библиотеки,"
 
 #: epubmerge_plugin.py:635
 msgid "Click '<b>No</b>' to leave it in Library."
-msgstr ""
+msgstr "Нажмите '<b>Нет</b>', чтобы оставить её в библиотеке."
 
 #: epubmerge_plugin.py:643
 msgid ""
@@ -457,7 +457,7 @@ msgstr "Закончено слияние%s EPUB."
 msgid ""
 "EpubMerge has finished. The new EPUB has been added to the book previously "
 "created."
-msgstr ""
+msgstr "EpubMerge завершен. Новый EPUB был добавлен к ранее созданной книге."
 
 #: epubmerge_plugin.py:677 epubmerge_plugin.py:678 epubmerge_plugin.py:679
 msgid "Unknown"
