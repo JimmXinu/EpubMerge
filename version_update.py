@@ -29,6 +29,11 @@ version_files = [
     'epubmerge.py',
     ]
 
+## save version from this file for index.html link.
+# save_file='version_test.txt'
+save_file='webservice/app.yaml'
+saved_version = None
+
 def main(args):
    ## major minor micro
     '''
@@ -43,17 +48,44 @@ version="2.3.6"
         r'(?P<minor>[0-9]+)(?P<dot2>[, \\.-]+)' \
         r'(?P<micro>[0-9]+[a-z]?)(?P<suffix>[",\\)]*\r?\n)$'
 
-    version_subs = '\g<prefix>version\g<infix>%s\g<dot1>%s\g<dot2>%s\g<suffix>' % tuple(args)
+    flag = args[0]
+
+    if len(args) > 1 :
+        version = [int(x) for x in args[1:]]
+    else:
+        with codecs.open(version_files[0], 'r', 'utf-8') as source_file:
+            for line in source_file:
+                m = re.match(version_re,line)
+                if m:
+                    prior_version = (m.group('major'),m.group('minor'),m.group('micro'))
+                    print(prior_version)
+                    break
+        version = [int(x) for x in prior_version]
+        if flag == 'test':
+            version[2] += 1
+        if flag == 'release':
+            version[1] += 1
+            version[2] = 0
+
+    print(version)
+    version_subs = r'\g<prefix>version\g<infix>%s\g<dot1>%s\g<dot2>%s\g<suffix>' % tuple(version)
 
     do_loop(version_files, version_re, version_subs)
 
-    release = 'Release'
-    if int(args[-1]) > 0:
-        release = 'Test'
-    print('\ngit add %s'%(" ".join(version_files)))
-    print('git commit -m "Bump %s Version %s"'%(release,'.'.join(args)))
+    index_files = []
+    # index_files = ['webservice/index.html']
+    # if saved_version:
+    #     ## only do major/minor, always leave micro 0 in index.html.
+    #     index_re = 'https://([0-9-]+[a-z]?)\\.fanficfare\\.appspot\\.com'
+    #     index_subs = 'https://%s-%s-0.fanficfare.appspot.com'%saved_version[0:2]
+    #     do_loop(index_files, index_re, index_subs)
+
+    release = flag.capitalize()
+    print('\ngit add %s'%(" ".join(version_files+index_files)))
+    print('git commit -m "Bump %s Version %s"'%(release,'.'.join([str(x) for x in version])))
 
 def do_loop(files, pattern, substring):
+    global saved_version
     for source_file_path in files:
         print("src:"+source_file_path)
         fh, target_file_path = mkstemp()
@@ -61,18 +93,22 @@ def do_loop(files, pattern, substring):
             with codecs.open(source_file_path, 'r', 'utf-8') as source_file:
                 for line in source_file:
                     repline = re.sub(pattern, substring, line)
+                    if line != repline and source_file_path == save_file:
+                        m = re.match(pattern,line)
+                        saved_version = (m.group('major'),m.group('minor'),m.group('micro'))
+                        print("<-%s->%s"%(line,repline))
                     target_file.write(repline)
         close(fh)
         unlink(source_file_path)
         rename(target_file_path,source_file_path)
 
 if __name__ == '__main__':
-    args = sys.argv[1:]
-    try:
-        if len(args) != 3:
-            raise Exception()
-        [int(x) for x in args]
-    except:
-        print("Requires exactly 3 numeric args: major minor micro")
-        exit()
-    main(args)
+    args = list(sys.argv[1:])
+
+    if len(args) == 0:
+        args.append('test')
+    if args[0] in ('test', 'release') and len(args) in (1,4):
+        main(args)
+    else:
+        print("args: (test|release) [1 2 3]")
+#    print(saved_version)
