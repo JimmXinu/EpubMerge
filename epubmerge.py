@@ -9,7 +9,7 @@ import sys, os
 import logging
 logger = logging.getLogger(__name__)
 
-version="2.11.1"
+version="2.11.2"
 
 # py2 vs py3 transition
 from six import text_type as unicode
