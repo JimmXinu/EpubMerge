@@ -63,7 +63,7 @@ def do_merge_bg(args,
                                                 dir=args['tdir'])
                 fn2 = epub2.name
                 # ebook-convert epub3.epub epub2.epub --epub-version=2
-                ebook_convert_cli_main(['epubmerge calling convert',fn,fn2,'--epub-version=2','--no-default-epub-cover'])
+                ebook_convert_cli_main(['epubmerge calling convert',fn,fn2,'--epub-version=2','--no-default-epub-cover','--output-profile=tablet'])
                 args['inputepubfns'][j] = fn2
                 print("Converted to temporary EPUB2: %s"%fn2)
             notify_progress(float(j)/len(args['inputepubfns']))
