@@ -365,7 +365,11 @@ def doMerge(outputio,
                 for content in tocdom.getElementsByTagNameNS("*","content"):
                     content.setAttribute("src",normpath(bookdir+relpath+content.getAttribute("src")))
 
-                navmaps.append(tocdom.getElementsByTagNameNS("*","navMap")[0])
+                if len(navmaps) == booknum:
+                    logger.warning("More than one application/x-dtbncx+xml (toc.ncx) file found, using last to match Calibre viewer")
+                    navmaps[-1]=tocdom.getElementsByTagNameNS("*","navMap")[0]
+                else:
+                    navmaps.append(tocdom.getElementsByTagNameNS("*","navMap")[0])
 
                 if keepmetadatafiles:
                     logger.debug("write toc.ncx %s to %s"%(relpath+itemhref,href))
