@@ -18,6 +18,7 @@ from PyQt5.Qt import (Qt, QIcon, QPixmap, QLabel, QDialog, QHBoxLayout,
                       QTextEdit,
                       QListWidget, QAbstractItemView)
 
+from calibre.constants import numeric_version as calibre_version
 from calibre.constants import iswindows
 from calibre.gui2 import gprefs, error_dialog, UNDEFINED_QDATETIME, info_dialog
 from calibre.gui2.actions import menu_action_unique_name
@@ -43,7 +44,20 @@ def set_plugin_icon_resources(name, resources):
     plugin_icon_resources = resources
 
 
-def get_icon(icon_name):
+def get_icon_6plus(icon_name):
+    '''
+    Retrieve a QIcon for the named image from the zip file if it exists,
+    or if not then from Calibre's image cache.
+    '''
+    if icon_name:
+        ## look in theme 1st, plugin zip 2nd
+        ## both .ic and get_icons return an empty QIcon if not found.
+        icon = QIcon.ic(icon_name)
+        if not icon or icon.isNull():
+            icon = get_icons(icon_name,plugin_name)
+    return icon
+
+def get_icon_old(icon_name):
     '''
     Retrieve a QIcon for the named image from the zip file if it exists,
     or if not then from Calibre's image cache.
@@ -57,6 +71,10 @@ def get_icon(icon_name):
             return QIcon(pixmap)
     return QIcon()
 
+if calibre_version >= (6,0,0):
+    get_icon = get_icon_6plus
+else:
+    get_icon = get_icon_old
 
 def get_pixmap(icon_name):
     '''
