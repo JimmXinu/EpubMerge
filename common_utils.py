@@ -43,6 +43,15 @@ def set_plugin_icon_resources(name, resources):
     plugin_name = name
     plugin_icon_resources = resources
 
+# print_tracebacks_for_missing_resources first appears in cal 6.2.0
+if calibre_version >= (6,2,0):
+    def get_icons_nolog(icon_name,plugin_name):
+        return get_icons(icon_name,
+                         plugin_name,
+                         print_tracebacks_for_missing_resources=False)
+else:
+    get_icons_nolog = get_icons
+
 def get_icon_6plus(icon_name):
     '''
     Retrieve a QIcon for the named image from
@@ -57,7 +66,10 @@ def get_icon_6plus(icon_name):
         icon = QIcon.ic(icon_name)
         ## both .ic and get_icons return an empty QIcon if not found.
         if not icon or icon.isNull():
-            icon = get_icons(icon_name.replace('images/',''),plugin_name)
+            # don't need a tracestack from get_icons just because
+            # there's no icon in the theme
+            icon = get_icons_nolog(icon_name.replace('images/',''),
+                                   plugin_name)
         if not icon or icon.isNull():
             icon = get_icons(icon_name,plugin_name)
     return icon
@@ -76,6 +88,7 @@ def get_icon_old(icon_name):
             return QIcon(pixmap)
     return QIcon()
 
+# get_icons changed in Cal6.
 if calibre_version >= (6,0,0):
     get_icon = get_icon_6plus
 else:
