@@ -4,13 +4,13 @@
 # Translators:
 # Chris Hilgenberg <chilgenb@gmail.com>, 2020
 # Pk11 <epicpkmn11@outlook.com>, 2020
-# 石丸健太郎, 2022
+# Kentaro Ishimaru, 2022
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2020-09-03 14:25-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
-"Last-Translator: 石丸健太郎, 2022\n"
+"Last-Translator: Kentaro Ishimaru, 2022\n"
 "Language-Team: Japanese (http://www.transifex.com/calibre/calibre-plugins/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
