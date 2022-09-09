@@ -265,6 +265,7 @@ class StoryListTableWidget(QTableWidget):
     def remove_selected_rows(self):
         self.setFocus()
         rows = self.selectionModel().selectedRows()
+        rows = sorted(rows, key=lambda x: x.row(), reverse=True)
         if len(rows) == 0:
             return
         message = '<p>'+_('Are you sure you want to remove this book from the list?')
@@ -273,7 +274,7 @@ class StoryListTableWidget(QTableWidget):
         if not confirm(message,'epubmerge_delete_item_again', self):
             return
         first_sel_row = self.currentRow()
-        for selrow in reversed(rows):
+        for selrow in rows:
             self.removeRow(selrow.row())
         if first_sel_row < self.rowCount():
             self.select_and_scroll_to_row(first_sel_row)
@@ -285,19 +286,18 @@ class StoryListTableWidget(QTableWidget):
         self.scrollToItem(self.currentItem())
 
     def move_rows_up(self):
-        self.setFocus()
         rows = self.selectionModel().selectedRows()
         if len(rows) == 0:
             return
-        first_sel_row = rows[0].row()
-        if first_sel_row <= 0:
-            return
-        # Workaround for strange selection bug in Qt which "alters" the selection
-        # in certain circumstances which meant move down only worked properly "once"
         selrows = []
         for row in rows:
             selrows.append(row.row())
         selrows.sort()
+        first_sel_row = selrows[0]
+        if first_sel_row <= 0:
+            return
+        # Workaround for strange selection bug in Qt which "alters" the selection
+        # in certain circumstances which meant move down only worked properly "once"
         for selrow in selrows:
             self.swap_row_widgets(selrow - 1, selrow + 1)
         scroll_to_row = first_sel_row - 1
@@ -310,15 +310,15 @@ class StoryListTableWidget(QTableWidget):
         rows = self.selectionModel().selectedRows()
         if len(rows) == 0:
             return
-        last_sel_row = rows[-1].row()
-        if last_sel_row == self.rowCount() - 1:
-            return
-        # Workaround for strange selection bug in Qt which "alters" the selection
-        # in certain circumstances which meant move down only worked properly "once"
         selrows = []
         for row in rows:
             selrows.append(row.row())
         selrows.sort()
+        last_sel_row = selrows[-1]
+        if last_sel_row == self.rowCount() - 1:
+            return
+        # Workaround for strange selection bug in Qt which "alters" the selection
+        # in certain circumstances which meant move down only worked properly "once"
         for selrow in reversed(selrows):
             self.swap_row_widgets(selrow + 2, selrow)
         scroll_to_row = last_sel_row + 1
