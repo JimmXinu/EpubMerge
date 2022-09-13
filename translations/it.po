@@ -3,6 +3,7 @@
 # 
 # Translators:
 # Alberto Canepa <alby.canepa@gmail.com>, 2016
+# Enrico Maria Casarotti, 2022
 # Giuseppe Pignataro <rogepix@gmail.com>, 2017
 # Giuseppe Pignataro <rogepix@gmail.com>, 2016
 # Maurizio Malagoli <malagoli.maurizio@gmail.com>, 2014
@@ -15,7 +16,7 @@ msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2020-09-03 14:25-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
-"Last-Translator: Marco Ciampa <ciampix@posteo.net>, 2018\n"
+"Last-Translator: Enrico Maria Casarotti, 2022\n"
 "Language-Team: Italian (http://www.transifex.com/calibre/calibre-plugins/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -58,15 +59,15 @@ msgstr "Vuoi inserire una Tavola dei Contenuti per ogni titolo?"
 msgid ""
 "If set, a new TOC entry will be made for each title and\n"
 "it's existing TOC nested underneath it."
-msgstr ""
+msgstr "Se selezionato, una nuova voce dell'indice sarà creata per ogni titolo e\nil suo indice esistente sarà annidato sotto."
 
 #: config.py:216
 msgid "Copy Table of Contents entries from each title?"
-msgstr ""
+msgstr "Copiare le voci dell'indice da ogni titolo?"
 
 #: config.py:217
 msgid "If set, the original TOC entries will be included the new epub."
-msgstr ""
+msgstr "Se selezionato, le voci dell'indice originale saranno incluse nel nuovo epub."
 
 #: config.py:230
 msgid "Flatten Table of Contents?"
@@ -74,7 +75,7 @@ msgstr "Appiattire Sommario?"
 
 #: config.py:231
 msgid "Remove nesting and make TOC all on one level."
-msgstr ""
+msgstr "Rimuove l'annidamento e crea un indice ad un solo livello"
 
 #: config.py:235
 msgid "Include Books' Comments?"
