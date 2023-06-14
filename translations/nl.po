@@ -4,7 +4,7 @@
 # Translators:
 # erkfuizfeuadjfjzefzfuzeff gbhygsregfges <erkfuizfeuadjfjzefzfuzeff@gmail.com>, 2017
 # Gideon van Melle <translations@gvmelle.com>, 2020
-# Marius K <matriko@hotmail.com>, 2016
+# bc46cb81e083f5390d490c6c8d2c9803_d101ee0 <dae5ec34c18ecc70f48fb6b4be07d0a7_410539>, 2016
 # 581439deeeb77bf7c15b4129f23d2364_739d3ec, 2014
 # M. de Boer <de.boer.melle@gmail.com>, 2019-2020
 # Meteor0id, 2019
@@ -17,7 +17,7 @@ msgstr ""
 "POT-Creation-Date: 2020-09-03 14:25-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
 "Last-Translator: Gideon van Melle <translations@gvmelle.com>, 2020\n"
-"Language-Team: Dutch (http://www.transifex.com/calibre/calibre-plugins/language/nl/)\n"
+"Language-Team: Dutch (http://app.transifex.com/calibre/calibre-plugins/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
