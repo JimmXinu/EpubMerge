@@ -334,7 +334,7 @@ def doMerge(outputio,
         if keepmetadatafiles:
             itemid=bookid+"rootfile"
             itemhref = rootfilename
-            href=bookdir+itemhref
+            href = normpath(bookdir+itemhref)
             logger.debug("write rootfile %s to %s"%(itemhref,href))
             outputepub.writestr(href,
                                 epub.read(itemhref))
@@ -347,7 +347,7 @@ def doMerge(outputio,
         for item in manifesttag.getElementsByTagNameNS("*","item"):
             itemid=bookid+item.getAttribute("id")
             itemhref = normpath(unquote(item.getAttribute("href"))) # remove %20, etc.
-            href=bookdir+relpath+itemhref
+            href = normpath(bookdir+relpath+itemhref) # normpath for ..
             # if item.getAttribute("properties") == "nav":
             #     # epub3 TOC file is only one with this type--as far as I know.
             #     # grab the whole navmap, deal with it later.
