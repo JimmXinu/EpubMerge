@@ -43,6 +43,7 @@ default_prefs['includecomments'] = False
 default_prefs['titlenavpoints'] = True
 default_prefs['originalnavpoints'] = True
 default_prefs['keepmeta'] = True
+default_prefs['restore_selection'] = False
 #default_prefs['showunmerge'] = True
 default_prefs['mergetags'] = ''
 default_prefs['mergeword'] = _('Anthology')
@@ -147,6 +148,7 @@ class ConfigWidget(QWidget):
         prefs['titlenavpoints'] = self.basic_tab.titlenavpoints.isChecked()
         prefs['originalnavpoints'] = self.basic_tab.originalnavpoints.isChecked()
         prefs['keepmeta'] = self.basic_tab.keepmeta.isChecked()
+        prefs['restore_selection'] = self.basic_tab.restore_selection.isChecked()
         # prefs['showunmerge'] = self.basic_tab.showunmerge.isChecked()
         prefs['mergetags'] = unicode(self.basic_tab.mergetags.text())
         prefs['mergeword'] = unicode(self.basic_tab.mergeword.text())
@@ -225,6 +227,12 @@ be included, allowing for UnMerge.  This includes your calibre custom
 columns.  Leave off if you plan to distribute the epub to others.'''))
         self.keepmeta.setChecked(prefs['keepmeta'])
         self.l.addWidget(self.keepmeta)
+
+        self.restore_selection = QCheckBox(_('Restore Selection?'),self)
+        self.restore_selection.setToolTip(_('''If set, the plugin will select the same books again after starting
+the merge.  Default behavior is to select the new merge book.'''))
+        self.restore_selection.setChecked(prefs['restore_selection'])
+        self.l.addWidget(self.restore_selection)
 
 #         self.showunmerge = QCheckBox(_('Show UnMerge Option?'),self)
 #         self.showunmerge.setToolTip(_('''If set, the UnMerge Epub option will be shown on the EpubMerge menu.

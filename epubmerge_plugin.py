@@ -609,6 +609,10 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
                 func, args=args,
                 description=desc)
 
+            if prefs['restore_selection']:
+                self.gui.library_view.select_rows(idslist)
+                self.gui.library_view.scroll_to_row(self.previous.row())
+
             self.gui.jobs_pointer.start()
             self.gui.status_bar.show_message(_('Starting EpubMerge'),3000)
 
