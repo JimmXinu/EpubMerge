@@ -36,7 +36,9 @@ try:
 except NameError:
     pass # load_translations() added in calibre 1.9
 
-from calibre_plugins.epubmerge.common_utils import (set_plugin_icon_resources, get_icon, create_menu_action_unique )
+from calibre_plugins.epubmerge.common_utils import (
+    set_plugin_icon_resources, get_icon, create_menu_action_unique,
+    busy_cursor )
 
 from calibre_plugins.epubmerge.config import (prefs, permitted_values)
 
@@ -115,7 +117,7 @@ class EpubMergePlugin(InterfaceAction):
 
         self.unmerge_action = self.create_menu_item_ex(self.menu, _('&UnMerge Epubs'), image='images/unmerge.png',
                                                        unique_name=_('&UnMerge Epubs'),
-                                                       triggered=self.unmerge )
+                                                       triggered=self.unmerge_button )
 
 
         # logger.debug("platform.system():%s"%platform.system())
@@ -166,6 +168,10 @@ class EpubMergePlugin(InterfaceAction):
         includes back-compat files that will work for EpubMerge.
         '''
         return doMerge(*args, **kwargs)
+
+    def unmerge_button(self):
+        with busy_cursor():
+            self.unmerge()
 
     def unmerge(self):
         db=self.gui.current_db
