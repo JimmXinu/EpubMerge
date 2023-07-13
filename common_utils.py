@@ -8,14 +8,15 @@ __copyright__ = '2011, Grant Drake <grant.drake@gmail.com>'
 __docformat__ = 'restructuredtext en'
 
 import os
+from contextlib import contextmanager
 
 import six
 from six import text_type as unicode
 
-from PyQt5.Qt import (Qt, QIcon, QPixmap, QLabel, QDialog, QHBoxLayout,
+from PyQt5.Qt import (QApplication, Qt, QIcon, QPixmap, QLabel, QDialog, QHBoxLayout,
                       QTableWidgetItem, QFont, QLineEdit, QComboBox,
                       QVBoxLayout, QDialogButtonBox, QStyledItemDelegate, QDateTime,
-                      QTextEdit,
+                      QTextEdit, QCursor,
                       QListWidget, QAbstractItemView)
 
 from calibre.constants import numeric_version as calibre_version
@@ -189,6 +190,14 @@ def get_library_uuid(db):
         library_uuid = ''
     return library_uuid
 
+# Call as ' with busy_cursor:"
+@contextmanager
+def busy_cursor():
+    try:
+        QApplication.setOverrideCursor(QCursor(Qt.WaitCursor))
+        yield
+    finally:
+        QApplication.restoreOverrideCursor()
 
 class ImageTitleLayout(QHBoxLayout):
     '''
