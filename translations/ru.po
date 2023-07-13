@@ -4,15 +4,15 @@
 # Translators:
 # Aleksandr P, 2019
 # Anna Evdokimova <anna.evdokimova@yahoo.com>, 2016
-# ashed <craysy@gmail.com>, 2017,2020-2021
+# ashed <craysy@gmail.com>, 2017,2020-2021,2023
 # Kirill Stryaponoff <stryaponoff@gmail.com>, 2016
 # Kirill Stryaponoff <stryaponoff@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2020-09-03 14:25-0500\n"
+"POT-Creation-Date: 2023-07-07 11:17-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
-"Last-Translator: ashed <craysy@gmail.com>, 2017,2020-2021\n"
+"Last-Translator: ashed <craysy@gmail.com>, 2017,2020-2021,2023\n"
 "Language-Team: Russian (http://app.transifex.com/calibre/calibre-plugins/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,395 +25,405 @@ msgstr ""
 msgid "UI plugin to concatenate multiple epubs into one."
 msgstr "UI для соединения нескольких epub в новую книгу."
 
-#: config.py:67
+#: config.py:49
 msgid "Anthology"
 msgstr "Антология"
 
-#: config.py:157
+#: config.py:139
 msgid "Basic"
 msgstr "Основное"
 
-#: config.py:160
+#: config.py:142
 msgid "Columns"
 msgstr "Столбцы"
 
-#: config.py:203
+#: config.py:186
 msgid "These settings control the basic features of the plugin."
 msgstr "Эти настройки управляют основными функциями плагина."
 
-#: config.py:208
+#: config.py:191
 msgid ""
 "If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'\n"
 "are unchecked, there will be no Table of Contents in merged books."
 msgstr "Если ни «Вставить элемент оглавления», ни «Копировать элементы оглавления»\nне отмечены, в новых книгах не будет оглавления."
 
-#: config.py:210
+#: config.py:193
 msgid "Insert Table of Contents entry for each title?"
 msgstr "Вставить элемент оглавления для каждой книги?"
 
-#: config.py:211
+#: config.py:194
 msgid ""
 "If set, a new TOC entry will be made for each title and\n"
 "it's existing TOC nested underneath it."
 msgstr "Если установлено, для каждого заголовка будет сделана новая запись TOC и \nсуществующая TOC, поместится под ней."
 
-#: config.py:216
+#: config.py:199
 msgid "Copy Table of Contents entries from each title?"
 msgstr "Копировать элементы оглавления из каждой книги?"
 
-#: config.py:217
+#: config.py:200
 msgid "If set, the original TOC entries will be included the new epub."
 msgstr "Если задано, то в новую книгу будут включены оглавления старых."
 
-#: config.py:230
+#: config.py:213
 msgid "Flatten Table of Contents?"
 msgstr "Уплощить оглавление?"
 
-#: config.py:231
+#: config.py:214
 msgid "Remove nesting and make TOC all on one level."
 msgstr "Удалить вложенность и сделать оглавление одноуровневым."
 
-#: config.py:235
+#: config.py:218
 msgid "Include Books' Comments?"
 msgstr "Включать комментарии к книгам?"
 
-#: config.py:236
+#: config.py:219
 msgid ""
 "Include all the merged books' comments in the new book's comments.\n"
 "Default is a list of included titles only."
 msgstr "Включить все комментарии объединяемых книг в комментарии  новой книги.\nЗначение по умолчанию - это список включенных заголовков."
 
-#: config.py:241
+#: config.py:224
 msgid "Keep UnMerge Metadata?"
 msgstr "Сохранять метаданные UnMerge?"
 
-#: config.py:242
+#: config.py:225
 msgid ""
 "If set, a copy of the original metadata for each merged book will\n"
 "be included, allowing for UnMerge.  This includes your calibre custom\n"
 "columns.  Leave off if you plan to distribute the epub to others."
 msgstr "Если установлено, копия исходных метаданных для каждой объединяемой книги будет\nвключена с разрешением разъединения. Будут включены ваши пользовательские\nстолбцы. Выключите, если вы планируете распространять epub другим."
 
-#: config.py:255
+#: config.py:231
+msgid "Restore Selection?"
+msgstr "Восстановить выделение?"
+
+#: config.py:232
+msgid ""
+"If set, the plugin will select the same books again after starting\n"
+"the merge.  Default behavior is to select the new merge book."
+msgstr "Если установлено, плагин снова будет выбирать те же книги после запуска\nслияние. Поведение по умолчанию — выбрать новую книгу для слияния."
+
+#: config.py:244
 msgid "Add tags to merged books:"
 msgstr "Добавить теги к объединяемым книгам:"
 
-#: config.py:259
+#: config.py:248
 msgid "Tags you enter here will be added to all new merged books"
 msgstr "Теги, которые вы вводите здесь, будут добавлены ко всем новым объединяемым книгам"
 
-#: config.py:264
+#: config.py:253
 msgid "Merged Book Word:"
 msgstr "Объединяющее книжное слово:"
 
-#: config.py:268
+#: config.py:257
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
 msgstr "Слово для описания объединенных книг в заголовке и сводке по умолчанию.\nДля людей, которым не нравится слово «Антология»."
 
-#: config.py:277
+#: config.py:266
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubMerge confirmation "
 "dialogs back again."
 msgstr "Эти элементы управления не являются настройками плагина, это - удобные кнопки для настройки сочетаний клавиш и получения всех диалоговых окон подтверждения  EpubMerge."
 
-#: config.py:282
+#: config.py:271
 msgid "Keyboard shortcuts..."
 msgstr "Сочетания клавиш..."
 
-#: config.py:283
+#: config.py:272
 msgid "Edit the keyboard shortcuts associated with this plugin"
 msgstr "Редактирование сочетаний клавиш, связанных с этим плагином"
 
-#: config.py:287
+#: config.py:276
 msgid "Reset disabled &confirmation dialogs"
 msgstr "Сброс отключенных и подтверждающих диалогов"
 
-#: config.py:288
+#: config.py:277
 msgid "Reset all show me again dialogs for the EpubMerge plugin"
 msgstr "Сбросить все диалоги *снова показать мне* для плагина EpubMerge"
 
-#: config.py:292
+#: config.py:281
 msgid "View library preferences..."
 msgstr "Просмотр предпочтений в библиотеке..."
 
-#: config.py:293
+#: config.py:282
 msgid "View data stored in the library database for this plugin"
 msgstr "Просмотр данных, хранящихся в базе данных библиотеки для этого плагина"
 
-#: config.py:308
+#: config.py:297
 msgid "Done"
 msgstr "Готово"
 
-#: config.py:309
+#: config.py:298
 msgid "Confirmation dialogs have all been reset"
 msgstr "Все диалоги подтверждения были сброшены"
 
-#: config.py:325
+#: config.py:314
 msgid "Take value from first source book"
 msgstr "Взять значение из первой исходной книги"
 
-#: config.py:326
+#: config.py:315
 msgid "Take value from last source book"
 msgstr "Взять значение из последней исходной книги"
 
-#: config.py:327
+#: config.py:316
 msgid "Add values from all source books"
 msgstr "Добавить значение из всех исходных книг"
 
-#: config.py:328
+#: config.py:317
 msgid "Average value from ALL source books"
 msgstr "Среднее значение из ВСЕХ исходных книг"
 
-#: config.py:329
+#: config.py:318
 msgid "Average value from source books with values"
 msgstr "Среднее значение из исходных книг со значениями"
 
-#: config.py:330
+#: config.py:319
 msgid "True if true on all source books (and)"
 msgstr "Истинно, если это правда во всех исходниках (и)"
 
-#: config.py:331
+#: config.py:320
 msgid "True if true on any source books (or)"
 msgstr "Истинно, если это правда в любых исходных книгах (или)"
 
-#: config.py:332
+#: config.py:321
 msgid "Take newest value from source books"
 msgstr "Взять новейшее значение из исходников"
 
-#: config.py:333
+#: config.py:322
 msgid "Take oldest value from source books"
 msgstr "Взять старейшее значение из исходников"
 
-#: config.py:334
+#: config.py:323
 msgid "Include values from all source books"
 msgstr "Включить значение из всех исходных книг"
 
-#: config.py:335
+#: config.py:324
 msgid "Concatenate values from all source books"
 msgstr "Объединить значения из всех исходников"
 
-#: config.py:336
+#: config.py:325
 msgid "Set to current time when created"
 msgstr "Установить текущее время при создании"
 
-#: config.py:349
+#: config.py:338
 msgid "Standard Columns:"
 msgstr "Стандартные столбцы:"
 
-#: config.py:354
+#: config.py:343
 msgid "Take Series from first book"
 msgstr "Взять серии из первой книги"
 
-#: config.py:355
+#: config.py:344
 msgid ""
 "If set, the Series name and index from the first book will be set on the "
 "merged book."
 msgstr "Если установлено, имя и индекс серии из первой книги будут установлены в объединенной книге."
 
-#: config.py:360
+#: config.py:349
 msgid "Custom Columns:"
 msgstr "Пользовательские столбцы:"
 
-#: config.py:363
+#: config.py:352
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose how "
 "you would like these columns handled."
 msgstr "Если у вас есть настраиваемые столбцы, они будут перечислены ниже. Выберите способ обработки этих столбцов."
 
-#: config.py:389
+#: config.py:378
 msgid "Set this %s column on new merged books..."
 msgstr "Установить этот столбец %s в новых объединенных книгах..."
 
-#: config.py:404
+#: config.py:393
 msgid "How this column will be populated by default."
 msgstr "Как этот столбец будет заполнен по умолчанию."
 
-#: dialogs.py:69 dialogs.py:93
+#: dialogs.py:46 dialogs.py:70
 msgid "Starting..."
 msgstr "Запуск..."
 
-#: dialogs.py:70 dialogs.py:94
+#: dialogs.py:47 dialogs.py:71
 msgid "Working"
 msgstr "Обработка"
 
-#: dialogs.py:71 dialogs.py:95
+#: dialogs.py:48 dialogs.py:72
 msgid "Completed so far"
 msgstr "Завершено до сих пор"
 
-#: dialogs.py:98
+#: dialogs.py:75
 msgid "Cancel"
 msgstr "Отмена"
 
-#: dialogs.py:139
+#: dialogs.py:116
 msgid "Starting Merge..."
 msgstr "Запуск объединения..."
 
-#: dialogs.py:195
+#: dialogs.py:172
 msgid "Move selected books up the list"
 msgstr "Переместить выбранные книги вверх по списку"
 
-#: dialogs.py:200
+#: dialogs.py:177
 msgid "Remove selected books from the list"
 msgstr "Удалить выбранные книги из списка"
 
-#: dialogs.py:205
+#: dialogs.py:182
 msgid "Move selected books down the list"
 msgstr "Переместить выбранные книги вниз по списку"
 
-#: dialogs.py:244
+#: dialogs.py:221
 msgid "Author(s)"
 msgstr "Автор(ы)"
 
-#: dialogs.py:244
+#: dialogs.py:221
 msgid "Series"
 msgstr "Серии"
 
-#: dialogs.py:244
+#: dialogs.py:221
 msgid "Title"
 msgstr "Название"
 
-#: dialogs.py:293
+#: dialogs.py:271
 msgid "Are you sure you want to remove this book from the list?"
 msgstr "Вы действительно хотите удалить эту книгу из списка?"
 
-#: dialogs.py:295
+#: dialogs.py:273
 msgid "Are you sure you want to remove the selected %d books from the list?"
 msgstr "Вы действительно хотите удалить %d выбранных книг из списка?"
 
-#: dialogs.py:369
+#: dialogs.py:346
 msgid "UnMerge Epub"
 msgstr "Расклеить Epub"
 
-#: dialogs.py:376
+#: dialogs.py:353
 msgid "Apply to all EPUBs?"
 msgstr "Применить ко всем Epub?"
 
-#: dialogs.py:377
+#: dialogs.py:354
 msgid "Apply the same action to the rest of the EPUBs after this."
 msgstr "Выполнить это же действие с остальными EPUB."
 
-#: dialogs.py:381
+#: dialogs.py:358
 msgid "Add"
 msgstr "Добавить"
 
-#: dialogs.py:385
+#: dialogs.py:362
 msgid "Overwrite"
 msgstr "Перезаписать"
 
-#: dialogs.py:388
+#: dialogs.py:365
 msgid "Discard"
 msgstr "Отказаться"
 
-#: epubmerge_plugin.py:64 epubmerge_plugin.py:544 epubmerge_plugin.py:560
+#: epubmerge_plugin.py:61 epubmerge_plugin.py:540 epubmerge_plugin.py:556
 #: epubmerge_plugin.py:666
 msgid "EpubMerge"
 msgstr "EpubMerge"
 
-#: epubmerge_plugin.py:65
+#: epubmerge_plugin.py:62
 msgid "Merge multiple EPUBs into one in a new book."
 msgstr "Объединить несколько EPUB в одну новую книгу."
 
-#: epubmerge_plugin.py:116 epubmerge_plugin.py:117
+#: epubmerge_plugin.py:112 epubmerge_plugin.py:113
 msgid "&Merge Epubs"
 msgstr "&Склеить Epub"
 
-#: epubmerge_plugin.py:120 epubmerge_plugin.py:121
+#: epubmerge_plugin.py:116 epubmerge_plugin.py:117
 msgid "&UnMerge Epubs"
 msgstr "&Расклеить Epub"
 
-#: epubmerge_plugin.py:130
+#: epubmerge_plugin.py:126
 msgid "&Configure Plugin"
 msgstr "&Конфигурировать плагин"
 
-#: epubmerge_plugin.py:132 epubmerge_plugin.py:133
+#: epubmerge_plugin.py:128 epubmerge_plugin.py:129
 msgid "Configure EpubMerge"
 msgstr "Конфигурировать EpubMerge"
 
-#: epubmerge_plugin.py:184
+#: epubmerge_plugin.py:180
 msgid "Cannot UnMerge Non-Epubs"
 msgstr "Нельзя расклеить *НЕ*Epub"
 
-#: epubmerge_plugin.py:185 epubmerge_plugin.py:196
+#: epubmerge_plugin.py:181 epubmerge_plugin.py:192
 msgid ""
 "To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
 " Metadata enabled."
 msgstr "Для UnMerge источником д.б. Epub (ы), созданный EpubMerge с включенными метаданными Keep UnMerge."
 
-#: epubmerge_plugin.py:195
+#: epubmerge_plugin.py:191
 msgid "No UnMerge data found"
 msgstr "Данные UnMerge не найдены"
 
-#: epubmerge_plugin.py:212
+#: epubmerge_plugin.py:208
 msgid ""
 "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
 "the same title, Overwrite the Epub in the existing book, or Discard this "
 "Epub."
 msgstr "У вас уже есть книга <i>%s</i> на <i>%s</i>. Вы можете добавить новую книгу с тем же названием, перезаписать файл в существующей книге или отказаться от создания этой книги."
 
-#: epubmerge_plugin.py:215
+#: epubmerge_plugin.py:211
 msgid ""
 "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
 "new book of the same title, or Discard this Epub."
 msgstr "У вас уже есть больше чем одна книга <i>%s</i> на <i>%s</i>. Вы можете добавить новую книгу с тем же названием или отказаться от создания этой книги."
 
-#: epubmerge_plugin.py:255 epubmerge_plugin.py:287
+#: epubmerge_plugin.py:251 epubmerge_plugin.py:283
 msgid "Cannot Merge Epubs"
 msgstr "Невозможно склеить книги"
 
-#: epubmerge_plugin.py:256
+#: epubmerge_plugin.py:252
 msgid "Less than 2 books selected."
 msgstr "Выбрано менее 2 книг."
 
-#: epubmerge_plugin.py:276
+#: epubmerge_plugin.py:272
 msgid "Collecting EPUBs for merger..."
 msgstr "Сбор EPUB для склеивания..."
 
-#: epubmerge_plugin.py:277
+#: epubmerge_plugin.py:273
 msgid "Get EPUBs for merge"
 msgstr "Получить EPUB для слияния"
 
-#: epubmerge_plugin.py:278
+#: epubmerge_plugin.py:274
 msgid "EPUBs collected"
 msgstr "EPUB собраны"
 
-#: epubmerge_plugin.py:288
+#: epubmerge_plugin.py:284
 msgid "%s books failed."
 msgstr "%s книг не удалось."
 
-#: epubmerge_plugin.py:293
+#: epubmerge_plugin.py:289
 msgid "Order EPUBs to Merge"
 msgstr "Порядок EPUB для слияния"
 
-#: epubmerge_plugin.py:360 epubmerge_plugin.py:579
+#: epubmerge_plugin.py:356 epubmerge_plugin.py:575
 msgid "%s by %s"
 msgstr "%s от %s"
 
-#: epubmerge_plugin.py:364
+#: epubmerge_plugin.py:360
 msgid "%s containing:"
 msgstr "%s содержит:"
 
-#: epubmerge_plugin.py:539
+#: epubmerge_plugin.py:535
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "Создана книга для нового Merged EPUB и заполнены метаданные по умолчанию.\n\nТем не менее, EPUB *НЕ* будет создан пока вы не просмотрите, отредактируете и закроете следующее диалоговое окно метаданных."
 
-#: epubmerge_plugin.py:555
+#: epubmerge_plugin.py:551
 msgid ""
 "EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
 "\n"
 "You are merging %s EPUBs totaling %s."
 msgstr "EpubMerge будет выполняться в фоновом режиме. Объединённый EPUB не появится в библиотеке, пока он не будет завершен.\n\nВы объединяете %s EPUB итого %s."
 
-#: epubmerge_plugin.py:568
+#: epubmerge_plugin.py:564
 msgid "Merging %s EPUBs..."
 msgstr "Слияние%s EPUBs..."
 
-#: epubmerge_plugin.py:610
+#: epubmerge_plugin.py:606
 msgid "EpubMerge: %s"
 msgstr "EpubMerge: %s"
 

@@ -2,14 +2,14 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Yuri Chornoivan <yurchor@ukr.net>, 2014-2018,2020
+# Yuri Chornoivan <yurchor@ukr.net>, 2014-2018,2020,2023
 # Yuri Chornoivan <yurchor@ukr.net>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2020-09-03 14:25-0500\n"
+"POT-Creation-Date: 2023-07-07 11:17-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2014-2018,2020\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2014-2018,2020,2023\n"
 "Language-Team: Ukrainian (http://app.transifex.com/calibre/calibre-plugins/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,395 +22,405 @@ msgstr ""
 msgid "UI plugin to concatenate multiple epubs into one."
 msgstr "Додаток для об’єднання декількох файлів EPub у один."
 
-#: config.py:67
+#: config.py:49
 msgid "Anthology"
 msgstr "Антологія"
 
-#: config.py:157
+#: config.py:139
 msgid "Basic"
 msgstr "Основні"
 
-#: config.py:160
+#: config.py:142
 msgid "Columns"
 msgstr "Стовпчики"
 
-#: config.py:203
+#: config.py:186
 msgid "These settings control the basic features of the plugin."
 msgstr "Ці параметри керують основним можливостями додатка."
 
-#: config.py:208
+#: config.py:191
 msgid ""
 "If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'\n"
 "are unchecked, there will be no Table of Contents in merged books."
 msgstr "Якщо знято позначки з обох пунктів, «Вставити запис таблиці змісту» і «Копіювати записи таблиці змісту», у об'єднаних книгах взагалі не буде таблиці змісту."
 
-#: config.py:210
+#: config.py:193
 msgid "Insert Table of Contents entry for each title?"
 msgstr "Вставляти запис змісту для кожної з частин?"
 
-#: config.py:211
+#: config.py:194
 msgid ""
 "If set, a new TOC entry will be made for each title and\n"
 "it's existing TOC nested underneath it."
 msgstr "Якщо позначено, для кожної частини буде створено новий запис змісту,\nа вкладені запис вмісту буде додано як підпункти запису."
 
-#: config.py:216
+#: config.py:199
 msgid "Copy Table of Contents entries from each title?"
 msgstr "Копіювати записи таблиці змісту з кожної з книг?"
 
-#: config.py:217
+#: config.py:200
 msgid "If set, the original TOC entries will be included the new epub."
 msgstr "Якщо позначено, початкові записи таблиці змісту буде включено до нової книги EPub."
 
-#: config.py:230
+#: config.py:213
 msgid "Flatten Table of Contents?"
 msgstr "Спрощувати «Зміст»?"
 
-#: config.py:231
+#: config.py:214
 msgid "Remove nesting and make TOC all on one level."
 msgstr "Вилучити вкладеність і створити однорівневий зміст."
 
-#: config.py:235
+#: config.py:218
 msgid "Include Books' Comments?"
 msgstr "Включати коментарі до книг?"
 
-#: config.py:236
+#: config.py:219
 msgid ""
 "Include all the merged books' comments in the new book's comments.\n"
 "Default is a list of included titles only."
 msgstr "Включати усі коментарі до об’єднуваних книг до коментарів об’єднаної книги.\nТипово буде включено лише список включених заголовків."
 
-#: config.py:241
+#: config.py:224
 msgid "Keep UnMerge Metadata?"
 msgstr "Зберегти метадані для скасування об’єднання?"
 
-#: config.py:242
+#: config.py:225
 msgid ""
 "If set, a copy of the original metadata for each merged book will\n"
 "be included, allowing for UnMerge.  This includes your calibre custom\n"
 "columns.  Leave off if you plan to distribute the epub to others."
 msgstr "Якщо позначено, буде включено копію початкових метаданих для кожної з\nоб’єднаних книг, що уможливить скасування об’єднання. Серед цих даних\nбудуть зокрема дані щодо нетипових стовпчиків calibre. Не позначайте,\nякщо хочете поділитися epub з іншими користувачами."
 
-#: config.py:255
+#: config.py:231
+msgid "Restore Selection?"
+msgstr "Відновлювати позначене?"
+
+#: config.py:232
+msgid ""
+"If set, the plugin will select the same books again after starting\n"
+"the merge.  Default behavior is to select the new merge book."
+msgstr "Якщо встановлено, додаток позначатиме ті самі книги знову після запуску об'єднання. Типовою поведінкою є позначення нової об'єднаної книги."
+
+#: config.py:244
 msgid "Add tags to merged books:"
 msgstr "Додати мітки до об’єднаних книг:"
 
-#: config.py:259
+#: config.py:248
 msgid "Tags you enter here will be added to all new merged books"
 msgstr "Вказані вами тут мітки буде додано до усіх об’єднаних книг"
 
-#: config.py:264
+#: config.py:253
 msgid "Merged Book Word:"
 msgstr "Слово для об’єднаних книг:"
 
-#: config.py:268
+#: config.py:257
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
 msgstr "Слово, яким буде описано об’єднані книги у типовій назві і резюме.\nДля тих, кому не подобається слово «Антологія»."
 
-#: config.py:277
+#: config.py:266
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubMerge confirmation "
 "dialogs back again."
 msgstr "Ці елементи керування не визначають параметрів додатка, а є лише зручними кнопками для визначення клавіатурних скорочень і відновлення показу діалогових вікон підтвердження об’єднання Epub."
 
-#: config.py:282
+#: config.py:271
 msgid "Keyboard shortcuts..."
 msgstr "Клавіатурні скорочення…"
 
-#: config.py:283
+#: config.py:272
 msgid "Edit the keyboard shortcuts associated with this plugin"
 msgstr "Редагувати клавіатурні скорочення, пов’язані із роботою цього додатка."
 
-#: config.py:287
+#: config.py:276
 msgid "Reset disabled &confirmation dialogs"
 msgstr "Відновити всі вимкнені ві&кна підтвердження"
 
-#: config.py:288
+#: config.py:277
 msgid "Reset all show me again dialogs for the EpubMerge plugin"
 msgstr "Відновити показ усіх діалогових вікон підтвердження для додатка об’єднання Epub"
 
-#: config.py:292
+#: config.py:281
 msgid "View library preferences..."
 msgstr "Переглянути налаштування бібліотеки…"
 
-#: config.py:293
+#: config.py:282
 msgid "View data stored in the library database for this plugin"
 msgstr "Переглянути дані, збережені у базі даних бібліотеки для цього додатка"
 
-#: config.py:308
+#: config.py:297
 msgid "Done"
 msgstr "Виконано"
 
-#: config.py:309
+#: config.py:298
 msgid "Confirmation dialogs have all been reset"
 msgstr "Показ діалогових вікон підтвердження відновлено"
 
-#: config.py:325
+#: config.py:314
 msgid "Take value from first source book"
 msgstr "Взяти значення з першої початкової книги"
 
-#: config.py:326
+#: config.py:315
 msgid "Take value from last source book"
 msgstr "Взяти значення із останньої початкової книги"
 
-#: config.py:327
+#: config.py:316
 msgid "Add values from all source books"
 msgstr "Додати значення з усіх початкових книг"
 
-#: config.py:328
+#: config.py:317
 msgid "Average value from ALL source books"
 msgstr "Середнє значення з усіх початкових книг"
 
-#: config.py:329
+#: config.py:318
 msgid "Average value from source books with values"
 msgstr "Середнє значення з усіх початкових книг зі встановленим значенням"
 
-#: config.py:330
+#: config.py:319
 msgid "True if true on all source books (and)"
 msgstr "«Так», якщо «так» для усіх книг (ТА)"
 
-#: config.py:331
+#: config.py:320
 msgid "True if true on any source books (or)"
 msgstr "«Так», якщо «так» для якоїсь із книг (АБО)"
 
-#: config.py:332
+#: config.py:321
 msgid "Take newest value from source books"
 msgstr "Скористатися найновішим значенням із початкових книг"
 
-#: config.py:333
+#: config.py:322
 msgid "Take oldest value from source books"
 msgstr "Скористатися найстарішим значенням із початкових книг"
 
-#: config.py:334
+#: config.py:323
 msgid "Include values from all source books"
 msgstr "Включити значення з усіх початкових книг"
 
-#: config.py:335
+#: config.py:324
 msgid "Concatenate values from all source books"
 msgstr "Об’єднати значення з усіх початкових книг"
 
-#: config.py:336
+#: config.py:325
 msgid "Set to current time when created"
 msgstr "Встановити поточний час при створенні"
 
-#: config.py:349
+#: config.py:338
 msgid "Standard Columns:"
 msgstr "Стандартні стовпчики:"
 
-#: config.py:354
+#: config.py:343
 msgid "Take Series from first book"
 msgstr "Взяти значення циклу з першої книги"
 
-#: config.py:355
+#: config.py:344
 msgid ""
 "If set, the Series name and index from the first book will be set on the "
 "merged book."
 msgstr "Якщо позначено, назву та індекс циклу у об’єднаній книзі буде визначено за першою з книг. "
 
-#: config.py:360
+#: config.py:349
 msgid "Custom Columns:"
 msgstr "Нетипові стовпчики:"
 
-#: config.py:363
+#: config.py:352
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose how "
 "you would like these columns handled."
 msgstr "Якщо у вас є нетипові стовпчики, їх буде показано у списку нижче. Виберіть спосіб обробки цих стовпчиків."
 
-#: config.py:389
+#: config.py:378
 msgid "Set this %s column on new merged books..."
 msgstr "Встановити цей стовпчик %s для нових об’єднаних книг…"
 
-#: config.py:404
+#: config.py:393
 msgid "How this column will be populated by default."
 msgstr "Спосіб типового заповнення цього стовпчика."
 
-#: dialogs.py:69 dialogs.py:93
+#: dialogs.py:46 dialogs.py:70
 msgid "Starting..."
 msgstr "Починаємо…"
 
-#: dialogs.py:70 dialogs.py:94
+#: dialogs.py:47 dialogs.py:71
 msgid "Working"
 msgstr "Обробляємо"
 
-#: dialogs.py:71 dialogs.py:95
+#: dialogs.py:48 dialogs.py:72
 msgid "Completed so far"
 msgstr "Завершено"
 
-#: dialogs.py:98
+#: dialogs.py:75
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: dialogs.py:139
+#: dialogs.py:116
 msgid "Starting Merge..."
 msgstr "Починаємо об’єднання…"
 
-#: dialogs.py:195
+#: dialogs.py:172
 msgid "Move selected books up the list"
 msgstr "Пересунути позначені книги вище у списку"
 
-#: dialogs.py:200
+#: dialogs.py:177
 msgid "Remove selected books from the list"
 msgstr "Вилучити позначені книги зі списку"
 
-#: dialogs.py:205
+#: dialogs.py:182
 msgid "Move selected books down the list"
 msgstr "Пересунути позначені книги нижче у списку"
 
-#: dialogs.py:244
+#: dialogs.py:221
 msgid "Author(s)"
 msgstr "Автор(и)"
 
-#: dialogs.py:244
+#: dialogs.py:221
 msgid "Series"
 msgstr "Цикл"
 
-#: dialogs.py:244
+#: dialogs.py:221
 msgid "Title"
 msgstr "Назва"
 
-#: dialogs.py:293
+#: dialogs.py:271
 msgid "Are you sure you want to remove this book from the list?"
 msgstr "Ви справді хочете вилучити цю книгу зі списку?"
 
-#: dialogs.py:295
+#: dialogs.py:273
 msgid "Are you sure you want to remove the selected %d books from the list?"
 msgstr "Ви справді хочете вилучити позначені %d книг зі списку?"
 
-#: dialogs.py:369
+#: dialogs.py:346
 msgid "UnMerge Epub"
 msgstr "Скасувати об’єднання Epub"
 
-#: dialogs.py:376
+#: dialogs.py:353
 msgid "Apply to all EPUBs?"
 msgstr "Застосувати до усіх EPUB?"
 
-#: dialogs.py:377
+#: dialogs.py:354
 msgid "Apply the same action to the rest of the EPUBs after this."
 msgstr "Застосувати ту саму дію до решти EPUB після цього."
 
-#: dialogs.py:381
+#: dialogs.py:358
 msgid "Add"
 msgstr "Додати"
 
-#: dialogs.py:385
+#: dialogs.py:362
 msgid "Overwrite"
 msgstr "Перезаписати"
 
-#: dialogs.py:388
+#: dialogs.py:365
 msgid "Discard"
 msgstr "Відкинути"
 
-#: epubmerge_plugin.py:64 epubmerge_plugin.py:544 epubmerge_plugin.py:560
+#: epubmerge_plugin.py:61 epubmerge_plugin.py:540 epubmerge_plugin.py:556
 #: epubmerge_plugin.py:666
 msgid "EpubMerge"
 msgstr "Об’єднання Epub"
 
-#: epubmerge_plugin.py:65
+#: epubmerge_plugin.py:62
 msgid "Merge multiple EPUBs into one in a new book."
 msgstr "Об’єднати декілька EPUB у одну нову книгу."
 
-#: epubmerge_plugin.py:116 epubmerge_plugin.py:117
+#: epubmerge_plugin.py:112 epubmerge_plugin.py:113
 msgid "&Merge Epubs"
 msgstr "&Об’єднати Epub"
 
-#: epubmerge_plugin.py:120 epubmerge_plugin.py:121
+#: epubmerge_plugin.py:116 epubmerge_plugin.py:117
 msgid "&UnMerge Epubs"
 msgstr "&Скасувати об’єднання Epub"
 
-#: epubmerge_plugin.py:130
+#: epubmerge_plugin.py:126
 msgid "&Configure Plugin"
 msgstr "&Налаштувати додаток"
 
-#: epubmerge_plugin.py:132 epubmerge_plugin.py:133
+#: epubmerge_plugin.py:128 epubmerge_plugin.py:129
 msgid "Configure EpubMerge"
 msgstr "Налаштовування EpubMerge"
 
-#: epubmerge_plugin.py:184
+#: epubmerge_plugin.py:180
 msgid "Cannot UnMerge Non-Epubs"
 msgstr "Не можна скасовувати об’єднання для файлів, відмінних від Epub"
 
-#: epubmerge_plugin.py:185 epubmerge_plugin.py:196
+#: epubmerge_plugin.py:181 epubmerge_plugin.py:192
 msgid ""
 "To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
 " Metadata enabled."
 msgstr "Для того, щоб можна було скасувати об’єднання, Epub має бути створено за допомогою засобу об’єднання Epub з позначеним пунктом «Зберегти метадані для скасування об’єднання»."
 
-#: epubmerge_plugin.py:195
+#: epubmerge_plugin.py:191
 msgid "No UnMerge data found"
 msgstr "Не знайдено даних для скасування об’єднання"
 
-#: epubmerge_plugin.py:212
+#: epubmerge_plugin.py:208
 msgid ""
 "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
 "the same title, Overwrite the Epub in the existing book, or Discard this "
 "Epub."
 msgstr "У вас вже є книга <i>%s</i>, <i>%s</i>. Ви можете додати нову книгу з тією самою назвою, перезаписати Epub у наявній книзі чи відкинути цей файл Epub."
 
-#: epubmerge_plugin.py:215
+#: epubmerge_plugin.py:211
 msgid ""
 "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
 "new book of the same title, or Discard this Epub."
 msgstr "У вас вже є декілька книг <i>%s</i>, <i>%s</i>. Ви можете додати нову книгу з тією самою назвою чи відкинути цей файл Epub."
 
-#: epubmerge_plugin.py:255 epubmerge_plugin.py:287
+#: epubmerge_plugin.py:251 epubmerge_plugin.py:283
 msgid "Cannot Merge Epubs"
 msgstr "Не вдалося об’єднати Epub"
 
-#: epubmerge_plugin.py:256
+#: epubmerge_plugin.py:252
 msgid "Less than 2 books selected."
 msgstr "Позначено менше за 2 книги."
 
-#: epubmerge_plugin.py:276
+#: epubmerge_plugin.py:272
 msgid "Collecting EPUBs for merger..."
 msgstr "Збираємо EPUB для об’єднання…"
 
-#: epubmerge_plugin.py:277
+#: epubmerge_plugin.py:273
 msgid "Get EPUBs for merge"
 msgstr "Отримати EPUB для об’єднання"
 
-#: epubmerge_plugin.py:278
+#: epubmerge_plugin.py:274
 msgid "EPUBs collected"
 msgstr "Зібрані EPUB"
 
-#: epubmerge_plugin.py:288
+#: epubmerge_plugin.py:284
 msgid "%s books failed."
 msgstr "Помилки для %s книг."
 
-#: epubmerge_plugin.py:293
+#: epubmerge_plugin.py:289
 msgid "Order EPUBs to Merge"
 msgstr "Порядок EPUB для об’єднання"
 
-#: epubmerge_plugin.py:360 epubmerge_plugin.py:579
+#: epubmerge_plugin.py:356 epubmerge_plugin.py:575
 msgid "%s by %s"
 msgstr "%s, %s"
 
-#: epubmerge_plugin.py:364
+#: epubmerge_plugin.py:360
 msgid "%s containing:"
 msgstr "%s містить:"
 
-#: epubmerge_plugin.py:539
+#: epubmerge_plugin.py:535
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "Було створено книгу з новим об’єднаним EPUB і заповненими полями метаданих.\n\nВтім, EPUB *не* буде створено, доки ви не виконаєте рецензування, редагування та закриєте діалогове вікно метаданих, яке буде показано далі."
 
-#: epubmerge_plugin.py:555
+#: epubmerge_plugin.py:551
 msgid ""
 "EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
 "\n"
 "You are merging %s EPUBs totaling %s."
 msgstr "EpubMerge буде виконано у межах фонового завдання. Об'єднаний EPUB не буде показано у бібліотеці, аж доки об'єднання не буде завершено.\n\nВи об'єднуєте %s EPUB, загалом — %s."
 
-#: epubmerge_plugin.py:568
+#: epubmerge_plugin.py:564
 msgid "Merging %s EPUBs..."
 msgstr "Об’єднуємо EPUB %s…"
 
-#: epubmerge_plugin.py:610
+#: epubmerge_plugin.py:606
 msgid "EpubMerge: %s"
 msgstr "EpubMerge: %s"
 
