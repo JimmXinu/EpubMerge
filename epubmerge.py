@@ -309,13 +309,13 @@ def doMerge(outputio,
         ## Sigil changes the unique-identifier, but leaves dc:contributor
         ## Calibre epub3->epub2 convert changes dc:contributor and modifies dc:identifier
         for c in metadom.getElementsByTagName("dc:contributor") + metadom.getElementsByTagName("dc:identifier"):
-            logger.debug("dc:contributor/identifier:%s"%getText(c.childNodes))
-            logger.debug("dc:contributor/identifier:%s / %s"%(c.getAttribute('opf:scheme'),c.getAttribute('id')))
+            # logger.debug("dc:contributor/identifier:%s"%getText(c.childNodes))
+            # logger.debug("dc:contributor/identifier:%s / %s"%(c.getAttribute('opf:scheme'),c.getAttribute('id')))
             if ( getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
                                            "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]
                  or 'fanficfare-uid' in c.getAttribute('opf:scheme').lower()
                  or 'fanficfare-uid' in c.getAttribute('id').lower() ):
-                logger.debug("------------> is_fff_epub <-----------------")
+                # logger.debug("------------> is_fff_epub <-----------------")
                 is_fff_epub[-1] = True # set last.
                 break;
 
@@ -384,7 +384,7 @@ def doMerge(outputio,
                     items.append((itemid,href,"origtocncx/xml"))
             else:
                 #href=href.encode('utf8')
-                logger.debug("item id: %s -> %s:"%(itemid,href))
+                # logger.debug("item id: %s -> %s:"%(itemid,href))
                 itemhrefs[itemid] = href
                 if href not in filelist:
                     try:
@@ -399,7 +399,7 @@ def doMerge(outputio,
                         del itemhrefs[itemid]
 
         itemreflist = metadom.getElementsByTagNameNS("*","itemref")
-        logger.debug("itemhrefs:%s"%itemhrefs)
+        # logger.debug("itemhrefs:%s"%itemhrefs)
         logger.debug("bookid:%s"%bookid)
         logger.debug("itemreflist[0].getAttribute(idref):%s"%itemreflist[0].getAttribute("idref"))
 
@@ -413,7 +413,7 @@ def doMerge(outputio,
 
         for itemref in itemreflist:
             itemrefs.append(bookid+itemref.getAttribute("idref"))
-            logger.debug("adding to itemrefs:\n%s"%itemref.toprettyxml())
+            # logger.debug("adding to itemrefs:\n%s"%itemref.toprettyxml())
 
         notify_progress(float(booknum-1)/len(files))
         booknum=booknum+1;
@@ -520,7 +520,7 @@ def doMerge(outputio,
                                         "linear":"yes"}))
 
     for item in items:
-        logger.debug("new item:%s %s %s"%item)
+        # logger.debug("new item:%s %s %s"%item)
         (id,href,type)=item
         manifest.appendChild(newTag(contentdom,"item",
                                        attrs={'id':id,
@@ -528,7 +528,7 @@ def doMerge(outputio,
                                               'media-type':type}))
 
     for itemref in itemrefs:
-        logger.debug("itemref:%s"%itemref)
+        # logger.debug("itemref:%s"%itemref)
         spine.appendChild(newTag(contentdom,"itemref",
                                     attrs={"idref":itemref,
                                            "linear":"yes"}))
@@ -564,11 +564,11 @@ def doMerge(outputio,
 
     for navmap in navmaps:
 
-        logger.debug( [ x.toprettyxml() for x in navmap.childNodes ] )
+        # logger.debug( [ x.toprettyxml() for x in navmap.childNodes ] )
         ## only gets top level TOC entries.  sub entries carried inside.
         navpoints = [ x for x in navmap.childNodes if isinstance(x,Element) and x.tagName=="navPoint" ]
-        logger.debug("len(navpoints):%s"%len(navpoints))
-        logger.debug( [ x.toprettyxml() for x in navpoints ] )
+        # logger.debug("len(navpoints):%s"%len(navpoints))
+        # logger.debug( [ x.toprettyxml() for x in navpoints ] )
         newnav = None
         if titlenavpoints:
             newnav = newTag(tocncxdom,"navPoint",{"id":"book%03d"%booknum})
@@ -587,9 +587,9 @@ def doMerge(outputio,
             newnav.appendChild(newTag(tocncxdom,"content",
                                       {"src":firstitemhrefs[booknum]}))
 
-            logger.debug("newnav:\n%s"%newnav.toprettyxml())
+            # logger.debug("newnav:\n%s"%newnav.toprettyxml())
             tocnavMap.appendChild(newnav)
-            logger.debug("tocnavMap:\n%s"%tocnavMap.toprettyxml())
+            # logger.debug("tocnavMap:\n%s"%tocnavMap.toprettyxml())
         else:
             newnav = tocnavMap
 
@@ -609,7 +609,7 @@ def doMerge(outputio,
                 ## and/or title pages
                 nonskip_navpoints_count = 0
                 for navpoint in navpoints:
-                    logger.debug("navpoint:\n%s"%navpoint.toprettyxml())
+                    # logger.debug("navpoint:\n%s"%navpoint.toprettyxml())
 
                     # this isn't going to find title/log pages farther
                     # down a tree, but if it's truly FFF input, they
@@ -621,21 +621,21 @@ def doMerge(outputio,
                             contentsrc = n.getAttribute("src")
                             break
                     navpointid = navpoint.getAttribute("id")
-                    logger.debug("navpointid:%s"%navpointid)
-                    logger.debug("contentsrc:%s"%contentsrc)
+                    # logger.debug("navpointid:%s"%navpointid)
+                    # logger.debug("contentsrc:%s"%contentsrc)
 
                     if not ( navpointid.endswith('log_page') or
                              contentsrc.endswith("log_page.xhtml") or
                              navpointid.endswith('title_page') or
                              contentsrc.endswith("title_page.xhtml") ):
-                        logger.debug("nonskip")
+                        # logger.debug("nonskip")
                         ## 1 for this node, plus search down for nested
                         nonskip_navpoints_count += (1+len(navpoint.getElementsByTagNameNS("*","navPoint")))
-                    logger.debug("nonskip_navpoints_count:%s"%nonskip_navpoints_count)
+                    # logger.debug("nonskip_navpoints_count:%s"%nonskip_navpoints_count)
 
             if keepsingletoc or nonskip_navpoints_count > 1:
                 for navpoint in navpoints:
-                    logger.debug("include navpoint:\n%s"%navpoint.toprettyxml())
+                    # logger.debug("include navpoint:\n%s"%navpoint.toprettyxml())
                     newnav.appendChild(navpoint)
 
         booknum=booknum+1;
@@ -646,9 +646,9 @@ def doMerge(outputio,
     removednodes = []
     ## Force strict ordering of playOrder, stripping out some.
     playorder=0
-    logger.debug("tocncxdom:\n%s"%tocncxdom.toprettyxml())
+    # logger.debug("tocncxdom:\n%s"%tocncxdom.toprettyxml())
     for navpoint in tocncxdom.getElementsByTagNameNS("*","navPoint"):
-        logger.debug("navpoint:\n%s"%navpoint.toprettyxml())
+        # logger.debug("navpoint:\n%s"%navpoint.toprettyxml())
         if navpoint in removednodes:
             continue
         # need content[src] to compare for dups.  epub wants dup srcs to have same playOrder.
@@ -656,7 +656,7 @@ def doMerge(outputio,
         for n in navpoint.childNodes:
             if isinstance(n,Element) and n.tagName == "content":
                 contentsrc = n.getAttribute("src")
-                logger.debug("contentsrc: %s"%contentsrc)
+                # logger.debug("contentsrc: %s"%contentsrc)
                 break
 
         if( contentsrc not in contentsrcs ):
@@ -666,7 +666,7 @@ def doMerge(outputio,
             contentsrcs[contentsrc] = navpoint.getAttribute("id")
             playorder += 1
             navpoint.setAttribute("playOrder","%d" % playorder)
-            logger.debug("playorder:%d:"%playorder)
+            # logger.debug("playorder:%d:"%playorder)
 
             # need to know depth of deepest navpoint for <meta name="dtb:depth" content="2"/>
             npdepth = 1
