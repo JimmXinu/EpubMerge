@@ -603,7 +603,7 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
                       'languages':mi.languages,
                       'titlenavpoints':prefs['titlenavpoints'],
                       'originalnavpoints':prefs['originalnavpoints'],
-                      'removesingletoc':prefs['removesingletoc'],
+                      'removesingletocs':prefs['removesingletocs'],
                       'flattentoc':prefs['flattentoc'],
                       'printtimes':True,
                       'coverjpgpath':coverjpgpath,

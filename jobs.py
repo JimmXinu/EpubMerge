@@ -92,7 +92,7 @@ def do_merge_bg(args,
             originalnavpoints=args['originalnavpoints'],
             # reversed in CLI vs plugin to match reversed
             # --no-titles-in-toc & --no-original-toc options
-            keepsingletoc=not args['removesingletoc'], 
+            keepsingletocs=not args['removesingletocs'],
             flattentoc=args['flattentoc'],
             printtimes=args['printtimes'],
             coverjpgpath=args['coverjpgpath'],
