@@ -83,17 +83,20 @@ def do_merge_bg(args,
 
     doMerge(args['outputepubfn'],
             args['inputepubfns'],
-            args['authoropts'],
-            args['titleopt'],
-            args['descopt'],
-            args['tags'],
-            args['languages'],
-            args['titlenavpoints'],
-            args['originalnavpoints'],
-            args['flattentoc'],
-            args['printtimes'],
-            args['coverjpgpath'],
-            args['keepmetadatafiles'],
+            authoropts=args['authoropts'],
+            titleopt=args['titleopt'],
+            descopt=args['descopt'],
+            tags=args['tags'],
+            languages=args['languages'],
+            titlenavpoints=args['titlenavpoints'],
+            originalnavpoints=args['originalnavpoints'],
+            # reversed in CLI vs plugin to match reversed
+            # --no-titles-in-toc & --no-original-toc options
+            keepsingletoc=not args['removesingletoc'], 
+            flattentoc=args['flattentoc'],
+            printtimes=args['printtimes'],
+            coverjpgpath=args['coverjpgpath'],
+            keepmetadatafiles=args['keepmetadatafiles'],
             notify_progress=notify_progress)
     print("=" * 50)
     print("\nFinished Merge...\n")
