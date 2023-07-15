@@ -563,7 +563,6 @@ def doMerge(outputio,
     t = time()
 
     for navmap in navmaps:
-        depthnavpoints = navmap.getElementsByTagNameNS("*","navPoint") # for checking more than one TOC entry
 
         logger.debug( [ x.toprettyxml() for x in navmap.childNodes ] )
         ## only gets top level TOC entries.  sub entries carried inside.
@@ -597,14 +596,47 @@ def doMerge(outputio,
         if not descopt and len(allauthors[booknum]) > 0:
             description.appendChild(contentdom.createTextNode(booktitles[booknum]+" by "+allauthors[booknum][0]+"\n"))
 
+        depthnavpoints = navmap.getElementsByTagNameNS("*","navPoint") # for checking more than one TOC entry
         ## If including original TOCs AND adding book title TOCs AND
-        ## EITHER keep single toc option OR only one TOC point(total,
-        ## not top level), include sub book TOC entries.
+        ## EITHER keep single toc option OR more than one TOC
+        ## point(total, not top level), include sub book TOC entries.
+        ## Each navpoint may be a whole sub tree.
         if originalnavpoints and titlenavpoints and (keepsingletoc or len(depthnavpoints) > 1):
-            for navpoint in navpoints:
-                logger.debug("navpoint:\n%s"%navpoint.toprettyxml())
-                newnav.appendChild(navpoint)
-                navpoint.is_fff_epub = is_fff_epub[booknum]
+            if not is_fff_epub[booknum]:
+                nonskip_navpoints_count = len(depthnavpoints)
+            else:
+                ## For FFF epubs ONLY, count chapters skipping log
+                ## and/or title pages
+                nonskip_navpoints_count = 0
+                for navpoint in navpoints:
+                    logger.debug("navpoint:\n%s"%navpoint.toprettyxml())
+
+                    # this isn't going to find title/log pages farther
+                    # down a tree, but if it's truly FFF input, they
+                    # should be at this level.
+                    contentsrc = ''
+                    navpointid = ''
+                    for n in navpoint.childNodes:
+                        if isinstance(n,Element) and n.tagName == "content":
+                            contentsrc = n.getAttribute("src")
+                            break
+                    navpointid = navpoint.getAttribute("id")
+                    logger.debug("navpointid:%s"%navpointid)
+                    logger.debug("contentsrc:%s"%contentsrc)
+
+                    if not ( navpointid.endswith('log_page') or
+                             contentsrc.endswith("log_page.xhtml") or
+                             navpointid.endswith('title_page') or
+                             contentsrc.endswith("title_page.xhtml") ):
+                        logger.debug("nonskip")
+                        ## 1 for this node, plus search down for nested
+                        nonskip_navpoints_count += (1+len(navpoint.getElementsByTagNameNS("*","navPoint")))
+                    logger.debug("nonskip_navpoints_count:%s"%nonskip_navpoints_count)
+
+            if keepsingletoc or nonskip_navpoints_count > 1:
+                for navpoint in navpoints:
+                    logger.debug("include navpoint:\n%s"%navpoint.toprettyxml())
+                    newnav.appendChild(navpoint)
 
         booknum=booknum+1;
         # end of navmaps loop.
@@ -629,23 +661,6 @@ def doMerge(outputio,
 
         if( contentsrc not in contentsrcs ):
             parent = navpoint.parentNode
-            try:
-                # if the epub was ever edited with Sigil, it changed
-                # the id, but the file name is the same.
-                if not keepsingletoc and navpoint.is_fff_epub and \
-                        ( navpoint.getAttribute("id").endswith('log_page') \
-                              or contentsrc.endswith("log_page.xhtml") ):
-                    logger.debug("Doing sibs 'filter' 1")
-                    sibs = [ x for x in parent.childNodes if isinstance(x,Element) and x.tagName=="navPoint" ]
-                    # if only logpage and one chapter, remove them from TOC and just show story.
-                    logger.debug("len(sibs):%s"%len(sibs))
-                    if len(sibs) == 2: # this assumes title_page also there whenever logpage is
-                        parent.removeChild(navpoint)
-                        logger.debug("Removing %s:"% sibs[0].getAttribute("playOrder"))
-                        parent.removeChild(sibs[1])
-                        removednodes.append(sibs[1])
-            except:
-                pass
 
             # New src, new number.
             contentsrcs[contentsrc] = navpoint.getAttribute("id")
@@ -663,30 +678,10 @@ def doMerge(outputio,
             if npdepth > maxdepth:
                 maxdepth = npdepth
         else:
-            # same content, look for ffdl and title_page and/or single chapter.
-
             # easier to just set it now, even if the node gets removed later.
             navpoint.setAttribute("playOrder","%d" % playorder)
             logger.debug("playorder:%d:"%playorder)
-
             parent = navpoint.parentNode
-            try:
-                # if the epub was ever edited with Sigil, it changed
-                # the id, but the file name is the same.
-                if not keepsingletoc and navpoint.is_fff_epub and \
-                        ( navpoint.getAttribute("id").endswith('title_page') \
-                              or contentsrc.endswith("title_page.xhtml") ):
-                    parent.removeChild(navpoint)
-                    logger.debug("Doing sibs 'filter' 2")
-                    sibs = [ x for x in parent.childNodes if isinstance(x,Element) and x.tagName=="navPoint" ]
-                    # if only one chapter after removing title_page, remove it too.
-                    logger.debug("len(sibs):%s"%len(sibs))
-                    if len(sibs) == 1:
-                        logger.debug("Removing %s:"% sibs[0].getAttribute("playOrder"))
-                        parent.removeChild(sibs[0])
-                        removednodes.append(sibs[0])
-            except:
-                pass
 
 
     if flattentoc:
