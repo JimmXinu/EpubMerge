@@ -112,8 +112,8 @@ Given list of epubs will be merged together into one new epub.
     optparser.add_option("-N", "--no-original-toc",
                       action="store_false", dest="originalnavpoints", default=True,
                       help="Default is to include the TOC from each original epub.",)
-    optparser.add_option("--keep-single-toc",
-                      action="store_true", dest="keepsingletoc",
+    optparser.add_option("--keep-single-tocs",
+                      action="store_true", dest="keepsingletocs",
                       help="Default is to add only epub title to TOC if there is only 1(or 0) entries in input TOC.  Does not apply if using --no-titles-in-toc",)
     optparser.add_option("-f", "--flatten-toc",
                       action="store_true", dest="flattentoc",
@@ -164,7 +164,7 @@ Given list of epubs will be merged together into one new epub.
                 languages=options.languageopts,
                 titlenavpoints=options.titlenavpoints,
                 originalnavpoints=options.originalnavpoints,
-                keepsingletoc=options.keepsingletoc,
+                keepsingletocs=options.keepsingletocs,
                 flattentoc=options.flattentoc,
                 coverjpgpath=options.coveropt,
                 keepmetadatafiles=options.keepmeta,
@@ -192,7 +192,7 @@ def doMerge(outputio,
             languages=['en'],
             titlenavpoints=True,
             originalnavpoints=True,
-            keepsingletoc=False,
+            keepsingletocs=False,
             flattentoc=False,
             printtimes=False,
             coverjpgpath=None,
@@ -209,7 +209,7 @@ def doMerge(outputio,
     languages = dc:language tags to include
     titlenavpoints if true, put in a new TOC entry for each epub, nesting each epub's chapters under it
     originalnavpoints if true, include the original TOCs from each epub
-    keepsingletoc if true, include original TOC even if only one entry
+    keepsingletocs if true, include original TOC even if only one entry
     flattentoc if true, flatten TOC down to one level only.
     coverjpgpath, Path to a jpg to use as cover image.
     '''
@@ -601,7 +601,7 @@ def doMerge(outputio,
         ## EITHER keep single toc option OR more than one TOC
         ## point(total, not top level), include sub book TOC entries.
         ## Each navpoint may be a whole sub tree.
-        if originalnavpoints and titlenavpoints and (keepsingletoc or len(depthnavpoints) > 1):
+        if originalnavpoints and titlenavpoints and (keepsingletocs or len(depthnavpoints) > 1):
             if not is_fff_epub[booknum]:
                 nonskip_navpoints_count = len(depthnavpoints)
             else:
@@ -633,7 +633,7 @@ def doMerge(outputio,
                         nonskip_navpoints_count += (1+len(navpoint.getElementsByTagNameNS("*","navPoint")))
                     # logger.debug("nonskip_navpoints_count:%s"%nonskip_navpoints_count)
 
-            if keepsingletoc or nonskip_navpoints_count > 1:
+            if keepsingletocs or nonskip_navpoints_count > 1:
                 for navpoint in navpoints:
                     # logger.debug("include navpoint:\n%s"%navpoint.toprettyxml())
                     newnav.appendChild(navpoint)

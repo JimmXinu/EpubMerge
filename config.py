@@ -43,7 +43,7 @@ default_prefs['flattentoc'] = False
 default_prefs['includecomments'] = False
 default_prefs['titlenavpoints'] = True
 default_prefs['originalnavpoints'] = True
-default_prefs['removesingletoc'] = True
+default_prefs['removesingletocs'] = True
 default_prefs['keepmeta'] = True
 default_prefs['restore_selection'] = False
 #default_prefs['showunmerge'] = True
@@ -149,7 +149,7 @@ class ConfigWidget(QWidget):
         prefs['includecomments'] = self.basic_tab.includecomments.isChecked()
         prefs['titlenavpoints'] = self.basic_tab.titlenavpoints.isChecked()
         prefs['originalnavpoints'] = self.basic_tab.originalnavpoints.isChecked()
-        prefs['removesingletoc'] = self.basic_tab.removesingletoc.isChecked()
+        prefs['removesingletocs'] = self.basic_tab.removesingletocs.isChecked()
         prefs['keepmeta'] = self.basic_tab.keepmeta.isChecked()
         prefs['restore_selection'] = self.basic_tab.restore_selection.isChecked()
         # prefs['showunmerge'] = self.basic_tab.showunmerge.isChecked()
@@ -213,15 +213,16 @@ it's existing TOC nested underneath it.''')+'\n'+no_toc_warning)
         self.originalnavpoints.stateChanged.connect(f)
 
         ## note that internal to epubmerge.py, the flag is reversed to
-        ## keepsingletoc
-        self.removesingletoc = QCheckBox(_('Skip when there is only one TOC entry?'),self)
-        self.removesingletoc.setToolTip(_('''If set, the original TOC entries for each book will only be included if there's more than one.'''))
-        self.removesingletoc.setChecked(prefs['removesingletoc'])
+        ## keepsingletocs
+        self.removesingletocs = QCheckBox(_('Skip when there is only one TOC entry?'),self)
+        self.removesingletocs.setToolTip(_('''If set, the original TOC entries for each book will only be included
+if there's more than TOC entry one in that book.'''))
+        self.removesingletocs.setChecked(prefs['removesingletocs'])
         horz = QHBoxLayout()
         horz.addItem(QtGui.QSpacerItem(20, 1))
         vertright = QVBoxLayout()
         horz.addLayout(vertright)
-        vertright.addWidget(self.removesingletoc)
+        vertright.addWidget(self.removesingletocs)
         self.l.addLayout(horz)
 
         self.titlenavpoints.stateChanged.connect(f)
