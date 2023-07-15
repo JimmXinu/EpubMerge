@@ -112,6 +112,9 @@ Given list of epubs will be merged together into one new epub.
     optparser.add_option("-N", "--no-original-toc",
                       action="store_false", dest="originalnavpoints", default=True,
                       help="Default is to include the TOC from each original epub.",)
+    optparser.add_option("--keep-single-toc",
+                      action="store_true", dest="keepsingletoc",
+                      help="Default is to add only epub title to TOC if there is only 1(or 0) entries in input TOC.  Does not apply if using --no-titles-in-toc",)
     optparser.add_option("-f", "--flatten-toc",
                       action="store_true", dest="flattentoc",
                       help="Flatten TOC down to one level only.",)
@@ -154,14 +157,15 @@ Given list of epubs will be merged together into one new epub.
     else:
         doMerge(options.outputopt,
                 args,
-                options.authoropts,
-                options.titleopt,
-                options.descopt,
-                options.tagopts,
-                options.languageopts,
-                options.titlenavpoints,
-                options.originalnavpoints,
-                options.flattentoc,
+                authoropts=options.authoropts,
+                titleopt=options.titleopt,
+                descopt=options.descopt,
+                tags=options.tagopts,
+                languages=options.languageopts,
+                titlenavpoints=options.titlenavpoints,
+                originalnavpoints=options.originalnavpoints,
+                keepsingletoc=options.keepsingletoc,
+                flattentoc=options.flattentoc,
                 coverjpgpath=options.coveropt,
                 keepmetadatafiles=options.keepmeta,
                 source=options.sourceopt
@@ -188,6 +192,7 @@ def doMerge(outputio,
             languages=['en'],
             titlenavpoints=True,
             originalnavpoints=True,
+            keepsingletoc=False,
             flattentoc=False,
             printtimes=False,
             coverjpgpath=None,
@@ -204,6 +209,7 @@ def doMerge(outputio,
     languages = dc:language tags to include
     titlenavpoints if true, put in a new TOC entry for each epub, nesting each epub's chapters under it
     originalnavpoints if true, include the original TOCs from each epub
+    keepsingletoc if true, include original TOC even if only one entry
     flattentoc if true, flatten TOC down to one level only.
     coverjpgpath, Path to a jpg to use as cover image.
     '''
@@ -252,7 +258,7 @@ def doMerge(outputio,
                                                                ## but it needs to be in the items manifest.
     itemrefs = [] # list of strings -- idrefs from .opfs' spines
     navmaps = [] # list of navMap DOM elements -- TOC data for each from toc.ncx files
-    is_ffdl_epub = [] # list of t/f
+    is_fff_epub = [] # list of t/f
 
     itemhrefs = {} # hash of item[id]s to itemref[href]s -- to find true start of book(s).
     firstitemhrefs = []
@@ -294,7 +300,7 @@ def doMerge(outputio,
             except:
                 source=""
 
-        is_ffdl_epub.append(False)
+        is_fff_epub.append(False)
         ## looking for any of:
         ##   <dc:contributor id="id-2">FanFicFare [https://github.com/JimmXinu/FanFicFare]</dc:contributor>
         ##   <dc:identifier opf:scheme="FANFICFARE-UID">test1.com-u98765-s68</dc:identifier>
@@ -303,14 +309,14 @@ def doMerge(outputio,
         ## Sigil changes the unique-identifier, but leaves dc:contributor
         ## Calibre epub3->epub2 convert changes dc:contributor and modifies dc:identifier
         for c in metadom.getElementsByTagName("dc:contributor") + metadom.getElementsByTagName("dc:identifier"):
-            # logger.debug("dc:contributor/identifier:%s"%getText(c.childNodes))
-            # logger.debug("dc:contributor/identifier:%s / %s"%(c.getAttribute('opf:scheme'),c.getAttribute('id')))
+            logger.debug("dc:contributor/identifier:%s"%getText(c.childNodes))
+            logger.debug("dc:contributor/identifier:%s / %s"%(c.getAttribute('opf:scheme'),c.getAttribute('id')))
             if ( getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
                                            "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]
                  or 'fanficfare-uid' in c.getAttribute('opf:scheme').lower()
                  or 'fanficfare-uid' in c.getAttribute('id').lower() ):
-                # logger.debug("------------> is_ffdl_epub <-----------------")
-                is_ffdl_epub[-1] = True # set last.
+                logger.debug("------------> is_fff_epub <-----------------")
+                is_fff_epub[-1] = True # set last.
                 break;
 
         ## Save indiv book title
@@ -378,7 +384,7 @@ def doMerge(outputio,
                     items.append((itemid,href,"origtocncx/xml"))
             else:
                 #href=href.encode('utf8')
-                # logger.debug("item id: %s -> %s:"%(itemid,href))
+                logger.debug("item id: %s -> %s:"%(itemid,href))
                 itemhrefs[itemid] = href
                 if href not in filelist:
                     try:
@@ -393,7 +399,7 @@ def doMerge(outputio,
                         del itemhrefs[itemid]
 
         itemreflist = metadom.getElementsByTagNameNS("*","itemref")
-        # logger.debug("itemhrefs:%s"%itemhrefs)
+        logger.debug("itemhrefs:%s"%itemhrefs)
         logger.debug("bookid:%s"%bookid)
         logger.debug("itemreflist[0].getAttribute(idref):%s"%itemreflist[0].getAttribute("idref"))
 
@@ -407,7 +413,7 @@ def doMerge(outputio,
 
         for itemref in itemreflist:
             itemrefs.append(bookid+itemref.getAttribute("idref"))
-            # logger.debug("adding to itemrefs:%s"%itemref.toprettyxml())
+            logger.debug("adding to itemrefs:\n%s"%itemref.toprettyxml())
 
         notify_progress(float(booknum-1)/len(files))
         booknum=booknum+1;
@@ -514,7 +520,7 @@ def doMerge(outputio,
                                         "linear":"yes"}))
 
     for item in items:
-        # logger.debug("new item:%s %s %s"%item)
+        logger.debug("new item:%s %s %s"%item)
         (id,href,type)=item
         manifest.appendChild(newTag(contentdom,"item",
                                        attrs={'id':id,
@@ -522,7 +528,7 @@ def doMerge(outputio,
                                               'media-type':type}))
 
     for itemref in itemrefs:
-        # logger.debug("itemref:%s"%itemref)
+        logger.debug("itemref:%s"%itemref)
         spine.appendChild(newTag(contentdom,"itemref",
                                     attrs={"idref":itemref,
                                            "linear":"yes"}))
@@ -559,11 +565,11 @@ def doMerge(outputio,
     for navmap in navmaps:
         depthnavpoints = navmap.getElementsByTagNameNS("*","navPoint") # for checking more than one TOC entry
 
-        # logger.debug( [ x.toprettyxml() for x in navmap.childNodes ] )
+        logger.debug( [ x.toprettyxml() for x in navmap.childNodes ] )
         ## only gets top level TOC entries.  sub entries carried inside.
         navpoints = [ x for x in navmap.childNodes if isinstance(x,Element) and x.tagName=="navPoint" ]
-        # logger.debug("len(navpoints):%s"%len(navpoints))
-        # logger.debug( [ x.toprettyxml() for x in navpoints ] )
+        logger.debug("len(navpoints):%s"%len(navpoints))
+        logger.debug( [ x.toprettyxml() for x in navpoints ] )
         newnav = None
         if titlenavpoints:
             newnav = newTag(tocncxdom,"navPoint",{"id":"book%03d"%booknum})
@@ -582,35 +588,35 @@ def doMerge(outputio,
             newnav.appendChild(newTag(tocncxdom,"content",
                                       {"src":firstitemhrefs[booknum]}))
 
-            # logger.debug("newnav:%s"%newnav.toprettyxml())
+            logger.debug("newnav:\n%s"%newnav.toprettyxml())
             tocnavMap.appendChild(newnav)
-            # logger.debug("tocnavMap:%s"%tocnavMap.toprettyxml())
+            logger.debug("tocnavMap:\n%s"%tocnavMap.toprettyxml())
         else:
             newnav = tocnavMap
 
         if not descopt and len(allauthors[booknum]) > 0:
             description.appendChild(contentdom.createTextNode(booktitles[booknum]+" by "+allauthors[booknum][0]+"\n"))
 
-        # If only one TOC point(total, not top level), or if not
-        # including title nav point, include sub book TOC entries.
-        if originalnavpoints and (len(depthnavpoints) > 1 or not titlenavpoints):
+        ## If including original TOCs AND adding book title TOCs AND
+        ## EITHER keep single toc option OR only one TOC point(total,
+        ## not top level), include sub book TOC entries.
+        if originalnavpoints and titlenavpoints and (keepsingletoc or len(depthnavpoints) > 1):
             for navpoint in navpoints:
-                # logger.debug("navpoint:%s"%navpoint.toprettyxml())
+                logger.debug("navpoint:\n%s"%navpoint.toprettyxml())
                 newnav.appendChild(navpoint)
-                navpoint.is_ffdl_epub = is_ffdl_epub[booknum]
+                navpoint.is_fff_epub = is_fff_epub[booknum]
 
         booknum=booknum+1;
         # end of navmaps loop.
-
 
     maxdepth = 0
     contentsrcs = {}
     removednodes = []
     ## Force strict ordering of playOrder, stripping out some.
     playorder=0
-    # logger.debug("tocncxdom:%s"%tocncxdom.toprettyxml())
+    logger.debug("tocncxdom:\n%s"%tocncxdom.toprettyxml())
     for navpoint in tocncxdom.getElementsByTagNameNS("*","navPoint"):
-        # logger.debug("navpoint:%s"%navpoint.toprettyxml())
+        logger.debug("navpoint:\n%s"%navpoint.toprettyxml())
         if navpoint in removednodes:
             continue
         # need content[src] to compare for dups.  epub wants dup srcs to have same playOrder.
@@ -618,22 +624,22 @@ def doMerge(outputio,
         for n in navpoint.childNodes:
             if isinstance(n,Element) and n.tagName == "content":
                 contentsrc = n.getAttribute("src")
-                # logger.debug("contentsrc: %s"%contentsrc)
+                logger.debug("contentsrc: %s"%contentsrc)
                 break
 
         if( contentsrc not in contentsrcs ):
-
             parent = navpoint.parentNode
             try:
                 # if the epub was ever edited with Sigil, it changed
                 # the id, but the file name is the same.
-                if navpoint.is_ffdl_epub and \
+                if not keepsingletoc and navpoint.is_fff_epub and \
                         ( navpoint.getAttribute("id").endswith('log_page') \
                               or contentsrc.endswith("log_page.xhtml") ):
                     logger.debug("Doing sibs 'filter' 1")
                     sibs = [ x for x in parent.childNodes if isinstance(x,Element) and x.tagName=="navPoint" ]
                     # if only logpage and one chapter, remove them from TOC and just show story.
-                    if len(sibs) == 2:
+                    logger.debug("len(sibs):%s"%len(sibs))
+                    if len(sibs) == 2: # this assumes title_page also there whenever logpage is
                         parent.removeChild(navpoint)
                         logger.debug("Removing %s:"% sibs[0].getAttribute("playOrder"))
                         parent.removeChild(sibs[1])
@@ -645,7 +651,7 @@ def doMerge(outputio,
             contentsrcs[contentsrc] = navpoint.getAttribute("id")
             playorder += 1
             navpoint.setAttribute("playOrder","%d" % playorder)
-            # logger.debug("playorder:%d:"%playorder)
+            logger.debug("playorder:%d:"%playorder)
 
             # need to know depth of deepest navpoint for <meta name="dtb:depth" content="2"/>
             npdepth = 1
@@ -667,13 +673,14 @@ def doMerge(outputio,
             try:
                 # if the epub was ever edited with Sigil, it changed
                 # the id, but the file name is the same.
-                if navpoint.is_ffdl_epub and \
+                if not keepsingletoc and navpoint.is_fff_epub and \
                         ( navpoint.getAttribute("id").endswith('title_page') \
                               or contentsrc.endswith("title_page.xhtml") ):
                     parent.removeChild(navpoint)
                     logger.debug("Doing sibs 'filter' 2")
                     sibs = [ x for x in parent.childNodes if isinstance(x,Element) and x.tagName=="navPoint" ]
                     # if only one chapter after removing title_page, remove it too.
+                    logger.debug("len(sibs):%s"%len(sibs))
                     if len(sibs) == 1:
                         logger.debug("Removing %s:"% sibs[0].getAttribute("playOrder"))
                         parent.removeChild(sibs[0])
@@ -735,6 +742,7 @@ div { margin: 0pt; padding: 0pt; }
     return (source,filecount)
 
 def doUnMerge(inputio,outdir=None):
+    logger.debug("doUnMerge")
     epub = ZipFile(inputio, 'r') # works equally well with inputio as a path or a blob
     outputios = []
 
