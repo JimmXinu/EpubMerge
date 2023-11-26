@@ -31,7 +31,7 @@ msgstr "选集"
 
 #: config.py:141
 msgid "Basic"
-msgstr "基本的"
+msgstr "基础设置"
 
 #: config.py:144
 msgid "Columns"
@@ -49,7 +49,7 @@ msgstr ""
 
 #: config.py:196
 msgid "Insert Table of Contents entry for each title?"
-msgstr "为每个标题生成一个目录项？"
+msgstr "为每个标题生成一个目录条目？"
 
 #: config.py:197
 msgid ""
@@ -85,13 +85,13 @@ msgstr "删除嵌套并使目录全部在一个级别上。"
 
 #: config.py:235
 msgid "Include Books' Comments?"
-msgstr "包含书籍评论？"
+msgstr "包含书籍简介？"
 
 #: config.py:236
 msgid ""
 "Include all the merged books' comments in the new book's comments.\n"
 "Default is a list of included titles only."
-msgstr "在新书注释中包含所有合并的书籍的注释。默认仅包含标题列表。"
+msgstr "在新书简介中包含所有合并的书籍的简介。默认仅包含书名列表。"
 
 #: config.py:241
 msgid "Keep UnMerge Metadata?"
@@ -106,7 +106,7 @@ msgstr ""
 
 #: config.py:248
 msgid "Restore Selection?"
-msgstr ""
+msgstr "还原所选项"
 
 #: config.py:249
 msgid ""
@@ -124,20 +124,20 @@ msgstr "您在此处输入的标记将添加到所有新的合并的书籍中"
 
 #: config.py:270
 msgid "Merged Book Word:"
-msgstr "合并书籍的词数"
+msgstr "合并的书籍的描述词："
 
 #: config.py:274
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
-msgstr ""
+msgstr "默认标题和简介中用于描述合并的书籍的词。如果不喜欢“选集”这个词可以用这个词。"
 
 #: config.py:283
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubMerge confirmation "
 "dialogs back again."
-msgstr "这些控件本身不是插件设置，而是用于设置键盘快捷键和再次返回所有EpubMerge确认对话框的便捷按钮。"
+msgstr "下述设置本身不属于插件设置，而是用于设置键盘快捷键和再次返回所有EpubMerge确认对话框的快捷按钮。"
 
 #: config.py:288
 msgid "Keyboard shortcuts..."
@@ -177,7 +177,7 @@ msgstr "从第一本源书籍中获取价值"
 
 #: config.py:332
 msgid "Take value from last source book"
-msgstr "从最后一本源书籍中获取价值"
+msgstr "从最后一本源书籍中获取值"
 
 #: config.py:333
 msgid "Add values from all source books"
@@ -293,7 +293,7 @@ msgstr "丛书"
 
 #: dialogs.py:221
 msgid "Title"
-msgstr "标题"
+msgstr "书名"
 
 #: dialogs.py:271
 msgid "Are you sure you want to remove this book from the list?"
@@ -305,7 +305,7 @@ msgstr "你确认要冲列表中删除选中的 %d 书籍吗？"
 
 #: dialogs.py:346
 msgid "UnMerge Epub"
-msgstr "分拆 Epub"
+msgstr "拆分 Epub"
 
 #: dialogs.py:353
 msgid "Apply to all EPUBs?"

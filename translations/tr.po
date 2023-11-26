@@ -68,13 +68,13 @@ msgstr "Ayarlanırsa, orijinal TOC girişleri yeni epub'a dahil edilecektir."
 
 #: config.py:217
 msgid "Skip when there is only one TOC entry?"
-msgstr ""
+msgstr "Yalnızca bir İçindekiler girişi olduğunda atlansın mı?"
 
 #: config.py:218
 msgid ""
 "If set, the original TOC entries for each book will only be included\n"
 "if there's more than TOC entry one in that book."
-msgstr ""
+msgstr "Ayarlanırsa, her kitap için orijinal İçindekiler girişleri, yalnızca o kitapta \nbirden fazla İçindekiler girişi olması durumunda dahil edilecektir."
 
 #: config.py:230
 msgid "Flatten Table of Contents?"
@@ -107,13 +107,13 @@ msgstr "Eğer belirlenmişse, her bir birleştirilmiş kitap için orijinal üst
 
 #: config.py:248
 msgid "Restore Selection?"
-msgstr ""
+msgstr "Seçim Geri Yüklensin mi?"
 
 #: config.py:249
 msgid ""
 "If set, the plugin will select the same books again after starting\n"
 "the merge.  Default behavior is to select the new merge book."
-msgstr ""
+msgstr "Ayarlanırsa eklenti, birleştirmeyi başlattıktan sonra aynı kitapları tekrar \nseçecektir. Varsayılan davranış, yeni birleştirme kitabını seçmektir."
 
 #: config.py:261
 msgid "Add tags to merged books:"

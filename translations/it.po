@@ -4,8 +4,8 @@
 # Translators:
 # Alberto Canepa <alby.canepa@gmail.com>, 2016
 # Enrico Maria Casarotti, 2022
-# Giuseppe Pignataro <rogepix@gmail.com>, 2017
-# Giuseppe Pignataro <rogepix@gmail.com>, 2016
+# Giuseppe Pignataro (Fastbyte01) <rogepix@gmail.com>, 2017
+# Giuseppe Pignataro (Fastbyte01) <rogepix@gmail.com>, 2016
 # Maurizio Malagoli <malagoli.maurizio@gmail.com>, 2014
 # Marco Ciampa <ciampix@posteo.net>, 2018
 # Marta Mingolla <martamingolla@yandex.com>, 2017

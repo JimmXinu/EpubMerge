@@ -64,13 +64,13 @@ msgstr "Si se activa, las entradas del índice original se incluirán en el nuev
 
 #: config.py:217
 msgid "Skip when there is only one TOC entry?"
-msgstr ""
+msgstr "¿Saltar cuando sólo hay una entrada en el índice?"
 
 #: config.py:218
 msgid ""
 "If set, the original TOC entries for each book will only be included\n"
 "if there's more than TOC entry one in that book."
-msgstr ""
+msgstr "Si se activa, las entradas del índice original de cada libro sólo se incluyen\nsi hay más de una entrada en el índice correspondiente."
 
 #: config.py:230
 msgid "Flatten Table of Contents?"
