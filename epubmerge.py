@@ -265,6 +265,7 @@ def doMerge(outputio,
 
     booktitles = [] # list of strings -- Each book's title
     allauthors = [] # list of lists of strings -- Each book's list of authors.
+    fileasauthors={} # saving opf:file-as attrs on author tags.
 
     filelist = []
 
@@ -331,6 +332,8 @@ def doMerge(outputio,
             try:
                 if( creator.getAttribute("opf:role") == "aut" or not creator.hasAttribute("opf:role") and creator.firstChild != None):
                     authors.append(creator.firstChild.data)
+                    if creator.getAttribute("opf:file-as"):
+                        fileasauthors[creator.firstChild.data]=creator.getAttribute("opf:file-as")
             except:
                 pass
         if len(authors) == 0:
@@ -441,6 +444,7 @@ def doMerge(outputio,
     # (allauthors kept for TOC & description gen below.
     if( len(authoropts) > 1  ):
         useauthors=[authoropts]
+        fileasauthors = {} # don't use opf:file-as attrs when taking authors from CLI opts.
     else:
         useauthors=allauthors
 
@@ -449,8 +453,11 @@ def doMerge(outputio,
         for author in authorlist:
             if( author not in usedauthors ):
                 usedauthors[author]=author
+                tagattrs = {"opf:role":"aut"}
+                if fileasauthors.get(author,None):
+                    tagattrs["opf:file-as"]=fileasauthors[author]
                 metadata.appendChild(newTag(contentdom,"dc:creator",
-                                            attrs={"opf:role":"aut"},
+                                            attrs=tagattrs,
                                             text=author))
 
     metadata.appendChild(newTag(contentdom,"dc:contributor",text="epubmerge"))
