@@ -1,0 +1,486 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# 
+# Translators:
+# Arun Sundaram <arunistheking@gmail.com>, 2015
+# Arun Sundaram <arunistheking@gmail.com>, 2015
+# JimmXinu, 2024
+msgid ""
+msgstr ""
+"Project-Id-Version: calibre-plugins\n"
+"POT-Creation-Date: 2023-07-15 16:27-0500\n"
+"PO-Revision-Date: 2014-06-19 23:00+0000\n"
+"Last-Translator: JimmXinu, 2024\n"
+"Language-Team: Tamil (http://app.transifex.com/calibre/calibre-plugins/language/ta/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"Language: ta\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: __init__.py:48
+msgid "UI plugin to concatenate multiple epubs into one."
+msgstr "பல எபப்களை ஒன்றாக இணைக்க UI சொருகி."
+
+#: config.py:51
+msgid "Anthology"
+msgstr "திரட்டு"
+
+#: config.py:141
+msgid "Basic"
+msgstr "அடிப்படை"
+
+#: config.py:144
+msgid "Columns"
+msgstr "நெடுவரிசைகள்"
+
+#: config.py:189
+msgid "These settings control the basic features of the plugin."
+msgstr "இந்த அமைப்புகள் சொருகி அடிப்படை அம்சங்களைக் கட்டுப்படுத்துகின்றன."
+
+#: config.py:194
+msgid ""
+"If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'\n"
+"are unchecked, there will be no Table of Contents in merged books."
+msgstr "'உள்ளடக்க அட்டவணையை செருகவும்' மற்றும் 'நகல் அட்டவணை உள்ளீடுகள்' இரண்டும் இருந்தால் \n தேர்வு செய்யப்படாமல், இணைக்கப்பட்ட புத்தகங்களில் உள்ளடக்க அட்டவணை இருக்காது."
+
+#: config.py:196
+msgid "Insert Table of Contents entry for each title?"
+msgstr "ஒவ்வொரு தலைப்புக்கும் உள்ளடக்க நுழைவு அட்டவணையைச் செருகவா?"
+
+#: config.py:197
+msgid ""
+"If set, a new TOC entry will be made for each title and\n"
+"it's existing TOC nested underneath it."
+msgstr "அமைக்கப்பட்டால், ஒவ்வொரு தலைப்புக்கும் ஒரு புதிய TOC நுழைவு செய்யப்படும் \n இது அதன் அடியில் உள்ள டோக்."
+
+#: config.py:202
+msgid "Copy Table of Contents entries from each title?"
+msgstr "ஒவ்வொரு தலைப்பிலிருந்தும் உள்ளடக்க உள்ளீடுகளின் அட்டவணையை நகலெடுக்கவா?"
+
+#: config.py:203
+msgid "If set, the original TOC entries will be included the new epub."
+msgstr "அமைக்கப்பட்டால், அசல் TOC உள்ளீடுகள் புதிய எபப் சேர்க்கப்படும்."
+
+#: config.py:217
+msgid "Skip when there is only one TOC entry?"
+msgstr "ஒரு TOC நுழைவு மட்டுமே இருக்கும்போது தவிர்க்கவா?"
+
+#: config.py:218
+msgid ""
+"If set, the original TOC entries for each book will only be included\n"
+"if there's more than TOC entry one in that book."
+msgstr "அமைக்கப்பட்டால், ஒவ்வொரு புத்தகத்திற்கும் அசல் TOC உள்ளீடுகள் மட்டுமே சேர்க்கப்படும் \n அந்த புத்தகத்தில் TOC நுழைவு ஒன்றை விட அதிகமாக இருந்தால்."
+
+#: config.py:230
+msgid "Flatten Table of Contents?"
+msgstr "தட்டையான உள்ளடக்க அட்டவணை?"
+
+#: config.py:231
+msgid "Remove nesting and make TOC all on one level."
+msgstr "கூடுகளை அகற்றி, ஒரு மட்டத்தில் TOC ஐ உருவாக்கவும்."
+
+#: config.py:235
+msgid "Include Books' Comments?"
+msgstr "புத்தகங்களின் கருத்துகளைச் சேர்க்கவா?"
+
+#: config.py:236
+msgid ""
+"Include all the merged books' comments in the new book's comments.\n"
+"Default is a list of included titles only."
+msgstr "இணைக்கப்பட்ட புத்தகங்களின் அனைத்து கருத்துகளையும் புதிய புத்தகத்தின் கருத்துகளில் சேர்க்கவும். \n இயல்புநிலை என்பது சேர்க்கப்பட்ட தலைப்புகளின் பட்டியல் மட்டுமே."
+
+#: config.py:241
+msgid "Keep UnMerge Metadata?"
+msgstr "Unmerge Metadata ஐ வைத்திருக்கவா?"
+
+#: config.py:242
+msgid ""
+"If set, a copy of the original metadata for each merged book will\n"
+"be included, allowing for UnMerge.  This includes your calibre custom\n"
+"columns.  Leave off if you plan to distribute the epub to others."
+msgstr "அமைக்கப்பட்டால், இணைக்கப்பட்ட ஒவ்வொரு புத்தகத்திற்கும் அசல் மெட்டாடேட்டாவின் நகல் இருக்கும் \n சேர்க்கப்பட வேண்டும், அவிழ்த்து விட அனுமதிக்கிறது. இது உங்கள் காலிபர் வழக்கத்தை உள்ளடக்கியது \n நெடுவரிசைகள். எபப் மற்றவர்களுக்கு விநியோகிக்க திட்டமிட்டால் விடுங்கள்."
+
+#: config.py:248
+msgid "Restore Selection?"
+msgstr "தேர்வை மீட்டெடுக்கவா?"
+
+#: config.py:249
+msgid ""
+"If set, the plugin will select the same books again after starting\n"
+"the merge.  Default behavior is to select the new merge book."
+msgstr "அமைக்கப்பட்டால், சொருகி தொடங்கிய பிறகு மீண்டும் அதே புத்தகங்களைத் தேர்ந்தெடுக்கும் \n ஒன்றிணைத்தல். இயல்புநிலை நடத்தை புதிய ஒன்றிணைப்பு புத்தகத்தைத் தேர்ந்தெடுப்பதாகும்."
+
+#: config.py:261
+msgid "Add tags to merged books:"
+msgstr "இணைக்கப்பட்ட புத்தகங்களுக்கு குறிச்சொற்களைச் சேர்க்கவும்:"
+
+#: config.py:265
+msgid "Tags you enter here will be added to all new merged books"
+msgstr "நீங்கள் இங்கு உள்ளிட்ட குறிச்சொற்கள் புதிய இணைக்கப்பட்ட அனைத்து புத்தகங்களிலும் சேர்க்கப்படும்"
+
+#: config.py:270
+msgid "Merged Book Word:"
+msgstr "இணைக்கப்பட்ட புத்தக சொல்:"
+
+#: config.py:274
+msgid ""
+"Word use to describe merged books in default title and summary.\n"
+"For people who don't like the word Anthology."
+msgstr "இணைக்கப்பட்ட புத்தகங்களை இயல்புநிலை தலைப்பு மற்றும் சுருக்கத்தில் விவரிக்க சொல் பயன்பாடு. \n ஆந்தாலஜி என்ற வார்த்தையை விரும்பாதவர்களுக்கு."
+
+#: config.py:283
+msgid ""
+"These controls aren't plugin settings as such, but convenience buttons for "
+"setting Keyboard shortcuts and getting all the EpubMerge confirmation "
+"dialogs back again."
+msgstr "இந்த கட்டுப்பாடுகள் சொருகி அமைப்புகள் அல்ல, ஆனால் விசைப்பலகை குறுக்குவழிகளை அமைப்பதற்கும் அனைத்து எபுப்மர்ஜ் உறுதிப்படுத்தல் உரையாடல்களையும் மீண்டும் பெறுவதற்கான வசதியான பொத்தான்கள்."
+
+#: config.py:288
+msgid "Keyboard shortcuts..."
+msgstr "விசைப்பலகை குறுக்குவழிகள் ..."
+
+#: config.py:289
+msgid "Edit the keyboard shortcuts associated with this plugin"
+msgstr "இந்த சொருகியுடன் தொடர்புடைய விசைப்பலகை குறுக்குவழிகளைத் திருத்தவும்"
+
+#: config.py:293
+msgid "Reset disabled &confirmation dialogs"
+msgstr "முடக்கப்பட்ட மற்றும் உறுதிப்படுத்தல் உரையாடல்களை மீட்டமைக்கவும்"
+
+#: config.py:294
+msgid "Reset all show me again dialogs for the EpubMerge plugin"
+msgstr "அனைத்தையும் மீட்டமைக்கவும் எபுப்மர்ஜ் சொருகிக்கான உரையாடல்களை மீண்டும் காண்பி"
+
+#: config.py:298
+msgid "View library preferences..."
+msgstr "நூலகம் விருப்பங்களை காண்க ..."
+
+#: config.py:299
+msgid "View data stored in the library database for this plugin"
+msgstr "இந்த சொருகி நூலக தரவுத்தளத்தில் சேமிக்கப்பட்ட தரவைக் காண்க"
+
+#: config.py:314
+msgid "Done"
+msgstr "முடிந்தது"
+
+#: config.py:315
+msgid "Confirmation dialogs have all been reset"
+msgstr "உறுதிப்படுத்தல் உரையாடல்கள் அனைத்தும் மீட்டமைக்கப்பட்டுள்ளன"
+
+#: config.py:331
+msgid "Take value from first source book"
+msgstr "முதல் மூல புத்தகத்திலிருந்து மதிப்பைப் பெறுங்கள்"
+
+#: config.py:332
+msgid "Take value from last source book"
+msgstr "கடைசி மூல புத்தகத்திலிருந்து மதிப்பைப் பெறுங்கள்"
+
+#: config.py:333
+msgid "Add values from all source books"
+msgstr "அனைத்து மூல புத்தகங்களிலிருந்தும் மதிப்புகளைச் சேர்க்கவும்"
+
+#: config.py:334
+msgid "Average value from ALL source books"
+msgstr "அனைத்து மூல புத்தகங்களிலிருந்தும் சராசரி மதிப்பு"
+
+#: config.py:335
+msgid "Average value from source books with values"
+msgstr "மதிப்புகளைக் கொண்ட மூல புத்தகங்களிலிருந்து சராசரி மதிப்பு"
+
+#: config.py:336
+msgid "True if true on all source books (and)"
+msgstr "அனைத்து மூல புத்தகங்களிலும் உண்மை என்றால் உண்மை (மற்றும்)"
+
+#: config.py:337
+msgid "True if true on any source books (or)"
+msgstr "எந்த மூல புத்தகங்களிலும் உண்மை என்றால் உண்மை (அல்லது)"
+
+#: config.py:338
+msgid "Take newest value from source books"
+msgstr "மூல புத்தகங்களிலிருந்து புதிய மதிப்பை எடுத்துக் கொள்ளுங்கள்"
+
+#: config.py:339
+msgid "Take oldest value from source books"
+msgstr "மூல புத்தகங்களிலிருந்து பழமையான மதிப்பை எடுத்துக் கொள்ளுங்கள்"
+
+#: config.py:340
+msgid "Include values from all source books"
+msgstr "அனைத்து மூல புத்தகங்களிலிருந்தும் மதிப்புகளைச் சேர்க்கவும்"
+
+#: config.py:341
+msgid "Concatenate values from all source books"
+msgstr "அனைத்து மூல புத்தகங்களிலிருந்தும் மதிப்புகளை இணைக்கவும்"
+
+#: config.py:342
+msgid "Set to current time when created"
+msgstr "உருவாக்கும்போது தற்போதைய நேரத்திற்கு அமைக்கவும்"
+
+#: config.py:355
+msgid "Standard Columns:"
+msgstr "நிலையான நெடுவரிசைகள்:"
+
+#: config.py:360
+msgid "Take Series from first book"
+msgstr "முதல் புத்தகத்திலிருந்து தொடரை எடுத்துக் கொள்ளுங்கள்"
+
+#: config.py:361
+msgid ""
+"If set, the Series name and index from the first book will be set on the "
+"merged book."
+msgstr "அமைக்கப்பட்டால், முதல் புத்தகத்தின் தொடர் பெயர் மற்றும் குறியீடு இணைக்கப்பட்ட புத்தகத்தில் அமைக்கப்படும்."
+
+#: config.py:366
+msgid "Custom Columns:"
+msgstr "தனிப்பயன் நெடுவரிசைகள்:"
+
+#: config.py:369
+msgid ""
+"If you have custom columns defined, they will be listed below.  Choose how "
+"you would like these columns handled."
+msgstr "உங்களிடம் தனிப்பயன் நெடுவரிசைகள் வரையறுக்கப்பட்டிருந்தால், அவை கீழே பட்டியலிடப்படும். இந்த நெடுவரிசைகளை எவ்வாறு கையாள விரும்புகிறீர்கள் என்பதைத் தேர்வுசெய்க."
+
+#: config.py:395
+msgid "Set this %s column on new merged books..."
+msgstr "புதிய இணைக்கப்பட்ட புத்தகங்களில் இந்த %s நெடுவரிசையை அமைக்கவும் ..."
+
+#: config.py:410
+msgid "How this column will be populated by default."
+msgstr "இந்த நெடுவரிசை இயல்புநிலையாக எவ்வாறு மக்கள்தொகை பெறப்படும்."
+
+#: dialogs.py:46 dialogs.py:70
+msgid "Starting..."
+msgstr "தொடங்குகிறது ..."
+
+#: dialogs.py:47 dialogs.py:71
+msgid "Working"
+msgstr "வேலை"
+
+#: dialogs.py:48 dialogs.py:72
+msgid "Completed so far"
+msgstr "இதுவரை முடிந்தது"
+
+#: dialogs.py:75
+msgid "Cancel"
+msgstr "ரத்துசெய்"
+
+#: dialogs.py:116
+msgid "Starting Merge..."
+msgstr "ஒன்றிணைக்கத் தொடங்குகிறது ..."
+
+#: dialogs.py:172
+msgid "Move selected books up the list"
+msgstr "தேர்ந்தெடுக்கப்பட்ட புத்தகங்களை பட்டியலில் நகர்த்தவும்"
+
+#: dialogs.py:177
+msgid "Remove selected books from the list"
+msgstr "பட்டியலிலிருந்து தேர்ந்தெடுக்கப்பட்ட புத்தகங்களை அகற்றவும்"
+
+#: dialogs.py:182
+msgid "Move selected books down the list"
+msgstr "தேர்ந்தெடுக்கப்பட்ட புத்தகங்களை பட்டியலில் நகர்த்தவும்"
+
+#: dialogs.py:221
+msgid "Author(s)"
+msgstr "ஆசிரியர் (கள்)"
+
+#: dialogs.py:221
+msgid "Series"
+msgstr "தொடர்"
+
+#: dialogs.py:221
+msgid "Title"
+msgstr "தலைப்பு"
+
+#: dialogs.py:271
+msgid "Are you sure you want to remove this book from the list?"
+msgstr "இந்த புத்தகத்தை பட்டியலிலிருந்து அகற்ற விரும்புகிறீர்களா?"
+
+#: dialogs.py:273
+msgid "Are you sure you want to remove the selected %d books from the list?"
+msgstr "பட்டியலில் இருந்து தேர்ந்தெடுக்கப்பட்ட %d புத்தகங்களை அகற்ற விரும்புகிறீர்களா?"
+
+#: dialogs.py:346
+msgid "UnMerge Epub"
+msgstr "Unmerge epub"
+
+#: dialogs.py:353
+msgid "Apply to all EPUBs?"
+msgstr "அனைத்து எபப்களுக்கும் விண்ணப்பிக்கவா?"
+
+#: dialogs.py:354
+msgid "Apply the same action to the rest of the EPUBs after this."
+msgstr "இதற்குப் பிறகு மீதமுள்ள எபப்களுக்கும் அதே செயலை பயன்படுத்துங்கள்."
+
+#: dialogs.py:358
+msgid "Add"
+msgstr "கூட்டு"
+
+#: dialogs.py:362
+msgid "Overwrite"
+msgstr "மேலெழுதும்"
+
+#: dialogs.py:365
+msgid "Discard"
+msgstr "நிராகரிக்கவும்"
+
+#: epubmerge_plugin.py:63 epubmerge_plugin.py:546 epubmerge_plugin.py:562
+#: epubmerge_plugin.py:673
+msgid "EpubMerge"
+msgstr "எபப்மர்ஜ்"
+
+#: epubmerge_plugin.py:64
+msgid "Merge multiple EPUBs into one in a new book."
+msgstr "புதிய புத்தகத்தில் பல எபப்களை ஒன்றில் ஒன்றிணைக்கவும்."
+
+#: epubmerge_plugin.py:114 epubmerge_plugin.py:115
+msgid "&Merge Epubs"
+msgstr "எபப் ஒன்றிணைக்கவும்"
+
+#: epubmerge_plugin.py:118 epubmerge_plugin.py:119
+msgid "&UnMerge Epubs"
+msgstr "எபப் ஒன்றிணைக்கவும்"
+
+#: epubmerge_plugin.py:128
+msgid "&Configure Plugin"
+msgstr "& சொருகி உள்ளமைக்கவும்"
+
+#: epubmerge_plugin.py:130 epubmerge_plugin.py:131
+msgid "Configure EpubMerge"
+msgstr "எபப்மர்ஜ் உள்ளமைக்கவும்"
+
+#: epubmerge_plugin.py:186
+msgid "Cannot UnMerge Non-Epubs"
+msgstr "அல்லாத எபப்களை அவிழ்க்க முடியாது"
+
+#: epubmerge_plugin.py:187 epubmerge_plugin.py:198
+msgid ""
+"To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
+" Metadata enabled."
+msgstr "அன்மர்ஜ் செய்ய மூலமானது எபப்மர்ஜ் உருவாக்கிய எபப் (கள்) ஆக இருக்க வேண்டும்."
+
+#: epubmerge_plugin.py:197
+msgid "No UnMerge data found"
+msgstr "அவிழ்ப்பது எதுவும் கிடைக்கவில்லை"
+
+#: epubmerge_plugin.py:214
+msgid ""
+"You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
+"the same title, Overwrite the Epub in the existing book, or Discard this "
+"Epub."
+msgstr "உங்களிடம் ஏற்கனவே ஒரு புத்தகம் <i>%s </i> <i>%s </i>. அதே தலைப்பின் புதிய புத்தகத்தை நீங்கள் சேர்க்கலாம், தற்போதுள்ள புத்தகத்தில் EPUB ஐ மேலெழுதலாம் அல்லது இந்த EPUB ஐ நிராகரிக்கலாம்."
+
+#: epubmerge_plugin.py:217
+msgid ""
+"You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
+"new book of the same title, or Discard this Epub."
+msgstr "உங்களிடம் ஏற்கனவே ஒன்றுக்கு மேற்பட்ட புத்தகங்கள் <i>%s </i> <i>%s </i> ஆல் உள்ளன. அதே தலைப்பின் புதிய புத்தகத்தை நீங்கள் சேர்க்கலாம் அல்லது இந்த எபப் நிராகரிக்கலாம்."
+
+#: epubmerge_plugin.py:257 epubmerge_plugin.py:289
+msgid "Cannot Merge Epubs"
+msgstr "எபப்களை ஒன்றிணைக்க முடியாது"
+
+#: epubmerge_plugin.py:258
+msgid "Less than 2 books selected."
+msgstr "தேர்ந்தெடுக்கப்பட்ட 2 புத்தகங்களுக்கும் குறைவானது."
+
+#: epubmerge_plugin.py:278
+msgid "Collecting EPUBs for merger..."
+msgstr "இணைப்புக்கான எபப்களை சேகரித்தல் ..."
+
+#: epubmerge_plugin.py:279
+msgid "Get EPUBs for merge"
+msgstr "ஒன்றிணைக்க எபப்களைப் பெறுங்கள்"
+
+#: epubmerge_plugin.py:280
+msgid "EPUBs collected"
+msgstr "எபப்கள் சேகரிக்கப்பட்டன"
+
+#: epubmerge_plugin.py:290
+msgid "%s books failed."
+msgstr "%எஸ் புத்தகங்கள் தோல்வியடைந்தன."
+
+#: epubmerge_plugin.py:295
+msgid "Order EPUBs to Merge"
+msgstr "ஒன்றிணைக்க எபப்களை ஆர்டர் செய்யுங்கள்"
+
+#: epubmerge_plugin.py:362 epubmerge_plugin.py:581
+msgid "%s by %s"
+msgstr "%s %s"
+
+#: epubmerge_plugin.py:366
+msgid "%s containing:"
+msgstr "%s:"
+
+#: epubmerge_plugin.py:541
+msgid ""
+"The book for the new Merged EPUB has been created and default metadata filled in.\n"
+"\n"
+"However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
+msgstr "புதிய இணைக்கப்பட்ட எபப் புத்தகம் உருவாக்கப்பட்டது மற்றும் இயல்புநிலை மெட்டாடேட்டா நிரப்பப்பட்டுள்ளது. \n\n இருப்பினும், நீங்கள் மதிப்பாய்வு செய்து, திருத்தி, தொடர்ந்து வரும் மெட்டாடேட்டா உரையாடலை மூடிய பிறகு எபப் * உருவாக்கப்படாது."
+
+#: epubmerge_plugin.py:557
+msgid ""
+"EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
+"\n"
+"You are merging %s EPUBs totaling %s."
+msgstr "எபுப்மர்ஜ் ஒரு பின்னணி வேலையில் செய்யப்படும். இணைக்கப்பட்ட எபப் முடிக்கும் வரை நூலகத்தில் தோன்றாது. \n\n நீங்கள் %s epubs மொத்தம் %s ஐ ஒன்றிணைக்கிறீர்கள்."
+
+#: epubmerge_plugin.py:570
+msgid "Merging %s EPUBs..."
+msgstr "%s எபப்களை ஒன்றிணைத்தல் ..."
+
+#: epubmerge_plugin.py:613
+msgid "EpubMerge: %s"
+msgstr "எபப்மர்ஜ்: %s"
+
+#: epubmerge_plugin.py:624
+msgid "Starting EpubMerge"
+msgstr "எபப்மர்ஜ் தொடங்குகிறது"
+
+#: epubmerge_plugin.py:632 epubmerge_plugin.py:638
+msgid "Remove Failed Anthology Book?"
+msgstr "தோல்வியுற்ற ஆந்தாலஜி புத்தகத்தை அகற்றவா?"
+
+#: epubmerge_plugin.py:639
+msgid ""
+"EpubMerge failed, no new EPUB was created; see the background job details "
+"for any error messages."
+msgstr "எபப்மர்ஜ் தோல்வியுற்றது, புதிய எபப் எதுவும் உருவாக்கப்படவில்லை; எந்த பிழை செய்திகளுக்கும் பின்னணி வேலை விவரங்களைப் பார்க்கவும்."
+
+#: epubmerge_plugin.py:640
+msgid "Do you want to delete the empty book EpubMerge created?"
+msgstr "உருவாக்கிய வெற்று புத்தகத்தை நீக்க விரும்புகிறீர்களா?"
+
+#: epubmerge_plugin.py:641
+msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
+msgstr "வெற்று புத்தகத்தை நூலகத்திலிருந்து அகற்ற '<a> ஆம் </b>' என்பதைக் கிளிக் செய்க,"
+
+#: epubmerge_plugin.py:642
+msgid "Click '<b>No</b>' to leave it in Library."
+msgstr "அதை நூலகத்தில் விட '<b> இல்லை </b>' என்பதைக் கிளிக் செய்க."
+
+#: epubmerge_plugin.py:650
+msgid ""
+"Merge finished, output in:\n"
+"%s"
+msgstr "ஒன்றிணைந்தது, வெளியீடு: \n %s"
+
+#: epubmerge_plugin.py:662
+msgid "Finished merging %s EPUBs."
+msgstr "%s எபப்களை ஒன்றிணைத்தது."
+
+#: epubmerge_plugin.py:670
+msgid ""
+"EpubMerge has finished. The new EPUB has been added to the book previously "
+"created."
+msgstr "எபுப்மர்ஜ் முடிந்துவிட்டது. முன்னர் உருவாக்கிய புத்தகத்தில் புதிய எபப் சேர்க்கப்பட்டுள்ளது."
+
+#: epubmerge_plugin.py:684 epubmerge_plugin.py:685 epubmerge_plugin.py:686
+msgid "Unknown"
+msgstr "தெரியவில்லை"
+
+#: epubmerge_plugin.py:727
+msgid "%s by %s doesn't have an EPUB."
+msgstr "%s %s எபப் இல்லை."
