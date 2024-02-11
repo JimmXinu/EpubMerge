@@ -104,7 +104,7 @@ Given list of epubs will be merged together into one new epub.
                       action="append", dest="tagopts", default=[],
                       help="Include TAG as dc:subject tag, multiple tags may be given, Default: None", metavar="TAG")
     optparser.add_option("-l", "--language",
-                      action="append", dest="languageopts", default=[],
+                      action="append", dest="languageopts", default=['en'],
                       help="Include LANG as dc:language tag, multiple languages may be given, Default: en", metavar="LANG")
     optparser.add_option("-n", "--no-titles-in-toc",
                       action="store_false", dest="titlenavpoints", default=True,
