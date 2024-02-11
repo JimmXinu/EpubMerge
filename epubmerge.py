@@ -72,6 +72,101 @@ except:
         else:
             raise TypeError("not expecting type '%s'" % type(s))
 
+## font decoding code lifted from
+## calibre/src/calibre/ebooks/conversion/plugins/epub_input.py
+## copyright '2009, Kovid Goyal <kovid@kovidgoyal.net>'
+## don't bug Kovid about this use of it.
+
+ADOBE_OBFUSCATION =  'http://ns.adobe.com/pdf/enc#RC'
+IDPF_OBFUSCATION = 'http://www.idpf.org/2008/embedding'
+from itertools import cycle
+
+class FontDecrypter:
+    def __init__(self, epub, content_dom):
+        self.epub = epub
+        self.content_dom = content_dom
+        self.encryption = {}
+        self.old_uuid = None
+
+    def get_file(self,href):
+        return self.epub.read(href)
+
+    def get_encrypted_fontfiles(self):
+        if not self.encryption:
+            ## Find the .opf file.
+            try:
+                # <encryption xmlns="urn:oasis:names:tc:opendocument:xmlns:container"
+                #             xmlns:enc="http://www.w3.org/2001/04/xmlenc#"
+                #             xmlns:deenc="http://ns.adobe.com/digitaleditions/enc">
+                #   <enc:EncryptedData>
+                #     <enc:EncryptionMethod Algorithm="http://ns.adobe.com/pdf/enc#RC"/>
+                #     <enc:CipherData>
+                #       <enc:CipherReference URI="fonts/00017.ttf"/>
+                #     </enc:CipherData>
+                #   </enc:EncryptedData>
+                # </encryption>
+                encryption = self.epub.read("META-INF/encryption.xml")
+                encryptiondom = parseString(encryption)
+                # print(encryptiondom.toprettyxml(indent='   '))
+                for encdata in encryptiondom.getElementsByTagName('enc:EncryptedData'):
+                    # print(encdata.toprettyxml(indent='   '))
+                    algorithm = encdata.getElementsByTagName('enc:EncryptionMethod')[0].getAttribute('Algorithm')
+                    if algorithm not in {ADOBE_OBFUSCATION, IDPF_OBFUSCATION}:
+                        print("Unknown font encryption: %s"%algorithm)
+                    else:
+                        # print(algorithm)
+                        for encref in encdata.getElementsByTagName('enc:CipherReference'):
+                            # print(encref.getAttribute('URI'))
+                            self.encryption[encref.getAttribute('URI')]=algorithm
+            except KeyError as ke:
+                self.encryption = {}
+        return self.encryption
+
+    def get_old_uuid(self):
+        if not self.old_uuid:
+            contentdom = self.content_dom
+            uidkey = contentdom.getElementsByTagName("package")[0].getAttribute("unique-identifier")
+            for dcid in contentdom.getElementsByTagName("dc:identifier"):
+                if dcid.getAttribute("id") == uidkey and dcid.getAttribute("opf:scheme") == "uuid":
+                    self.old_uuid = dcid.firstChild.data
+        return self.old_uuid
+
+    def get_idpf_key(self):
+        # idpf key:urn:uuid:221c69fe-29f3-4cb4-bb3f-58c430261cc6
+        # idpf key:b'\xfb\xa9\x03N}\xae~\x12 \xaa\xe0\xc11\xe2\xe7\x1b\xf6\xa5\xcas'
+        idpf_key = self.get_old_uuid()
+        import uuid, hashlib
+        idpf_key = re.sub('[\u0020\u0009\u000d\u000a]', '', idpf_key)
+        idpf_key = hashlib.sha1(idpf_key.encode('utf-8')).digest()
+        return idpf_key
+
+    def get_adobe_key(self):
+        # adobe key:221c69fe-29f3-4cb4-bb3f-58c430261cc6
+        # adobe key:b'"\x1ci\xfe)\xf3L\xb4\xbb?X\xc40&\x1c\xc6'
+        adobe_key = self.get_old_uuid()
+        import uuid
+        adobe_key = adobe_key.rpartition(':')[-1] # skip urn:uuid:
+        adobe_key = uuid.UUID(adobe_key).bytes
+        return adobe_key
+
+    def get_decrypted_font_data(self, uri):
+        # print(self.get_old_uuid())
+        # print("idpf : %s"%self.get_idpf_key())
+        # print("adobe: %s"%self.get_adobe_key())
+        # print("uri:%s"%uri)
+        font_data = self.get_file(uri)
+        if uri in self.get_encrypted_fontfiles():
+            key = self.get_adobe_key() if self.get_encrypted_fontfiles()[uri] == ADOBE_OBFUSCATION else self.get_idpf_key()
+            font_data =  self.decrypt_font_data(key, font_data, self.get_encrypted_fontfiles()[uri])
+        return font_data
+
+    def decrypt_font_data(self, key, data, algorithm):
+        is_adobe = algorithm == ADOBE_OBFUSCATION
+        crypt_len = 1024 if is_adobe else 1040
+        crypt = bytearray(data[:crypt_len])
+        key = cycle(iter(bytearray(key)))
+        decrypt = bytes(bytearray(x^next(key) for x in crypt))
+        return decrypt + data[crypt_len:]
 
 def main(argv,usage=None):
     loghandler=logging.StreamHandler()
@@ -293,6 +388,7 @@ def doMerge(outputio,
         relpath = get_path_part(rootfilename)
 
         metadom = parseString(epub.read(rootfilename))
+        fontdecrypter = FontDecrypter(epub,metadom)
         # logger.debug("metadom:%s"%epub.read(rootfilename))
         if booknum==1 and not source:
             try:
@@ -391,8 +487,12 @@ def doMerge(outputio,
                 itemhrefs[itemid] = href
                 if href not in filelist:
                     try:
-                        outputepub.writestr(href,
-                                            epub.read(normpath(relpath+itemhref)))
+                        # logger.debug("read href:%s"%normpath(relpath+itemhref))
+                        filedata = epub.read(normpath(relpath+itemhref))
+                        if normpath(relpath+itemhref) in fontdecrypter.get_encrypted_fontfiles():
+                            logger.info("Decrypting font file: %s"%itemhref)
+                            filedata = fontdecrypter.get_decrypted_font_data(normpath(relpath+itemhref))
+                        outputepub.writestr(href,filedata)
                         if re.match(r'.*/(file|chapter)\d+\.x?html',href):
                             filecount+=1
                         items.append((itemid,href,item.getAttribute("media-type")))
