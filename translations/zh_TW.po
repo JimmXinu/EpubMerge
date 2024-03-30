@@ -2,167 +2,163 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Li Liu <liu431@indiana.edu>, 2015
-# RERBIN MA, 2022-2023
-# tony shen <anthanny@hotmail.com>, 2024
-# Mew X <imewx@qq.com>, 2016
-# 朱仁杰 <johnson19960308@gmail.com>, 2016
-# 白夜咲雪, 2021
+# Simon Lee, 2024
+# Simon Lee <SimonLee.Taiwan@gmail.com>, 2024
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
 "POT-Creation-Date: 2023-07-15 16:27-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
-"Last-Translator: tony shen <anthanny@hotmail.com>, 2024\n"
-"Language-Team: Chinese (China) (http://app.transifex.com/calibre/calibre-plugins/language/zh_CN/)\n"
+"Last-Translator: Simon Lee, 2024\n"
+"Language-Team: Chinese (Taiwan) (http://app.transifex.com/calibre/calibre-plugins/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
-"Language: zh_CN\n"
+"Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: __init__.py:48
 msgid "UI plugin to concatenate multiple epubs into one."
-msgstr "将多个epub合并为一个的UI插件。"
+msgstr "可將多個EPUB書籍檔案合併的UI外掛程式。"
 
 #: config.py:51
 msgid "Anthology"
-msgstr "选集"
+msgstr "選集"
 
 #: config.py:141
 msgid "Basic"
-msgstr "基础设置"
+msgstr "基本設定"
 
 #: config.py:144
 msgid "Columns"
-msgstr "栏目"
+msgstr "欄"
 
 #: config.py:189
 msgid "These settings control the basic features of the plugin."
-msgstr "这些设置控制插件的基本功能。"
+msgstr "以下設定可控制外掛程式的基本功能。"
 
 #: config.py:194
 msgid ""
 "If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'\n"
 "are unchecked, there will be no Table of Contents in merged books."
-msgstr "如果“插入目录条目”和“复制目录条目”均未选中，\n则合并图书中将没有目录。"
+msgstr "如果「插入目錄條目」和「複製目錄條目」都未勾選，合併書籍中將不會有目錄。"
 
 #: config.py:196
 msgid "Insert Table of Contents entry for each title?"
-msgstr "为每个标题生成一个目录条目？"
+msgstr "是否插入一個含有所有標題大網的目錄？"
 
 #: config.py:197
 msgid ""
 "If set, a new TOC entry will be made for each title and\n"
 "it's existing TOC nested underneath it."
-msgstr "如果设置了，将为每个标题创建一个新的目录条目，并且其下面嵌套现有的目录。"
+msgstr "如果設置此選項，將創建一個新的目錄頁面，包含所有標題和子標題按章節排序。"
 
 #: config.py:202
 msgid "Copy Table of Contents entries from each title?"
-msgstr "从每个标题复制目录条目？"
+msgstr "是否複製每個標題以建立目錄？"
 
 #: config.py:203
 msgid "If set, the original TOC entries will be included the new epub."
-msgstr "如果设置，原始目录条目将包含在新的epub中。"
+msgstr "如果設置了此選項，原始目錄條目將包含在新的EPUB書籍中。"
 
 #: config.py:217
 msgid "Skip when there is only one TOC entry?"
-msgstr "当图书只有一个目录条目，是否略过？"
+msgstr "若書籍只有一個目錄條目，是否略過？"
 
 #: config.py:218
 msgid ""
 "If set, the original TOC entries for each book will only be included\n"
 "if there's more than TOC entry one in that book."
-msgstr "如果设置，则仅当该书中有多个目录条目时，才会包含每本书的原始 目录 条目。"
+msgstr "如果設置了此選項，則每本書的原始目錄條目只有在該書中有超過一個目錄條目時才會被包含。"
 
 #: config.py:230
 msgid "Flatten Table of Contents?"
-msgstr "展开目录"
+msgstr "是否要將多層次目錄扁平化？"
 
 #: config.py:231
 msgid "Remove nesting and make TOC all on one level."
-msgstr "删除嵌套并使目录全部在一个级别上。"
+msgstr "刪除巢狀目錄並保持所有標題在同一層。"
 
 #: config.py:235
 msgid "Include Books' Comments?"
-msgstr "包含书籍简介？"
+msgstr "是否包含書籍的評論？"
 
 #: config.py:236
 msgid ""
 "Include all the merged books' comments in the new book's comments.\n"
 "Default is a list of included titles only."
-msgstr "在新书简介中包含所有合并的书籍的简介。默认仅包含书名列表。"
+msgstr "在新書簡介中包含所有合併的書籍的簡介。\n預設僅包含書名列表。"
 
 #: config.py:241
 msgid "Keep UnMerge Metadata?"
-msgstr "是否保留取消合并元数据？"
+msgstr "是否保留可供解除合併的中繼資料？"
 
 #: config.py:242
 msgid ""
 "If set, a copy of the original metadata for each merged book will\n"
 "be included, allowing for UnMerge.  This includes your calibre custom\n"
 "columns.  Leave off if you plan to distribute the epub to others."
-msgstr "如果设置，将包含每本合并书籍的原始元数据的副本，以便取消合并。 这包括您的calibre自定义列。 如果您打算将 epub 分发给其他人，请不要这样做。"
+msgstr "如果設置了此選項，每個合併書籍的原始中繼資料副本將被包括在內，以便進行取消合併操作。\n這包括您的 calibre 自定義列。如果您計劃將 EPUB 書籍發送給其他人，請勿啟用此選項。"
 
 #: config.py:248
 msgid "Restore Selection?"
-msgstr "还原所选项"
+msgstr "是否還原選定項目？"
 
 #: config.py:249
 msgid ""
 "If set, the plugin will select the same books again after starting\n"
 "the merge.  Default behavior is to select the new merge book."
-msgstr "如果设置，插件将在开始合并后再次选择相同的书籍。 \n默认行为是选择新的合并书。"
+msgstr "如果設置了此選項，在開始合併後，插件將再次選擇相同的書籍。\n預設是選擇新合併的書籍。"
 
 #: config.py:261
 msgid "Add tags to merged books:"
-msgstr "给合并的书籍添加标记："
+msgstr "為合併後的書籍加上標籤："
 
 #: config.py:265
 msgid "Tags you enter here will be added to all new merged books"
-msgstr "您在此处输入的标记将添加到所有新的合并的书籍中"
+msgstr "您在此處輸入的標籤將添加到所有新合併的書籍中。"
 
 #: config.py:270
 msgid "Merged Book Word:"
-msgstr "合并的书籍的描述词："
+msgstr "合併後書籍的關鍵字："
 
 #: config.py:274
 msgid ""
 "Word use to describe merged books in default title and summary.\n"
 "For people who don't like the word Anthology."
-msgstr "默认标题和简介中用于描述合并的书籍的词。如果不喜欢“选集”这个词可以用这个词。"
+msgstr "預設標題和簡介中用於描述合併的書籍的詞。如果不喜歡“選集”這個詞，您可以自訂喜歡的詞彙。"
 
 #: config.py:283
 msgid ""
 "These controls aren't plugin settings as such, but convenience buttons for "
 "setting Keyboard shortcuts and getting all the EpubMerge confirmation "
 "dialogs back again."
-msgstr "下述设置本身不属于插件设置，而是用于设置键盘快捷键和再次返回所有EpubMerge确认对话框的快捷按钮。"
+msgstr "下述設定非外掛程式設定，僅用於設定鍵盤快速鍵和返回EpubMerge確認對話方塊的快捷按鈕。"
 
 #: config.py:288
 msgid "Keyboard shortcuts..."
-msgstr "快捷键..……"
+msgstr "鍵盤快速鍵…"
 
 #: config.py:289
 msgid "Edit the keyboard shortcuts associated with this plugin"
-msgstr "编辑与此插件关联的键盘快捷键"
+msgstr "編輯與此外掛程式關聯的鍵盤快速鍵"
 
 #: config.py:293
 msgid "Reset disabled &confirmation dialogs"
-msgstr "重置禁用的确认对话框（&C）"
+msgstr "重置禁用的確認對話方塊 &C"
 
 #: config.py:294
 msgid "Reset all show me again dialogs for the EpubMerge plugin"
-msgstr "重置EpubMerge插件的所有“再次显示”对话框"
+msgstr "重置EpubMerge外掛程式的所有“再次顯示”對話方塊"
 
 #: config.py:298
 msgid "View library preferences..."
-msgstr "查看书库首选项..."
+msgstr "查看書庫選項…"
 
 #: config.py:299
 msgid "View data stored in the library database for this plugin"
-msgstr "查看存储在书库数据库中的此插件的数据"
+msgstr "查看書庫資料庫中的外掛程式資料。"
 
 #: config.py:314
 msgid "Done"
@@ -170,95 +166,95 @@ msgstr "已完成"
 
 #: config.py:315
 msgid "Confirmation dialogs have all been reset"
-msgstr "确认对话框已全部重置"
+msgstr "確認對話方塊已重置。"
 
 #: config.py:331
 msgid "Take value from first source book"
-msgstr "从第一本源书籍中获取价值"
+msgstr "從第一本來源書籍中取得值"
 
 #: config.py:332
 msgid "Take value from last source book"
-msgstr "从最后一本源书籍中获取值"
+msgstr "從最後一本來源書籍中取得數值"
 
 #: config.py:333
 msgid "Add values from all source books"
-msgstr "添加所有源书籍中的值"
+msgstr "添加所有來源書籍中的數值"
 
 #: config.py:334
 msgid "Average value from ALL source books"
-msgstr "所有源书籍的平均值"
+msgstr "使用所有來源書籍的平均值"
 
 #: config.py:335
 msgid "Average value from source books with values"
-msgstr "具有值的源书籍的平均值"
+msgstr "只使用具有數值的來源書籍平均值"
 
 #: config.py:336
 msgid "True if true on all source books (and)"
-msgstr "如果所有原始书籍都为真，则为真（和）"
+msgstr "若在所有來源書籍中為真，則數值為真 (AND)"
 
 #: config.py:337
 msgid "True if true on any source books (or)"
-msgstr "如果在任何原始书籍上为真，则为真（或）"
+msgstr "若在任一來源書籍中為真，則數值為真 (OR)"
 
 #: config.py:338
 msgid "Take newest value from source books"
-msgstr "从源书籍中获取最新值"
+msgstr "從來源書籍中獲取最新數值"
 
 #: config.py:339
 msgid "Take oldest value from source books"
-msgstr "从源书籍中获取最旧的值"
+msgstr "從來源書籍中獲取最舊的數值"
 
 #: config.py:340
 msgid "Include values from all source books"
-msgstr "包含所有源书籍中的值"
+msgstr "包含所有來源書籍中的數值"
 
 #: config.py:341
 msgid "Concatenate values from all source books"
-msgstr "链接所有源书籍中的值"
+msgstr "連結所有來源書籍中的數值"
 
 #: config.py:342
 msgid "Set to current time when created"
-msgstr "创建时设置为当前时间"
+msgstr "創建書籍時設定為當前時間"
 
 #: config.py:355
 msgid "Standard Columns:"
-msgstr "标准栏目："
+msgstr "標準欄位："
 
 #: config.py:360
 msgid "Take Series from first book"
-msgstr "从第一本书中获取丛书信息"
+msgstr "從第一本書中獲取系列叢書資訊"
 
 #: config.py:361
 msgid ""
 "If set, the Series name and index from the first book will be set on the "
 "merged book."
-msgstr "如果设置，第一本书的系列名称和索引将设置在合并的书中。"
+msgstr "如果設置了此選項，合併後的EPUB書籍將自動加入第一本書的系列叢書名稱及索引。"
 
 #: config.py:366
 msgid "Custom Columns:"
-msgstr "自定义栏目:"
+msgstr "自訂欄位："
 
 #: config.py:369
 msgid ""
 "If you have custom columns defined, they will be listed below.  Choose how "
 "you would like these columns handled."
-msgstr "如果您定义了自定义栏目，它们将在下面列出。选择处理这些栏目的方式。"
+msgstr "如果您定義了自訂欄位，它們將在下面列出。選擇處理這些欄目的方式。"
 
 #: config.py:395
 msgid "Set this %s column on new merged books..."
-msgstr "在新合并的帐簿上设置此%s列..."
+msgstr "在新合併的書籍上設置這個 %s 欄位..."
 
 #: config.py:410
 msgid "How this column will be populated by default."
-msgstr "默认情况下如何填充此列。"
+msgstr "預設情況下如何填充此列。"
 
 #: dialogs.py:46 dialogs.py:70
 msgid "Starting..."
-msgstr "开始……"
+msgstr "開始……"
 
 #: dialogs.py:47 dialogs.py:71
 msgid "Working"
-msgstr "运行中"
+msgstr "運行中"
 
 #: dialogs.py:48 dialogs.py:72
 msgid "Completed so far"
@@ -270,39 +266,39 @@ msgstr "取消"
 
 #: dialogs.py:116
 msgid "Starting Merge..."
-msgstr "开始合并..."
+msgstr "開始合併……"
 
 #: dialogs.py:172
 msgid "Move selected books up the list"
-msgstr "在列表中上移所选书籍"
+msgstr "將列表中所選定的書籍上移"
 
 #: dialogs.py:177
 msgid "Remove selected books from the list"
-msgstr "从列表中删除所选书籍"
+msgstr "將列表中所選定的書籍刪除"
 
 #: dialogs.py:182
 msgid "Move selected books down the list"
-msgstr "在列表中下移所选书籍"
+msgstr "將列表中所選定的書籍下移"
 
 #: dialogs.py:221
 msgid "Author(s)"
-msgstr "作者"
+msgstr "作者(群)"
 
 #: dialogs.py:221
 msgid "Series"
-msgstr "丛书"
+msgstr "系列叢書"
 
 #: dialogs.py:221
 msgid "Title"
-msgstr "书名"
+msgstr "書名"
 
 #: dialogs.py:271
 msgid "Are you sure you want to remove this book from the list?"
-msgstr "你确认要从列表中删除这本书吗？"
+msgstr "是否確認要從列表中刪除這本書？"
 
 #: dialogs.py:273
 msgid "Are you sure you want to remove the selected %d books from the list?"
-msgstr "你确认要冲列表中删除选中的 %d 书籍吗？"
+msgstr "是否確認要從列表中刪除所選的 %d 書籍？"
 
 #: dialogs.py:346
 msgid "UnMerge Epub"
@@ -310,107 +306,107 @@ msgstr "拆分 Epub"
 
 #: dialogs.py:353
 msgid "Apply to all EPUBs?"
-msgstr "应用到所有EPUB?"
+msgstr "是否套用到所有EPUB檔案？"
 
 #: dialogs.py:354
 msgid "Apply the same action to the rest of the EPUBs after this."
-msgstr "在此之后，对其余EPUB应用相同的操作。"
+msgstr "在此之後，對其餘EPUB套用相同的操作。"
 
 #: dialogs.py:358
 msgid "Add"
-msgstr "添加"
+msgstr "加入"
 
 #: dialogs.py:362
 msgid "Overwrite"
-msgstr "覆盖"
+msgstr "覆蓋"
 
 #: dialogs.py:365
 msgid "Discard"
-msgstr "丢弃"
+msgstr "丟棄"
 
 #: epubmerge_plugin.py:63 epubmerge_plugin.py:546 epubmerge_plugin.py:562
 #: epubmerge_plugin.py:673
 msgid "EpubMerge"
-msgstr "Epub合并"
+msgstr "Epub合併"
 
 #: epubmerge_plugin.py:64
 msgid "Merge multiple EPUBs into one in a new book."
-msgstr "将多个EPUB合并为一本新书."
+msgstr "將多個EPUB合併為一本新書."
 
 #: epubmerge_plugin.py:114 epubmerge_plugin.py:115
 msgid "&Merge Epubs"
-msgstr "合并Epub(&M)"
+msgstr "合併EPUB(&M)"
 
 #: epubmerge_plugin.py:118 epubmerge_plugin.py:119
 msgid "&UnMerge Epubs"
-msgstr "拆分Epub(&U)"
+msgstr "拆分EPUB(&U)"
 
 #: epubmerge_plugin.py:128
 msgid "&Configure Plugin"
-msgstr "设置插件(&C)"
+msgstr "設定外掛程式(&C)"
 
 #: epubmerge_plugin.py:130 epubmerge_plugin.py:131
 msgid "Configure EpubMerge"
-msgstr "配置Epub合并"
+msgstr "變更EpubMerge設定"
 
 #: epubmerge_plugin.py:186
 msgid "Cannot UnMerge Non-Epubs"
-msgstr "无法取消合并非Epub文件"
+msgstr "無法取消合併非EPUB檔"
 
 #: epubmerge_plugin.py:187 epubmerge_plugin.py:198
 msgid ""
 "To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
 " Metadata enabled."
-msgstr "要取消合并，源必须是由 EpubMerge 创建并启用“保留取消合并元数据”的 Epub(s)。"
+msgstr "要取消合併，原始文件必須是由啟用了保留取消合併中繼資料功能的 EpubMerge 創建的 EPUB檔案。"
 
 #: epubmerge_plugin.py:197
 msgid "No UnMerge data found"
-msgstr "未找到取消合并数据"
+msgstr "找不到可供還原的必要資訊。"
 
 #: epubmerge_plugin.py:214
 msgid ""
 "You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
 "the same title, Overwrite the Epub in the existing book, or Discard this "
 "Epub."
-msgstr "您已经有一本<i>%s</i> 写的书 <i>%s</i>。 您可以添加一本同名的新书，覆盖现有书中的 Epub，或放弃此 Epub。"
+msgstr "您已經擁有一本同名書籍<i>%s</i>由<i>%s</i>所著。您可以新增一本標題相同的新書，覆蓋現有書籍中的EPUB，或者捨棄此EPUB。"
 
 #: epubmerge_plugin.py:217
 msgid ""
 "You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
 "new book of the same title, or Discard this Epub."
-msgstr "您已经拥有不止一本<i>%s</i>的 <i>%s</i>书。 您可以添加一本同名的新书，或放弃此 Epub。"
+msgstr "您已擁有多於一本同名書籍 <i>%s</i> 由 <i>%s</i> 所著。\n您可以新增一本同標題的新書，或者捨棄此 EPUB。"
 
 #: epubmerge_plugin.py:257 epubmerge_plugin.py:289
 msgid "Cannot Merge Epubs"
-msgstr "无法合并Epub文件"
+msgstr "無法合併Epub書籍"
 
 #: epubmerge_plugin.py:258
 msgid "Less than 2 books selected."
-msgstr "选择的书籍少于两本."
+msgstr "選擇的書籍少於兩本。"
 
 #: epubmerge_plugin.py:278
 msgid "Collecting EPUBs for merger..."
-msgstr "正在收集 EPUB 以进行合并..."
+msgstr "正在取得要合併的EPUB"
 
 #: epubmerge_plugin.py:279
 msgid "Get EPUBs for merge"
-msgstr "获取用于合并的EPUB"
+msgstr "取得用於合併的EPUB"
 
 #: epubmerge_plugin.py:280
 msgid "EPUBs collected"
-msgstr "收集的 EPUB"
+msgstr "要合併的EPUB已取得"
 
 #: epubmerge_plugin.py:290
 msgid "%s books failed."
-msgstr "%s 本书失败."
+msgstr "%s 本書失敗"
 
 #: epubmerge_plugin.py:295
 msgid "Order EPUBs to Merge"
-msgstr "排序要合并的EPUB"
+msgstr "排序要合併的EPUB"
 
 #: epubmerge_plugin.py:362 epubmerge_plugin.py:581
 msgid "%s by %s"
-msgstr "%s 由 %s"
+msgstr "%s 由 %s 翻譯"
 
 #: epubmerge_plugin.py:366
 msgid "%s containing:"
@@ -421,64 +417,64 @@ msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
-msgstr "新合并 EPUB 的书籍已创建并填充了默认元数据。\n\n但是，只有在您审阅、编辑并关闭随后的元数据对话框之后，才会*不会*创建 EPUB。"
+msgstr "已建立新合併 EPUB 的書籍並填入預設的中繼資料。\n然而，在您檢閱、編輯並關閉隨後的對話方塊之前，EPUB 將不會被建立。"
 
 #: epubmerge_plugin.py:557
 msgid ""
 "EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
 "\n"
 "You are merging %s EPUBs totaling %s."
-msgstr "EpubMerge 将在后台作业中完成。 合并的 EPUB 在完成之前不会出现在库中。\n\n您正在合并总计为 %s 的 %s EPUB。"
+msgstr "EpubMerge 將在後台作業中進行。合併後的 EPUB 將在完成後才會顯示在書庫。\n\n您合併了 %s 個 EPUB，總共 %s。"
 
 #: epubmerge_plugin.py:570
 msgid "Merging %s EPUBs..."
-msgstr "正在合并%s 个 EPUB..."
+msgstr "正在合併以下書籍：%s"
 
 #: epubmerge_plugin.py:613
 msgid "EpubMerge: %s"
-msgstr "Epub合并: %s"
+msgstr "Epub合併: %s"
 
 #: epubmerge_plugin.py:624
 msgid "Starting EpubMerge"
-msgstr "开始Epub合并"
+msgstr "開始合併Epub檔案格式..."
 
 #: epubmerge_plugin.py:632 epubmerge_plugin.py:638
 msgid "Remove Failed Anthology Book?"
-msgstr "删除失败的选集书籍？"
+msgstr "是否移除合併失敗的書集清單？"
 
 #: epubmerge_plugin.py:639
 msgid ""
 "EpubMerge failed, no new EPUB was created; see the background job details "
 "for any error messages."
-msgstr "EpubMerge失败，没有创建新的EPUB； 查看后台作业详细信息以获取任何错误消息。"
+msgstr "EpubMerge 合併失敗，沒有建立新的 EPUB；\n請查看後台工作詳細資訊以獲取錯誤訊息。"
 
 #: epubmerge_plugin.py:640
 msgid "Do you want to delete the empty book EpubMerge created?"
-msgstr "是否要删除EpubMerge创建的空书？"
+msgstr "是否要刪除EpubMerge創建的空書？"
 
 #: epubmerge_plugin.py:641
 msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
-msgstr "单击“<b>是</b>”从书库中删除空书，"
+msgstr "按一下“<b>是</b>”從書庫中刪除空書，"
 
 #: epubmerge_plugin.py:642
 msgid "Click '<b>No</b>' to leave it in Library."
-msgstr "单击 '<b>否</b>'将其留在书库中."
+msgstr "按一下 '<b>否</b>'將其留在書庫中."
 
 #: epubmerge_plugin.py:650
 msgid ""
 "Merge finished, output in:\n"
 "%s"
-msgstr "合并完成, 输出文件位于:\n%s"
+msgstr "合併完成, 輸出檔位於:\n%s"
 
 #: epubmerge_plugin.py:662
 msgid "Finished merging %s EPUBs."
-msgstr "完成合并 %s 本EPUB."
+msgstr "完成合併 %s 本EPUB."
 
 #: epubmerge_plugin.py:670
 msgid ""
 "EpubMerge has finished. The new EPUB has been added to the book previously "
 "created."
-msgstr "EpubMerge 已完成。 新的 EPUB 已添加到之前创建的书中。"
+msgstr "EpubMerge作業完成，新的EPUB已建立。"
 
 #: epubmerge_plugin.py:684 epubmerge_plugin.py:685 epubmerge_plugin.py:686
 msgid "Unknown"
@@ -486,4 +482,4 @@ msgstr "未知"
 
 #: epubmerge_plugin.py:727
 msgid "%s by %s doesn't have an EPUB."
-msgstr "以下位置 %s 找不到EPUB书籍。"
+msgstr "以下位置 %s 找不到EPUB書籍。"
