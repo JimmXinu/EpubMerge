@@ -954,5 +954,5 @@ if __name__ == "__main__":
     main(sys.argv[1:])
     #doUnMerge(sys.argv[1],sys.argv[2])
 
-def call_main:
+def call_main():
     main(sys.argv[1:])
