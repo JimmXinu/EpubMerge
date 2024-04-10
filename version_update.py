@@ -26,7 +26,7 @@ from os import rename, close, unlink
 version_files = [
     'setup.py',
     '__init__.py',
-    'epubmerge.py',
+    'epubmerge/epubmerge.py',
     ]
 
 ## save version from this file for index.html link.
