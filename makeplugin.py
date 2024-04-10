@@ -17,7 +17,7 @@ if __name__=="__main__":
     exclude=['*.pyc','*~','*.xcf','*[0-9].png','makezip.py','makeplugin.py','*.po','*.pot','*default.mo','*Thumbs.db']
     # from top dir. 'w' for overwrite
     #from calibre-plugin dir. 'a' for append
-    files=['images','translations']
+    files=['epubmerge','images','translations']
     files.extend(glob('*.py'))
     files.extend(glob('plugin-import-name-*.txt'))
     createZipFile(filename,"w",
