@@ -1,5 +1,3 @@
-
-
 """A setuptools based setup module.
 
 See:
@@ -7,17 +5,17 @@ https://packaging.python.org/en/latest/distributing.html
 https://github.com/pypa/sampleproject
 """
 
-# Always prefer setuptools over distutils
-from setuptools import setup, find_packages
 # To use a consistent encoding
 import codecs
-from os import path
-
-package_name="EpubMerge"
-
+# Always prefer setuptools over distutils
 import sys
-if sys.version_info < (2,7):
-    sys.exit(package_name+' requires Python 2.7 or newer.')
+
+from setuptools import setup
+
+package_name = "EpubMerge"
+
+if sys.version_info < (2, 7):
+    sys.exit(package_name + ' requires Python 2.7 or newer.')
 
 # Get the long description from the relevant file
 with codecs.open('DESCRIPTION.rst', encoding='utf-8') as f:
@@ -28,7 +26,6 @@ setup(
 
     # Versions should comply with PEP440.
     version="2.18.0",
-
     description='A tool for merging multiple epubs into one.',
     long_description=long_description,
 
@@ -49,7 +46,6 @@ setup(
         #   4 - Beta
         #   5 - Production/Stable
         'Development Status :: 4 - Beta',
-
         'Environment :: Console',
 
         # Indicate who your project is intended for
@@ -93,8 +89,7 @@ setup(
     # If there are data files included in your packages that need to be
     # installed, specify them here.  If using Python 2.6 or less, then these
     # have to be included in MANIFEST.in as well.
-    package_data={
-    },
+    package_data={},
 
     # Although 'package_data' is the preferred approach, in some case you may
     # need to place data files outside of your packages. See:
@@ -110,4 +105,4 @@ setup(
             'epubmerge=epubmerge:main',
         ],
     },
-)
+    scripts=['epubmerge/epubmerge.py'])
