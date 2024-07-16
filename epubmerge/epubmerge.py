@@ -26,6 +26,8 @@ from time import time, sleep
 
 from xml.dom.minidom import parse, parseString, getDOMImplementation, Element
 
+from six import text_type
+
 try:
     from six import ensure_binary
 except:
@@ -53,7 +55,7 @@ except:
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-    from six import text_type, binary_type
+    from six import binary_type
     def ensure_binary(s, encoding='utf-8', errors='strict'):
         """Coerce **s** to six.binary_type.
 
@@ -369,157 +371,171 @@ def doMerge(outputio,
 
     booknum=1
     firstmetadom = None
-    for file in files:
-        if file == None : continue
 
-        book = "%d" % booknum
-        bookdir = "%d/" % booknum
-        bookid = "a%d" % booknum
-
-        epub = ZipFile(file, 'r')
-
-        ## Find the .opf file.
-        container = epub.read("META-INF/container.xml")
-        containerdom = parseString(container)
-        rootfilenodelist = containerdom.getElementsByTagNameNS("*","rootfile")
-        rootfilename = rootfilenodelist[0].getAttribute("full-path")
-
-        ## Save the path to the .opf file--hrefs inside it are relative to it.
-        relpath = get_path_part(rootfilename)
-
-        metadom = parseString(epub.read(rootfilename))
-        fontdecrypter = FontDecrypter(epub,metadom)
-        # logger.debug("metadom:%s"%epub.read(rootfilename))
-        if booknum==1 and not source:
-            try:
-                firstmetadom = metadom.getElementsByTagNameNS("*","metadata")[0]
-                source=unicode(firstmetadom.getElementsByTagName("dc:source")[0].firstChild.data)
-            except:
-                source=""
-
-        is_fff_epub.append(False)
-        ## looking for any of:
-        ##   <dc:contributor id="id-2">FanFicFare [https://github.com/JimmXinu/FanFicFare]</dc:contributor>
-        ##   <dc:identifier opf:scheme="FANFICFARE-UID">test1.com-u98765-s68</dc:identifier>
-        ##   <dc:identifier id="fanficfare-uid">fanficfare-uid:test1.com-u98765-s68</dc:identifier>
-        ## FFF writes dc:contributor and dc:identifier
-        ## Sigil changes the unique-identifier, but leaves dc:contributor
-        ## Calibre epub3->epub2 convert changes dc:contributor and modifies dc:identifier
-        for c in metadom.getElementsByTagName("dc:contributor") + metadom.getElementsByTagName("dc:identifier"):
-            # logger.debug("dc:contributor/identifier:%s"%getText(c.childNodes))
-            # logger.debug("dc:contributor/identifier:%s / %s"%(c.getAttribute('opf:scheme'),c.getAttribute('id')))
-            if ( getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
-                                           "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]
-                 or 'fanficfare-uid' in c.getAttribute('opf:scheme').lower()
-                 or 'fanficfare-uid' in c.getAttribute('id').lower() ):
-                # logger.debug("------------> is_fff_epub <-----------------")
-                is_fff_epub[-1] = True # set last.
-                break;
-
-        ## Save indiv book title
+    for epub in files:
+        current_epub = {}
+        if epub == None : continue
         try:
-            booktitles.append(metadom.getElementsByTagName("dc:title")[0].firstChild.data)
-        except:
-            booktitles.append("(Title Missing)")
+            if isinstance(epub, text_type):
+                current_epub['filename'] = epub
+            book = "%d" % booknum
+            bookdir = "%d/" % booknum
+            bookid = "a%d" % booknum
 
-        ## Save authors.
-        authors=[]
-        for creator in metadom.getElementsByTagName("dc:creator"):
+            epub = ZipFile(epub, 'r')
+
+            ## Find the .opf file.
+            container = epub.read("META-INF/container.xml")
+            containerdom = parseString(container)
+            rootfilenodelist = containerdom.getElementsByTagNameNS("*","rootfile")
+            rootfilename = rootfilenodelist[0].getAttribute("full-path")
+
+            ## Save the path to the .opf file--hrefs inside it are relative to it.
+            relpath = get_path_part(rootfilename)
+
+            metadom = parseString(epub.read(rootfilename))
+            fontdecrypter = FontDecrypter(epub,metadom)
+            # logger.debug("metadom:%s"%epub.read(rootfilename))
+            if booknum==1 and not source:
+                try:
+                    firstmetadom = metadom.getElementsByTagNameNS("*","metadata")[0]
+                    source=unicode(firstmetadom.getElementsByTagName("dc:source")[0].firstChild.data)
+                except:
+                    source=""
+
+            is_fff_epub.append(False)
+            ## looking for any of:
+            ##   <dc:contributor id="id-2">FanFicFare [https://github.com/JimmXinu/FanFicFare]</dc:contributor>
+            ##   <dc:identifier opf:scheme="FANFICFARE-UID">test1.com-u98765-s68</dc:identifier>
+            ##   <dc:identifier id="fanficfare-uid">fanficfare-uid:test1.com-u98765-s68</dc:identifier>
+            ## FFF writes dc:contributor and dc:identifier
+            ## Sigil changes the unique-identifier, but leaves dc:contributor
+            ## Calibre epub3->epub2 convert changes dc:contributor and modifies dc:identifier
+            for c in metadom.getElementsByTagName("dc:contributor") + metadom.getElementsByTagName("dc:identifier"):
+                # logger.debug("dc:contributor/identifier:%s"%getText(c.childNodes))
+                # logger.debug("dc:contributor/identifier:%s / %s"%(c.getAttribute('opf:scheme'),c.getAttribute('id')))
+                if ( getText(c.childNodes) in ["fanficdownloader [http://fanficdownloader.googlecode.com]",
+                                               "FanFicFare [https://github.com/JimmXinu/FanFicFare]"]
+                     or 'fanficfare-uid' in c.getAttribute('opf:scheme').lower()
+                     or 'fanficfare-uid' in c.getAttribute('id').lower() ):
+                    # logger.debug("------------> is_fff_epub <-----------------")
+                    is_fff_epub[-1] = True # set last.
+                    break;
+
+            ## Save indiv book title
             try:
-                if( creator.getAttribute("opf:role") == "aut" or not creator.hasAttribute("opf:role") and creator.firstChild != None):
-                    authors.append(creator.firstChild.data)
-                    if creator.getAttribute("opf:file-as"):
-                        fileasauthors[creator.firstChild.data]=creator.getAttribute("opf:file-as")
+                booktitles.append(metadom.getElementsByTagName("dc:title")[0].firstChild.data)
             except:
-                pass
-        if len(authors) == 0:
-            authors.append("(Author Missing)")
-        allauthors.append(authors)
+                booktitles.append("(Title Missing)")
+            current_epub['title'] = booktitles[-1]
 
-        if keepmetadatafiles:
-            itemid=bookid+"rootfile"
-            itemhref = rootfilename
-            href = normpath(bookdir+itemhref)
-            logger.debug("write rootfile %s to %s"%(itemhref,href))
-            outputepub.writestr(href,
-                                epub.read(itemhref))
-            items.append((itemid,href,"origrootfile/xml"))
+            ## Save authors.
+            authors=[]
+            for creator in metadom.getElementsByTagName("dc:creator"):
+                try:
+                    if( creator.getAttribute("opf:role") == "aut" or not creator.hasAttribute("opf:role") and creator.firstChild != None):
+                        authors.append(creator.firstChild.data)
+                        if creator.getAttribute("opf:file-as"):
+                            fileasauthors[creator.firstChild.data]=creator.getAttribute("opf:file-as")
+                except:
+                    pass
+            if len(authors) == 0:
+                authors.append("(Author Missing)")
+            allauthors.append(authors)
+            current_epub['authors'] = authors
 
-        # spin through the manifest--only place there are item tags.
-        # Correction--only place there *should* be item tags.  But
-        # somebody found one that did.
-        manifesttag=metadom.getElementsByTagNameNS("*","manifest")[0]
-        for item in manifesttag.getElementsByTagNameNS("*","item"):
-            itemid=bookid+item.getAttribute("id")
-            itemhref = normpath(unquote(item.getAttribute("href"))) # remove %20, etc.
-            href = normpath(bookdir+relpath+itemhref) # normpath for ..
-            # if item.getAttribute("properties") == "nav":
-            #     # epub3 TOC file is only one with this type--as far as I know.
-            #     # grab the whole navmap, deal with it later.
-            # el
-            if item.getAttribute("media-type") == "application/x-dtbncx+xml":
-                # epub2 TOC file is only one with this type--as far as I know.
-                # grab the whole navmap, deal with it later.
-                tocdom = parseString(epub.read(normpath(relpath+item.getAttribute("href"))))
+            if keepmetadatafiles:
+                itemid=bookid+"rootfile"
+                itemhref = rootfilename
+                href = normpath(bookdir+itemhref)
+                logger.debug("write rootfile %s to %s"%(itemhref,href))
+                outputepub.writestr(href,
+                                    epub.read(itemhref))
+                items.append((itemid,href,"origrootfile/xml"))
 
-                # update all navpoint ids with bookid for uniqueness.
-                for navpoint in tocdom.getElementsByTagNameNS("*","navPoint"):
-                    navpoint.setAttribute("id",bookid+navpoint.getAttribute("id"))
+            # spin through the manifest--only place there are item tags.
+            # Correction--only place there *should* be item tags.  But
+            # somebody found one that did.
+            manifesttag=metadom.getElementsByTagNameNS("*","manifest")[0]
+            for item in manifesttag.getElementsByTagNameNS("*","item"):
+                itemid=bookid+item.getAttribute("id")
+                itemhref = normpath(unquote(item.getAttribute("href"))) # remove %20, etc.
+                href = normpath(bookdir+relpath+itemhref) # normpath for ..
+                # if item.getAttribute("properties") == "nav":
+                #     # epub3 TOC file is only one with this type--as far as I know.
+                #     # grab the whole navmap, deal with it later.
+                # el
+                if item.getAttribute("media-type") == "application/x-dtbncx+xml":
+                    # epub2 TOC file is only one with this type--as far as I know.
+                    # grab the whole navmap, deal with it later.
+                    tocdom = parseString(epub.read(normpath(relpath+item.getAttribute("href"))))
 
-                # update all content paths with bookdir for uniqueness.
-                for content in tocdom.getElementsByTagNameNS("*","content"):
-                    content.setAttribute("src",normpath(bookdir+relpath+content.getAttribute("src")))
+                    # update all navpoint ids with bookid for uniqueness.
+                    for navpoint in tocdom.getElementsByTagNameNS("*","navPoint"):
+                        navpoint.setAttribute("id",bookid+navpoint.getAttribute("id"))
 
-                if len(navmaps) == booknum:
-                    logger.warning("More than one application/x-dtbncx+xml (toc.ncx) file found, using last to match Calibre viewer")
-                    navmaps[-1]=tocdom.getElementsByTagNameNS("*","navMap")[0]
+                    # update all content paths with bookdir for uniqueness.
+                    for content in tocdom.getElementsByTagNameNS("*","content"):
+                        content.setAttribute("src",normpath(bookdir+relpath+content.getAttribute("src")))
+
+                    if len(navmaps) == booknum:
+                        logger.warning("More than one application/x-dtbncx+xml (toc.ncx) file found, using last to match Calibre viewer")
+                        navmaps[-1]=tocdom.getElementsByTagNameNS("*","navMap")[0]
+                    else:
+                        navmaps.append(tocdom.getElementsByTagNameNS("*","navMap")[0])
+
+                    if keepmetadatafiles:
+                        logger.debug("write toc.ncx %s to %s"%(relpath+itemhref,href))
+                        outputepub.writestr(href,
+                                            epub.read(normpath(relpath+itemhref)))
+                        items.append((itemid,href,"origtocncx/xml"))
                 else:
-                    navmaps.append(tocdom.getElementsByTagNameNS("*","navMap")[0])
+                    #href=href.encode('utf8')
+                    # logger.debug("item id: %s -> %s:"%(itemid,href))
+                    itemhrefs[itemid] = href
+                    if href not in filelist:
+                        try:
+                            # logger.debug("read href:%s"%normpath(relpath+itemhref))
+                            filedata = epub.read(normpath(relpath+itemhref))
+                            if normpath(relpath+itemhref) in fontdecrypter.get_encrypted_fontfiles():
+                                logger.info("Decrypting font file: %s"%itemhref)
+                                filedata = fontdecrypter.get_decrypted_font_data(normpath(relpath+itemhref))
+                            outputepub.writestr(href,filedata)
+                            if re.match(r'.*/(file|chapter)\d+\.x?html',href):
+                                filecount+=1
+                            items.append((itemid,href,item.getAttribute("media-type")))
+                            filelist.append(href)
+                        except KeyError as ke: # Skip missing files.
+                            logger.info("Skipping missing file %s (%s)"%(href,relpath+itemhref))
+                            del itemhrefs[itemid]
 
-                if keepmetadatafiles:
-                    logger.debug("write toc.ncx %s to %s"%(relpath+itemhref,href))
-                    outputepub.writestr(href,
-                                        epub.read(normpath(relpath+itemhref)))
-                    items.append((itemid,href,"origtocncx/xml"))
-            else:
-                #href=href.encode('utf8')
-                # logger.debug("item id: %s -> %s:"%(itemid,href))
-                itemhrefs[itemid] = href
-                if href not in filelist:
-                    try:
-                        # logger.debug("read href:%s"%normpath(relpath+itemhref))
-                        filedata = epub.read(normpath(relpath+itemhref))
-                        if normpath(relpath+itemhref) in fontdecrypter.get_encrypted_fontfiles():
-                            logger.info("Decrypting font file: %s"%itemhref)
-                            filedata = fontdecrypter.get_decrypted_font_data(normpath(relpath+itemhref))
-                        outputepub.writestr(href,filedata)
-                        if re.match(r'.*/(file|chapter)\d+\.x?html',href):
-                            filecount+=1
-                        items.append((itemid,href,item.getAttribute("media-type")))
-                        filelist.append(href)
-                    except KeyError as ke: # Skip missing files.
-                        logger.info("Skipping missing file %s (%s)"%(href,relpath+itemhref))
-                        del itemhrefs[itemid]
+            itemreflist = metadom.getElementsByTagNameNS("*","itemref")
+            # logger.debug("itemhrefs:%s"%itemhrefs)
+            logger.debug("bookid:%s"%bookid)
+            logger.debug("itemreflist[0].getAttribute(idref):%s"%itemreflist[0].getAttribute("idref"))
 
-        itemreflist = metadom.getElementsByTagNameNS("*","itemref")
-        # logger.debug("itemhrefs:%s"%itemhrefs)
-        logger.debug("bookid:%s"%bookid)
-        logger.debug("itemreflist[0].getAttribute(idref):%s"%itemreflist[0].getAttribute("idref"))
+            # Looking for the first item in itemreflist that wasn't
+            # discarded due to missing files.
+            for itemref in itemreflist:
+                idref = bookid+itemref.getAttribute("idref")
+                if idref in itemhrefs:
+                    firstitemhrefs.append(itemhrefs[idref])
+                    break
 
-        # Looking for the first item in itemreflist that wasn't
-        # discarded due to missing files.
-        for itemref in itemreflist:
-            idref = bookid+itemref.getAttribute("idref")
-            if idref in itemhrefs:
-                firstitemhrefs.append(itemhrefs[idref])
-                break
+            for itemref in itemreflist:
+                itemrefs.append(bookid+itemref.getAttribute("idref"))
+                # logger.debug("adding to itemrefs:\n%s"%itemref.toprettyxml())
 
-        for itemref in itemreflist:
-            itemrefs.append(bookid+itemref.getAttribute("idref"))
-            # logger.debug("adding to itemrefs:\n%s"%itemref.toprettyxml())
+            notify_progress(float(booknum-1)/len(files))
+            booknum=booknum+1;
 
-        notify_progress(float(booknum-1)/len(files))
-        booknum=booknum+1;
+        except:
+            print("\nError occurred processing '%s' by %s.\nTemp file left in %s\n"%(
+                    current_epub.get('title','Unknown'),
+                    current_epub.get('authors','Unknown'),
+                    current_epub.get('filename','Unknown')))
+            raise
+        # print(current_epub)
 
     printt("after file loop:%s"%(time()-t))
     t = time()
