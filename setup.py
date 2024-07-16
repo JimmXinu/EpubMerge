@@ -25,7 +25,7 @@ setup(
     name=package_name,
 
     # Versions should comply with PEP440.
-    version="3.0.0",
+    version="3.0.1",
     description='A tool for merging multiple epubs into one.',
     long_description=long_description,
 
