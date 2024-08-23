@@ -111,10 +111,10 @@ class FontDecrypter:
                 encryptiondom = parseString(encryption)
                 # print(encryptiondom.toprettyxml(indent='   '))
                 for encdata in encryptiondom.getElementsByTagName('enc:EncryptedData'):
-                    # print(encdata.toprettyxml(indent='   '))
+                    # logger.debug(encdata.toprettyxml(indent='   '))
                     algorithm = encdata.getElementsByTagName('enc:EncryptionMethod')[0].getAttribute('Algorithm')
                     if algorithm not in {ADOBE_OBFUSCATION, IDPF_OBFUSCATION}:
-                        print("Unknown font encryption: %s"%algorithm)
+                        logger.warning("Unknown font encryption: %s"%algorithm)
                     else:
                         # print(algorithm)
                         for encref in encdata.getElementsByTagName('enc:CipherReference'):
@@ -129,7 +129,10 @@ class FontDecrypter:
             contentdom = self.content_dom
             uidkey = contentdom.getElementsByTagName("package")[0].getAttribute("unique-identifier")
             for dcid in contentdom.getElementsByTagName("dc:identifier"):
-                if dcid.getAttribute("id") == uidkey and dcid.getAttribute("opf:scheme") == "uuid":
+                # logger.debug(dcid)
+                # logger.debug(dcid.getAttribute("opf:scheme"))
+                # logger.debug(dcid.firstChild.data)
+                if dcid.getAttribute("id") == uidkey:# and dcid.getAttribute("opf:scheme") == "uuid":
                     self.old_uuid = dcid.firstChild.data
         return self.old_uuid
 
