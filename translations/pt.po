@@ -141,7 +141,7 @@ msgstr "Atalhos de teclado..."
 
 #: config.py:289
 msgid "Edit the keyboard shortcuts associated with this plugin"
-msgstr "Editar os atalhos de teclado associados a esta extensão"
+msgstr "Editar os atalhos de teclado associados a este plugin"
 
 #: config.py:293
 msgid "Reset disabled &confirmation dialogs"
@@ -157,7 +157,7 @@ msgstr "Ver preferências da biblioteca..."
 
 #: config.py:299
 msgid "View data stored in the library database for this plugin"
-msgstr "Ver dados armazenados na base de dados da biblioteca para esta extensão"
+msgstr "Ver dados armazenados na base de dados da biblioteca relacionados com este plugin"
 
 #: config.py:314
 msgid "Done"
