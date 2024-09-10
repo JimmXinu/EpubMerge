@@ -102,5 +102,5 @@ class EpubMergeBase(InterfaceActionBase):
             ac.apply_settings()
 
     def cli_main(self,argv):
-        from calibre_plugins.epubmerge.epubmerge import main as epubmerge_main
+        from calibre_plugins.epubmerge.epubmerge.epubmerge import main as epubmerge_main
         epubmerge_main(argv[1:],usage='%prog --run-plugin '+self.name+' --')
