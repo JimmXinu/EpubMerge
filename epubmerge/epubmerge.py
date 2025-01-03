@@ -375,6 +375,10 @@ def doMerge(outputio,
     booknum=1
     firstmetadom = None
 
+    ## only set <spine page-progression-direction=X > if all input
+    ## books agree and it's not empty string.
+    outputpagedirs = set()
+
     for epub in files:
         current_epub = {}
         if epub == None : continue
@@ -446,6 +450,9 @@ def doMerge(outputio,
                 authors.append("(Author Missing)")
             allauthors.append(authors)
             current_epub['authors'] = authors
+
+            ## Record input page dir.
+            outputpagedirs.add(metadom.getElementsByTagName("spine")[0].getAttribute("page-progression-direction"))
 
             if keepmetadatafiles:
                 itemid=bookid+"rootfile"
@@ -608,6 +615,15 @@ def doMerge(outputio,
     package.appendChild(manifest)
 
     spine = newTag(contentdom,"spine",attrs={"toc":"ncx"})
+    if len(outputpagedirs) == 1:
+        ## all books had the same page-progression-direction value.
+        pagedir = outputpagedirs.pop()
+        if pagedir:
+            ## ...and it's not empty string.
+            logger.debug("Setting <spine page-progression-direction='%s'>"%pagedir)
+            spine.setAttribute("page-progression-direction",pagedir)
+    else:
+        logger.debug("<spine page-progression-direction attrs didn't all match %s, ignoring."%outputpagedirs)
     package.appendChild(spine)
 
     if coverjpgpath:
