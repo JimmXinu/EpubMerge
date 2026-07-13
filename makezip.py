@@ -7,7 +7,7 @@ __docformat__ = 'restructuredtext en'
 
 import os, zipfile, sys
 from glob import glob
-from six import text_type as unicode
+unicode = str
 
 def addFolderToZip(myZipFile,folder,exclude=[]):
     folder = unicode(folder) #convert path to ascii for ZipFile Method

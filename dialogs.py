@@ -20,7 +20,8 @@ from PyQt5 import QtWidgets as QtGui
 from PyQt5.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayout, QGridLayout,
                       QPushButton, QProgressDialog, QLabel, QCheckBox, QIcon, QTextCursor,
                       QTextEdit, QLineEdit, QInputDialog, QComboBox, QClipboard,
-                      QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView )
+                      QProgressDialog, QTimer, QDialogButtonBox, QPixmap, Qt,QAbstractItemView,
+                      QTableWidgetItem, QGroupBox, QRadioButton )
 
 from calibre.gui2 import error_dialog, warning_dialog, question_dialog, info_dialog
 from calibre.gui2.dialogs.confirm_delete import confirm
@@ -183,8 +184,41 @@ class OrderEPUBsDialog(SizePersistedDialog):
         self.move_down_button.setIcon(QIcon(I('arrow-down.png')))
         self.move_down_button.clicked.connect(self.books_table.move_rows_down)
         button_layout.addWidget(self.move_down_button)
+        self.local_upload_button = QtGui.QToolButton(self)
+        self.local_upload_button.setToolTip(_('Add EPUBs from PC...'))
+        self.local_upload_button.setIcon(get_icon('document_open.png'))
+        self.local_upload_button.clicked.connect(self.local_upload)
+        button_layout.addWidget(self.local_upload_button)
         spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         button_layout.addItem(spacerItem1)
+
+        # Configure merge options
+        self.merge_group = QGroupBox(_("Output Merge Option"), self)
+        group_layout = QVBoxLayout()
+        self.merge_group.setLayout(group_layout)
+        
+        self.btn_create_new = QRadioButton(_("Create a new book entry in the library"), self)
+        self.btn_overwrite = QRadioButton(_("Update an existing book entry"), self)
+        self.btn_create_new.setChecked(True)
+        
+        group_layout.addWidget(self.btn_create_new)
+        group_layout.addWidget(self.btn_overwrite)
+        
+        self.overwrite_combo = QComboBox(self)
+        self.overwrite_combo.setEnabled(False)
+        
+        self.library_books = []
+        for b in books:
+            if b.get('calibre_id') is not None:
+                self.library_books.append(b)
+                self.overwrite_combo.addItem(f"{b['title']} - {', '.join(b['authors'])}", b['calibre_id'])
+                
+        if not self.library_books:
+            self.btn_overwrite.setEnabled(False)
+            
+        self.btn_overwrite.toggled.connect(self.overwrite_combo.setEnabled)
+        group_layout.addWidget(self.overwrite_combo)
+        layout.addWidget(self.merge_group)
 
         options_layout = QHBoxLayout()
 
@@ -204,6 +238,59 @@ class OrderEPUBsDialog(SizePersistedDialog):
 
     def get_books(self):
         return self.books_table.get_books()
+
+    def get_merge_option(self):
+        is_overwrite = self.btn_overwrite.isChecked()
+        target_id = self.overwrite_combo.itemData(self.overwrite_combo.currentIndex()) if is_overwrite else None
+        return is_overwrite, target_id
+
+    def local_upload(self):
+        import os
+        from calibre.gui2 import choose_files, error_dialog
+        from calibre.ebooks.metadata.epub import get_metadata
+        
+        files = choose_files(self, 'epubmerge:local_upload_dialog',
+                             _('Choose EPUB files to merge'),
+                             filters=[(_('EPUB files'), ['epub'])],
+                             all_files=False, select_only_single_file=False)
+        if not files:
+            return
+            
+        for filepath in files:
+            try:
+                with open(filepath, 'rb') as f:
+                    mi = get_metadata(f)
+                
+                book = {
+                    'good': True,
+                    'calibre_id': None,
+                    'title': mi.title or _('Unknown'),
+                    'authors': mi.authors or [_('Unknown')],
+                    'author_sort': mi.author_sort or _('Unknown'),
+                    'tags': mi.tags or [],
+                    'series': mi.series or '',
+                    'comments': mi.comments or '',
+                    'publisher': mi.publisher or '',
+                    'pubdate': mi.pubdate or None,
+                    'series_index': mi.series_index if mi.series else None,
+                    'languages': mi.languages or ['en'],
+                    'error': '',
+                    'epub': filepath,
+                    'epub_size': os.path.getsize(filepath)
+                }
+                
+                # Append to books_table
+                row = self.books_table.rowCount()
+                self.books_table.setRowCount(row + 1)
+                self.books_table.populate_table_row(row, book)
+                self.books_table.books[row] = book
+                
+            except Exception as e:
+                error_dialog(self, _('Error reading file'),
+                             _('Could not read metadata from %s:<br>%s') % (filepath, str(e)),
+                             show_copy_button=False).exec_()
+
+
 
 class StoryListTableWidget(QTableWidget):
 
