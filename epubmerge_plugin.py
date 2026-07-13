@@ -395,15 +395,14 @@ class EpubMergePlugin(InterfaceAction):
             has_epub_backup = False
 
             if is_overwrite and target_id is not None:
-                # Secondary "Are you sure?" confirmation dialog
-                confirm_overwrite = question_dialog(
+                # Overwrite confirmation dialog
+                confirm_overwrite = confirm('\n'+_('''Are you sure you want to overwrite the existing EPUB in book <i>%s</i>?<br><br>
+
+This will replace the current EPUB file. A backup of the previous file will be saved in Calibre as ORIGINAL_EPUB.''') % mi.title,
+                    'epubmerge_overwrite_epub_confirm',
                     self.gui,
-                    _("Confirm Overwrite"),
-                    #ISSUE LINE OVERFLOW
-                    _("Are you sure you want to overwrite the existing EPUB in book <i>%s</i>?<br><br>"
-                      "This will replace the current EPUB file. A backup of the previous file will be saved in Calibre as ORIGINAL_EPUB.") % mi.title,
-                    show_copy_button=False
-                )
+                    title=_("EpubMerge"),
+                    show_cancel_button=True)
 
                 if not confirm_overwrite:
                     # Abort the merge operation and clean up
@@ -745,7 +744,7 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
         if self.gui.cover_flow:
             self.gui.cover_flow.dataChanged()
 
-        # Check for duplicate page references in the newly merged EPUB (prevents 2 TOC entries to the same page)
+        # Check for duplicate page references in the newly merged EPUB (prevents 2 TOC entries to the)
         try:
             import zipfile
             import xml.etree.ElementTree as ET
