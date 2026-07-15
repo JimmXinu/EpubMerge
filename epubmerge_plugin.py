@@ -732,19 +732,8 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
         logger.debug("7:%s"%(time.time()-self.t))
         self.t = time.time()
 
-        # clean up temp files.
-        remove_dir(args['tdir'])
-
-        self.gui.status_bar.show_message(_('Finished merging %s EPUBs.')%book_count, 3000)
-        self.gui.library_view.model().refresh_ids([book_id])
-        self.gui.tags_view.recount()
-        current = self.gui.library_view.currentIndex()
-        self.gui.library_view.model().current_changed(current, self.previous)
-            #self.gui.iactions['View'].view_book(False)
-        if self.gui.cover_flow:
-            self.gui.cover_flow.dataChanged()
-
-        # Check for duplicate page references in the newly merged EPUB (prevents 2 TOC entries to the)
+        # Check for duplicate page references in the newly merged EPUB (prevents 2 TOC entries to the same page)
+        duplicates = []
         try:
             import zipfile
             import xml.etree.ElementTree as ET
@@ -775,17 +764,29 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
                                 src_map[base_src] = []
                             src_map[base_src].append(label)
                     
-                    duplicates = []
                     for base, labels in src_map.items():
                         if len(labels) > 1:
                             duplicates.append(_("Page '%s' is referenced by multiple chapters: %s") % (base, ", ".join(f"'{l}'" for l in labels)))
                             
-                    if duplicates:
-                        msg = _("The merged EPUB contains chapters referencing the same content pages:<br><br>%s") % "<br>".join(duplicates)
-                        warning_dialog(self.gui, _("Duplicate Chapter Page References"), msg, show_copy_button=False).exec_()
         except Exception as ex:
             logger.error("Error checking duplicate TOC references: %s" % str(ex), exc_info=True)
 
+        # clean up temp files.
+        remove_dir(args['tdir'])
+
+        self.gui.status_bar.show_message(_('Finished merging %s EPUBs.')%book_count, 3000)
+        self.gui.library_view.model().refresh_ids([book_id])
+        self.gui.tags_view.recount()
+        current = self.gui.library_view.currentIndex()
+        self.gui.library_view.model().current_changed(current, self.previous)
+            #self.gui.iactions['View'].view_book(False)
+        if self.gui.cover_flow:
+            self.gui.cover_flow.dataChanged()
+
+        if duplicates:
+            msg = _("The merged EPUB contains chapters referencing the same content pages:<br><br>%s") % "<br>".join(duplicates)
+            error_dialog(self.gui, _("Duplicate Chapter Page References"), msg, show_copy_button=False).exec_()
+        
         confirm('\n'+_('''EpubMerge has finished. The new EPUB has been added to the book previously created.'''),
                 'epubmerge_finished_again',
                 self.gui,
