@@ -3,6 +3,7 @@
 from __future__ import (unicode_literals, division,
                         print_function)
 
+import os
 import logging
 logger = logging.getLogger(__name__)
 
@@ -24,8 +25,11 @@ from PyQt5.Qt import (QDialog, QTableWidget, QMessageBox, QVBoxLayout, QHBoxLayo
                       QTableWidgetItem, QGroupBox, QRadioButton )
 
 from calibre.gui2 import error_dialog, warning_dialog, question_dialog, info_dialog
+from calibre.gui2 import choose_files
+from calibre.ebooks.metadata.epub import get_metadata
 from calibre.gui2.dialogs.confirm_delete import confirm
 from calibre.ebooks.metadata import fmt_sidx
+from calibre.ptempfile import PersistentTemporaryDirectory
 
 from calibre import confirm_config_name
 from calibre.gui2 import dynamic
@@ -55,11 +59,11 @@ def LoopProgressDialog(gui,
                              status_prefix)
     # Mac OS X gets upset if the finish_function is called from inside
     # the real _LoopProgressDialog class.
-    
+
     # reflect old behavior.
     if not ld.wasCanceled():
         finish_function(book_list)
-        
+
 class _LoopProgressDialog(QProgressDialog):
     '''
     ProgressDialog displayed while fetching metadata for each story.
@@ -186,7 +190,7 @@ class OrderEPUBsDialog(SizePersistedDialog):
         button_layout.addWidget(self.move_down_button)
         self.local_upload_button = QtGui.QToolButton(self)
         self.local_upload_button.setToolTip(_('Add EPUBs from PC...'))
-        self.local_upload_button.setIcon(get_icon('document_open.png'))
+        self.local_upload_button.setIcon(get_icon('add_book.png'))
         self.local_upload_button.clicked.connect(self.local_upload)
         button_layout.addWidget(self.local_upload_button)
         spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
@@ -239,57 +243,76 @@ class OrderEPUBsDialog(SizePersistedDialog):
     def get_books(self):
         return self.books_table.get_books()
 
-    def get_merge_option(self):
-        is_overwrite = self.btn_overwrite.isChecked()
-        target_id = self.overwrite_combo.itemData(self.overwrite_combo.currentIndex()) if is_overwrite else None
-        return is_overwrite, target_id
+    def populate_book_from_local_upload(self, book, db=None, tdir=None):
+        try:
+            filepath = book['epub']
+            with open(filepath, 'rb') as f:
+                mi = get_metadata(f)
+
+            book['calibre_id'] = None
+            book['title'] = mi.title or _('Unknown')
+            book['authors'] = mi.authors or [_('Unknown')]
+            book['author_sort'] = mi.author_sort or _('Unknown')
+            book['tags'] = mi.tags or []
+            book['series'] = mi.series or ''
+            book['comments'] = mi.comments or ''
+            book['publisher'] = mi.publisher or ''
+            book['pubdate'] = mi.pubdate or None
+            book['series_index'] = mi.series_index if mi.series else None
+            book['languages'] = mi.languages or ['en']
+            book['error'] = ''
+            book['epub_size'] = os.path.getsize(filepath)
+
+            return book
+
+        except Exception as e:
+            book['good'] = False
+            book['error'] = str(e)
+            raise e
+
+    def _append_book_to_table(self, book_list, db=None, tdir=None):
+        failed_files = []
+        for book in book_list:
+            if book.get('good'):
+                row = self.books_table.rowCount()
+                self.books_table.setRowCount(row + 1)
+                self.books_table.populate_table_row(row, book)
+                self.books_table.books[row] = book
+            else:
+                failed_files.append(f"{os.path.basename(book['epub'])}: {book.get('error') or book.get('comment')}")
+
+        self.books_table.resizeColumnsToContents()
+
+        if failed_files:
+            error_dialog(self, _('Error reading files'),
+                         _('Could not read metadata from the following files:<br><br>%s') % '<br>'.join(failed_files),
+                         show_copy_button=False).exec_()
 
     def local_upload(self):
-        import os
-        from calibre.gui2 import choose_files, error_dialog
-        from calibre.ebooks.metadata.epub import get_metadata
-        
+
         files = choose_files(self, 'epubmerge:local_upload_dialog',
                              _('Choose EPUB files to merge'),
                              filters=[(_('EPUB files'), ['epub'])],
                              all_files=False, select_only_single_file=False)
         if not files:
             return
-            
-        for filepath in files:
-            try:
-                with open(filepath, 'rb') as f:
-                    mi = get_metadata(f)
-                
-                book = {
-                    'good': True,
-                    'calibre_id': None,
-                    'title': mi.title or _('Unknown'),
-                    'authors': mi.authors or [_('Unknown')],
-                    'author_sort': mi.author_sort or _('Unknown'),
-                    'tags': mi.tags or [],
-                    'series': mi.series or '',
-                    'comments': mi.comments or '',
-                    'publisher': mi.publisher or '',
-                    'pubdate': mi.pubdate or None,
-                    'series_index': mi.series_index if mi.series else None,
-                    'languages': mi.languages or ['en'],
-                    'error': '',
-                    'epub': filepath,
-                    'epub_size': os.path.getsize(filepath)
-                }
-                
-                # Append to books_table
-                row = self.books_table.rowCount()
-                self.books_table.setRowCount(row + 1)
-                self.books_table.populate_table_row(row, book)
-                self.books_table.books[row] = book
-                
-            except Exception as e:
-                error_dialog(self, _('Error reading file'),
-                             _('Could not read metadata from %s:<br>%s') % (filepath, str(e)),
-                             show_copy_button=False).exec_()
 
+        book_list = []
+        for filepath in files:
+            book_list.append({
+                'good': True,
+                'epub': filepath,
+                'epub_size': os.path.getsize(filepath)
+            })
+
+        tdir = PersistentTemporaryDirectory(prefix='epubmerge_')
+        LoopProgressDialog(self.gui,
+                            book_list,
+                            partial(self.populate_book_from_local_upload, db=self.gui.current_db, tdir=tdir),
+                            partial(self._append_book_to_table,tdir=tdir),
+                            init_label=_("Collecting EPUBs for merger..."),
+                            win_title=_("Get EPUBs for merge"),
+                            status_prefix=_("EPUBs collected"))
 
 
 class StoryListTableWidget(QTableWidget):
