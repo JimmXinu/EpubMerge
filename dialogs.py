@@ -149,6 +149,49 @@ class SeriesTableWidgetItem(ReadOnlyTableWidgetItem):
         else:
             return self.series_name < other.series_name
 
+class MergeTargetDialog(SizePersistedDialog):
+    def __init__(self, gui, header, prefs, icon, books,
+                 save_size_name='epubmerge:merge target dialog'):
+        SizePersistedDialog.__init__(self, gui, save_size_name)
+        self.gui = gui
+
+        self.setWindowTitle(header)
+        if icon:
+            self.setWindowIcon(icon)
+        
+        layout = QVBoxLayout(self)
+        
+        self.merge_group = QGroupBox(_("Select Merge Target"), self)
+        group_layout = QVBoxLayout()
+        self.merge_group.setLayout(group_layout)
+        
+        self.overwrite_combo = QComboBox(self)
+        
+        self.library_books = []
+        for b in books:
+            if b.get('calibre_id') is not None:
+                self.library_books.append(b)
+                self.overwrite_combo.addItem(f"{b['title']} - {', '.join(b['authors'])}", b['calibre_id'])
+            
+        group_layout.addWidget(self.overwrite_combo)
+        layout.addWidget(self.merge_group)
+        
+        button_box = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel)
+        button_box.accepted.connect(self.accept)
+        button_box.rejected.connect(self.reject)
+        layout.addWidget(button_box)
+        
+    def get_target_title(self):
+        target_id = self.overwrite_combo.currentData()
+        for b in self.library_books:
+            if b['calibre_id'] == target_id:
+                return b['title']
+        return None
+
+    def get_merge_option(self):
+        target_id = self.overwrite_combo.currentData()
+        return target_id
+
 class OrderEPUBsDialog(SizePersistedDialog):
     def __init__(self, gui, header, prefs, icon, books,
                  save_size_name='epubmerge:update list dialog'):
@@ -195,34 +238,6 @@ class OrderEPUBsDialog(SizePersistedDialog):
         button_layout.addWidget(self.local_upload_button)
         spacerItem1 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         button_layout.addItem(spacerItem1)
-
-        # Configure merge options
-        self.merge_group = QGroupBox(_("Output Merge Option"), self)
-        group_layout = QVBoxLayout()
-        self.merge_group.setLayout(group_layout)
-        
-        self.btn_create_new = QRadioButton(_("Create a new book entry in the library"), self)
-        self.btn_overwrite = QRadioButton(_("Update an existing book entry"), self)
-        self.btn_create_new.setChecked(True)
-        
-        group_layout.addWidget(self.btn_create_new)
-        group_layout.addWidget(self.btn_overwrite)
-        
-        self.overwrite_combo = QComboBox(self)
-        self.overwrite_combo.setEnabled(False)
-        
-        self.library_books = []
-        for b in books:
-            if b.get('calibre_id') is not None:
-                self.library_books.append(b)
-                self.overwrite_combo.addItem(f"{b['title']} - {', '.join(b['authors'])}", b['calibre_id'])
-                
-        if not self.library_books:
-            self.btn_overwrite.setEnabled(False)
-            
-        self.btn_overwrite.toggled.connect(self.overwrite_combo.setEnabled)
-        group_layout.addWidget(self.overwrite_combo)
-        layout.addWidget(self.merge_group)
 
         options_layout = QHBoxLayout()
 

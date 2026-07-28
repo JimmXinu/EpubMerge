@@ -45,7 +45,7 @@ from calibre_plugins.epubmerge.config import (prefs, permitted_values)
 from calibre_plugins.epubmerge.epubmerge import doMerge, doUnMerge
 
 from calibre_plugins.epubmerge.dialogs import (
-    LoopProgressDialog, OrderEPUBsDialog, AddOverDiscardDialog
+    LoopProgressDialog, OrderEPUBsDialog, AddOverDiscardDialog, MergeTargetDialog
     )
 
 PLUGIN_ICONS = ['images/icon.png','images/unmerge.png']
@@ -115,6 +115,10 @@ class EpubMergePlugin(InterfaceAction):
                                                      unique_name=_('&Merge Epubs'),
                                                      triggered=self.plugin_button )
 
+        self.merge_existing_book_action = self.create_menu_item_ex(self.menu, _('&Merge into Existing Epub'), image='images/icon.png',
+                                                       unique_name=_('&Merge into Existing Epub'),
+                                                       triggered=self.merge_existing_book_button )
+
         self.unmerge_action = self.create_menu_item_ex(self.menu, _('&UnMerge Epubs'), image='images/unmerge.png',
                                                        unique_name=_('&UnMerge Epubs'),
                                                        triggered=self.unmerge_button )
@@ -156,6 +160,92 @@ class EpubMergePlugin(InterfaceAction):
             logger.debug("macmenuhack file_path:%s"%file_path)
             self.macmenuhack = os.access(file_path, os.F_OK)
             return self.macmenuhack
+
+    def merge_existing_book_button(self):
+        with busy_cursor():   
+            self.merge_existing_book()
+    
+    def merge_existing_book(self):
+        db=self.gui.current_db
+        applyall = False
+        premerged_books = False
+        state = 'add'
+        for book_id in self.gui.library_view.get_selected_ids():
+            # Unmerge if any book has already been merged.
+            unmerge_mi = db.get_metadata(book_id,index_is_id=True)
+            if db.has_format(book_id,'ORIGINAL_EPUB',index_is_id=True):
+                epub = BytesIO(db.format(book_id,'EPUB',index_is_id=True))
+                premerged_books = True
+            else:
+                epub = BytesIO(db.format(book_id,'EPUB',index_is_id=True))
+
+            # create temporary directory to store unmerged epubs
+            tdir = PersistentTemporaryDirectory(prefix='epubmerge_')
+            logger.debug("tdir:%s"%tdir)
+
+            # Unmerge the original epub to get the individual files
+            if premerged_books:
+                outfilenames = self.do_unmerge(epub,tdir)
+            else:
+                outfilenames = [epub]
+            
+            if not outfilenames:
+                continue
+
+            logger.warn("outfilenames %s"%outfilenames)
+            
+
+        # Get selected books from Calibre library.
+        if len(self.gui.library_view.get_selected_ids()) < 1:
+            d = error_dialog(self.gui,
+                            _('Cannot Merge Epubs'),
+                            _('No books selected.'),
+                            show_copy_button=False)
+            d.exec_()
+            remove_dir(tdir)
+
+        # Convert book ids to book objects and add the unmerged epubs if needed.
+        book_list = [ self._convert_id_to_book(x, good=False) for x in self.gui.library_view.get_selected_ids() if x != book_id ]
+        
+        # Convert unmerged data into book objects
+        if premerged_books and outfilenames:
+            from calibre.ebooks.metadata.epub import get_metadata
+            for filepath in outfilenames:
+                with open(filepath, 'rb') as f:
+                    mi = get_metadata(f)
+                book_list.append({
+                    'good': True,
+                    'epub': filepath,
+                    'epub_size': os.path.getsize(filepath),
+                    'calibre_id': None,
+                    'title': mi.title or _('Unknown'),
+                    'authors': mi.authors or [_('Unknown')],
+                    'author_sort': mi.author_sort or _('Unknown'),
+                    'tags': mi.tags or [],
+                    'series': mi.series or '',
+                    'comments': mi.comments or '',
+                    'publisher': mi.publisher or '',
+                    'pubdate': mi.pubdate or None,
+                    'series_index': mi.series_index if mi.series else None,
+                    'languages': mi.languages or ['en'],
+                    'error': ''
+                })
+        elif not premerged_books:
+            # If the target is not premerged, just include it as a normal calibre book
+            book_list.insert(0, self._convert_id_to_book(book_id, good=False))
+
+        def populate_book(book):
+            if book.get('calibre_id') is not None:
+                self._populate_book_from_calibre_id(book, db=self.gui.current_db, tdir=tdir)
+
+        # Process books using standard merge system
+        LoopProgressDialog(self.gui,
+                            book_list,
+                            populate_book,
+                            partial(self._start_merge,tdir=tdir, is_overwrite=True),
+                            init_label=_("Collecting EPUBs for merger..."),
+                            win_title=_("Get EPUBs for merge"),
+                            status_prefix=_("EPUBs collected"))
 
     def do_unmerge(self, *args, **kwargs):
         '''Also called by FanFicFare plugin.'''
@@ -279,9 +369,11 @@ class EpubMergePlugin(InterfaceAction):
                                win_title=_("Get EPUBs for merge"),
                                status_prefix=_("EPUBs collected"))
 
-    def _start_merge(self,book_list,tdir=None):
+    def _start_merge(self,book_list,tdir=None, is_overwrite=False):
         db=self.gui.current_db
         self.previous = self.gui.library_view.currentIndex()
+        target_id = None
+        target_book = None
         # if any bad, bail.
         bad_list = [ x for x in book_list if not x['good'] ]
         if len(bad_list) > 0:
@@ -291,6 +383,20 @@ class EpubMergePlugin(InterfaceAction):
                              det_msg='\n'.join( [ x['error'] for x in bad_list ]))
             d.exec_()
         else:
+            if is_overwrite:
+                d = MergeTargetDialog(self.gui,
+                                     _('Select Merge Target'),
+                                     prefs,
+                                     self.qaction.icon(),
+                                     book_list,
+                                     )
+                d.exec_()
+                if d.result() != d.Accepted:
+                    return
+                
+                target_id = d.get_merge_option()
+                target_book = d.get_target_title()
+                
             d = OrderEPUBsDialog(self.gui,
                                  _('Order EPUBs to Merge'),
                                  prefs,
@@ -311,7 +417,7 @@ class EpubMergePlugin(InterfaceAction):
                 d.exec_()
                 return
 
-            logger.debug("2:%s"%(time.time()-self.t))
+            #logger.debug("2:%s"%(time.time()-self.t))
             self.t = time.time()
 
             deftitle = "%s %s" % (book_list[0]['title'],prefs['mergeword'])
@@ -388,8 +494,6 @@ class EpubMergePlugin(InterfaceAction):
 
             # ======================= make book entry =========================
 
-            # Read selection from the dialog
-            is_overwrite, target_id = d.get_merge_option()
             book_id = None
             backup_metadata_opf = None
             has_epub_backup = False
@@ -398,7 +502,7 @@ class EpubMergePlugin(InterfaceAction):
                 # Overwrite confirmation dialog
                 confirm_overwrite = confirm('\n'+_('''Are you sure you want to overwrite the existing EPUB in book <i>%s</i>?<br><br>
 
-This will replace the current EPUB file. A backup of the previous file will be saved in Calibre as ORIGINAL_EPUB.''') % mi.title,
+This will replace the current EPUB file. A backup of the previous file will be saved in Calibre as ORIGINAL_EPUB.''') % target_book,
                     'epubmerge_overwrite_epub_confirm',
                     self.gui,
                     title=_("EpubMerge"),
@@ -428,8 +532,8 @@ This will replace the current EPUB file. A backup of the previous file will be s
                     )
                     has_epub_backup = True
 
-                # Update metadata on the existing book record
-                db.set_metadata(book_id, mi)
+                # # Update metadata on the existing book record
+                # db.set_metadata(book_id, mi)
 
             # If we are not overwriting, create a new book entry
             if book_id is None:
