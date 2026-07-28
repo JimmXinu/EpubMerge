@@ -174,7 +174,7 @@ class EpubMergePlugin(InterfaceAction):
             if not outfilenames:
                 continue
 
-            logger.warn("outfilenames %s"%outfilenames)
+            #logger.debug("outfilenames %s"%outfilenames)
             
 
         # Get selected books from Calibre library.
