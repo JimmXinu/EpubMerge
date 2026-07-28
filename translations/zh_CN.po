@@ -6,13 +6,13 @@
 # Li Liu <liu431@indiana.edu>, 2015
 # RERBIN MA, 2022-2023
 # tony shen <anthanny@hotmail.com>, 2024
-# Mew X <imewx@qq.com>, 2016
+# MewX <xiayuanzhong@gmail.com>, 2016
 # 朱仁杰 <johnson19960308@gmail.com>, 2016
 # 白夜咲雪, 2021
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2023-07-15 16:27-0500\n"
+"POT-Creation-Date: 2026-07-15 16:24-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
 "Last-Translator: JimmXinu, 2024\n"
 "Language-Team: Chinese (China) (http://app.transifex.com/calibre/calibre-plugins/language/zh_CN/)\n"
@@ -253,84 +253,121 @@ msgstr "在新合并的帐簿上设置此%s列..."
 msgid "How this column will be populated by default."
 msgstr "默认情况下如何填充此列。"
 
-#: dialogs.py:46 dialogs.py:70
+#: dialogs.py:50 dialogs.py:74
 msgid "Starting..."
 msgstr "开始……"
 
-#: dialogs.py:47 dialogs.py:71
+#: dialogs.py:51 dialogs.py:75
 msgid "Working"
 msgstr "运行中"
 
-#: dialogs.py:48 dialogs.py:72
+#: dialogs.py:52 dialogs.py:76
 msgid "Completed so far"
 msgstr "目前已完成"
 
-#: dialogs.py:75
+#: dialogs.py:79
 msgid "Cancel"
 msgstr "取消"
 
-#: dialogs.py:116
+#: dialogs.py:120
 msgid "Starting Merge..."
 msgstr "开始合并..."
 
-#: dialogs.py:172
+#: dialogs.py:176
 msgid "Move selected books up the list"
 msgstr "在列表中上移所选书籍"
 
-#: dialogs.py:177
+#: dialogs.py:181
 msgid "Remove selected books from the list"
 msgstr "从列表中删除所选书籍"
 
-#: dialogs.py:182
+#: dialogs.py:186
 msgid "Move selected books down the list"
 msgstr "在列表中下移所选书籍"
 
-#: dialogs.py:221
+#: dialogs.py:191
+msgid "Add EPUBs from PC..."
+msgstr ""
+
+#: dialogs.py:224 dialogs.py:225 dialogs.py:226 epubmerge_plugin.py:692
+#: epubmerge_plugin.py:693 epubmerge_plugin.py:694
+msgid "Unknown"
+msgstr "未知"
+
+#: dialogs.py:258
+msgid "Error reading files"
+msgstr ""
+
+#: dialogs.py:259
+msgid "Could not read metadata from the following files:<br><br>%s"
+msgstr ""
+
+#: dialogs.py:265
+msgid "Choose EPUB files to merge"
+msgstr ""
+
+#: dialogs.py:266
+msgid "EPUB files"
+msgstr ""
+
+#: dialogs.py:284 epubmerge_plugin.py:278
+msgid "Collecting EPUBs for merger..."
+msgstr "正在收集 EPUB 以进行合并..."
+
+#: dialogs.py:285 epubmerge_plugin.py:279
+msgid "Get EPUBs for merge"
+msgstr "获取用于合并的EPUB"
+
+#: dialogs.py:286 epubmerge_plugin.py:280
+msgid "EPUBs collected"
+msgstr "收集的 EPUB"
+
+#: dialogs.py:302
 msgid "Author(s)"
 msgstr "作者"
 
-#: dialogs.py:221
+#: dialogs.py:302
 msgid "Series"
 msgstr "丛书"
 
-#: dialogs.py:221
+#: dialogs.py:302
 msgid "Title"
 msgstr "书名"
 
-#: dialogs.py:271
+#: dialogs.py:352
 msgid "Are you sure you want to remove this book from the list?"
 msgstr "你确认要从列表中删除这本书吗？"
 
-#: dialogs.py:273
+#: dialogs.py:354
 msgid "Are you sure you want to remove the selected %d books from the list?"
 msgstr "你确认要冲列表中删除选中的 %d 书籍吗？"
 
-#: dialogs.py:346
+#: dialogs.py:427
 msgid "UnMerge Epub"
 msgstr "拆分 Epub"
 
-#: dialogs.py:353
+#: dialogs.py:434
 msgid "Apply to all EPUBs?"
 msgstr "应用到所有EPUB?"
 
-#: dialogs.py:354
+#: dialogs.py:435
 msgid "Apply the same action to the rest of the EPUBs after this."
 msgstr "在此之后，对其余EPUB应用相同的操作。"
 
-#: dialogs.py:358
+#: dialogs.py:439
 msgid "Add"
 msgstr "添加"
 
-#: dialogs.py:362
+#: dialogs.py:443
 msgid "Overwrite"
 msgstr "覆盖"
 
-#: dialogs.py:365
+#: dialogs.py:446
 msgid "Discard"
 msgstr "丢弃"
 
-#: epubmerge_plugin.py:63 epubmerge_plugin.py:546 epubmerge_plugin.py:562
-#: epubmerge_plugin.py:673
+#: epubmerge_plugin.py:63 epubmerge_plugin.py:554 epubmerge_plugin.py:570
+#: epubmerge_plugin.py:681
 msgid "EpubMerge"
 msgstr "Epub合并"
 
@@ -381,25 +418,13 @@ msgid ""
 "new book of the same title, or Discard this Epub."
 msgstr "您已经拥有不止一本<i>%s</i>的 <i>%s</i>书。 您可以添加一本同名的新书，或放弃此 Epub。"
 
-#: epubmerge_plugin.py:257 epubmerge_plugin.py:289
+#: epubmerge_plugin.py:257 epubmerge_plugin.py:289 epubmerge_plugin.py:308
 msgid "Cannot Merge Epubs"
 msgstr "无法合并Epub文件"
 
 #: epubmerge_plugin.py:258
-msgid "Less than 2 books selected."
-msgstr "选择的书籍少于两本."
-
-#: epubmerge_plugin.py:278
-msgid "Collecting EPUBs for merger..."
-msgstr "正在收集 EPUB 以进行合并..."
-
-#: epubmerge_plugin.py:279
-msgid "Get EPUBs for merge"
-msgstr "获取用于合并的EPUB"
-
-#: epubmerge_plugin.py:280
-msgid "EPUBs collected"
-msgstr "收集的 EPUB"
+msgid "No books selected."
+msgstr ""
 
 #: epubmerge_plugin.py:290
 msgid "%s books failed."
@@ -409,82 +434,82 @@ msgstr "%s 本书失败."
 msgid "Order EPUBs to Merge"
 msgstr "排序要合并的EPUB"
 
-#: epubmerge_plugin.py:362 epubmerge_plugin.py:581
+#: epubmerge_plugin.py:309
+msgid "Less than 2 books in merge list."
+msgstr ""
+
+#: epubmerge_plugin.py:370 epubmerge_plugin.py:589
 msgid "%s by %s"
 msgstr "%s 由 %s"
 
-#: epubmerge_plugin.py:366
+#: epubmerge_plugin.py:374
 msgid "%s containing:"
 msgstr "%s 包含:"
 
-#: epubmerge_plugin.py:541
+#: epubmerge_plugin.py:549
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "新合并 EPUB 的书籍已创建并填充了默认元数据。\n\n但是，只有在您审阅、编辑并关闭随后的元数据对话框之后，才会*不会*创建 EPUB。"
 
-#: epubmerge_plugin.py:557
+#: epubmerge_plugin.py:565
 msgid ""
 "EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
 "\n"
 "You are merging %s EPUBs totaling %s."
 msgstr "EpubMerge 将在后台作业中完成。 合并的 EPUB 在完成之前不会出现在库中。\n\n您正在合并总计为 %s 的 %s EPUB。"
 
-#: epubmerge_plugin.py:570
+#: epubmerge_plugin.py:578
 msgid "Merging %s EPUBs..."
 msgstr "正在合并%s 个 EPUB..."
 
-#: epubmerge_plugin.py:613
+#: epubmerge_plugin.py:621
 msgid "EpubMerge: %s"
 msgstr "Epub合并: %s"
 
-#: epubmerge_plugin.py:624
+#: epubmerge_plugin.py:632
 msgid "Starting EpubMerge"
 msgstr "开始Epub合并"
 
-#: epubmerge_plugin.py:632 epubmerge_plugin.py:638
+#: epubmerge_plugin.py:640 epubmerge_plugin.py:646
 msgid "Remove Failed Anthology Book?"
 msgstr "删除失败的选集书籍？"
 
-#: epubmerge_plugin.py:639
+#: epubmerge_plugin.py:647
 msgid ""
 "EpubMerge failed, no new EPUB was created; see the background job details "
 "for any error messages."
 msgstr "EpubMerge失败，没有创建新的EPUB； 查看后台作业详细信息以获取任何错误消息。"
 
-#: epubmerge_plugin.py:640
+#: epubmerge_plugin.py:648
 msgid "Do you want to delete the empty book EpubMerge created?"
 msgstr "是否要删除EpubMerge创建的空书？"
 
-#: epubmerge_plugin.py:641
+#: epubmerge_plugin.py:649
 msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
 msgstr "单击“<b>是</b>”从书库中删除空书，"
 
-#: epubmerge_plugin.py:642
+#: epubmerge_plugin.py:650
 msgid "Click '<b>No</b>' to leave it in Library."
 msgstr "单击 '<b>否</b>'将其留在书库中."
 
-#: epubmerge_plugin.py:650
+#: epubmerge_plugin.py:658
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr "合并完成, 输出文件位于:\n%s"
 
-#: epubmerge_plugin.py:662
+#: epubmerge_plugin.py:670
 msgid "Finished merging %s EPUBs."
 msgstr "完成合并 %s 本EPUB."
 
-#: epubmerge_plugin.py:670
+#: epubmerge_plugin.py:678
 msgid ""
 "EpubMerge has finished. The new EPUB has been added to the book previously "
 "created."
 msgstr "EpubMerge 已完成。 新的 EPUB 已添加到之前创建的书中。"
 
-#: epubmerge_plugin.py:684 epubmerge_plugin.py:685 epubmerge_plugin.py:686
-msgid "Unknown"
-msgstr "未知"
-
-#: epubmerge_plugin.py:727
+#: epubmerge_plugin.py:735
 msgid "%s by %s doesn't have an EPUB."
 msgstr "以下位置 %s by %s 找不到EPUB书籍。"

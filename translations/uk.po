@@ -2,14 +2,14 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Yuri Chornoivan <yurchor@ukr.net>, 2014-2018,2020,2023
+# Yuri Chornoivan <yurchor@ukr.net>, 2014-2018,2020,2023,2026
 # Yuri Chornoivan <yurchor@ukr.net>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2023-07-15 16:27-0500\n"
+"POT-Creation-Date: 2026-07-15 16:24-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2014-2018,2020,2023\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2014-2018,2020,2023,2026\n"
 "Language-Team: Ukrainian (http://app.transifex.com/calibre/calibre-plugins/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -248,84 +248,121 @@ msgstr "Встановити цей стовпчик %s для нових об�
 msgid "How this column will be populated by default."
 msgstr "Спосіб типового заповнення цього стовпчика."
 
-#: dialogs.py:46 dialogs.py:70
+#: dialogs.py:50 dialogs.py:74
 msgid "Starting..."
 msgstr "Починаємо…"
 
-#: dialogs.py:47 dialogs.py:71
+#: dialogs.py:51 dialogs.py:75
 msgid "Working"
 msgstr "Обробляємо"
 
-#: dialogs.py:48 dialogs.py:72
+#: dialogs.py:52 dialogs.py:76
 msgid "Completed so far"
 msgstr "Завершено"
 
-#: dialogs.py:75
+#: dialogs.py:79
 msgid "Cancel"
 msgstr "Скасувати"
 
-#: dialogs.py:116
+#: dialogs.py:120
 msgid "Starting Merge..."
 msgstr "Починаємо об’єднання…"
 
-#: dialogs.py:172
+#: dialogs.py:176
 msgid "Move selected books up the list"
 msgstr "Пересунути позначені книги вище у списку"
 
-#: dialogs.py:177
+#: dialogs.py:181
 msgid "Remove selected books from the list"
 msgstr "Вилучити позначені книги зі списку"
 
-#: dialogs.py:182
+#: dialogs.py:186
 msgid "Move selected books down the list"
 msgstr "Пересунути позначені книги нижче у списку"
 
-#: dialogs.py:221
+#: dialogs.py:191
+msgid "Add EPUBs from PC..."
+msgstr "Додати EPUB з ПК..."
+
+#: dialogs.py:224 dialogs.py:225 dialogs.py:226 epubmerge_plugin.py:692
+#: epubmerge_plugin.py:693 epubmerge_plugin.py:694
+msgid "Unknown"
+msgstr "Невідомо"
+
+#: dialogs.py:258
+msgid "Error reading files"
+msgstr "Помилка під час спроби прочитати файли"
+
+#: dialogs.py:259
+msgid "Could not read metadata from the following files:<br><br>%s"
+msgstr "Не вдалося прочитати метадані з таких файлів:<br><br>%s"
+
+#: dialogs.py:265
+msgid "Choose EPUB files to merge"
+msgstr "Виберіть файли EPUB для об'єднання"
+
+#: dialogs.py:266
+msgid "EPUB files"
+msgstr "файли EPUB"
+
+#: dialogs.py:284 epubmerge_plugin.py:278
+msgid "Collecting EPUBs for merger..."
+msgstr "Збираємо EPUB для об’єднання…"
+
+#: dialogs.py:285 epubmerge_plugin.py:279
+msgid "Get EPUBs for merge"
+msgstr "Отримати EPUB для об’єднання"
+
+#: dialogs.py:286 epubmerge_plugin.py:280
+msgid "EPUBs collected"
+msgstr "Зібрані EPUB"
+
+#: dialogs.py:302
 msgid "Author(s)"
 msgstr "Автор(и)"
 
-#: dialogs.py:221
+#: dialogs.py:302
 msgid "Series"
 msgstr "Цикл"
 
-#: dialogs.py:221
+#: dialogs.py:302
 msgid "Title"
 msgstr "Назва"
 
-#: dialogs.py:271
+#: dialogs.py:352
 msgid "Are you sure you want to remove this book from the list?"
 msgstr "Ви справді хочете вилучити цю книгу зі списку?"
 
-#: dialogs.py:273
+#: dialogs.py:354
 msgid "Are you sure you want to remove the selected %d books from the list?"
 msgstr "Ви справді хочете вилучити позначені %d книг зі списку?"
 
-#: dialogs.py:346
+#: dialogs.py:427
 msgid "UnMerge Epub"
 msgstr "Скасувати об’єднання Epub"
 
-#: dialogs.py:353
+#: dialogs.py:434
 msgid "Apply to all EPUBs?"
 msgstr "Застосувати до усіх EPUB?"
 
-#: dialogs.py:354
+#: dialogs.py:435
 msgid "Apply the same action to the rest of the EPUBs after this."
 msgstr "Застосувати ту саму дію до решти EPUB після цього."
 
-#: dialogs.py:358
+#: dialogs.py:439
 msgid "Add"
 msgstr "Додати"
 
-#: dialogs.py:362
+#: dialogs.py:443
 msgid "Overwrite"
 msgstr "Перезаписати"
 
-#: dialogs.py:365
+#: dialogs.py:446
 msgid "Discard"
 msgstr "Відкинути"
 
-#: epubmerge_plugin.py:63 epubmerge_plugin.py:546 epubmerge_plugin.py:562
-#: epubmerge_plugin.py:673
+#: epubmerge_plugin.py:63 epubmerge_plugin.py:554 epubmerge_plugin.py:570
+#: epubmerge_plugin.py:681
 msgid "EpubMerge"
 msgstr "Об’єднання Epub"
 
@@ -376,25 +413,13 @@ msgid ""
 "new book of the same title, or Discard this Epub."
 msgstr "У вас вже є декілька книг <i>%s</i>, <i>%s</i>. Ви можете додати нову книгу з тією самою назвою чи відкинути цей файл Epub."
 
-#: epubmerge_plugin.py:257 epubmerge_plugin.py:289
+#: epubmerge_plugin.py:257 epubmerge_plugin.py:289 epubmerge_plugin.py:308
 msgid "Cannot Merge Epubs"
 msgstr "Не вдалося об’єднати Epub"
 
 #: epubmerge_plugin.py:258
-msgid "Less than 2 books selected."
-msgstr "Позначено менше за 2 книги."
-
-#: epubmerge_plugin.py:278
-msgid "Collecting EPUBs for merger..."
-msgstr "Збираємо EPUB для об’єднання…"
-
-#: epubmerge_plugin.py:279
-msgid "Get EPUBs for merge"
-msgstr "Отримати EPUB для об’єднання"
-
-#: epubmerge_plugin.py:280
-msgid "EPUBs collected"
-msgstr "Зібрані EPUB"
+msgid "No books selected."
+msgstr "Не вибрано жодної книги."
 
 #: epubmerge_plugin.py:290
 msgid "%s books failed."
@@ -404,82 +429,82 @@ msgstr "Помилки для %s книг."
 msgid "Order EPUBs to Merge"
 msgstr "Порядок EPUB для об’єднання"
 
-#: epubmerge_plugin.py:362 epubmerge_plugin.py:581
+#: epubmerge_plugin.py:309
+msgid "Less than 2 books in merge list."
+msgstr "У списку об'єднання менше 2 книг."
+
+#: epubmerge_plugin.py:370 epubmerge_plugin.py:589
 msgid "%s by %s"
 msgstr "%s, %s"
 
-#: epubmerge_plugin.py:366
+#: epubmerge_plugin.py:374
 msgid "%s containing:"
 msgstr "%s містить:"
 
-#: epubmerge_plugin.py:541
+#: epubmerge_plugin.py:549
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "Було створено книгу з новим об’єднаним EPUB і заповненими полями метаданих.\n\nВтім, EPUB *не* буде створено, доки ви не виконаєте рецензування, редагування та закриєте діалогове вікно метаданих, яке буде показано далі."
 
-#: epubmerge_plugin.py:557
+#: epubmerge_plugin.py:565
 msgid ""
 "EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
 "\n"
 "You are merging %s EPUBs totaling %s."
 msgstr "EpubMerge буде виконано у межах фонового завдання. Об'єднаний EPUB не буде показано у бібліотеці, аж доки об'єднання не буде завершено.\n\nВи об'єднуєте %s EPUB, загалом — %s."
 
-#: epubmerge_plugin.py:570
+#: epubmerge_plugin.py:578
 msgid "Merging %s EPUBs..."
 msgstr "Об’єднуємо EPUB %s…"
 
-#: epubmerge_plugin.py:613
+#: epubmerge_plugin.py:621
 msgid "EpubMerge: %s"
 msgstr "EpubMerge: %s"
 
-#: epubmerge_plugin.py:624
+#: epubmerge_plugin.py:632
 msgid "Starting EpubMerge"
 msgstr "Запускаємо EpubMerge"
 
-#: epubmerge_plugin.py:632 epubmerge_plugin.py:638
+#: epubmerge_plugin.py:640 epubmerge_plugin.py:646
 msgid "Remove Failed Anthology Book?"
 msgstr "Вилучити помилкову книгу антології?"
 
-#: epubmerge_plugin.py:639
+#: epubmerge_plugin.py:647
 msgid ""
 "EpubMerge failed, no new EPUB was created; see the background job details "
 "for any error messages."
 msgstr "EpubMerge не вдалося виконати завдання. Новий файл EPUB не створено. Повідомлення про помилки можна знайти у подробицях щодо роботи фонового завдання."
 
-#: epubmerge_plugin.py:640
+#: epubmerge_plugin.py:648
 msgid "Do you want to delete the empty book EpubMerge created?"
 msgstr "Хочете вилучити створену EpubMerge порожню книгу?"
 
-#: epubmerge_plugin.py:641
+#: epubmerge_plugin.py:649
 msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
 msgstr "Натисніть «<b>Так</b>», щоб вилучити порожню книгу з бібліотеки,"
 
-#: epubmerge_plugin.py:642
+#: epubmerge_plugin.py:650
 msgid "Click '<b>No</b>' to leave it in Library."
 msgstr "Натисніть «<b>Ні</b>», щоб залишити її у бібліотеці."
 
-#: epubmerge_plugin.py:650
+#: epubmerge_plugin.py:658
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr "Об’єднання завершено, результат тут:\n%s"
 
-#: epubmerge_plugin.py:662
+#: epubmerge_plugin.py:670
 msgid "Finished merging %s EPUBs."
 msgstr "Об’єднання %s EPUB завершено."
 
-#: epubmerge_plugin.py:670
+#: epubmerge_plugin.py:678
 msgid ""
 "EpubMerge has finished. The new EPUB has been added to the book previously "
 "created."
 msgstr "Роботу EpubMerge завершено. Нову книгу EPUB додано до раніше створеного запису книги."
 
-#: epubmerge_plugin.py:684 epubmerge_plugin.py:685 epubmerge_plugin.py:686
-msgid "Unknown"
-msgstr "Невідомо"
-
-#: epubmerge_plugin.py:727
+#: epubmerge_plugin.py:735
 msgid "%s by %s doesn't have an EPUB."
 msgstr "%s, %s не має версії у форматі EPUB."

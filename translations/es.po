@@ -2,14 +2,14 @@
 # Copyright (C) YEAR ORGANIZATION
 # 
 # Translators:
-# Adolfo Jayme-Barrientos, 2014
-# Jellby <jellby@yahoo.com>, 2014-2016,2018,2020,2023-2024
+# Adolfo Jayme Barrientos, 2014
+# Jellby <jellby@yahoo.com>, 2014-2016,2018,2020,2023-2024,2026
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2023-07-15 16:27-0500\n"
+"POT-Creation-Date: 2026-07-15 16:24-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
-"Last-Translator: Jellby <jellby@yahoo.com>, 2014-2016,2018,2020,2023-2024\n"
+"Last-Translator: Jellby <jellby@yahoo.com>, 2014-2016,2018,2020,2023-2024,2026\n"
 "Language-Team: Spanish (http://app.transifex.com/calibre/calibre-plugins/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -248,84 +248,121 @@ msgstr "Establecer esta columna %s en los nuevos libros combinados..."
 msgid "How this column will be populated by default."
 msgstr "Cómo se rellenará esta columna de manera predeterminada."
 
-#: dialogs.py:46 dialogs.py:70
+#: dialogs.py:50 dialogs.py:74
 msgid "Starting..."
 msgstr "Iniciando..."
 
-#: dialogs.py:47 dialogs.py:71
+#: dialogs.py:51 dialogs.py:75
 msgid "Working"
 msgstr "Trabajando"
 
-#: dialogs.py:48 dialogs.py:72
+#: dialogs.py:52 dialogs.py:76
 msgid "Completed so far"
 msgstr "Completado hasta ahora"
 
-#: dialogs.py:75
+#: dialogs.py:79
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: dialogs.py:116
+#: dialogs.py:120
 msgid "Starting Merge..."
 msgstr "Iniciando la combinación..."
 
-#: dialogs.py:172
+#: dialogs.py:176
 msgid "Move selected books up the list"
 msgstr "Mover los libros seleccionados hacia arriba en la lista"
 
-#: dialogs.py:177
+#: dialogs.py:181
 msgid "Remove selected books from the list"
 msgstr "Eliminar los libros seleccionados de la lista"
 
-#: dialogs.py:182
+#: dialogs.py:186
 msgid "Move selected books down the list"
 msgstr "Mover los libros seleccionados hacia abajo en la lista"
 
-#: dialogs.py:221
+#: dialogs.py:191
+msgid "Add EPUBs from PC..."
+msgstr "Añadir EPUBs del equipo..."
+
+#: dialogs.py:224 dialogs.py:225 dialogs.py:226 epubmerge_plugin.py:692
+#: epubmerge_plugin.py:693 epubmerge_plugin.py:694
+msgid "Unknown"
+msgstr "Desconocido"
+
+#: dialogs.py:258
+msgid "Error reading files"
+msgstr "Error leyendo archivos"
+
+#: dialogs.py:259
+msgid "Could not read metadata from the following files:<br><br>%s"
+msgstr "No se pudo leer los metadatos de los siguientes archivos:<br><br>%s"
+
+#: dialogs.py:265
+msgid "Choose EPUB files to merge"
+msgstr "Elegir archivos EPUB para combinar"
+
+#: dialogs.py:266
+msgid "EPUB files"
+msgstr "Archivos EPUB"
+
+#: dialogs.py:284 epubmerge_plugin.py:278
+msgid "Collecting EPUBs for merger..."
+msgstr "Recopilando archivos EPUB para combinar..."
+
+#: dialogs.py:285 epubmerge_plugin.py:279
+msgid "Get EPUBs for merge"
+msgstr "Recopilar archivos EPUB para combinar"
+
+#: dialogs.py:286 epubmerge_plugin.py:280
+msgid "EPUBs collected"
+msgstr "Archivos EPUB recopilados"
+
+#: dialogs.py:302
 msgid "Author(s)"
 msgstr "Autor(es)"
 
-#: dialogs.py:221
+#: dialogs.py:302
 msgid "Series"
 msgstr "Serie"
 
-#: dialogs.py:221
+#: dialogs.py:302
 msgid "Title"
 msgstr "Título"
 
-#: dialogs.py:271
+#: dialogs.py:352
 msgid "Are you sure you want to remove this book from the list?"
 msgstr "¿Está seguro de querer eliminar este libro de la lista?"
 
-#: dialogs.py:273
+#: dialogs.py:354
 msgid "Are you sure you want to remove the selected %d books from the list?"
 msgstr "¿Está seguro de querer eliminar los %d libros seleccionados de la lista?"
 
-#: dialogs.py:346
+#: dialogs.py:427
 msgid "UnMerge Epub"
 msgstr "Deshacer la combinación de epubs"
 
-#: dialogs.py:353
+#: dialogs.py:434
 msgid "Apply to all EPUBs?"
 msgstr "¿Aplicar a todos los epubs?"
 
-#: dialogs.py:354
+#: dialogs.py:435
 msgid "Apply the same action to the rest of the EPUBs after this."
 msgstr "Aplicar la misma acción al resto de los epubs después de éste."
 
-#: dialogs.py:358
+#: dialogs.py:439
 msgid "Add"
 msgstr "Añadir"
 
-#: dialogs.py:362
+#: dialogs.py:443
 msgid "Overwrite"
 msgstr "Reemplazar"
 
-#: dialogs.py:365
+#: dialogs.py:446
 msgid "Discard"
 msgstr "Descartar"
 
-#: epubmerge_plugin.py:63 epubmerge_plugin.py:546 epubmerge_plugin.py:562
-#: epubmerge_plugin.py:673
+#: epubmerge_plugin.py:63 epubmerge_plugin.py:554 epubmerge_plugin.py:570
+#: epubmerge_plugin.py:681
 msgid "EpubMerge"
 msgstr "EpubMerge"
 
@@ -376,25 +413,13 @@ msgid ""
 "new book of the same title, or Discard this Epub."
 msgstr "Ya tiene más de un libro <i>%s</i> de <i>%s</i>. Puede Añadir un nuevo libro con el mismo título o Descartar este Epub."
 
-#: epubmerge_plugin.py:257 epubmerge_plugin.py:289
+#: epubmerge_plugin.py:257 epubmerge_plugin.py:289 epubmerge_plugin.py:308
 msgid "Cannot Merge Epubs"
 msgstr "No se pueden combinar los epubs"
 
 #: epubmerge_plugin.py:258
-msgid "Less than 2 books selected."
-msgstr "Menos de 2 libros seleccionados."
-
-#: epubmerge_plugin.py:278
-msgid "Collecting EPUBs for merger..."
-msgstr "Recopilando archivos EPUB para combinar..."
-
-#: epubmerge_plugin.py:279
-msgid "Get EPUBs for merge"
-msgstr "Recopilar archivos EPUB para combinar"
-
-#: epubmerge_plugin.py:280
-msgid "EPUBs collected"
-msgstr "Archivos EPUB recopilados"
+msgid "No books selected."
+msgstr "No hay libros seleccionados."
 
 #: epubmerge_plugin.py:290
 msgid "%s books failed."
@@ -404,82 +429,82 @@ msgstr "Fallaron %s libros."
 msgid "Order EPUBs to Merge"
 msgstr "Ordenar epubs para combinar"
 
-#: epubmerge_plugin.py:362 epubmerge_plugin.py:581
+#: epubmerge_plugin.py:309
+msgid "Less than 2 books in merge list."
+msgstr "Menos de 2 libros en la lista para combinar."
+
+#: epubmerge_plugin.py:370 epubmerge_plugin.py:589
 msgid "%s by %s"
 msgstr "%s de %s"
 
-#: epubmerge_plugin.py:366
+#: epubmerge_plugin.py:374
 msgid "%s containing:"
 msgstr "%s contiene:"
 
-#: epubmerge_plugin.py:541
+#: epubmerge_plugin.py:549
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "El libro para el nuevo epub combinado se ha creado con los metadatos predeterminados.\n\nSin embargo, el archivo EPUB *no* se creará hasta que no haya revisado, editado y cerrado el diálogo de metadatos que sigue."
 
-#: epubmerge_plugin.py:557
+#: epubmerge_plugin.py:565
 msgid ""
 "EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
 "\n"
 "You are merging %s EPUBs totaling %s."
 msgstr "EpubMerge realizará un trabajo en segundo plano. El EPUB fusionado no aparecerá en la biblioteca hasta que finalice.\n\nVa a fusionar %s EPUB con un total de %s."
 
-#: epubmerge_plugin.py:570
+#: epubmerge_plugin.py:578
 msgid "Merging %s EPUBs..."
 msgstr "Combinando %s archivos EPUB…"
 
-#: epubmerge_plugin.py:613
+#: epubmerge_plugin.py:621
 msgid "EpubMerge: %s"
 msgstr "EpubMerge: %s"
 
-#: epubmerge_plugin.py:624
+#: epubmerge_plugin.py:632
 msgid "Starting EpubMerge"
 msgstr "Iniciando EpubMerge"
 
-#: epubmerge_plugin.py:632 epubmerge_plugin.py:638
+#: epubmerge_plugin.py:640 epubmerge_plugin.py:646
 msgid "Remove Failed Anthology Book?"
 msgstr "¿Eliminar libre de antología fallido?"
 
-#: epubmerge_plugin.py:639
+#: epubmerge_plugin.py:647
 msgid ""
 "EpubMerge failed, no new EPUB was created; see the background job details "
 "for any error messages."
 msgstr "EpubMerge falló, no se créo un nuevo EPUB; vea los detalles del trabajo en segundo plano por si hay algún mensaje de error."
 
-#: epubmerge_plugin.py:640
+#: epubmerge_plugin.py:648
 msgid "Do you want to delete the empty book EpubMerge created?"
 msgstr "¿Quiere borrar el libro vacío creado por EpubMerge?"
 
-#: epubmerge_plugin.py:641
+#: epubmerge_plugin.py:649
 msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
 msgstr "Pulse en «<b>Sí</b>» para eliminar el libro vacío de la biblioteca."
 
-#: epubmerge_plugin.py:642
+#: epubmerge_plugin.py:650
 msgid "Click '<b>No</b>' to leave it in Library."
 msgstr "Pulse en «<b>No</b>» para dejarlo en la biblioteca."
 
-#: epubmerge_plugin.py:650
+#: epubmerge_plugin.py:658
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr "Combinación finalizada, la salida está en:\n%s"
 
-#: epubmerge_plugin.py:662
+#: epubmerge_plugin.py:670
 msgid "Finished merging %s EPUBs."
 msgstr "Combinación de %s epubs finalizada."
 
-#: epubmerge_plugin.py:670
+#: epubmerge_plugin.py:678
 msgid ""
 "EpubMerge has finished. The new EPUB has been added to the book previously "
 "created."
 msgstr "EpubMerge ha terminado. El nuevo EPUB se ha añadido al libro creado previamente."
 
-#: epubmerge_plugin.py:684 epubmerge_plugin.py:685 epubmerge_plugin.py:686
-msgid "Unknown"
-msgstr "Desconocido"
-
-#: epubmerge_plugin.py:727
+#: epubmerge_plugin.py:735
 msgid "%s by %s doesn't have an EPUB."
 msgstr "%s de %s no tiene un archivo EPUB."

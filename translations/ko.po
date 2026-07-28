@@ -1,0 +1,510 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# 
+# Translators:
+# Junghee Lee <daemul72@gmail.com>, 2021-2022,2026
+# Junghee Lee <daemul72@gmail.com>, 2021
+msgid ""
+msgstr ""
+"Project-Id-Version: calibre-plugins\n"
+"POT-Creation-Date: 2026-07-15 16:24-0500\n"
+"PO-Revision-Date: 2014-06-19 23:00+0000\n"
+"Last-Translator: Junghee Lee <daemul72@gmail.com>, 2021-2022,2026\n"
+"Language-Team: Korean (http://app.transifex.com/calibre/calibre-plugins/language/ko/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: __init__.py:48
+msgid "UI plugin to concatenate multiple epubs into one."
+msgstr "여러 EPUB를 하나로 이어 붙이는 UI 플러그인입니다."
+
+#: config.py:51
+msgid "Anthology"
+msgstr "문집"
+
+#: config.py:141
+msgid "Basic"
+msgstr "기본"
+
+#: config.py:144
+msgid "Columns"
+msgstr "열"
+
+#: config.py:189
+msgid "These settings control the basic features of the plugin."
+msgstr "이 설정은 플러그인의 기본 기능을 제어합니다."
+
+#: config.py:194
+msgid ""
+"If both 'Insert Table of Contents entry' and 'Copy Table of Contents entries'\n"
+"are unchecked, there will be no Table of Contents in merged books."
+msgstr "'목차 항목 삽입'과 '목차 항목 복사'를 모두 선택 해제하면\n병합된 책에 목차가 생성되지 않습니다."
+
+#: config.py:196
+msgid "Insert Table of Contents entry for each title?"
+msgstr "각 제목마다 목차 항목을 삽입하시겠습니까?"
+
+#: config.py:197
+msgid ""
+"If set, a new TOC entry will be made for each title and\n"
+"it's existing TOC nested underneath it."
+msgstr "이 옵션을 선택하면 각 제목마다 새 TOC 항목이 만들어지고,\n그 아래에 기존 TOC가 중첩됩니다."
+
+#: config.py:202
+msgid "Copy Table of Contents entries from each title?"
+msgstr "각 제목의 목차 항목을 복사하시겠습니까?"
+
+#: config.py:203
+msgid "If set, the original TOC entries will be included the new epub."
+msgstr "이 옵션을 선택하면 원래 TOC 항목이 새 EPUB에 포함됩니다."
+
+#: config.py:217
+msgid "Skip when there is only one TOC entry?"
+msgstr "TOC 항목이 하나뿐이면 건너뛰시겠습니까?"
+
+#: config.py:218
+msgid ""
+"If set, the original TOC entries for each book will only be included\n"
+"if there's more than TOC entry one in that book."
+msgstr "이 옵션을 선택하면 각 책의 원래 TOC 항목은\n그 책에 TOC 항목이 둘 이상 있을 때만 포함됩니다."
+
+#: config.py:230
+msgid "Flatten Table of Contents?"
+msgstr "목차를 평탄화하시겠습니까?"
+
+#: config.py:231
+msgid "Remove nesting and make TOC all on one level."
+msgstr "중첩을 제거하고 TOC를 한 단계로 만듭니다."
+
+#: config.py:235
+msgid "Include Books' Comments?"
+msgstr "책 설명도 포함하시겠습니까?"
+
+#: config.py:236
+msgid ""
+"Include all the merged books' comments in the new book's comments.\n"
+"Default is a list of included titles only."
+msgstr "병합되는 모든 책의 설명을 새 책의 설명에 포함합니다.\n기본값은 포함된 제목 목록만 표시합니다."
+
+#: config.py:241
+msgid "Keep UnMerge Metadata?"
+msgstr "분리용 메타데이터를 유지하시겠습니까?"
+
+#: config.py:242
+msgid ""
+"If set, a copy of the original metadata for each merged book will\n"
+"be included, allowing for UnMerge.  This includes your calibre custom\n"
+"columns.  Leave off if you plan to distribute the epub to others."
+msgstr "이 옵션을 선택하면 병합된 각 책의 원래 메타데이터 사본이 포함되어\n나중에 분리할 수 있습니다. 여기에는 calibre 사용자 지정 열도 포함됩니다.\nEPUB를 다른 사람에게 배포할 계획이라면 해제해 두십시오."
+
+#: config.py:248
+msgid "Restore Selection?"
+msgstr "선택 복원하시겠습니까?"
+
+#: config.py:249
+msgid ""
+"If set, the plugin will select the same books again after starting\n"
+"the merge.  Default behavior is to select the new merge book."
+msgstr "이 옵션을 선택하면 병합을 시작한 뒤에도 같은 책이 다시 선택됩니다.\n기본 동작은 새로 병합된 책을 선택하는 것입니다."
+
+#: config.py:261
+msgid "Add tags to merged books:"
+msgstr "병합된 책에 태그 추가:"
+
+#: config.py:265
+msgid "Tags you enter here will be added to all new merged books"
+msgstr "여기에 입력한 태그는 새로 병합된 모든 책에 추가됩니다"
+
+#: config.py:270
+msgid "Merged Book Word:"
+msgstr "병합 책 용어:"
+
+#: config.py:274
+msgid ""
+"Word use to describe merged books in default title and summary.\n"
+"For people who don't like the word Anthology."
+msgstr "기본 제목과 요약에서 병합된 책을 설명할 때 사용할 단어입니다.\n'Anthology'라는 단어를 선호하지 않는 경우 사용합니다."
+
+#: config.py:283
+msgid ""
+"These controls aren't plugin settings as such, but convenience buttons for "
+"setting Keyboard shortcuts and getting all the EpubMerge confirmation "
+"dialogs back again."
+msgstr "이 항목은 엄밀한 플러그인 설정이라기보다, 키보드 단축키를 설정하고 EpubMerge의 모든 확인 대화상자를 다시 표시하게 하는 편의 버튼입니다."
+
+#: config.py:288
+msgid "Keyboard shortcuts..."
+msgstr "키보드 단축키..."
+
+#: config.py:289
+msgid "Edit the keyboard shortcuts associated with this plugin"
+msgstr "이 플러그인에 연결된 키보드 단축키를 편집합니다"
+
+#: config.py:293
+msgid "Reset disabled &confirmation dialogs"
+msgstr "비활성화된 확인 대화상자 재설정(&C)"
+
+#: config.py:294
+msgid "Reset all show me again dialogs for the EpubMerge plugin"
+msgstr "EpubMerge 플러그인의 다시 표시 대화상자 모두 초기화"
+
+#: config.py:298
+msgid "View library preferences..."
+msgstr "서재 환경 설정 보기..."
+
+#: config.py:299
+msgid "View data stored in the library database for this plugin"
+msgstr "이 플러그인에 대해 서재 데이터베이스에 저장된 데이터를 봅니다"
+
+#: config.py:314
+msgid "Done"
+msgstr "완료"
+
+#: config.py:315
+msgid "Confirmation dialogs have all been reset"
+msgstr "확인 대화상자가 모두 초기화되었습니다"
+
+#: config.py:331
+msgid "Take value from first source book"
+msgstr "첫 번째 원본 책의 값 사용"
+
+#: config.py:332
+msgid "Take value from last source book"
+msgstr "마지막 원본 책의 값 사용"
+
+#: config.py:333
+msgid "Add values from all source books"
+msgstr "모든 원본 책의 값 추가"
+
+#: config.py:334
+msgid "Average value from ALL source books"
+msgstr "모든 원본 책의 평균값"
+
+#: config.py:335
+msgid "Average value from source books with values"
+msgstr "값이 있는 원본 책의 평균값"
+
+#: config.py:336
+msgid "True if true on all source books (and)"
+msgstr "모든 원본 책에서 참이면 참(and)"
+
+#: config.py:337
+msgid "True if true on any source books (or)"
+msgstr "원본 책 중 하나라도 참이면 참(or)"
+
+#: config.py:338
+msgid "Take newest value from source books"
+msgstr "원본 책 중 가장 새 값 사용"
+
+#: config.py:339
+msgid "Take oldest value from source books"
+msgstr "원본 책 중 가장 오래된 값 사용"
+
+#: config.py:340
+msgid "Include values from all source books"
+msgstr "모든 원본 책의 값 포함"
+
+#: config.py:341
+msgid "Concatenate values from all source books"
+msgstr "모든 원본 책의 값 이어 붙이기"
+
+#: config.py:342
+msgid "Set to current time when created"
+msgstr "생성 시 현재 시간으로 설정"
+
+#: config.py:355
+msgid "Standard Columns:"
+msgstr "표준 열:"
+
+#: config.py:360
+msgid "Take Series from first book"
+msgstr "첫 번째 책의 시리즈 사용"
+
+#: config.py:361
+msgid ""
+"If set, the Series name and index from the first book will be set on the "
+"merged book."
+msgstr "설정하면 병합된 책에 첫 번째 책의 시리즈 이름과 번호를 사용합니다."
+
+#: config.py:366
+msgid "Custom Columns:"
+msgstr "사용자 지정 열:"
+
+#: config.py:369
+msgid ""
+"If you have custom columns defined, they will be listed below.  Choose how "
+"you would like these columns handled."
+msgstr "사용자 지정 열이 정의되어 있으면 아래에 표시됩니다. 이 열을 어떻게 처리할지 선택하세요."
+
+#: config.py:395
+msgid "Set this %s column on new merged books..."
+msgstr "새 병합 책에서 이 %s 열 설정..."
+
+#: config.py:410
+msgid "How this column will be populated by default."
+msgstr "이 열을 기본적으로 채우는 방식입니다."
+
+#: dialogs.py:50 dialogs.py:74
+msgid "Starting..."
+msgstr "시작 중..."
+
+#: dialogs.py:51 dialogs.py:75
+msgid "Working"
+msgstr "작업 중"
+
+#: dialogs.py:52 dialogs.py:76
+msgid "Completed so far"
+msgstr "현재까지 완료"
+
+#: dialogs.py:79
+msgid "Cancel"
+msgstr "취소"
+
+#: dialogs.py:120
+msgid "Starting Merge..."
+msgstr "병합 시작 중..."
+
+#: dialogs.py:176
+msgid "Move selected books up the list"
+msgstr "선택한 책을 목록 위로 이동"
+
+#: dialogs.py:181
+msgid "Remove selected books from the list"
+msgstr "선택한 책을 목록에서 제거"
+
+#: dialogs.py:186
+msgid "Move selected books down the list"
+msgstr "선택한 책을 목록 아래로 이동"
+
+#: dialogs.py:191
+msgid "Add EPUBs from PC..."
+msgstr ""
+
+#: dialogs.py:224 dialogs.py:225 dialogs.py:226 epubmerge_plugin.py:692
+#: epubmerge_plugin.py:693 epubmerge_plugin.py:694
+msgid "Unknown"
+msgstr "알 수 없음"
+
+#: dialogs.py:258
+msgid "Error reading files"
+msgstr ""
+
+#: dialogs.py:259
+msgid "Could not read metadata from the following files:<br><br>%s"
+msgstr ""
+
+#: dialogs.py:265
+msgid "Choose EPUB files to merge"
+msgstr ""
+
+#: dialogs.py:266
+msgid "EPUB files"
+msgstr ""
+
+#: dialogs.py:284 epubmerge_plugin.py:278
+msgid "Collecting EPUBs for merger..."
+msgstr "병합할 EPUB 수집 중..."
+
+#: dialogs.py:285 epubmerge_plugin.py:279
+msgid "Get EPUBs for merge"
+msgstr "병합용 EPUB 가져오기"
+
+#: dialogs.py:286 epubmerge_plugin.py:280
+msgid "EPUBs collected"
+msgstr "EPUB 수집됨"
+
+#: dialogs.py:302
+msgid "Author(s)"
+msgstr "저자"
+
+#: dialogs.py:302
+msgid "Series"
+msgstr "시리즈"
+
+#: dialogs.py:302
+msgid "Title"
+msgstr "제목"
+
+#: dialogs.py:352
+msgid "Are you sure you want to remove this book from the list?"
+msgstr "이 책을 목록에서 제거하시겠습니까?"
+
+#: dialogs.py:354
+msgid "Are you sure you want to remove the selected %d books from the list?"
+msgstr "선택한 %d권의 책을 목록에서 제거하시겠습니까?"
+
+#: dialogs.py:427
+msgid "UnMerge Epub"
+msgstr "EPUB 병합 해제"
+
+#: dialogs.py:434
+msgid "Apply to all EPUBs?"
+msgstr "모든 EPUB에 적용하시겠습니까?"
+
+#: dialogs.py:435
+msgid "Apply the same action to the rest of the EPUBs after this."
+msgstr "이후 나머지 EPUB에도 같은 동작을 적용합니다."
+
+#: dialogs.py:439
+msgid "Add"
+msgstr "추가"
+
+#: dialogs.py:443
+msgid "Overwrite"
+msgstr "덮어쓰기"
+
+#: dialogs.py:446
+msgid "Discard"
+msgstr "버리기"
+
+#: epubmerge_plugin.py:63 epubmerge_plugin.py:554 epubmerge_plugin.py:570
+#: epubmerge_plugin.py:681
+msgid "EpubMerge"
+msgstr "EpubMerge"
+
+#: epubmerge_plugin.py:64
+msgid "Merge multiple EPUBs into one in a new book."
+msgstr "여러 EPUB를 새 책 하나로 병합합니다."
+
+#: epubmerge_plugin.py:114 epubmerge_plugin.py:115
+msgid "&Merge Epubs"
+msgstr "EPUB 병합(&M)"
+
+#: epubmerge_plugin.py:118 epubmerge_plugin.py:119
+msgid "&UnMerge Epubs"
+msgstr "EPUB 병합 해제(&U)"
+
+#: epubmerge_plugin.py:128
+msgid "&Configure Plugin"
+msgstr "플러그인 설정(&C)"
+
+#: epubmerge_plugin.py:130 epubmerge_plugin.py:131
+msgid "Configure EpubMerge"
+msgstr "EpubMerge 설정"
+
+#: epubmerge_plugin.py:186
+msgid "Cannot UnMerge Non-Epubs"
+msgstr "EPUB가 아닌 파일은 분리할 수 없음"
+
+#: epubmerge_plugin.py:187 epubmerge_plugin.py:198
+msgid ""
+"To UnMerge the source must be Epub(s) created by EpubMerge with Keep UnMerge"
+" Metadata enabled."
+msgstr "분리하려면 원본이 '분리 메타데이터 유지'가 활성화된 EpubMerge로 생성된 EPUB여야 합니다."
+
+#: epubmerge_plugin.py:197
+msgid "No UnMerge data found"
+msgstr "분리 데이터가 없습니다"
+
+#: epubmerge_plugin.py:214
+msgid ""
+"You already have a book <i>%s</i> by <i>%s</i>.  You may Add a new book of "
+"the same title, Overwrite the Epub in the existing book, or Discard this "
+"Epub."
+msgstr "<i>%s</i> / <i>%s</i> 책이 이미 있습니다. 같은 제목의 새 책으로 추가하거나, 기존 책의 Epub를 덮어쓰거나, 이 Epub를 버릴 수 있습니다."
+
+#: epubmerge_plugin.py:217
+msgid ""
+"You already have more than one book <i>%s</i> by <i>%s</i>.  You may Add a "
+"new book of the same title, or Discard this Epub."
+msgstr "<i>%s</i> / <i>%s</i> 책이 이미 둘 이상 있습니다. 같은 제목의 새 책으로 추가하거나 이 Epub를 버릴 수 있습니다."
+
+#: epubmerge_plugin.py:257 epubmerge_plugin.py:289 epubmerge_plugin.py:308
+msgid "Cannot Merge Epubs"
+msgstr "Epub를 병합할 수 없음"
+
+#: epubmerge_plugin.py:258
+msgid "No books selected."
+msgstr ""
+
+#: epubmerge_plugin.py:290
+msgid "%s books failed."
+msgstr "%s권 처리 실패."
+
+#: epubmerge_plugin.py:295
+msgid "Order EPUBs to Merge"
+msgstr "병합할 EPUB 순서"
+
+#: epubmerge_plugin.py:309
+msgid "Less than 2 books in merge list."
+msgstr ""
+
+#: epubmerge_plugin.py:370 epubmerge_plugin.py:589
+msgid "%s by %s"
+msgstr "%s / %s"
+
+#: epubmerge_plugin.py:374
+msgid "%s containing:"
+msgstr "%s 포함:"
+
+#: epubmerge_plugin.py:549
+msgid ""
+"The book for the new Merged EPUB has been created and default metadata filled in.\n"
+"\n"
+"However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
+msgstr "새 병합 EPUB용 책이 생성되었고 기본 메타데이터도 채워졌습니다.\n\n하지만 이어지는 메타데이터 대화상자를 확인·편집하고 닫기 전까지 EPUB는 생성되지 않습니다."
+
+#: epubmerge_plugin.py:565
+msgid ""
+"EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
+"\n"
+"You are merging %s EPUBs totaling %s."
+msgstr "EpubMerge는 백그라운드 작업으로 수행됩니다. 작업이 끝날 때까지 병합 EPUB는 서재에 나타나지 않습니다.\n\n총 %s, %s 분량의 EPUB를 병합합니다."
+
+#: epubmerge_plugin.py:578
+msgid "Merging %s EPUBs..."
+msgstr "EPUB %s개 병합 중..."
+
+#: epubmerge_plugin.py:621
+msgid "EpubMerge: %s"
+msgstr "EpubMerge: %s"
+
+#: epubmerge_plugin.py:632
+msgid "Starting EpubMerge"
+msgstr "EpubMerge 시작"
+
+#: epubmerge_plugin.py:640 epubmerge_plugin.py:646
+msgid "Remove Failed Anthology Book?"
+msgstr "실패한 작품집 도서를 제거하시겠습니까?"
+
+#: epubmerge_plugin.py:647
+msgid ""
+"EpubMerge failed, no new EPUB was created; see the background job details "
+"for any error messages."
+msgstr "EpubMerge 실행에 실패하여 새 EPUB를 만들지 못했습니다. 오류 메시지는 백그라운드 작업 세부 정보에서 확인하십시오."
+
+#: epubmerge_plugin.py:648
+msgid "Do you want to delete the empty book EpubMerge created?"
+msgstr "EpubMerge가 만든 빈 책을 삭제하시겠습니까?"
+
+#: epubmerge_plugin.py:649
+msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
+msgstr "빈 책을 서재에서 제거하려면 '<b>예</b>'를 클릭하세요."
+
+#: epubmerge_plugin.py:650
+msgid "Click '<b>No</b>' to leave it in Library."
+msgstr "서재에 남겨두려면 '<b>아니오</b>'를 클릭하세요."
+
+#: epubmerge_plugin.py:658
+msgid ""
+"Merge finished, output in:\n"
+"%s"
+msgstr "병합 완료, 출력 위치:\n%s"
+
+#: epubmerge_plugin.py:670
+msgid "Finished merging %s EPUBs."
+msgstr "EPUB %s개 병합 완료."
+
+#: epubmerge_plugin.py:678
+msgid ""
+"EpubMerge has finished. The new EPUB has been added to the book previously "
+"created."
+msgstr "EpubMerge가 완료되었습니다. 새 EPUB가 미리 생성된 책에 추가되었습니다."
+
+#: epubmerge_plugin.py:735
+msgid "%s by %s doesn't have an EPUB."
+msgstr "%s / %s 책에는 EPUB가 없습니다."

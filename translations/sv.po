@@ -3,16 +3,19 @@
 # 
 # Translators:
 # cb445fb3dfd1fe3c2b9f58ac5638f478, 2016
+# cb445fb3dfd1fe3c2b9f58ac5638f478, 2016
+# Jonatan Nyberg, 2026
 # Jonatan Nyberg, 2016-2017,2023
 # efef6ec5b435a041fce803c7f8af77d2_2341d43, 2019-2020
+# Jonatan Nyberg, 2026
 # Mars Northman <marsnorthman@gmail.com>, 2017
 # Merarom <merarom@yahoo.es>, 2014-2015
 msgid ""
 msgstr ""
 "Project-Id-Version: calibre-plugins\n"
-"POT-Creation-Date: 2023-07-15 16:27-0500\n"
+"POT-Creation-Date: 2026-07-15 16:24-0500\n"
 "PO-Revision-Date: 2014-06-19 23:00+0000\n"
-"Last-Translator: Jonatan Nyberg, 2016-2017,2023\n"
+"Last-Translator: Mars Northman <marsnorthman@gmail.com>, 2017\n"
 "Language-Team: Swedish (http://app.transifex.com/calibre/calibre-plugins/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -67,13 +70,13 @@ msgstr "Om den är inställd kommer de ursprungliga TOC-posterna att inkluderas 
 
 #: config.py:217
 msgid "Skip when there is only one TOC entry?"
-msgstr ""
+msgstr "Hoppa över när innehållsförteckningen bara har en post?"
 
 #: config.py:218
 msgid ""
 "If set, the original TOC entries for each book will only be included\n"
 "if there's more than TOC entry one in that book."
-msgstr ""
+msgstr "När detta är aktiverat tas de ursprungliga posterna i varje boks\ninnehållsförteckning endast med om boken har fler än en sådan post."
 
 #: config.py:230
 msgid "Flatten Table of Contents?"
@@ -106,13 +109,13 @@ msgstr "Om satt, kommer en kopia av originalets metadata för varje hopslagen\nb
 
 #: config.py:248
 msgid "Restore Selection?"
-msgstr ""
+msgstr "Återställ markeringen?"
 
 #: config.py:249
 msgid ""
 "If set, the plugin will select the same books again after starting\n"
 "the merge.  Default behavior is to select the new merge book."
-msgstr ""
+msgstr "När detta är aktiverat markerar insticksmodulen samma böcker igen efter\natt sammanfogningen har startat. Som standard markeras den nya sammanfogade boken."
 
 #: config.py:261
 msgid "Add tags to merged books:"
@@ -149,7 +152,7 @@ msgstr "Redigera tangentbordets kortkommandon som hör samman med detta tillägg
 
 #: config.py:293
 msgid "Reset disabled &confirmation dialogs"
-msgstr "Återställ avaktiverade &konfirmationsdialogrutor"
+msgstr "Återställ inaktiverade &bekräftelsedialogrutor"
 
 #: config.py:294
 msgid "Reset all show me again dialogs for the EpubMerge plugin"
@@ -169,7 +172,7 @@ msgstr "Klar"
 
 #: config.py:315
 msgid "Confirmation dialogs have all been reset"
-msgstr "Alla konfirmationsdialogrutor har blivit återställda."
+msgstr "Alla bekräftelsedialogrutor har återställts."
 
 #: config.py:331
 msgid "Take value from first source book"
@@ -251,84 +254,121 @@ msgstr "Ange denna %s kolumn på nya sammanslagna böcker..."
 msgid "How this column will be populated by default."
 msgstr "Hur denna kolumn kommer att fyllas som standard."
 
-#: dialogs.py:46 dialogs.py:70
+#: dialogs.py:50 dialogs.py:74
 msgid "Starting..."
 msgstr "Påbörjar..."
 
-#: dialogs.py:47 dialogs.py:71
+#: dialogs.py:51 dialogs.py:75
 msgid "Working"
 msgstr "Arbetar"
 
-#: dialogs.py:48 dialogs.py:72
+#: dialogs.py:52 dialogs.py:76
 msgid "Completed so far"
 msgstr "Färdiga hittills"
 
-#: dialogs.py:75
+#: dialogs.py:79
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: dialogs.py:116
+#: dialogs.py:120
 msgid "Starting Merge..."
 msgstr "Påbörja sammanslagning..."
 
-#: dialogs.py:172
+#: dialogs.py:176
 msgid "Move selected books up the list"
 msgstr "Flytta valda böcker uppåt i listan"
 
-#: dialogs.py:177
+#: dialogs.py:181
 msgid "Remove selected books from the list"
 msgstr "Ta bort valda böcker från listan"
 
-#: dialogs.py:182
+#: dialogs.py:186
 msgid "Move selected books down the list"
 msgstr "Flytta valda böcker neråt i listan"
 
-#: dialogs.py:221
+#: dialogs.py:191
+msgid "Add EPUBs from PC..."
+msgstr "Lägg till EPUB-filer från datorn…"
+
+#: dialogs.py:224 dialogs.py:225 dialogs.py:226 epubmerge_plugin.py:692
+#: epubmerge_plugin.py:693 epubmerge_plugin.py:694
+msgid "Unknown"
+msgstr "Okänd"
+
+#: dialogs.py:258
+msgid "Error reading files"
+msgstr "Fel vid läsning av filer"
+
+#: dialogs.py:259
+msgid "Could not read metadata from the following files:<br><br>%s"
+msgstr "Kunde inte läsa metadata från följande filer:<br><br>%s"
+
+#: dialogs.py:265
+msgid "Choose EPUB files to merge"
+msgstr "Välj EPUB-filer att sammanfoga"
+
+#: dialogs.py:266
+msgid "EPUB files"
+msgstr "EPUB-filer"
+
+#: dialogs.py:284 epubmerge_plugin.py:278
+msgid "Collecting EPUBs for merger..."
+msgstr "Samlar EPUB-filer för sammanslagning..."
+
+#: dialogs.py:285 epubmerge_plugin.py:279
+msgid "Get EPUBs for merge"
+msgstr "Hämta EPUB-filer för sammanslagning"
+
+#: dialogs.py:286 epubmerge_plugin.py:280
+msgid "EPUBs collected"
+msgstr "EPUB-filer ihopsamlade"
+
+#: dialogs.py:302
 msgid "Author(s)"
 msgstr "Författare"
 
-#: dialogs.py:221
+#: dialogs.py:302
 msgid "Series"
 msgstr "Serier"
 
-#: dialogs.py:221
+#: dialogs.py:302
 msgid "Title"
 msgstr "Titel"
 
-#: dialogs.py:271
+#: dialogs.py:352
 msgid "Are you sure you want to remove this book from the list?"
 msgstr "Är du säker du vill ta bort denna bok från listan?"
 
-#: dialogs.py:273
+#: dialogs.py:354
 msgid "Are you sure you want to remove the selected %d books from the list?"
 msgstr "Är du säker du vill ta bort valda %d böcker från listan?"
 
-#: dialogs.py:346
+#: dialogs.py:427
 msgid "UnMerge Epub"
 msgstr "Separera EPUB"
 
-#: dialogs.py:353
+#: dialogs.py:434
 msgid "Apply to all EPUBs?"
 msgstr "Tillämpa på alla EPUB-filer?"
 
-#: dialogs.py:354
+#: dialogs.py:435
 msgid "Apply the same action to the rest of the EPUBs after this."
 msgstr "Tillämpa samma handling för resten av EPUB-filer efter det här."
 
-#: dialogs.py:358
+#: dialogs.py:439
 msgid "Add"
 msgstr "Lägg till"
 
-#: dialogs.py:362
+#: dialogs.py:443
 msgid "Overwrite"
 msgstr "Skriv över"
 
-#: dialogs.py:365
+#: dialogs.py:446
 msgid "Discard"
 msgstr "Släng"
 
-#: epubmerge_plugin.py:63 epubmerge_plugin.py:546 epubmerge_plugin.py:562
-#: epubmerge_plugin.py:673
+#: epubmerge_plugin.py:63 epubmerge_plugin.py:554 epubmerge_plugin.py:570
+#: epubmerge_plugin.py:681
 msgid "EpubMerge"
 msgstr "EpubMerge"
 
@@ -379,25 +419,13 @@ msgid ""
 "new book of the same title, or Discard this Epub."
 msgstr "Du har redan mer än en bok <i>%s</i> av <i>%s</i>.  Du kan lägga till en ny bok med samma titel eller ta bort denna EPUB."
 
-#: epubmerge_plugin.py:257 epubmerge_plugin.py:289
+#: epubmerge_plugin.py:257 epubmerge_plugin.py:289 epubmerge_plugin.py:308
 msgid "Cannot Merge Epubs"
 msgstr "Kan inte slå samman EPUB-filer"
 
 #: epubmerge_plugin.py:258
-msgid "Less than 2 books selected."
-msgstr "Mindre än 2 böcker valda."
-
-#: epubmerge_plugin.py:278
-msgid "Collecting EPUBs for merger..."
-msgstr "Samlar EPUB-filer för sammanslagning..."
-
-#: epubmerge_plugin.py:279
-msgid "Get EPUBs for merge"
-msgstr "Hämta EPUB-filer för sammanslagning"
-
-#: epubmerge_plugin.py:280
-msgid "EPUBs collected"
-msgstr "EPUB-filer ihopsamlade"
+msgid "No books selected."
+msgstr "Inga böcker har valts."
 
 #: epubmerge_plugin.py:290
 msgid "%s books failed."
@@ -407,82 +435,82 @@ msgstr "%s böcker misslyckades."
 msgid "Order EPUBs to Merge"
 msgstr "Beordra EPUB-filer att slås samman"
 
-#: epubmerge_plugin.py:362 epubmerge_plugin.py:581
+#: epubmerge_plugin.py:309
+msgid "Less than 2 books in merge list."
+msgstr "Färre än två böcker finns i sammanfogningslistan."
+
+#: epubmerge_plugin.py:370 epubmerge_plugin.py:589
 msgid "%s by %s"
 msgstr "%s av %s"
 
-#: epubmerge_plugin.py:366
+#: epubmerge_plugin.py:374
 msgid "%s containing:"
 msgstr "%s innehåller:"
 
-#: epubmerge_plugin.py:541
+#: epubmerge_plugin.py:549
 msgid ""
 "The book for the new Merged EPUB has been created and default metadata filled in.\n"
 "\n"
 "However, the EPUB will *not* be created until after you've reviewed, edited, and closed the metadata dialog that follows."
 msgstr "Boken för den nya sammanslagna EPUB har skapats och standard metadata fylls in.\n\nMen EPUB kommer *inte* att skapas förrän du har granskat, redigerat, och stängt metadata dialogrutan som följer."
 
-#: epubmerge_plugin.py:557
+#: epubmerge_plugin.py:565
 msgid ""
 "EpubMerge will be done in a Background job.  The merged EPUB will not appear in the Library until finished.\n"
 "\n"
 "You are merging %s EPUBs totaling %s."
 msgstr "EpubMerge kommer att göras i ett bakgrundsjobb. Den sammanslagna EPUB:n kommer inte att visas i biblioteket förrän den är klar. \n\nDu slår samman %s EPUB-filer på totalt %s."
 
-#: epubmerge_plugin.py:570
+#: epubmerge_plugin.py:578
 msgid "Merging %s EPUBs..."
 msgstr "Sammanfogar %s EPUB-filer..."
 
-#: epubmerge_plugin.py:613
+#: epubmerge_plugin.py:621
 msgid "EpubMerge: %s"
 msgstr "EpubMerge: %s"
 
-#: epubmerge_plugin.py:624
+#: epubmerge_plugin.py:632
 msgid "Starting EpubMerge"
 msgstr "Startar EpubMerge"
 
-#: epubmerge_plugin.py:632 epubmerge_plugin.py:638
+#: epubmerge_plugin.py:640 epubmerge_plugin.py:646
 msgid "Remove Failed Anthology Book?"
-msgstr ""
+msgstr "Ta bort den misslyckade antologiboken?"
 
-#: epubmerge_plugin.py:639
+#: epubmerge_plugin.py:647
 msgid ""
 "EpubMerge failed, no new EPUB was created; see the background job details "
 "for any error messages."
 msgstr "EpubMerge misslyckades, ingen ny EPUB skapades; se bakgrundsinformation för eventuella felmeddelanden."
 
-#: epubmerge_plugin.py:640
+#: epubmerge_plugin.py:648
 msgid "Do you want to delete the empty book EpubMerge created?"
 msgstr "Vill du ta bort den tomma boken som EpubMerge skapade?"
 
-#: epubmerge_plugin.py:641
+#: epubmerge_plugin.py:649
 msgid "Click '<b>Yes</b>' to remove empty book from Libary,"
 msgstr "Klicka på \"<b>Ja</b>\" för att ta bort tom bok från biblioteket,"
 
-#: epubmerge_plugin.py:642
+#: epubmerge_plugin.py:650
 msgid "Click '<b>No</b>' to leave it in Library."
 msgstr "Klicka på \"<b>Nej</b>\" för att lämna den i biblioteket."
 
-#: epubmerge_plugin.py:650
+#: epubmerge_plugin.py:658
 msgid ""
 "Merge finished, output in:\n"
 "%s"
 msgstr "Sammanfogning klar, resultat i:\n%s"
 
-#: epubmerge_plugin.py:662
+#: epubmerge_plugin.py:670
 msgid "Finished merging %s EPUBs."
 msgstr "Klar med sammanslagning av %s EPUB-filer."
 
-#: epubmerge_plugin.py:670
+#: epubmerge_plugin.py:678
 msgid ""
 "EpubMerge has finished. The new EPUB has been added to the book previously "
 "created."
 msgstr "EpubMerge är klar. Den nya EPUB:n har lagts till i den tidigare skapade boken."
 
-#: epubmerge_plugin.py:684 epubmerge_plugin.py:685 epubmerge_plugin.py:686
-msgid "Unknown"
-msgstr "Okänd"
-
-#: epubmerge_plugin.py:727
+#: epubmerge_plugin.py:735
 msgid "%s by %s doesn't have an EPUB."
 msgstr "%s av %s har inte en EPUB."

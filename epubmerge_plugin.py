@@ -124,17 +124,13 @@ class EpubMergePlugin(InterfaceAction):
                                                        triggered=self.unmerge_button )
 
 
-        # logger.debug("platform.system():%s"%platform.system())
-        # logger.debug("platform.mac_ver()[0]:%s"%platform.mac_ver()[0])
-        if not self.check_macmenuhack(): # not platform.mac_ver()[0]: # Some macs crash on these menu items for unknown reasons.
-            do_user_config = self.interface_action_base_plugin.do_user_config
-            self.menu.addSeparator()
-            self.config_action = self.create_menu_item_ex(self.menu, _('&Configure Plugin'),
-                                                          image= 'config.png',
-                                                          unique_name=_('Configure EpubMerge'),
-                                                          shortcut_name=_('Configure EpubMerge'),
-                                                          triggered=partial(do_user_config,parent=self.gui))
-
+        do_user_config = self.interface_action_base_plugin.do_user_config
+        self.menu.addSeparator()
+        self.config_action = self.create_menu_item_ex(self.menu, _('&Configure Plugin'),
+                                                      image= 'config.png',
+                                                      unique_name=_('Configure EpubMerge'),
+                                                      shortcut_name=_('Configure EpubMerge'),
+                                                      triggered=partial(do_user_config,parent=self.gui))
 
         self.gui.keyboard.finalize()
 
@@ -146,20 +142,6 @@ class EpubMergePlugin(InterfaceAction):
                                        shortcut, triggered, is_checked, shortcut_name, unique_name)
         #logger.debug("create_menu_item_ex after %s"%menu_text)
         return ac
-
-    ## Kludgey, yes, but with the real configuration inside the
-    ## library now, how else would a user be able to change this
-    ## setting if it's crashing calibre?
-    def check_macmenuhack(self):
-        try:
-            return self.macmenuhack
-        except:
-            file_path = os.path.join(calibre_config_dir,
-                                     *("plugins/fanficfare_macmenuhack.txt".split('/')))
-            file_path = os.path.abspath(file_path)
-            logger.debug("macmenuhack file_path:%s"%file_path)
-            self.macmenuhack = os.access(file_path, os.F_OK)
-            return self.macmenuhack
 
     def merge_existing_book_button(self):
         with busy_cursor():   
