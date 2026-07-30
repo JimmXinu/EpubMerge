@@ -153,10 +153,9 @@ class EpubMergePlugin(InterfaceAction):
         state = 'add'
         for book_id in self.gui.library_view.get_selected_ids():
             if db.has_format(book_id,'ORIGINAL_EPUB',index_is_id=True):
-                epub = BytesIO(db.format(book_id,'EPUB',index_is_id=True))
                 premerged_books = True
-            else:
-                epub = BytesIO(db.format(book_id,'EPUB',index_is_id=True))
+
+            epub = BytesIO(db.format(book_id,'EPUB',index_is_id=True))
 
             # create temporary directory to store unmerged epubs
             tdir = PersistentTemporaryDirectory(prefix='epubmerge_')
