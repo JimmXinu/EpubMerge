@@ -818,44 +818,44 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
         logger.debug("7:%s"%(time.time()-self.t))
         self.t = time.time()
 
-        # Check for duplicate page references in the newly merged EPUB (prevents 2 TOC entries to the same page)
-        duplicates = []
-        try:
-            import zipfile
-            import xml.etree.ElementTree as ET
+        # # Check for duplicate page references in the newly merged EPUB (prevents 2 TOC entries to the same page)
+        # duplicates = []
+        # try:
+        #     import zipfile
+        #     import xml.etree.ElementTree as ET
             
-            with zipfile.ZipFile(outputepubfn, 'r') as z:
-                ncx_file = None
-                for name in z.namelist():
-                    if name.endswith('toc.ncx'):
-                        ncx_file = name
-                        break
+        #     with zipfile.ZipFile(outputepubfn, 'r') as z:
+        #         ncx_file = None
+        #         for name in z.namelist():
+        #             if name.endswith('toc.ncx'):
+        #                 ncx_file = name
+        #                 break
                 
-                if ncx_file:
-                    ncx_data = z.read(ncx_file)
-                    root = ET.fromstring(ncx_data)
-                    ns = {'ncx': 'http://www.daisy.org/z3986/2005/ncx/'}
-                    nav_points = root.findall('.//ncx:navPoint', ns)
+        #         if ncx_file:
+        #             ncx_data = z.read(ncx_file)
+        #             root = ET.fromstring(ncx_data)
+        #             ns = {'ncx': 'http://www.daisy.org/z3986/2005/ncx/'}
+        #             nav_points = root.findall('.//ncx:navPoint', ns)
                     
-                    src_map = {}
-                    for np in nav_points:
-                        label_el = np.find('ncx:navLabel/ncx:text', ns)
-                        content_el = np.find('ncx:content', ns)
-                        label = label_el.text if label_el is not None else _("Unknown")
-                        src = content_el.attrib.get('src') if content_el is not None else ""
+        #             src_map = {}
+        #             for np in nav_points:
+        #                 label_el = np.find('ncx:navLabel/ncx:text', ns)
+        #                 content_el = np.find('ncx:content', ns)
+        #                 label = label_el.text if label_el is not None else _("Unknown")
+        #                 src = content_el.attrib.get('src') if content_el is not None else ""
                         
-                        if src:
-                            base_src = src.split('#')[0]
-                            if base_src not in src_map:
-                                src_map[base_src] = []
-                            src_map[base_src].append(label)
+        #                 if src:
+        #                     base_src = src.split('#')[0]
+        #                     if base_src not in src_map:
+        #                         src_map[base_src] = []
+        #                     src_map[base_src].append(label)
                     
-                    for base, labels in src_map.items():
-                        if len(labels) > 1:
-                            duplicates.append(_("Page '%s' is referenced by multiple chapters: %s") % (base, ", ".join(f"'{l}'" for l in labels)))
+        #             for base, labels in src_map.items():
+        #                 if len(labels) > 1:
+        #                     duplicates.append(_("Page '%s' is referenced by multiple chapters: %s") % (base, ", ".join(f"'{l}'" for l in labels)))
                             
-        except Exception as ex:
-            logger.error("Error checking duplicate TOC references: %s" % str(ex), exc_info=True)
+        # except Exception as ex:
+        #     logger.error("Error checking duplicate TOC references: %s" % str(ex), exc_info=True)
 
         # clean up temp files.
         remove_dir(args['tdir'])
@@ -869,9 +869,9 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
         if self.gui.cover_flow:
             self.gui.cover_flow.dataChanged()
 
-        if duplicates:
-            msg = _("The merged EPUB contains chapters referencing the same content pages:<br><br>%s") % "<br>".join(duplicates)
-            error_dialog(self.gui, _("Duplicate Chapter Page References"), msg, show_copy_button=False).exec_()
+        # if duplicates:
+        #     msg = _("The merged EPUB contains chapters referencing the same content pages:<br><br>%s") % "<br>".join(duplicates)
+        #     error_dialog(self.gui, _("Duplicate Chapter Page References"), msg, show_copy_button=False).exec_()
         
         confirm('\n'+_('''EpubMerge has finished. The new EPUB has been added to the book previously created.'''),
                 'epubmerge_finished_again',

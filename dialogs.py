@@ -166,13 +166,13 @@ class MergeTargetDialog(SizePersistedDialog):
         self.merge_group.setLayout(group_layout)
         
         self.overwrite_combo = QComboBox(self)
-        
-        self.library_books = []
+
+        self.library_books = {}
         for b in books:
             if b.get('calibre_id') is not None:
-                self.library_books.append(b)
-                self.overwrite_combo.addItem(f"{b['title']} - {', '.join(b['authors'])}", b['calibre_id'])
-            
+                self.library_books[b['calibre_id']] = b
+                self.overwrite_combo.addItem(b['title'], b['calibre_id'])
+        
         group_layout.addWidget(self.overwrite_combo)
         layout.addWidget(self.merge_group)
         
@@ -183,10 +183,7 @@ class MergeTargetDialog(SizePersistedDialog):
         
     def get_target_title(self):
         target_id = self.overwrite_combo.currentData()
-        for b in self.library_books:
-            if b['calibre_id'] == target_id:
-                return b['title']
-        return None
+        return self.library_books[target_id]['title']
 
     def get_merge_option(self):
         target_id = self.overwrite_combo.currentData()
