@@ -152,8 +152,6 @@ class EpubMergePlugin(InterfaceAction):
         premerged_books = False
         state = 'add'
         for book_id in self.gui.library_view.get_selected_ids():
-            # Unmerge if any book has already been merged.
-            unmerge_mi = db.get_metadata(book_id,index_is_id=True)
             if db.has_format(book_id,'ORIGINAL_EPUB',index_is_id=True):
                 epub = BytesIO(db.format(book_id,'EPUB',index_is_id=True))
                 premerged_books = True
