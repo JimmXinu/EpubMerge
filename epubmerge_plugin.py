@@ -144,8 +144,7 @@ class EpubMergePlugin(InterfaceAction):
         return ac
 
     def merge_existing_book_button(self):
-        with busy_cursor():   
-            self.merge_existing_book()
+        self.merge_existing_book()
     
     def merge_existing_book(self):
         db=self.gui.current_db
@@ -187,7 +186,7 @@ class EpubMergePlugin(InterfaceAction):
             remove_dir(tdir)
 
         # Convert book ids to book objects and add the unmerged epubs if needed.
-        book_list = [ self._convert_id_to_book(x, good=False) for x in self.gui.library_view.get_selected_ids() if x != book_id ]
+        book_list = [ self._convert_id_to_book(x, good=False) for x in self.gui.library_view.get_selected_ids() ]
         
         # Convert unmerged data into book objects
         if premerged_books and outfilenames:
@@ -212,9 +211,7 @@ class EpubMergePlugin(InterfaceAction):
                     'languages': mi.languages or ['en'],
                     'error': ''
                 })
-        elif not premerged_books:
-            # If the target is not premerged, just include it as a normal calibre book
-            book_list.insert(0, self._convert_id_to_book(book_id, good=False))
+
 
         def populate_book(book):
             if book.get('calibre_id') is not None:
