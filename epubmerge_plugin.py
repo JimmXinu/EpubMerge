@@ -468,13 +468,14 @@ class EpubMergePlugin(InterfaceAction):
 
             book_id = None
             backup_metadata_opf = None
+            save_original_epub = True
             has_epub_backup = False
 
             if target_id is not None:
-                # Overwrite confirmation dialog
+                # Overwrite confirmation dialog 
                 confirm_overwrite = confirm('\n'+_('''Are you sure you want to overwrite the existing EPUB in book <i>%s</i>?<br><br>
 
-This will replace the current EPUB file. A backup of the previous file will be saved in Calibre as ORIGINAL_EPUB.''') % target_book,
+This will replace the current EPUB file.''') % target_book,
                     'epubmerge_overwrite_epub_confirm',
                     self.gui,
                     title=_("EpubMerge"),
@@ -485,6 +486,20 @@ This will replace the current EPUB file. A backup of the previous file will be s
                     remove_dir(tdir)
                     return
 
+                confirm_orginal_epub_backup = confirm('\n'+_('''Do you want to save a backup of the existing EPUB as ORIGINAL_EPUB  <i>%s</i>?<br><br>
+
+If converting to another format using Calibre and want to use the new EPUB, you will need to manually remove the ORIGINAL_EPUB file.<br><br>
+
+If you choose not to save a backup, you may still see it in the metadata confirm change screen, but it will be deleted once merging is complete.''') % target_book,
+                    'epubmerge_backup_original_epub_confirm',
+                    self.gui,
+                    title=_("EpubMerge"),
+                    show_cancel_button=True)
+
+                if not confirm_orginal_epub_backup:
+                    # Do not create ORIGINAL_EPUB backup
+                    save_original_epub = False
+
                 # Proceed with overwrite/update of the selected book
                 book_id = target_id
 
@@ -494,7 +509,7 @@ This will replace the current EPUB file. A backup of the previous file will be s
                 backup_metadata_opf = metadata_to_opf(raw_metadata)
 
                 # Backup previous EPUB as ORIGINAL_EPUB if it exists
-                if db.has_format(book_id, 'EPUB', index_is_id=True):
+                if save_original_epub and db.has_format(book_id, 'EPUB', index_is_id=True):
                     existing_epub_data = db.format(book_id, 'EPUB', index_is_id=True)
                     db.add_format_with_hooks(
                         book_id,
@@ -504,8 +519,6 @@ This will replace the current EPUB file. A backup of the previous file will be s
                     )
                     has_epub_backup = True
 
-                # # Update metadata on the existing book record
-                # db.set_metadata(book_id, mi)
 
             # If we are not overwriting, create a new book entry
             if book_id is None:
@@ -800,6 +813,12 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
         logger.debug("6:%s"%(time.time()-self.t))
         logger.debug(_("Merge finished, output in:\n%s")%outputepubfn)
         self.t = time.time()
+        
+        # If the user chose not to backup the existing EPUB, delete the ORIGINAL_EPUB when Calibre makes it.
+        if args.get('backup_metadata_opf') is not None and not args.get('save_original_epub'):
+            if db.has_format(book_id, 'ORIGINAL_EPUB', index_is_id=True):
+                db.remove_format(book_id, 'ORIGINAL_EPUB', index_is_id=True)
+                
         db.add_format_with_hooks(book_id,
                                  'EPUB',
                                  outputepubfn, index_is_id=True)
