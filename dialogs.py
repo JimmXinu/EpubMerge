@@ -185,7 +185,7 @@ class MergeTargetDialog(SizePersistedDialog):
         target_id = self.overwrite_combo.currentData()
         return self.library_books[target_id]['title']
 
-    def get_merge_option(self):
+    def get_target_id(self):
         target_id = self.overwrite_combo.currentData()
         return target_id
 
