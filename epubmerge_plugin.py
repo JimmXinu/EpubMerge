@@ -192,12 +192,13 @@ class EpubMergePlugin(InterfaceAction):
         outfilenames = self.do_unmerge(epub,tdir)
 
         # If the book has already been mergered before then convert unmerged data into book objects.
+        existing_books = []
         if len(outfilenames) > 0:
             from calibre.ebooks.metadata.epub import get_metadata
             for filepath in outfilenames:
                 with open(filepath, 'rb') as f:
                     mi = get_metadata(f)
-                book_list.append({
+                existing_books.append({
                     'good': True,
                     'epub': filepath,
                     'epub_size': os.path.getsize(filepath),
@@ -219,7 +220,9 @@ class EpubMergePlugin(InterfaceAction):
             target_book_obj = self._convert_id_to_book(target_id, good=False)
             target_book_mi = db.get_metadata(target_id, index_is_id=True)
             target_book_obj['title'] = target_book_mi.title or _('Unknown')
-            book_list.append(target_book_obj)
+            existing_books.append(target_book_obj)
+
+        book_list = existing_books + book_list
 
 
         def populate_book(book):
