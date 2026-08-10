@@ -473,6 +473,7 @@ class EpubMergePlugin(InterfaceAction):
             backup_metadata_opf = None
             save_original_epub = True
             has_epub_backup = False
+            is_overwrite = False
 
             if target_id is not None:
                 # Overwrite confirmation dialog 
@@ -488,6 +489,8 @@ This will replace the current EPUB file.''') % target_book,
                     # Abort the merge operation and clean up
                     remove_dir(tdir)
                     return
+
+                is_overwrite = confirm_overwrite
 
                 confirm_orginal_epub_backup = confirm('\n'+_('''Do you want to save a backup of the existing EPUB as ORIGINAL_EPUB  <i>%s</i>?<br><br>
 
@@ -753,6 +756,7 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
                       'flattentoc':prefs['flattentoc'],
                       'printtimes':True,
                       'coverjpgpath':coverjpgpath,
+                      'is_overwrite':is_overwrite,
                       'keepmetadatafiles':prefs['keepmeta'],
                       'backup_metadata_opf': backup_metadata_opf,
                       'save_original_epub': save_original_epub,
