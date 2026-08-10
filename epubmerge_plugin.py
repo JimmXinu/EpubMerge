@@ -752,6 +752,7 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
                       'coverjpgpath':coverjpgpath,
                       'keepmetadatafiles':prefs['keepmeta'],
                       'backup_metadata_opf': backup_metadata_opf,
+                      'save_original_epub': save_original_epub,
                       'has_epub_backup': has_epub_backup
                       },
                      cpus)]
@@ -815,7 +816,7 @@ You are merging %s EPUBs totaling %s.''')%(len(book_list),gethumanreadable(total
         self.t = time.time()
         
         # If the user chose not to backup the existing EPUB, delete the ORIGINAL_EPUB when Calibre makes it.
-        if args.get('backup_metadata_opf') is not None and not args.get('save_original_epub'):
+        if args.get('backup_metadata_opf') is not None and args.get('save_original_epub') is False:
             if db.has_format(book_id, 'ORIGINAL_EPUB', index_is_id=True):
                 db.remove_format(book_id, 'ORIGINAL_EPUB', index_is_id=True)
                 
